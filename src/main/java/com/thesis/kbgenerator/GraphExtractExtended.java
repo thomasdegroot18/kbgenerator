@@ -86,7 +86,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             active.add( root );
             Iterator<Triple> it = extractFrom.find( root, Node.ANY, Node.ANY );
 
-            while (it.hasNext() && counter < 10000)
+            while (it.hasNext() && counter < 20000)
             {
                 Triple t = it.next();
                 Node subRoot = t.getObject();

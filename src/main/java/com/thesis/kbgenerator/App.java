@@ -2,7 +2,9 @@ package com.thesis.kbgenerator;
 
 import openllet.jena.PelletInfGraph;
 import openllet.jena.PelletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
+import org.apache.jena.util.iterator.ExtendedIterator;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
@@ -21,7 +23,6 @@ import openllet.core.OpenlletOptions;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.lang.annotation.ElementType;
 
 
 /**
@@ -48,13 +49,9 @@ public class App
         return results;
     }
 
-    private static boolean WriteInconsistency(Graph graph, String tripleItem, FileOutputStream fileWriter, NodeFactory NodeFactoryName){
-
-
-
+    private static boolean WriteInconsistencySubGraph(Graph graph, String tripleItem, FileOutputStream fileWriter, NodeFactory NodeFactoryName){
 
         org.apache.jena.graph.Node testNode = NodeFactoryName.createURI(tripleItem);
-
 
 
         GraphExtractExtended GraphExtr = new GraphExtractExtended(TripleBoundary.stopNowhere);
@@ -66,16 +63,25 @@ public class App
             return false;
         }
 
+        return  WriteInconsistencyGraph(subGraph, fileWriter);
 
+    }
+
+    private static boolean WriteInconsistencyGraph(Graph graph, FileOutputStream fileWriter){
+        System.out.println(graph.size());
+
+        Model subModel = ModelFactory.createModelForGraph(graph);
+        return WriteInconsistencyModel(subModel, fileWriter);
+
+    }
+
+    private static boolean WriteInconsistencyModel(Model subModel, FileOutputStream fileWriter){
         OpenlletOptions.USE_TRACING = true;
-
-
-
-        Model subModel = ModelFactory.createModelForGraph(subGraph);
-
         Model subModelNew = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC, subModel);
 
         PelletInfGraph pellet = (PelletInfGraph) subModelNew.getGraph();
+
+//        subModel.write(System.out, "TTL");
 
         if( !pellet.isConsistent() ) {
             // create an inference model using Pellet reasoner
@@ -88,48 +94,38 @@ public class App
     }
 
 
+    public static void QueryResultPrinter(Model model, String query){
+        ResultSet results = sparqlQuery(model, query);
+        while (results.hasNext()){
+            System.out.println(results.next());
+        }
+    }
+
+    public static void testQueries(Model model){
+
+        String query = "SELECT ?a ?C ?D WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
+        String query2 = "SELECT ?a ?C WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?C . } LIMIT 5";
+        String query3 = "SELECT ?D ?C WHERE { ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
+
+        QueryResultPrinter(model, query);
+        QueryResultPrinter(model, query2);
+        QueryResultPrinter(model, query3);
 
 
-    public static void main( String[] args ) throws Exception {
-        // Load HDT file using the hdt-java library
-        HDT hdt = HDTManager.mapIndexedHDT("/home/thomas/thesis/HDTs/lod-10000T.hdt", null);
+    }
 
+    public static void testConsistency(IteratorTripleString it, Graph graph, FileOutputStream fileWriter) throws Exception {
 
-
-
-        System.out.println("Starting search");
-
-
-        IteratorTripleString it = hdt.search("", "", "");
-
-        // Create Jena wrapper on top of HDT.
-        HDTGraph graph = new HDTGraph(hdt);
-        NodeFactory NodeFactoryName = new NodeFactory();
-
-
-//        String query = "SELECT ?a ?C ?D WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } limit 1";
-//
-//
-//        Model model = ModelFactory.createModelForGraph(graph);
-//        ResultSet results = sparqlQuery(model, query);
-//        while (results.hasNext()){
-//            System.out.println(results.next());
-//        }
-//
-//
-//        org.apache.jena.graph.Node testNode2 = NodeFactorytest.createURI("http://yago-knowledge.org/resource/SeaWorld_&_Busch_Gardens_Conservation_Fund");
-        FileOutputStream fileWriter = new FileOutputStream(new File("../RDFs/myInconsistencies.ttl"));
-
-
-        int iterator = 0;
-
-        boolean Incons;
 
         byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
         fileWriter.write(strToBytes);
 
+        NodeFactory NodeFactoryName = new NodeFactory();
+
+        int iterator = 0;
+        boolean Incons;
         while(it.hasNext()){
-            if (!(iterator%100000 == 0)){
+            if (!(iterator%10500 == 0)){
                 iterator += 1;
                 it.next();
                 continue;
@@ -137,17 +133,17 @@ public class App
             TripleString item = it.next();
 
             String subject = item.getSubject().toString();
-            // String Predicate = item.getPredicate().toString();
             String object = item.getObject().toString();
 
-            Incons = WriteInconsistency(graph, object, fileWriter, NodeFactoryName);
+
+            Incons = WriteInconsistencySubGraph(graph, object, fileWriter, NodeFactoryName);
 
             if (Incons){
                 strToBytes = ("\n New inconsistency: \n").getBytes();
                 fileWriter.write(strToBytes);
             }
 
-            Incons = WriteInconsistency(graph, subject, fileWriter, NodeFactoryName);
+            Incons = WriteInconsistencySubGraph(graph, subject, fileWriter, NodeFactoryName);
 
             if (Incons){
                 strToBytes = ("\n New inconsistency: \n").getBytes();
@@ -158,6 +154,41 @@ public class App
 
             iterator += 1;
         }
+    }
+
+
+
+    public static void main( String[] args ) throws Exception {
+        // Load HDT file using the hdt-java library
+        System.out.println("Print Loading in HDT");
+        HDT hdt = HDTManager.mapIndexedHDT("/home/thomas/thesis/HDTs/dblp-20170124.hdt", null);
+
+
+        // Create Jena wrapper on top of HDT.
+        HDTGraph graph = new HDTGraph(hdt);
+
+        // Set output Writer
+        FileOutputStream fileWriter = new FileOutputStream(new File("../RDFs/myInconsistencies.ttl"));
+
+        // Create Models
+        Model model = ModelFactory.createModelForGraph(graph);
+
+        Model NewModel = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
+
+        // Run test Queries
+        testQueries(model);
+        //testQueries(NewModel);
+
+
+
+        // Test Inconsistencies
+        System.out.println(WriteInconsistencyModel(NewModel, fileWriter));
+        //testConsistency(hdt.search("","",""), graph, fileWriter);
+
+
+
+
+
 
 
 

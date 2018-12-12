@@ -65,10 +65,6 @@
       <version>5.0.3</version>
     </dependency>
     <dependency>
-      <groupId>net.sourceforge.owlapitools</groupId>
-      <artifactId>owlexplanation</artifactId>
-      <version>5.0.0</version>
-    </dependency><dependency>
     <groupId>com.github.galigator.openllet</groupId>
     <artifactId>openllet-owlapi</artifactId>
     <version>2.6.4</version>
