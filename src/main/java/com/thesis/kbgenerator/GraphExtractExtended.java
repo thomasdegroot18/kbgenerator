@@ -82,6 +82,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             this.extractFrom = extractFrom;
             this.active = CollectionFactory.createHashedSet();
             this.b = b;
+
         }
 
         public int extractIntoExtend( CharSequence root , int counter ) throws Exception

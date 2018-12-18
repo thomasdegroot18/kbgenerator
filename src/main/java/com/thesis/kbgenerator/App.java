@@ -7,12 +7,16 @@ import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
+import org.apache.jena.riot.SysRIOT;
 import org.apache.jena.util.iterator.ExtendedIterator;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
+
+import java.io.*;
+import java.util.Random;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -24,13 +28,10 @@ import org.apache.jena.rdf.model.ModelFactory;
 
 import openllet.core.OpenlletOptions;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.Set;
 
 
@@ -45,6 +46,7 @@ public class App
 {
     public static byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
     public static int MaxExplanations = 10;
+    public static Random rand = new Random();
 
 
     public static ResultSet sparqlQuery(Model model, String sparqlQuery) {
@@ -77,54 +79,55 @@ public class App
 
     }
 
+    private static OWLOntology PipeModel(Set<String> subModel) throws Exception{
+
+
+        PipedInputStream in = new PipedInputStream();
+        PipedOutputStream out = new PipedOutputStream(in);
+        new Thread(
+                new Runnable(){
+                    public void run(){
+                        //put your code that writes data to the outputstream here.
+                        try {
+                            for (String Test: subModel){
+                                out.write(Test.getBytes());
+                            }
+                            out.close();
+                        }catch(IOException io) {
+                            io.printStackTrace();
+                        }
+                    }
+                }
+        ).start();
+
+
+        return OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(in);
+    }
+
 
     private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
 
 
-//        OpenlletOptions.USE_TRACING = true;
-//        Model subModelNew = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC, Model testModel);
-//
-//        PelletInfGraph pellet = (PelletInfGraph) subModelNew.getGraph();
-//
-////        subModel.write(System.out, "TTL");
-
-
-
-
-        System.out.println("Check2");
-
-        OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(subModel);
-
-        System.out.println("Check3");
+        OWLOntology ontology = PipeModel(subModel);
 
         PelletExplanation.setup();
         // Create the reasoner and load the ontology
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
 
+
         // Create an clashExplanation generator
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
-        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations();
+
+        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(10);
 
         for(Set<OWLAxiom> InconsExplanation: exp){
             for (OWLAxiom InconsExplanationLine : InconsExplanation){
 
-                System.out.println(InconsExplanationLine.toString());
-
                 fileWriter.write(InconsExplanationLine.toString().getBytes());
             }
         }
-
-//
-//
-//        fileWriter.write(strToBytes);
-//
-//        if( !pellet.isConsistent() ) {
-//            // create an inference model using Pellet reasoner
-//            Model explanation = pellet.explainInconsistency();// print the explanation
-//            explanation.write( fileWriter, "TTL");
-//            System.out.println("Inconsistency Found!");
-//        }
+        
     }
 
 
@@ -157,8 +160,8 @@ public class App
         IteratorTripleString it = hdt.search("","","");
 
         while(it.hasNext()){
-            if (!(iterator%10500 == 0)){
-                iterator += 1;
+            if (!(iterator%(10*(rand.nextInt(50))+1) == 0)){
+                iterator ++;
                 it.next();
                 continue;
             }
@@ -173,7 +176,8 @@ public class App
 
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
-            iterator += 1;
+            iterator ++;
+
         }
     }
 
