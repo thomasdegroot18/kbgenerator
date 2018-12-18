@@ -21,11 +21,14 @@
 
 package com.thesis.kbgenerator;
 
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.jena.graph.*;
 import org.apache.jena.util.CollectionFactory ;
+import org.rdfhdt.hdt.hdt.HDT;
+import org.rdfhdt.hdt.triples.IteratorTripleString;
+import org.rdfhdt.hdt.triples.TripleString;
 
 /**
  GraphExtract offers a very simple recursive extraction of a subgraph with a
@@ -48,15 +51,15 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      in <code>graph</code> with the terminating condition given by the
      TripleBoundary passed to the constructor.
      */
-    public Graph extractExtend( Node node, Graph graph )
-    { return extractIntoExtend( Factory.createGraphMem(), node, graph ); }
+    public Set<String> extractExtend( String node, HDT graph ) throws Exception
+    { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
     /**
      Answer the graph <code>toUpdate</code> augmented with the sub-graph of
      <code>extractFrom</code> reachable from <code>root</code> bounded
      by this instance's TripleBoundary.
      */
-    public Graph extractIntoExtend( Graph toUpdate, Node root, Graph extractFrom )
+    public Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
     { new ExtractionExtend( b, toUpdate, extractFrom ).extractIntoExtend( root , 0);
         return toUpdate; }
 
@@ -68,12 +71,12 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      */
     protected static class ExtractionExtend
     {
-        protected Graph toUpdate;
-        protected Graph extractFrom;
-        protected Set<Node> active;
+        protected Set<String> toUpdate;
+        protected HDT extractFrom;
+        protected Set<CharSequence> active;
         protected TripleBoundary b;
 
-        ExtractionExtend( TripleBoundary b, Graph toUpdate, Graph extractFrom )
+        ExtractionExtend( TripleBoundary b, Set<String> toUpdate, HDT extractFrom )
         {
             this.toUpdate = toUpdate;
             this.extractFrom = extractFrom;
@@ -81,17 +84,17 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             this.b = b;
         }
 
-        public int extractIntoExtend( Node root , int counter )
+        public int extractIntoExtend( CharSequence root , int counter ) throws Exception
         {
             active.add( root );
-            Iterator<Triple> it = extractFrom.find( root, Node.ANY, Node.ANY );
 
-            while (it.hasNext() && counter < 20000)
+            IteratorTripleString it = extractFrom.search(root, "", "");
+            while (it.hasNext() && counter < 5000)
             {
-                Triple t = it.next();
-                Node subRoot = t.getObject();
-                toUpdate.add( t );
-                if (! (active.contains( subRoot ) || b.stopAt( t )  ) ) {  //
+                TripleString t = it.next();
+                String subRoot = t.getObject().toString();
+                toUpdate.add( t.asNtriple().toString() );
+                if (! (active.contains( subRoot )  ) ) {  //
                     counter = extractIntoExtend( subRoot, counter);
                 }
                 counter ++;

@@ -2,6 +2,9 @@ package com.thesis.kbgenerator;
 
 import openllet.jena.PelletInfGraph;
 import openllet.jena.PelletReasonerFactory;
+import openllet.owlapi.explanation.PelletExplanation;
+import openllet.owlapi.OpenlletReasoner;
+import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
 import org.apache.jena.util.iterator.ExtendedIterator;
@@ -20,9 +23,15 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 
 import openllet.core.OpenlletOptions;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.Set;
 
 
 /**
@@ -32,7 +41,12 @@ import java.io.FileOutputStream;
 
 
 public class App
+
 {
+    public static byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
+    public static int MaxExplanations = 10;
+
+
     public static ResultSet sparqlQuery(Model model, String sparqlQuery) {
         //HDT hdt = HDTManager.mapIndexedHDT(fileHDT, null);
         ResultSet results = null;
@@ -49,48 +63,68 @@ public class App
         return results;
     }
 
-    private static boolean WriteInconsistencySubGraph(Graph graph, String tripleItem, FileOutputStream fileWriter, NodeFactory NodeFactoryName){
-
-        org.apache.jena.graph.Node testNode = NodeFactoryName.createURI(tripleItem);
-
+    private static void WriteInconsistencySubGraph(HDT hdt, String tripleItem, FileOutputStream fileWriter) throws Exception{
 
         GraphExtractExtended GraphExtr = new GraphExtractExtended(TripleBoundary.stopNowhere);
-        Graph subGraph = null;
+        Set<String> subGraph = null;
         try{
-            subGraph = GraphExtr.extractExtend(testNode , graph);
+            subGraph = GraphExtr.extractExtend(tripleItem , hdt);
         } catch (StackOverflowError e){
             System.out.println(e);
-            return false;
         }
 
-        return  WriteInconsistencyGraph(subGraph, fileWriter);
+        WriteInconsistencyModel(subGraph, fileWriter);
 
     }
 
-    private static boolean WriteInconsistencyGraph(Graph graph, FileOutputStream fileWriter){
-        System.out.println(graph.size());
 
-        Model subModel = ModelFactory.createModelForGraph(graph);
-        return WriteInconsistencyModel(subModel, fileWriter);
+    private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
 
-    }
 
-    private static boolean WriteInconsistencyModel(Model subModel, FileOutputStream fileWriter){
-        OpenlletOptions.USE_TRACING = true;
-        Model subModelNew = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC, subModel);
+//        OpenlletOptions.USE_TRACING = true;
+//        Model subModelNew = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC, Model testModel);
+//
+//        PelletInfGraph pellet = (PelletInfGraph) subModelNew.getGraph();
+//
+////        subModel.write(System.out, "TTL");
 
-        PelletInfGraph pellet = (PelletInfGraph) subModelNew.getGraph();
 
-//        subModel.write(System.out, "TTL");
 
-        if( !pellet.isConsistent() ) {
-            // create an inference model using Pellet reasoner
-            Model explanation = pellet.explainInconsistency();// print the explanation
-            explanation.write( fileWriter, "TTL");
-            System.out.println("Inconsistency Found!");
-            return true;
+
+        System.out.println("Check2");
+
+        OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(subModel);
+
+        System.out.println("Check3");
+
+        PelletExplanation.setup();
+        // Create the reasoner and load the ontology
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+
+        // Create an clashExplanation generator
+        PelletExplanation expGen = new PelletExplanation(reasoner);
+
+        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations();
+
+        for(Set<OWLAxiom> InconsExplanation: exp){
+            for (OWLAxiom InconsExplanationLine : InconsExplanation){
+
+                System.out.println(InconsExplanationLine.toString());
+
+                fileWriter.write(InconsExplanationLine.toString().getBytes());
+            }
         }
-        return false;
+
+//
+//
+//        fileWriter.write(strToBytes);
+//
+//        if( !pellet.isConsistent() ) {
+//            // create an inference model using Pellet reasoner
+//            Model explanation = pellet.explainInconsistency();// print the explanation
+//            explanation.write( fileWriter, "TTL");
+//            System.out.println("Inconsistency Found!");
+//        }
     }
 
 
@@ -114,16 +148,14 @@ public class App
 
     }
 
-    public static void testConsistency(IteratorTripleString it, Graph graph, FileOutputStream fileWriter) throws Exception {
+    public static void testConsistency(HDT hdt, FileOutputStream fileWriter) throws Exception {
 
 
-        byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
         fileWriter.write(strToBytes);
 
-        NodeFactory NodeFactoryName = new NodeFactory();
-
         int iterator = 0;
-        boolean Incons;
+        IteratorTripleString it = hdt.search("","","");
+
         while(it.hasNext()){
             if (!(iterator%10500 == 0)){
                 iterator += 1;
@@ -136,21 +168,10 @@ public class App
             String object = item.getObject().toString();
 
 
-            Incons = WriteInconsistencySubGraph(graph, object, fileWriter, NodeFactoryName);
-
-            if (Incons){
-                strToBytes = ("\n New inconsistency: \n").getBytes();
-                fileWriter.write(strToBytes);
-            }
-
-            Incons = WriteInconsistencySubGraph(graph, subject, fileWriter, NodeFactoryName);
-
-            if (Incons){
-                strToBytes = ("\n New inconsistency: \n").getBytes();
-                fileWriter.write(strToBytes);
-            }
+            WriteInconsistencySubGraph(hdt, object, fileWriter);
 
 
+            WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
             iterator += 1;
         }
@@ -160,31 +181,35 @@ public class App
 
     public static void main( String[] args ) throws Exception {
         // Load HDT file using the hdt-java library
+        if (!args[2].isEmpty()){
+            MaxExplanations = Integer.parseInt(args[2]);
+        }
+
         System.out.println("Print Loading in HDT");
-        HDT hdt = HDTManager.mapIndexedHDT("/home/thomas/thesis/HDTs/dblp-20170124.hdt", null);
-
-
-        // Create Jena wrapper on top of HDT.
-        HDTGraph graph = new HDTGraph(hdt);
+        HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
 
         // Set output Writer
-        FileOutputStream fileWriter = new FileOutputStream(new File("../RDFs/myInconsistencies.ttl"));
+        FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
 
-        // Create Models
-        Model model = ModelFactory.createModelForGraph(graph);
+        System.out.println("Finished Loading HDT");
 
-        Model NewModel = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
-
-        // Run test Queries
-        testQueries(model);
+//        // Create Jena wrapper on top of HDT.
+//        HDTGraph graph = new HDTGraph(hdt);
+//
+//
+//        // Create Models
+//        Model model = ModelFactory.createModelForGraph(graph);
+//
+//        Model NewModel = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
+//
+//        // Run test Queries
+//        testQueries(model);
         //testQueries(NewModel);
 
 
 
         // Test Inconsistencies
-        System.out.println(WriteInconsistencyModel(NewModel, fileWriter));
-        //testConsistency(hdt.search("","",""), graph, fileWriter);
-
+        testConsistency(hdt, fileWriter);
 
 
 

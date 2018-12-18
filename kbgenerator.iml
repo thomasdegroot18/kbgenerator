@@ -109,6 +109,7 @@
     <orderEntry type="library" name="Maven: com.github.galigator.openllet:openllet-query:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: com.github.galigator.openllet:openllet-jena:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
+    <orderEntry type="library" name="Maven: com.github.galigator.openllet:openllet-explanation:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.11" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.2.11" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.11" level="project" />
