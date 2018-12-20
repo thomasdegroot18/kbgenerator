@@ -122,12 +122,12 @@ public class App
         Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(10);
 
         for(Set<OWLAxiom> InconsExplanation: exp){
+            fileWriter.write(strToBytes);
             for (OWLAxiom InconsExplanationLine : InconsExplanation){
-
                 fileWriter.write(InconsExplanationLine.toString().getBytes());
             }
         }
-        
+
     }
 
 
@@ -152,9 +152,6 @@ public class App
     }
 
     public static void testConsistency(HDT hdt, FileOutputStream fileWriter) throws Exception {
-
-
-        fileWriter.write(strToBytes);
 
         int iterator = 0;
         IteratorTripleString it = hdt.search("","","");
