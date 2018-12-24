@@ -24,11 +24,8 @@ import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 
-import openllet.core.OpenlletOptions;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 
@@ -44,12 +41,11 @@ import java.util.Set;
 public class App
 
 {
-    public static byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
-    public static int MaxExplanations = 10;
-    public static Random rand = new Random();
+    private static byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
+    private static int MaxExplanations;
+    private static Random rand = new Random();
+    private static ResultSet sparqlQuery(Model model, String sparqlQuery) {
 
-
-    public static ResultSet sparqlQuery(Model model, String sparqlQuery) {
         //HDT hdt = HDTManager.mapIndexedHDT(fileHDT, null);
         ResultSet results = null;
         try {
@@ -60,7 +56,7 @@ public class App
 
             results = qe.execSelect();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return results;
     }
@@ -72,7 +68,7 @@ public class App
         try{
             subGraph = GraphExtr.extractExtend(tripleItem , hdt);
         } catch (StackOverflowError e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
         WriteInconsistencyModel(subGraph, fileWriter);
@@ -84,24 +80,34 @@ public class App
 
         PipedInputStream in = new PipedInputStream();
         PipedOutputStream out = new PipedOutputStream(in);
-        new Thread(
-                new Runnable(){
-                    public void run(){
-                        //put your code that writes data to the outputstream here.
-                        try {
-                            for (String Test: subModel){
-                                out.write(Test.getBytes());
-                            }
-                            out.close();
-                        }catch(IOException io) {
-                            io.printStackTrace();
-                        }
-                    }
+
+        // Lambda Runnable
+        Runnable task = () -> {
+            try {
+                for (String Test: subModel){
+                    out.write(Test.getBytes());
                 }
-        ).start();
+                out.close();
+            }
+            catch(IOException io) {
+                io.printStackTrace();
+            }
+        };
+
+        new Thread(task).start();
+
 
 
         return OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(in);
+    }
+
+
+    private static void InconsistencyStandardizer(Set<OWLAxiom> InconsistencyExplanation, FileOutputStream fileWriter) throws Exception
+    {
+
+        for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
+            fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+        }
     }
 
 
@@ -119,19 +125,18 @@ public class App
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
 
-        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(10);
+        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(MaxExplanations);
 
-        for(Set<OWLAxiom> InconsExplanation: exp){
+        for(Set<OWLAxiom> InconsistencyExplanation: exp){
             fileWriter.write(strToBytes);
-            for (OWLAxiom InconsExplanationLine : InconsExplanation){
-                fileWriter.write(InconsExplanationLine.toString().getBytes());
-            }
+            InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
+
         }
 
     }
 
 
-    public static void QueryResultPrinter(Model model, String query){
+    private static void QueryResultPrinter(Model model, String query){
         ResultSet results = sparqlQuery(model, query);
         while (results.hasNext()){
             System.out.println(results.next());
@@ -151,7 +156,7 @@ public class App
 
     }
 
-    public static void testConsistency(HDT hdt, FileOutputStream fileWriter) throws Exception {
+    private static void testConsistency(HDT hdt, FileOutputStream fileWriter) throws Exception {
 
         int iterator = 0;
         IteratorTripleString it = hdt.search("","","");
@@ -184,6 +189,8 @@ public class App
         // Load HDT file using the hdt-java library
         if (!args[2].isEmpty()){
             MaxExplanations = Integer.parseInt(args[2]);
+        } else{
+            MaxExplanations = 10;
         }
 
         System.out.println("Print Loading in HDT");
