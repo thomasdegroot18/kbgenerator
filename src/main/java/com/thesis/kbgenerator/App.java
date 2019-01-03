@@ -36,14 +36,18 @@ import org.semanticweb.owlapi.model.OWLOntology;
 public class App
 
 {
-    private static byte[] strToBytes = ("\n New inconsistency: \n").getBytes();
-    private static int MaxExplanations;
-    private static Random rand = new Random();
-    private static String[] classLabels;
-    private static String[] individualLabels;
+    private static byte[] strToBytes = ("\nNew inconsistency: \n").getBytes();  // Small string to separate different explanations.
+    private static int MaxExplanations;                                         // Max explanation Storage.
+    private static Random rand = new Random();                                  // Random Instantiation
+    private static String[] classLabels;                                        // ClassLabel storage
+    private static String[] individualLabels;                                   // InstanceLabel Storage
+    private static boolean verbose;                                             // Verbosity storage
+    private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
+        // TODO: Add COMMENTS
+
         List<String> NewList = new ArrayList<>();
 
         Object[] ListIndividuals = InconsistencyExplanationLine.individualsInSignature().toArray();
@@ -59,7 +63,10 @@ public class App
 
 
     private static String AxiomConverter(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator){
+        // TODO: Add COMMENTS
         List SetOfVariables = StreamParser(InconsistencyExplanationLine);
+
+
         AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
         for (Object variable: SetOfVariables){
             if (!variableMap.containsKey(variable)){
@@ -74,51 +81,99 @@ public class App
             }
         }
 
-
+        // return the string line with a generalised variable, Takes RelationType + first element + second element.
         return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
     }
 
 
     private static void InconsistencyStandardizer(Set<OWLAxiom> InconsistencyExplanation, FileOutputStream fileWriter)
     {
-
+        // Instantiate the variable map storing all the variables/labels and the combined Cleaned labels
+        // Due being declared in this scope the changes made to the Hashmap are also stored in this scoped, and are
+        // inherited in deeper layered functions(AxiomConverter and StreamParser).
         Map<Object, String> variableMap = new HashMap<>();
+
+        //Stores the lines of the explanations in a list.
         List<String> ExplanationStringList = new ArrayList<>();
 
 
-
         int[] iterator = new int[2]; // The first element is the Class iterator, the second element is the Individual Iterator.
+
+        // Loop through the Inconsistency line per line to replace the Classes and the instances with the correct values.
         for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
-
+            // Instantiate the StringLine in correct scope.
             String StringLine;
+
+            // Get the axiom type.
             AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
+
+            // For each relationTYPE a function is called. At the moment only these 4 RelationTypes are used.
+            // TODO Add in more relation types.
+
+            // class assertion: <a1> <rdf:type> <C1>
             if (RelationType == AxiomType.CLASS_ASSERTION){
+                // Gets the new clean relation graph with generalised names.
                 StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
 
+            // Disjoint class: <C1> <owl:disjointWith> <C2>
             } else if (RelationType == AxiomType.DISJOINT_CLASSES){
+                // Gets the new clean relation graph with generalised names.
                 StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
 
+            // Subclass of: <C1> <rdf:subclassOf> <C2>
             } else if (RelationType == AxiomType.SUBCLASS_OF){
+                // Gets the new clean relation graph with generalised names.
                 StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
 
+            // Equivalent Class: <C1> <owl:equivalentWith> <C2>
             }  else if (RelationType == AxiomType.EQUIVALENT_CLASSES){
+                // Gets the new clean relation graph with generalised names.
                 StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
 
+            // If any other classes are hit Class cast exception is thrown. Throwing the relationtype to add.
             } else {
                 throw new ClassCastException(RelationType.toString());
             }
+
+            // Adds the new cleaned line to the ExplanationList
             ExplanationStringList.add(StringLine);
 
         }
+
+        // TRY to check the graph and write if needed to a file.
         try {
-//            for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation) { // Write out all the complete inconsistencies for examples Paper.
-//                fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
-//            }
-            for (String StringLine : ExplanationStringList) { // Write to Output stream for Generalised output.
-                fileWriter.write((StringLine + "\n") .getBytes());
+            if(verbose) { // IF verbose write to file.
+                { // Write out all the complete inconsistencies for examples Paper.
+                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation)
+                    // Transfer the string to bytes and send to filewriter.
+                    fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+                }
+                for (String StringLine : ExplanationStringList) { // Write to Output stream for Generalised output.
+                    // Generalised output written.
+                    fileWriter.write((StringLine + "\n") .getBytes());
+                }
             }
+
+            // Takes the Generalised Explanation and makes a generalised subgraph.
+            // Adds to the list if the subgraph is not yet recognized.
             GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(ExplanationStringList);
-            GeneralGraph.CompareGraph(GeneralGraph);
+
+            // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
+            // the subgraph is added to the list.
+
+            boolean AcceptedTo = true;
+            // Loop through all the subgraphs.
+            for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
+
+                // Check if the subgraph is equal to the compared graph.
+                if (AcceptedTo && AcceptedGraph.CompareGraph(GeneralGraph) ){
+                    AcceptedTo = false;
+                }
+            }
+            // If no subgraph can be found it is added to the list.
+            if (AcceptedTo){
+                GeneralGraphs.add(GeneralGraph);
+            }
         } catch(IOException io) {
             io.printStackTrace();
         }
@@ -175,7 +230,7 @@ public class App
         // Loop through the set of explanations and standardize the Inconsistencies.
         for(Set<OWLAxiom> InconsistencyExplanation: exp){
 
-            // WIL BE DEPRECATED IN FUTURE VERSIONS: Writing to file split between inconsistencies. strToBytes.
+            // TODO: Do not use the filewriter here.
             fileWriter.write(strToBytes);
 
             // Standardize the inconsistency and write to file.
@@ -325,19 +380,27 @@ public class App
     public static void main( String[] args ) throws Exception {
         /* main method that generates Inconsistencies when found.
          * @params {@code args[0] } location of the HDT
-         * @params {@code args[1]} Location to store the output
+         * @params {@code args[1] } Location to store the output
          * @params {@code args[2] } inconsistency explanations per subgraph
+         * @params {@code args[3] } Verbose
          *
          * @returns void
          *
          */
 
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
-        // the amount given bij the user.
+        // the amount given by the user.
         if (!args[2].isEmpty()){
             MaxExplanations = Integer.parseInt(args[2]);
-        } else{
+        } else {
             MaxExplanations = 10;
+        }
+
+        // If the fourth argument is empty the amount of
+        if (!args[3].isEmpty() && args[3].equals("true")){
+            verbose = true;
+        } else {
+            verbose = false;
         }
 
         // Generate labels for the classes and instances.
@@ -355,24 +418,23 @@ public class App
         // Set output Writer
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
 
+        if(verbose) {
+            // Create Jena wrapper on top of HDT.
+            System.out.println("Creating Jena HDT graph");
+            HDTGraph graph = new HDTGraph(hdt);
 
-        // Create Jena wrapper on top of HDT.
-        System.out.println("Creating Jena HDT graph");
-        HDTGraph graph = new HDTGraph(hdt);
+            // Create Models
+            System.out.println("Creating model from graph");
+            Model model = ModelFactory.createModelForGraph(graph);
 
+            System.out.println("Creating model from n3");
+            Model N3Model = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
 
-        // Create Models
-        System.out.println("Creating model from graph");
-        Model model = ModelFactory.createModelForGraph(graph);
-
-        System.out.println("Creating model from n3");
-        Model N3Model = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
-
-        System.out.println("Running test Queries");
-        // Run test Queries
-        testQueries(model);
-        testQueries(N3Model);
-
+            System.out.println("Running test Queries");
+            // Run test Queries
+            testQueries(model);
+            testQueries(N3Model);
+        }
 
         // Print to the user that system started finding inconsistencies.
         System.out.println("Start locating the inconsistencies.");
