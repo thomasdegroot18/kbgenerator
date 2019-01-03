@@ -34,8 +34,11 @@ import org.rdfhdt.hdt.triples.TripleString;
  GraphExtract offers a very simple recursive extraction of a subgraph with a
  specified root in some supergraph. The recursion is terminated by triples
  that satisfy some supplied boundary condition.
+
+ EXTENDED by:
+ Thomas de Groot
  */
-class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
+public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 {
     final TripleBoundary b;
 

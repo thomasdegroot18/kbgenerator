@@ -43,38 +43,111 @@ public class App
     private static String[] individualLabels;                                   // InstanceLabel Storage
     private static boolean verbose;                                             // Verbosity storage
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
+    private static int InconsistenciesHit = 0;
+    private static int TotalInconsistenciesBeforeBreak;
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
-        // TODO: Add COMMENTS
-
+        // Instantiate a new Array List.
         List<String> NewList = new ArrayList<>();
 
+        // Retrieve the individuals as a array of objects.
         Object[] ListIndividuals = InconsistencyExplanationLine.individualsInSignature().toArray();
-        for (Object ListItem: ListIndividuals ) {
-            NewList.add(ListItem.toString()+"IndividualCheck82910283");
-        }
+
+        // Retrieve the classes as a array of objects.
         Object[] ListClasses = InconsistencyExplanationLine.classesInSignature().toArray();
+
+        // Instantiate the value.
+        int value;
+        int prevValue = 0;
+
+        // Loop through the list of individuals.
+        for (Object ListItem: ListIndividuals ) {
+            // generate the value where the object is found in the line.
+            value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            // If not found throw error.
+            if (value < 0){
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString()+"IndividualCheck82910283");
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString()+"IndividualCheck82910283");
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. "+ InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString()+"IndividualCheck82910283");
+            }
+        }
+
+
         for (Object ListItem: ListClasses ) {
-            NewList.add(ListItem.toString());
+            // generate the value where the object is found in the line.
+            value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            // If not found throw error.
+            if (value < 0) {
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString());
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString());
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString());
+            }
+
         }
         return NewList;
     }
 
 
     private static String AxiomConverter(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator){
-        // TODO: Add COMMENTS
+
+        // Get the list of variables in the correct order.
         List SetOfVariables = StreamParser(InconsistencyExplanationLine);
 
-
+        // Gets the axiom type of the line.
         AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
+        // For both elements of the class/instance list.
         for (Object variable: SetOfVariables){
+            // Check if the variable map contains the key for the variable(class/Instance)
             if (!variableMap.containsKey(variable)){
+                // If there is no key yet made, the key is added to map.
+                // Now we check if the variable is an instance or not. By checking if it hits an certain string.
+                // TODO: low priority. Change the IndividualCheck82910283 to a less breakable check.
                 if ( variable.toString().contains("IndividualCheck82910283")) {
+                    // add the variable and new label to the map and increase the value with one
                     variableMap.put(variable, individualLabels[iterator[1]]);  // Iterator on Individual
                     iterator[1] ++;
+
                 } else {
-                    variableMap.put(variable, classLabels[iterator[0]]);
+                    // add the variable and new label to the map and increase the value with one.
+                    variableMap.put(variable, classLabels[iterator[0]]); // Iterator on Class
                     iterator[0] ++;
                 }
 
@@ -157,7 +230,6 @@ public class App
             // Takes the Generalised Explanation and makes a generalised subgraph.
             // Adds to the list if the subgraph is not yet recognized.
             GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(ExplanationStringList);
-
             // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
             // the subgraph is added to the list.
 
@@ -173,6 +245,14 @@ public class App
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
+            }
+
+            if(verbose) { // IF verbose write to file.
+                { // Write out all the complete inconsistencies for examples Paper.
+                    for (Object InconsistencyExplanationLine : GeneralGraph.Axioms().toArray())
+                        // Transfer the string to bytes and send to filewriter.
+                        fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+                }
             }
         } catch(IOException io) {
             io.printStackTrace();
@@ -229,7 +309,7 @@ public class App
 
         // Loop through the set of explanations and standardize the Inconsistencies.
         for(Set<OWLAxiom> InconsistencyExplanation: exp){
-
+            InconsistenciesHit ++;
             // TODO: Do not use the filewriter here.
             fileWriter.write(strToBytes);
 
@@ -270,7 +350,7 @@ public class App
         IteratorTripleString it = hdt.search("","","");
 
         // While there is a triple the loop continues.
-        while(it.hasNext()){
+        while(it.hasNext() && InconsistenciesHit < TotalInconsistenciesBeforeBreak){
 
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
             // that triples are connected to each other, not every triple needs to be evaluated.
@@ -388,6 +468,10 @@ public class App
          *
          */
 
+        // TODO: add to the user capability to change and add.
+        TotalInconsistenciesBeforeBreak = 100;
+
+
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
         if (!args[2].isEmpty()){
@@ -397,11 +481,7 @@ public class App
         }
 
         // If the fourth argument is empty the amount of
-        if (!args[3].isEmpty() && args[3].equals("true")){
-            verbose = true;
-        } else {
-            verbose = false;
-        }
+        verbose = !args[3].isEmpty() && args[3].equals("true");
 
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
@@ -444,6 +524,14 @@ public class App
 
         // Print to the user that the system finished finding inconsistencies.
         System.out.println("Finished locating inconsistencies");
+
+        System.out.println("Printing Generalised Graphs");
+        // Prints the finalised generalised subgraphs
+        for (GeneralisedSubGraph GeneralGraph: GeneralGraphs ){
+
+            // Prints the generalGraph with specialised function.
+            GeneralGraph.print();
+        }
 
     }
 

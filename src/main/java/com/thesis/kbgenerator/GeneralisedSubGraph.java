@@ -1,17 +1,18 @@
 package com.thesis.kbgenerator;
 
 
-
-
-import org.apache.jena.base.Sys;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.Ontology;
-import org.apache.jena.rdf.model.ModelFactory;
+import openllet.owlapi.OpenlletReasoner;
+import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Stream;
+
+/**
+ *
+ * @author Thomas de Groot
+ */
 
 
 class GeneralisedSubGraph {
@@ -19,11 +20,17 @@ class GeneralisedSubGraph {
     // Make New Subgraph
     private OWLOntology owlOntology;        // Instantiate OWLOntology for the graph
     private OWLDataFactory dataFactory;     // Instantiate the Datafactory.
+    private List<String> SubGraphStoredasStrings;
+
+    private boolean consistency;            // Store the consistency of the subgraph
 
 
     // Constructor for the Generalised Sub graph.
     GeneralisedSubGraph(List<String> Subgraph)
         {
+            // Storing the subgraph as String:
+            SubGraphStoredasStrings = Subgraph;
+
             // OWL ontology manager creation.
             OWLOntologyManager man = OWLManager.createOWLOntologyManager();
 
@@ -64,7 +71,6 @@ class GeneralisedSubGraph {
                         // Instantiate Instance
                         OWLIndividual Individual = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
 
-                        // Instantiate Class Assertion/
                         OWLClassAssertionAxiom Assertion = dataFactory.getOWLClassAssertionAxiom(classC2, Individual);
 
                         // Add triple
@@ -80,75 +86,98 @@ class GeneralisedSubGraph {
                     } else {
 
                         // Add the two classes for the relationship cases.
-                        OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
-                        OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
+                        OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
+                        OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
 
                         // Instantiate Assertion in scope.
 
                         // TODO: Add more and different cases.
 
-                        // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses
-                        if (OWLAXIOMString[0].equals("SubClassOf")){
+                        // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
+                        switch (OWLAXIOMString[0]) {
+                            case "SubClassOf": {
 
-                            // Build Subclass Axiom
-                            OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC2,  classC1);
-                            // Add Subclass Axiom
-                            owlOntology.add(Assertion);
+                                // Build Subclass Axiom
+                                OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntology.add(Assertion);
 
-                        } else if (OWLAXIOMString[0].equals("DisjointClasses")){
-                            // Build Subclass Axiom
-                            OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC2,  classC1);
-                            // Add Subclass Axiom
-                            owlOntology.add(Assertion);
+                                break;
+                            }
+                            case "DisjointClasses": {
+                                // Build Subclass Axiom
+                                OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntology.add(Assertion);
 
-                        } else {
-                            throw new ClassCastException( OWLAXIOMString[0] );
+                                break;
+                            }
+                            case "EquivalentClasses": {
+                                // Build Subclass Axiom
+                                OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntology.add(Assertion);
+
+                                break;
+                            }
+                            default:
+                                throw new ClassCastException(OWLAXIOMString[0]);
                         }
-
                     }
-
-
                 }
+            // If at any time an error pops up the catch will throw the stacktrace
             } catch (OWLOntologyCreationException e)
             {
                 e.printStackTrace();
             }
-
-
-
+            // Check if the consistency still holds
+            CheckConsistency();
         }
 
+    // Add the class declarations to the graph.
     private OWLClass AddDeclarationClass(String AxiomDeclaration){
+        // Add class
         OWLClass classC2 = dataFactory.getOWLClass(AxiomDeclaration);
+        // Add Declaration Axiom
         OWLDeclarationAxiom DeclarationAxiom1 = dataFactory.getOWLDeclarationAxiom(classC2);
+        // Add the declaration Axiom to the OWL ontology.
         owlOntology.add(DeclarationAxiom1);
+        // Return the classC2
         return classC2;
     }
 
-    private boolean CheckConsistency(){
-        // Checks if the consistency still holds or not.
-        boolean consistency = true;
-
-
-
-        return consistency;
-
+    private void CheckConsistency(){
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(owlOntology);
+        consistency = reasoner.isConsistent();
+        reasoner.dispose();
     }
 
+
+    Stream<OWLAxiom> Axioms(){
+        return owlOntology.axioms();
+    }
+
+    boolean getConsistency(){
+        // gets the consistency.
+        return consistency;
+    }
+
+    int size(){
+        return Axioms().toArray().length;
+    }
+
+    void print(){
+        // Print the general Graph
+    }
 
 
     // Test Subgraph with other subgraph
 
     boolean CompareGraph(GeneralisedSubGraph otherGraph)
         {
-
-
-
-
-            if(1 < 0.5){
+            if (otherGraph.size() != size() ){
                 return false;
-            }
-            else {
+            } else{
                 return true;
             }
         }
