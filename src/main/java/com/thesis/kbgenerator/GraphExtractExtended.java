@@ -35,12 +35,12 @@ import org.rdfhdt.hdt.triples.TripleString;
  specified root in some supergraph. The recursion is terminated by triples
  that satisfy some supplied boundary condition.
  */
-public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
+class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 {
-    protected final TripleBoundary b;
+    final TripleBoundary b;
 
 
-    public GraphExtractExtended( TripleBoundary b )
+    GraphExtractExtended( TripleBoundary b )
     {
         super(b);
         this.b = b;
@@ -51,7 +51,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      in <code>graph</code> with the terminating condition given by the
      TripleBoundary passed to the constructor.
      */
-    public Set<String> extractExtend( String node, HDT graph ) throws Exception
+    Set<String> extractExtend( String node, HDT graph ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
     /**
@@ -59,7 +59,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      <code>extractFrom</code> reachable from <code>root</code> bounded
      by this instance's TripleBoundary.
      */
-    public Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
+    private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
     { new ExtractionExtend( b, toUpdate, extractFrom ).extractIntoExtend( root , 0);
         return toUpdate; }
 
@@ -69,14 +69,14 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      limits of the extraction, and a local set <code>active</code> of nodes
      already seen and hence not to be re-processed.
      */
-    protected static class ExtractionExtend
+    private static class ExtractionExtend
     {
-        protected Set<String> toUpdate;
-        protected HDT extractFrom;
-        protected Set<CharSequence> active;
-        protected TripleBoundary b;
+        private Set<String> toUpdate;
+        private HDT extractFrom;
+        private Set<CharSequence> active;
+        private TripleBoundary b;
 
-        ExtractionExtend( TripleBoundary b, Set<String> toUpdate, HDT extractFrom )
+        private ExtractionExtend( TripleBoundary b, Set<String> toUpdate, HDT extractFrom )
         {
             this.toUpdate = toUpdate;
             this.extractFrom = extractFrom;
@@ -85,7 +85,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 
         }
 
-        public int extractIntoExtend( CharSequence root , int counter ) throws Exception
+        private int extractIntoExtend( CharSequence root , int counter ) throws Exception
         {
             active.add( root );
 
