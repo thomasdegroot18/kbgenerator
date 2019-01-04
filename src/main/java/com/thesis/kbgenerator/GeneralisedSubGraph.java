@@ -8,8 +8,9 @@ import org.semanticweb.owlapi.model.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -24,6 +25,8 @@ class GeneralisedSubGraph {
     private OWLOntology owlOntologyGraph;        // Instantiate OWLOntology for the graph, The bread and butter of this class
     private OWLDataFactory dataFactory;     // Instantiate the Datafactory.
     private List<String> SubGraphStoredasStrings;
+    private Map<Object, String[]> HashMapStorage = new HashMap<>();
+
     private int instances;
     private int classes;
 
@@ -68,6 +71,9 @@ class GeneralisedSubGraph {
 
                     // Add triple
                     owlOntologyGraph.add(Assertion);
+                    // Add Triple To hashMap
+                    // TODO Make It a String ARRAY
+                    HashMapStorage.put(OWLAXIOMString[1],OWLAXIOMString[0] + " " + OWLAXIOMString[1]);
 
                 // Relation, instance, class.
                 } else if (OWLAXIOMString[1].contains("a") && OWLAXIOMString[0].contains("ClassAssertion")){
@@ -83,6 +89,8 @@ class GeneralisedSubGraph {
 
                     // Add triple
                     owlOntologyGraph.add(Assertion);
+
+
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
                 // This could have happened with incorrect class assertion or other things.
@@ -167,7 +175,7 @@ class GeneralisedSubGraph {
     }
 
     // Returns a stream of Axioms to the user.
-    Stream<OWLAxiom> Axioms(){
+    Stream<OWLAxiom> getAxioms(){
         return owlOntologyGraph.axioms();
     }
 
@@ -176,7 +184,7 @@ class GeneralisedSubGraph {
 
     // Returns the size of the graph
     int size(){
-        return Axioms().toArray().length;
+        return getAxioms().toArray().length;
     }
 
     // Returns the size of the graph
@@ -188,7 +196,16 @@ class GeneralisedSubGraph {
         return instances;
     }
 
-     Object[] GetInstances() { return owlOntologyGraph.individualsInSignature().toArray(); }
+    Object[] GetInstances() { return owlOntologyGraph.individualsInSignature().toArray(); }
+
+    Object[] GetClasses() { return owlOntologyGraph.classesInSignature().toArray(); }
+
+
+    // TODO: Make a GetEdges function that returns all outgoing edges of the Vertex.
+    Object[] GetEdges(String Vertex ) {
+
+
+    }
 
     // If no Parameter is found the print uses this version.
     void print(){ print(""); }
@@ -199,7 +216,7 @@ class GeneralisedSubGraph {
         if (printlocation.contains("System.out") || printlocation.isEmpty()){
             // Print to System out. By looping through the array and printing out the axioms.
             System.out.println("Graph to system out:");
-            for (Object Axiom : Axioms().toArray()){
+            for (Object Axiom : getAxioms().toArray()){
                 System.out.println(Axiom.toString());
             }
         } else{
@@ -219,7 +236,7 @@ class GeneralisedSubGraph {
 
             }
 
-            for (Object Axiom : Axioms().toArray()){
+            for (Object Axiom : getAxioms().toArray()){
                 try{
                     if (fileWriter != null){
                         fileWriter.write(Axiom.toString().getBytes());
@@ -234,43 +251,5 @@ class GeneralisedSubGraph {
         }
 
     }
-
-    // Test Subgraph with other subgraph owlOntologyGraph
-
-    boolean CompareGraph(GeneralisedSubGraph otherGraph){
-        // If Size is not equal the two graphs can not be isomorphic.
-        if (otherGraph.size() != size() ){
-            return false;
-        }
-        if(getCountInstances() != otherGraph.getCountInstances()){
-            return false;
-        }
-        if(getCountClasses() != otherGraph.getCountClasses()){
-            return false;
-        }
-
-        // LESS GENERAL CASE OF USING TREES.
-        for( Object component : GetInstances()){
-            System.out.println(component.toString());
-            for( Object componentGraph : otherGraph.GetInstances()){
-                System.out.println(componentGraph.toString());
-
-
-            }
-        }
-
-
-
-
-        // GENERALIZATION OF THE USE CASES.
-
-
-
-
-        return true;
-    }
-
-
-
 
 }

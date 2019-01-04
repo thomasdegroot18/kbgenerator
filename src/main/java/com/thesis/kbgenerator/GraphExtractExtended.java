@@ -32,21 +32,18 @@ import org.rdfhdt.hdt.triples.TripleString;
 
 /**
  GraphExtract offers a very simple recursive extraction of a subgraph with a
- specified root in some supergraph. The recursion is terminated by triples
+ specified root in some superGraph. The recursion is terminated by triples
  that satisfy some supplied boundary condition.
 
  EXTENDED by:
  Thomas de Groot
  */
-public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
+class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 {
-    final TripleBoundary b;
-
 
     GraphExtractExtended( TripleBoundary b )
     {
         super(b);
-        this.b = b;
     }
 
     /**
@@ -63,7 +60,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      by this instance's TripleBoundary.
      */
     private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
-    { new ExtractionExtend( b, toUpdate, extractFrom ).extractIntoExtend( root , 0);
+    { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtend( root , 0);
         return toUpdate; }
 
     /**
@@ -77,15 +74,12 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         private Set<String> toUpdate;
         private HDT extractFrom;
         private Set<CharSequence> active;
-        private TripleBoundary b;
 
-        private ExtractionExtend( TripleBoundary b, Set<String> toUpdate, HDT extractFrom )
+        private ExtractionExtend( Set<String> toUpdate, HDT extractFrom )
         {
             this.toUpdate = toUpdate;
             this.extractFrom = extractFrom;
             this.active = CollectionFactory.createHashedSet();
-            this.b = b;
-
         }
 
         private int extractIntoExtend( CharSequence root , int counter ) throws Exception

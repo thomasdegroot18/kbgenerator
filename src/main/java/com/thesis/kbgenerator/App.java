@@ -43,9 +43,10 @@ public class App
     private static String[] individualLabels;                                   // InstanceLabel Storage
     private static boolean verbose;                                             // Verbosity storage
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
-    private static int InconsistenciesHit = 0;
-    private static int TotalInconsistenciesBeforeBreak;
-    private static boolean UnBreakable;
+    private static int InconsistenciesHit = 0;                                  // Counter of inconsistencies
+    private static int TotalInconsistenciesBeforeBreak;                         // Break terminator for inconsistencies hit
+    private static boolean UnBreakable;                                         // Stores boolean for breaking after amount of Inconsistencies
+    private static IsomorphismManager IsoChecker = new IsomorphismManager();    // Start IsomorphismManager
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
@@ -239,7 +240,7 @@ public class App
             for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
 
                 // Check if the subgraph is equal to the compared graph.
-                if (AcceptedTo && AcceptedGraph.CompareGraph(GeneralGraph) ){
+                if (AcceptedTo && IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph) ){
                     AcceptedTo = false;
                 }
             }
@@ -250,7 +251,7 @@ public class App
 
             if(verbose) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
-                    for (Object InconsistencyExplanationLine : GeneralGraph.Axioms().toArray())
+                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
                         // Transfer the string to bytes and send to fileWriter.
                         fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
                 }
@@ -546,10 +547,12 @@ public class App
 
         System.out.println("Printing Generalised Graphs");
         // Prints the finalised generalised subgraphs
-        for (GeneralisedSubGraph GeneralGraph: GeneralGraphs ){
+        if (verbose) {
+            for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
 
-            // Prints the generalGraph with specialised function.
-            GeneralGraph.print();
+                // Prints the generalGraph with specialised function.
+                GeneralGraph.print();
+            }
         }
 
     }
