@@ -45,7 +45,7 @@ public class App
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
     private static int InconsistenciesHit = 0;
     private static int TotalInconsistenciesBeforeBreak;
-    private static boolean Breakable;
+    private static boolean UnBreakable;
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
@@ -351,7 +351,7 @@ public class App
         IteratorTripleString it = hdt.search("","","");
 
         // While there is a triple the loop continues.
-        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak && Breakable)){
+        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)){
 
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
             // that triples are connected to each other, not every triple needs to be evaluated.
@@ -469,6 +469,20 @@ public class App
          *
          */
 
+        // Print to the user that the HDT is being loaded. Can take a while.
+        System.out.println("Print Loading in HDT");
+
+        // Load HDT file using the hdt-java library
+        // TODO: Throw error when incorrect location.
+        HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
+
+        // Print to the user that the HDT is finished loading.
+        System.out.println("Finished Loading HDT");
+
+        // Set output Writer
+        // TODO: Throw error when incorrect location.
+        FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
+
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
         if (!args[2].isEmpty()){
@@ -483,42 +497,25 @@ public class App
             MaxExplanations = 10;
         }
 
-        // Sets the break for the Inconsistencies for the graph. This checks for the amount and sets it accordingly.
-        // The default is no break.
-        if (!args[4].isEmpty()){
-            try{
-                TotalInconsistenciesBeforeBreak = Integer.parseInt(args[4]);
-                Breakable = true;
-            } catch (Exception e){
-                System.out.println("Could not parse the fifth argument Will continue without breaking the subgraphs");
-                Breakable = false;
-            }
-        } else {
-            Breakable = false;
-        }
-
-
-
-
         // If the fourth argument is empty the amount of
         verbose = !args[3].isEmpty() && args[3].equals("true");
 
+        // Sets the break for the Inconsistencies for the graph. This checks for the amount and sets it accordingly.
+        // The default is no break.
+        if (args.length > 4 && !args[4].isEmpty()){
+            try{
+                TotalInconsistenciesBeforeBreak = Integer.parseInt(args[4]);
+                UnBreakable = false;
+            } catch (Exception e){
+                System.out.println("Could not parse the fifth argument Will continue without breaking the subgraphs");
+                UnBreakable = true;
+            }
+        } else {
+            UnBreakable = true;
+        }
+
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
-
-        // Print to the user that the HDT is being loaded. Can take a while.
-        System.out.println("Print Loading in HDT");
-
-        // Load HDT file using the hdt-java library
-        // TODO: Throw error when incorrect location.
-        HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
-
-        // Print to the user that the HDT is finished loading.
-        System.out.println("Finished Loading HDT");
-
-        // Set output Writer
-        // TODO: Throw error when incorrect location.
-        FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
 
         if(verbose) {
             // Create Jena wrapper on top of HDT.
