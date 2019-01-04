@@ -45,6 +45,7 @@ public class App
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
     private static int InconsistenciesHit = 0;
     private static int TotalInconsistenciesBeforeBreak;
+    private static boolean Breakable;
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
@@ -162,7 +163,7 @@ public class App
     private static void InconsistencyStandardizer(Set<OWLAxiom> InconsistencyExplanation, FileOutputStream fileWriter)
     {
         // Instantiate the variable map storing all the variables/labels and the combined Cleaned labels
-        // Due being declared in this scope the changes made to the Hashmap are also stored in this scoped, and are
+        // Due being declared in this scope the changes made to the HashMap are also stored in this scoped, and are
         // inherited in deeper layered functions(AxiomConverter and StreamParser).
         Map<Object, String> variableMap = new HashMap<>();
 
@@ -203,7 +204,7 @@ public class App
                 // Gets the new clean relation graph with generalised names.
                 StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
 
-            // If any other classes are hit Class cast exception is thrown. Throwing the relationtype to add.
+            // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
             } else {
                 throw new ClassCastException(RelationType.toString());
             }
@@ -218,7 +219,7 @@ public class App
             if(verbose) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
                 for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation)
-                    // Transfer the string to bytes and send to filewriter.
+                    // Transfer the string to bytes and send to fileWriter.
                     fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
                 }
                 for (String StringLine : ExplanationStringList) { // Write to Output stream for Generalised output.
@@ -250,7 +251,7 @@ public class App
             if(verbose) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
                     for (Object InconsistencyExplanationLine : GeneralGraph.Axioms().toArray())
-                        // Transfer the string to bytes and send to filewriter.
+                        // Transfer the string to bytes and send to fileWriter.
                         fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
                 }
             }
@@ -271,7 +272,7 @@ public class App
         Runnable task = () -> {
             try {
                 for (String Test: subModel){
-                    // Write to outputstream as bytes.
+                    // Write to outputStream as bytes.
                     out.write(Test.getBytes());
                 }
                 out.close();
@@ -292,7 +293,7 @@ public class App
 
 
     private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
-        // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the submodel to the OWL Ontology.
+        // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
         OWLOntology ontology = PipeModel(subModel);
 
         // Starting up the Pellet Explanation module.
@@ -310,7 +311,7 @@ public class App
         // Loop through the set of explanations and standardize the Inconsistencies.
         for(Set<OWLAxiom> InconsistencyExplanation: exp){
             InconsistenciesHit ++;
-            // TODO: Do not use the filewriter here.
+            // TODO: Do not use the fileWriter here.
             fileWriter.write(strToBytes);
 
             // Standardize the inconsistency and write to file.
@@ -324,13 +325,13 @@ public class App
     private static void WriteInconsistencySubGraph(HDT hdt, String tripleItem, FileOutputStream fileWriter) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
-        GraphExtractExtended GraphExtr = new GraphExtractExtended(TripleBoundary.stopNowhere);
+        GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
 
         // The subgraph is a set of strings. That stores up to 5000 triples.
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtr.extractExtend(tripleItem , hdt);
+            subGraph = GraphExtract.extractExtend(tripleItem , hdt);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -350,7 +351,7 @@ public class App
         IteratorTripleString it = hdt.search("","","");
 
         // While there is a triple the loop continues.
-        while(it.hasNext() && InconsistenciesHit < TotalInconsistenciesBeforeBreak){
+        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak && Breakable)){
 
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
             // that triples are connected to each other, not every triple needs to be evaluated.
@@ -363,7 +364,7 @@ public class App
                 continue;
             }
 
-            // If the loop is not triggered the next element from the triplestring is taken.
+            // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
 
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
@@ -383,7 +384,7 @@ public class App
     }
 
 
-    private static ResultSet sparqlQuery(Model model, String sparqlQuery) {
+    private static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
         // Set the result set to null.
         ResultSet results = null;
 
@@ -391,7 +392,7 @@ public class App
         try {
 
             // Use Jena ARQ to execute the query. Firstly creating the query.
-            Query query = QueryFactory.create(sparqlQuery);
+            Query query = QueryFactory.create(SPARQLQuery);
 
             // Executing the query.
             QueryExecution qe = QueryExecutionFactory.create(query, model);
@@ -408,7 +409,7 @@ public class App
 
     private static void QueryResultPrinter(Model model, String query){
         //  Run query  and retrieve the results as ResultSet.
-        ResultSet results = sparqlQuery(model, query);
+        ResultSet results = SPARQLQuery(model, query);
 
         // Print for every result the result line.
         while (results.hasNext()){
@@ -459,26 +460,45 @@ public class App
 
     public static void main( String[] args ) throws Exception {
         /* main method that generates Inconsistencies when found.
-         * @params {@code args[0] } location of the HDT
-         * @params {@code args[1] } Location to store the output
-         * @params {@code args[2] } inconsistency explanations per subgraph
-         * @params {@code args[3] } Verbose
-         *
+         * @params {@code args[0] } location of the HDT  -- necessary
+         * @params {@code args[1] } Location to store the output  -- necessary
+         * @params {@code args[2] } inconsistency explanations per subgraph  -- not necessary, default 10
+         * @params {@code args[3] } Verbose   -- not necessary, default false
+         * @params {@code args[4] } Inconsistency break   -- not necessary, default false, needs integer.
          * @returns void
          *
          */
 
-        // TODO: add to the user capability to change and add.
-        TotalInconsistenciesBeforeBreak = 100;
-
-
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
         if (!args[2].isEmpty()){
-            MaxExplanations = Integer.parseInt(args[2]);
+            try{
+                MaxExplanations = Integer.parseInt(args[2]);
+
+            } catch (Exception e){
+                System.out.println("Could not parse the third argument using 10 explanations");
+                MaxExplanations = 10;
+            }
         } else {
             MaxExplanations = 10;
         }
+
+        // Sets the break for the Inconsistencies for the graph. This checks for the amount and sets it accordingly.
+        // The default is no break.
+        if (!args[4].isEmpty()){
+            try{
+                TotalInconsistenciesBeforeBreak = Integer.parseInt(args[4]);
+                Breakable = true;
+            } catch (Exception e){
+                System.out.println("Could not parse the fifth argument Will continue without breaking the subgraphs");
+                Breakable = false;
+            }
+        } else {
+            Breakable = false;
+        }
+
+
+
 
         // If the fourth argument is empty the amount of
         verbose = !args[3].isEmpty() && args[3].equals("true");
@@ -490,12 +510,14 @@ public class App
         System.out.println("Print Loading in HDT");
 
         // Load HDT file using the hdt-java library
+        // TODO: Throw error when incorrect location.
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
 
         // Print to the user that the HDT is finished loading.
         System.out.println("Finished Loading HDT");
 
         // Set output Writer
+        // TODO: Throw error when incorrect location.
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
 
         if(verbose) {

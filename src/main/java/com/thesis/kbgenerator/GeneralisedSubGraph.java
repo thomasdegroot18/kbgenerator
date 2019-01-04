@@ -146,28 +146,45 @@ class GeneralisedSubGraph {
         return classC2;
     }
 
+    // Checks the consistency of the small graph.
     private void CheckConsistency(){
+        // Starts the reasoner
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(owlOntology);
+        // Sets the consistency of the graph.
         consistency = reasoner.isConsistent();
+        // Disposes of the reasoner. To get garbage collection done.
         reasoner.dispose();
     }
 
-
+    // Returns a stream of Axioms to the user.
     Stream<OWLAxiom> Axioms(){
         return owlOntology.axioms();
     }
 
-    boolean getConsistency(){
-        // gets the consistency.
-        return consistency;
-    }
+    // gets the consistency.
+    boolean getConsistency(){ return consistency; }
 
+    // Returns the size of the graph
     int size(){
         return Axioms().toArray().length;
     }
 
-    void print(){
-        // Print the general Graph
+    // If no Parameter is found the print uses this version.
+    void print(){ print(""); }
+
+    // TODO: Make pretty print of the graph.
+    void print(String printlocation){
+        // Print the general Graph uses the print location to write the file. Default is System.out
+        if (printlocation.contains("System.out") || printlocation.isEmpty()){
+            // Print to System out.
+            System.out.println(Axioms().toArray().toString());
+        } else{
+            // Print to location
+            System.out.println(Axioms().toArray().toString());
+        }
+
+
+
     }
 
 
