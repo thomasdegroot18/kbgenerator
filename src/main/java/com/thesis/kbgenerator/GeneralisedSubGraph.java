@@ -23,7 +23,7 @@ class GeneralisedSubGraph {
     private OWLOntology owlOntologyGraph;        // Instantiate OWLOntology for the graph, The bread and butter of this class
     private OWLDataFactory dataFactory;     // Instantiate the DataFactory.
     private List<String> SubGraphStoredasStrings;
-    private HashMap<String, ArrayList<String>> Verteces = new HashMap<String, ArrayList<String>>();
+    private HashMap<String, ArrayList<String>> Verteces = new HashMap<>();
 
     private int instances;
     private int classes;

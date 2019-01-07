@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f363c51-3bde-4c13-be99-962a4285a799" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,12 +16,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="449">
+              <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#771#798#0" expanded="true" />
-                <element signature="e#9560#9568#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -32,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="571" column="9" lean-forward="true" selection-start-line="571" selection-start-column="9" selection-end-line="571" selection-end-column="9" />
+            <state relative-caret-position="8205">
+              <caret line="571" column="9" selection-start-line="571" selection-start-column="9" selection-end-line="571" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,7 +40,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
+            <state relative-caret-position="420">
               <caret line="28" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="39" />
             </state>
           </provider>
@@ -95,8 +91,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsoCheckClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" />
       </list>
     </option>
   </component>
@@ -147,8 +143,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,10 +206,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546870390893" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546878500090" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../inconsistent-subgraph-query" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
@@ -235,7 +231,7 @@
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.thesis.kbgenerator.App" />
       <module name="kbgenerator" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/../HDTs/yago2s.hdt&quot; &quot;$PROJECT_DIR$/../RDFs/Inconsistencies.ttl&quot; 20 true 5000" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/HDTs/yago2s.hdt&quot; &quot;$PROJECT_DIR$/RDFs/Inconsistencies.ttl&quot; 20 true 5000" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.thesis.kbgenerator.*" />
@@ -300,7 +296,7 @@
     <frame x="1667" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49933776" visible="true" weight="0.18981738" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49933776" visible="true" weight="0.192031" />
       <window_info id="Structure" order="1" sideWeight="0.50066227" side_tool="true" weight="0.17044826" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -473,32 +469,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="28" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="39" />
+        <state relative-caret-position="449">
+          <caret line="44" column="13" lean-forward="true" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="571" column="9" lean-forward="true" selection-start-line="571" selection-start-column="9" selection-end-line="571" selection-end-column="9" />
+        <state relative-caret-position="8205">
+          <caret line="571" column="9" selection-start-line="571" selection-start-column="9" selection-end-line="571" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#771#798#0" expanded="true" />
-            <element signature="e#9560#9568#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="420">
+          <caret line="28" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="39" />
         </state>
       </provider>
     </entry>
