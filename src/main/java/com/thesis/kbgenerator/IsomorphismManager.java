@@ -1,11 +1,8 @@
 package com.thesis.kbgenerator;
 
-import org.apache.jena.base.Sys;
-
 import java.util.ArrayList;
-import java.util.Set;
 
-public class IsomorphismManager {
+final class IsomorphismManager {
     private GeneralisedSubGraph Graph1;
     private GeneralisedSubGraph Graph2;
 
@@ -16,9 +13,8 @@ public class IsomorphismManager {
         this.Graph1 = Graph1;
         this.Graph2 = Graph2;
 
-
         // If Size is not equal the two graphs can not be isomorphic.
-        if (Graph1.Axiomsize() != Graph2.Axiomsize() ){
+        if (Graph1.AxiomSize() != Graph2.AxiomSize() ){
             return false;
         }
         if(Graph1.getCountInstances() != Graph2.getCountInstances()){
@@ -27,9 +23,11 @@ public class IsomorphismManager {
         if(Graph1.getCountClasses() != Graph2.getCountClasses()){
             return false;
         }
-        ArrayList<String> emptyList1= new ArrayList<String>();
-        ArrayList<String> emptyList2= new ArrayList<String>();
-        return recursiveIsomorphicCheck(Graph1.GetInstancesSet(), Graph2.GetInstancesSet(), emptyList1, emptyList2);
+        ArrayList<String> emptyList1= new ArrayList<>();
+        ArrayList<String> emptyList2= new ArrayList<>();
+        boolean IsoCheck = recursiveIsomorphicCheck(Graph1.GetInstancesSet(), Graph2.GetInstancesSet(), emptyList1, emptyList2);
+//        System.out.println(IsoCheck);
+        return IsoCheck;
 
     }
 
@@ -59,11 +57,14 @@ public class IsomorphismManager {
                     // Recursive without chosen values.
                     validIsoFound = recursiveIsomorphicCheck(graph1Out, graph2Out, Used1 , Used2);
 
+                    if (!validIsoFound){
+                        Used1.remove(vertexGraph1);
+                        Used2.remove(vertexGraph2);
+                    }
+
                 }
 
-
             }
-
 
         }
 

@@ -243,16 +243,15 @@ public class App
                 // Check if the subgraph is equal to the compared graph.
                 if (AcceptedTo && IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph) ){
                     AcceptedTo = false;
-                    fileWriter.write(("IS ISOMORPH \n") .getBytes());
                 }
             }
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
-                fileWriter.write(("IS ISOMORPH GENERAL.\n") .getBytes());
+                System.out.println("Found A new General Graph");
             }
 
-            if(verbose && false) { // IF verbose write to file.
+            if(verbose) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
                     for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
                         // Transfer the string to bytes and send to fileWriter.
@@ -383,6 +382,9 @@ public class App
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
+            if (InconsistenciesHit % 1000 == 0){
+                System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
+            }
 
         }
     }
@@ -518,6 +520,14 @@ public class App
             UnBreakable = true;
         }
 
+
+        System.out.println("InputLocation : " + args[0]);
+        System.out.println("OutputLocation : " + args[1]);
+        System.out.println("MaxExplanations : " + MaxExplanations);
+        System.out.println("verbose : " + verbose);
+        System.out.println("TotalInconsistenciesBeforeBreak : " + TotalInconsistenciesBeforeBreak);
+        System.out.println("UnBreakable : " + UnBreakable);
+
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
@@ -550,11 +560,14 @@ public class App
 
         System.out.println("Printing Generalised Graphs");
         // Prints the finalised generalised subgraphs
+        int GeneralCounter = 0;
         if (verbose) {
             for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
+                System.out.println(GeneralCounter);
 
                 // Prints the generalGraph with specialised function.
                 GeneralGraph.print();
+                GeneralCounter ++;
             }
         }
 

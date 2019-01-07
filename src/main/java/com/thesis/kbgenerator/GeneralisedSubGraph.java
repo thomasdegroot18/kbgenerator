@@ -3,7 +3,6 @@ package com.thesis.kbgenerator;
 
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
-import org.apache.jena.base.Sys;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
@@ -162,7 +161,7 @@ class GeneralisedSubGraph {
     }
 
     // Adds the Verteces to a array list.
-    public synchronized void addToList(String Ingoing, String Outgoing) {
+    private synchronized void addToList(String Ingoing, String Outgoing) {
 
         // Finds the array list if the list exists.
         ArrayList<String> itemsList = Verteces.get(Ingoing);
@@ -170,7 +169,7 @@ class GeneralisedSubGraph {
         // if list does not exist create it
         if(itemsList == null) {
             // makes a new list.
-            itemsList = new ArrayList<String>();
+            itemsList = new ArrayList<>();
 
             // Adds the link to the new array list
             itemsList.add(Outgoing);
@@ -215,7 +214,7 @@ class GeneralisedSubGraph {
     boolean getConsistency(){ return consistency; }
 
     // Returns the size of the graph
-    int Axiomsize(){
+    int AxiomSize(){
         return getAxioms().toArray().length;
     }
 
@@ -233,9 +232,9 @@ class GeneralisedSubGraph {
         return this.GetInstances().toArray().length;
     }
 
-    Stream<OWLNamedIndividual> GetInstances() { return owlOntologyGraph.individualsInSignature(); }
+    private Stream<OWLNamedIndividual> GetInstances() { return owlOntologyGraph.individualsInSignature(); }
 
-    Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
+    private Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
 
     ArrayList<String> GetInstancesSet() {
         ArrayList<String> newList = new ArrayList<String>();
@@ -254,13 +253,13 @@ class GeneralisedSubGraph {
 //
 //    }
 
-    // TODO: Make a GetVerteces function that returns all outgoing vertexes of the Vertex.
+    // TODO: Make a GetVertexes function that returns all outgoing vertexes of the Vertex.
     ArrayList<String> GetOutVertexes(String Vertex ) {
         return Verteces.get(Vertex);
     }
 
-    // TODO: Make a GetVerteces function that returns all outgoing vertexes of the Vertex.
-    Set<String> GetVertexes() {
+    // TODO: Make a GetVertexes function that returns all outgoing vertexes of the Vertex.
+    private Set<String> GetVertexes() {
         return Verteces.keySet();
     }
 
