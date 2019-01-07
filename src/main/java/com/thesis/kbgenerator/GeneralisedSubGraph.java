@@ -213,32 +213,37 @@ class GeneralisedSubGraph {
     // gets the consistency.
     boolean getConsistency(){ return consistency; }
 
-    // Returns the size of the graph
+    // Returns the size of the Axioms
     int AxiomSize(){
         return getAxioms().toArray().length;
     }
 
+    // Returns the size of the graph
     int size(){
 
         return this.GetClasses().toArray().length + this.GetInstances().toArray().length;
     }
 
-    // Returns the size of the graph
+    // Gets the amount of classes
     int getCountClasses(){
         return this.GetClasses().toArray().length;
     }
 
+    // Gets the amount of Instances
     int getCountInstances(){
         return this.GetInstances().toArray().length;
     }
 
+    // Gets the instances as stream
     private Stream<OWLNamedIndividual> GetInstances() { return owlOntologyGraph.individualsInSignature(); }
 
+    // Gets the classes as stream
     private Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
 
+    // Gets the instances as set.
     ArrayList<String> GetInstancesSet() {
         ArrayList<String> newList = new ArrayList<String>();
-        for (String elem : this.GetVertexes()){
+        for (String elem : this.Getvertices()){
             if( elem.contains("a")){
                 newList.add(elem);
             }
@@ -253,16 +258,15 @@ class GeneralisedSubGraph {
 //
 //    }
 
-    // TODO: Make a GetVertexes function that returns all outgoing vertexes of the Vertex.
-    ArrayList<String> GetOutVertexes(String Vertex ) {
+    // A Getvertices function that returns all outgoing vertices of the Vertex.
+    ArrayList<String> GetOutvertices(String Vertex ) {
         return Verteces.get(Vertex);
     }
 
-    // TODO: Make a GetVertexes function that returns all outgoing vertexes of the Vertex.
-    private Set<String> GetVertexes() {
+    // A Getvertices function that returns all outgoing vertices of the Vertex.
+    private Set<String> Getvertices() {
         return Verteces.keySet();
     }
-
 
     // If no Parameter is found the print uses this version.
     void print(){ print(""); }
