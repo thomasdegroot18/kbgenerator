@@ -3,14 +3,13 @@ package com.thesis.kbgenerator;
 
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -23,9 +22,9 @@ class GeneralisedSubGraph {
 
     // Make New Subgraph
     private OWLOntology owlOntologyGraph;        // Instantiate OWLOntology for the graph, The bread and butter of this class
-    private OWLDataFactory dataFactory;     // Instantiate the Datafactory.
+    private OWLDataFactory dataFactory;     // Instantiate the DataFactory.
     private List<String> SubGraphStoredasStrings;
-    private Map<Object, String[]> HashMapStorage = new HashMap<>();
+    private HashMap<String, ArrayList<String>> Verteces = new HashMap<String, ArrayList<String>>();
 
     private int instances;
     private int classes;
@@ -36,7 +35,7 @@ class GeneralisedSubGraph {
     // Constructor for the Generalised Sub graph.
     GeneralisedSubGraph(List<String> Subgraph) {
         // Storing the subgraph as String:
-        SubGraphStoredasStrings = Subgraph;
+        this.SubGraphStoredasStrings = Subgraph;
         instances = 0;
         classes = 0;
 
@@ -45,7 +44,7 @@ class GeneralisedSubGraph {
 
         // try to build generalised subgraph.
         try {
-            // Use the owlOntology and datafactory.
+            // Use the owlOntology and dataFactory.
             owlOntologyGraph = man.createOntology();
             dataFactory = owlOntologyGraph.getOWLOntologyManager().getOWLDataFactory();
 
@@ -72,8 +71,10 @@ class GeneralisedSubGraph {
                     // Add triple
                     owlOntologyGraph.add(Assertion);
                     // Add Triple To hashMap
-                    // TODO Make It a String ARRAY
-                    HashMapStorage.put(OWLAXIOMString[1],OWLAXIOMString[0] + " " + OWLAXIOMString[1]);
+                    addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                    addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+
+
 
                 // Relation, instance, class.
                 } else if (OWLAXIOMString[1].contains("a") && OWLAXIOMString[0].contains("ClassAssertion")){
@@ -89,7 +90,9 @@ class GeneralisedSubGraph {
 
                     // Add triple
                     owlOntologyGraph.add(Assertion);
-
+                    // Add Triple To hashMap
+                    addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                    addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
@@ -117,7 +120,9 @@ class GeneralisedSubGraph {
                             OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC1, classC2);
                             // Add Subclass Axiom
                             owlOntologyGraph.add(Assertion);
-
+                            // Add Triple To hashMap
+                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
                             break;
                         }
                         case "DisjointClasses": {
@@ -125,7 +130,9 @@ class GeneralisedSubGraph {
                             OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
                             // Add Subclass Axiom
                             owlOntologyGraph.add(Assertion);
-
+                            // Add Triple To hashMap
+                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
                             break;
                         }
                         case "EquivalentClasses": {
@@ -133,7 +140,9 @@ class GeneralisedSubGraph {
                             OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
                             // Add Subclass Axiom
                             owlOntologyGraph.add(Assertion);
-
+                            // Add Triple To hashMap
+                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
                             break;
                         }
                         default:
@@ -148,6 +157,29 @@ class GeneralisedSubGraph {
         }
         // Check if the consistency still holds
         CheckConsistency();
+
+
+    }
+
+    // Adds the Verteces to a array list.
+    public synchronized void addToList(String Ingoing, String Outgoing) {
+
+        // Finds the array list if the list exists.
+        ArrayList<String> itemsList = Verteces.get(Ingoing);
+
+        // if list does not exist create it
+        if(itemsList == null) {
+            // makes a new list.
+            itemsList = new ArrayList<String>();
+
+            // Adds the link to the new array list
+            itemsList.add(Outgoing);
+            //Adds the link to the complete map.
+            Verteces.put(Ingoing, itemsList);
+        } else {
+            // add if item is not already in list
+            if(!itemsList.contains(Outgoing)) itemsList.add(Outgoing);
+        }
     }
 
     // Add the class declarations to the graph.
@@ -183,29 +215,55 @@ class GeneralisedSubGraph {
     boolean getConsistency(){ return consistency; }
 
     // Returns the size of the graph
-    int size(){
+    int Axiomsize(){
         return getAxioms().toArray().length;
+    }
+
+    int size(){
+
+        return this.GetClasses().toArray().length + this.GetInstances().toArray().length;
     }
 
     // Returns the size of the graph
     int getCountClasses(){
-        return classes;
+        return this.GetClasses().toArray().length;
     }
 
     int getCountInstances(){
-        return instances;
+        return this.GetInstances().toArray().length;
     }
 
-    Object[] GetInstances() { return owlOntologyGraph.individualsInSignature().toArray(); }
+    Stream<OWLNamedIndividual> GetInstances() { return owlOntologyGraph.individualsInSignature(); }
 
-    Object[] GetClasses() { return owlOntologyGraph.classesInSignature().toArray(); }
+    Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
+
+    ArrayList<String> GetInstancesSet() {
+        ArrayList<String> newList = new ArrayList<String>();
+        for (String elem : this.GetVertexes()){
+            if( elem.contains("a")){
+                newList.add(elem);
+            }
+        }
+        return newList;
+    }
 
 
     // TODO: Make a GetEdges function that returns all outgoing edges of the Vertex.
-    Object[] GetEdges(String Vertex ) {
+//    Object[] GetEdges(String Vertex ) {
+//
+//
+//    }
 
-
+    // TODO: Make a GetVerteces function that returns all outgoing vertexes of the Vertex.
+    ArrayList<String> GetOutVertexes(String Vertex ) {
+        return Verteces.get(Vertex);
     }
+
+    // TODO: Make a GetVerteces function that returns all outgoing vertexes of the Vertex.
+    Set<String> GetVertexes() {
+        return Verteces.keySet();
+    }
+
 
     // If no Parameter is found the print uses this version.
     void print(){ print(""); }

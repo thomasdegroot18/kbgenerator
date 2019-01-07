@@ -217,9 +217,10 @@ public class App
 
         // TRY to check the graph and write if needed to a file.
         try {
-            if(verbose) { // IF verbose write to file.
-                { // Write out all the complete inconsistencies for examples Paper.
-                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation)
+            if(verbose ) { // IF verbose write to file.
+                // Write out all the complete inconsistencies for examples Paper.
+                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
+
                     // Transfer the string to bytes and send to fileWriter.
                     fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
                 }
@@ -242,14 +243,16 @@ public class App
                 // Check if the subgraph is equal to the compared graph.
                 if (AcceptedTo && IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph) ){
                     AcceptedTo = false;
+                    fileWriter.write(("IS ISOMORPH \n") .getBytes());
                 }
             }
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
+                fileWriter.write(("IS ISOMORPH GENERAL.\n") .getBytes());
             }
 
-            if(verbose) { // IF verbose write to file.
+            if(verbose && false) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
                     for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
                         // Transfer the string to bytes and send to fileWriter.

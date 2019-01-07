@@ -1,13 +1,24 @@
 package com.thesis.kbgenerator;
 
+import org.apache.jena.base.Sys;
+
+import java.util.ArrayList;
+import java.util.Set;
+
 public class IsomorphismManager {
+    private GeneralisedSubGraph Graph1;
+    private GeneralisedSubGraph Graph2;
 
     // Test Subgraph with other subgraph owlOntologyGraph
 
+
     boolean CompareGraph(GeneralisedSubGraph Graph1, GeneralisedSubGraph Graph2){
+        this.Graph1 = Graph1;
+        this.Graph2 = Graph2;
+
 
         // If Size is not equal the two graphs can not be isomorphic.
-        if (Graph1.size() != Graph2.size() ){
+        if (Graph1.Axiomsize() != Graph2.Axiomsize() ){
             return false;
         }
         if(Graph1.getCountInstances() != Graph2.getCountInstances()){
@@ -16,47 +27,40 @@ public class IsomorphismManager {
         if(Graph1.getCountClasses() != Graph2.getCountClasses()){
             return false;
         }
-        boolean IsIsomorphic = recursiveIsomorphicCheck(Graph1, Graph2);
-
-        return IsIsomorphic;
+        ArrayList<String> emptyList1= new ArrayList<String>();
+        ArrayList<String> emptyList2= new ArrayList<String>();
+        return recursiveIsomorphicCheck(Graph1.GetInstancesSet(), Graph2.GetInstancesSet(), emptyList1, emptyList2);
 
     }
 
-    private boolean recursiveIsomorphicCheck(GeneralisedSubGraph Graph1, GeneralisedSubGraph Graph2) {
+    private boolean recursiveIsomorphicCheck(ArrayList<String> Graph1Vertex, ArrayList<String> Graph2Vertex, ArrayList<String> Used1, ArrayList<String> Used2 ) {
+
+        // IF Graph1 and Graph2 ARE empty RETURN TRUE
+        if (Used1.size() == Graph1.size() ){
+            return true;
+        }
+
+        // ALGORITHM
+        boolean validIsoFound = false;
 
 
-        // TODO:
-        //  PROCEDURE Match(s)
-        //    INPUT: an intermediate state s; the initial state s0 has M(s0)=
-        //    OUTPUT: the mappings between the two graphs
-        //    IF M(s) covers all the nodes of G2 THEN
-        //        OUTPUT M(s)
-        //    ELSE
-        //        Compute the set P(s) of the pairs candidate for inclusion in M(s)
-        //        FOREACH (n, m) P(s)
-        //            IF F(s, n, m) THEN
-        //                Compute the state s´ obtained by adding (n, m) to M(s)
-        //                CALL Match(s )
-        //            END IF
-        //        END FOREACH
-        //         Restore data structures
-        //    END IF
-        //  END PROCEDURE
+        for (String vertexGraph1 : Graph1Vertex) {
+            ArrayList<String> graph1Out = this.Graph1.GetOutVertexes(vertexGraph1);
 
 
-        for (Object axiomsGraph1 : Graph1.getAxioms().toArray()) {
-            String Specialized1  = axiomsGraph1.toString();
-            if (Specialized1.contains("Declaration")){
-                continue;
-            }
-            String GeneralString1 = Specialized1.replaceAll("<a[0-9]+>","Instance").replaceAll("<C[0-9]+>","Class");
+            for (String vertexGraph2 : Graph2Vertex) {
+                ArrayList<String> graph2Out = this.Graph2.GetOutVertexes(vertexGraph2);
 
-            for (Object axiomsGraph2 : Graph2.getAxioms().toArray()) {
-                String Specialized2  = axiomsGraph2.toString();
-                if (Specialized2.contains("Declaration")){
-                    continue;
+                if (graph1Out.size() == graph2Out.size() && !(Used1.contains(vertexGraph1)) && !(Used2.contains(vertexGraph2))){
+
+
+                    Used1.add(vertexGraph1);
+                    Used2.add(vertexGraph2);
+                    // Recursive without chosen values.
+                    validIsoFound = recursiveIsomorphicCheck(graph1Out, graph2Out, Used1 , Used2);
+
                 }
-                String GeneralString2 = Specialized2.replaceAll("<a[0-9]+>","Instance").replaceAll("<C[0-9]+>","Class");
+
 
             }
 
@@ -64,12 +68,9 @@ public class IsomorphismManager {
         }
 
 
+        // IF Graph1 and Graph2 ARE not equal AND never empty RETURN FALSE ELSE RETURN TRUE
+        return validIsoFound;
 
-
-
-
-
-        return true;
     }
 
 }
