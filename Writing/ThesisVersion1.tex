@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{graphicx, color}
+\usepackage[a4paper,margin=2cm]{geometry}
+
+\newcommand{\red}[1]{{\color{red}{#1}}}
+
+\begin{document}
+
+	\begin{titlepage}
+	
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+	\center % Center everything on the page
+	
+	%----------------------------------------------------------------------------------------
+	%	HEADING SECTIONS
+	%----------------------------------------------------------------------------------------
+	
+	%\includegraphics[width=\linewidth]{uvaENG}\\[2.5cm]
+	\textsc{\Large MSc Artificial Intelligence}\\[0.2cm]
+	\textsc{\normalsize Track: \red{track}}\\[1.0cm] % track
+	\textsc{\Large Master Thesis}\\[0.5cm] 
+	
+	%----------------------------------------------------------------------------------------
+	%	TITLE SECTION
+	%----------------------------------------------------------------------------------------
+	
+	\HRule \\[0.4cm]
+	{ \huge \bfseries \red{Designing custom knowledge bases\\ For inconsistency work}}\\[0.4cm] % Title of your document
+	\HRule \\[0.5cm]
+	
+	%----------------------------------------------------------------------------------------
+	%	AUTHOR SECTION
+	%----------------------------------------------------------------------------------------
+	
+	by\\[0.2cm]
+	\textsc{\Large \red{Thomas de Groot}}\\[0.2cm] %your name
+	\red{student number}\\[1cm]
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	DATE SECTION
+	%----------------------------------------------------------------------------------------
+	
+	{\Large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
+	
+	\red{Number of Credits}\\ %
+	\red{Period in which the research was carried out}\\[1cm]%
+	
+	%----------------------------------------------------------------------------------------
+	%	COMMITTEE SECTION
+	%----------------------------------------------------------------------------------------
+	\begin{minipage}[t]{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Supervisor:} \\
+			\red{Dr A \textsc{Person} }% Supervisor's Name
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}[t]{0.4\textwidth}
+		\begin{flushright} \large
+			\emph{Assessor:} \\
+			\red{Dr A  \textsc{Person}}\\
+		\end{flushright}
+	\end{minipage}\\[2cm]
+	
+	%----------------------------------------------------------------------------------------
+	%	LOGO SECTION
+	%----------------------------------------------------------------------------------------
+	
+	\framebox{\rule{0pt}{2.5cm}\rule{2.5cm}{0pt}}\\[0.5cm]
+	%\includegraphics[width=2.5cm]{figure}\\ % Include a department/university logo - this will require the graphicx package
+	\textsc{\large \red{institute name}}\\[1.0cm] % 
+	
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Fill the rest of the page with whitespace
+	
+\end{titlepage}
+\pagenumbering{roman}
+% Writing of the report
+\section{Acknowledgments}
+
+\newpage
+\section{Definitions}
+
+
+\newpage
+\section{Abstract}
+The development of larger knowledge based systems is growing rapidly. and the reasoners over these large datasets are following quickly behind. While reasoning over these large knowledge graphs is improving ++ADD IN CITATION++, it is mandatory that these knowledge systems are consistent. With one inconsistency the knowledge graph can break and it is no longer possible to reason of these graphs. Several methods exists that clean the knowledge bases from these inconsistencies. Other methods try to reason around the inconsistencies or use other methods to incorporate the knowledge in their reasoners. While most methods work well, the test cases that are used for these models are not a great representation of the complete world wide web of linked data. Most of the test cases are selected for their characteristics, or the datasets are specifically designed for the test purposes of the method.\\
+To improve the general availability of inconsistent knowledge bases we designed an general knowledge base generator that uses generalized forms of inconsistencies found in the LOD-a-LOT ++ADD IN CITATION++ and use these inconsistencies to build an inconsistent knowledge base that is designed according to a set of parameters that can be given by the user.\\
+
+
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+
+\newpage
+\section{Related Work}
+
+
+\newpage
+\section{Preliminaries}
+
+
+\newpage
+\section{Method \& Approach}
+
+
+\newpage
+\section{Experiments}
+
+
+\newpage
+\section{Results}
+
+
+\newpage
+\section{Conclusion}
+
+
+\newpage
+\section{Bibliography}
+
+
+\newpage
+\section{Appendices}
+\subsection{Appendix A}
+
+\end{document}
+
+
+	
+
