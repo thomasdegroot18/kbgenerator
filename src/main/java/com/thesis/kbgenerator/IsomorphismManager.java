@@ -57,6 +57,9 @@ final class IsomorphismManager {
                 // Retrieve all outgoing links from the chosen vertex From GRAPH 2.
                 ArrayList<String> graph2Out = this.Graph2.GetOutvertices(vertexGraph2);
 
+
+
+
                 // IF the two outgoing vertices have the same size and are not yet used they are considered equal.
                 // TODO: add in check that checks if the outgoing vertices have the same type. "Instance" or "Class"
                 // TODO: add in check that checks if the outgoing links have the same type. "subClassOf", "InstanceOf", "DisjointWith", ...

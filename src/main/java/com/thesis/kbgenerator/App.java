@@ -3,6 +3,7 @@ package com.thesis.kbgenerator;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
@@ -25,6 +26,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 
 
 /**
@@ -321,6 +323,7 @@ public class App
             InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
         }
+
 
     }
 

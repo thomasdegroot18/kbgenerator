@@ -78,14 +78,17 @@
 \end{titlepage}
 \pagenumbering{roman}
 % Writing of the report
-\section{Acknowledgments}
 
-\newpage
-\section{Definitions}
+\section*{Definitions}
 
 
 \newpage
-\section{Abstract}
+\section*{Acknowledgments}
+
+
+
+\newpage
+\section*{Abstract}
 The development of larger knowledge based systems is growing rapidly. and the reasoners over these large datasets are following quickly behind. While reasoning over these large knowledge graphs is improving ++ADD IN CITATION++, it is mandatory that these knowledge systems are consistent. With one inconsistency the knowledge graph can break and it is no longer possible to reason of these graphs. Several methods exists that clean the knowledge bases from these inconsistencies. Other methods try to reason around the inconsistencies or use other methods to incorporate the knowledge in their reasoners. While most methods work well, the test cases that are used for these models are not a great representation of the complete world wide web of linked data. Most of the test cases are selected for their characteristics, or the datasets are specifically designed for the test purposes of the method.\\
 To improve the general availability of inconsistent knowledge bases we designed an general knowledge base generator that uses generalized forms of inconsistencies found in the LOD-a-LOT ++ADD IN CITATION++ and use these inconsistencies to build an inconsistent knowledge base that is designed according to a set of parameters that can be given by the user.\\
 
@@ -106,13 +109,30 @@ To improve the general availability of inconsistent knowledge bases we designed 
 \section{Preliminaries}
 
 
+
 \newpage
-\section{Method \& Approach}
+\section{Approach \& Method }
+\begin{enumerate}
+	\item Import the LOD-a-lot
+	\item Retrieve a sub graph of the LOD cloud by choosing a vertex as root node and retrieving a small part of LOD-a-lot by expanding the root node.
+	\item Check the sub graph for inconsistencies. 
+	\item Retrieve the inconsistencies and check if they can be generalized.
+	\item Generalize on basis of isomorphic, check if vertex isomorphic and edge isomorphic
+	\item Add in ... steps to further generalize.
+	\item Count the amount of occurrences per "generalized" inconsistent subgraph
+	\item Make a generator that uses input from the generalized inconsistencies and user given parameters to build a knowledge base.
+	\item The generator uses a .... ALGORITHM to build these graphs from the LOD-a-lot Cloud.
+	\item The generator returns the graph to the user.
+	\item Testing the generated graphs with the method to check if the consistencies are correct. 
+	\item Implement several methods to test whether these methods perform as well as that the researchers propose.
+	\item Show results.
+\end{enumerate}
 
 
 \newpage
 \section{Experiments}
-
+Possible Experiments for testing:
+https://openproceedings.org/2018/conf/edbt/paper-61.pdf
 
 \newpage
 \section{Results}
