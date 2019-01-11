@@ -1,5 +1,6 @@
 com/thesis/kbgenerator/GraphExtractExtended$ExtractionExtend.class
 com/thesis/kbgenerator/GraphExtractExtended$1.class
+com/thesis/kbgenerator/IsomorphismManager.class
 com/thesis/kbgenerator/App.class
 com/thesis/kbgenerator/GraphExtractExtended.class
 com/thesis/kbgenerator/GeneralisedSubGraph.class

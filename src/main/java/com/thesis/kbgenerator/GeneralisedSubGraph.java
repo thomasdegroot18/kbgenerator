@@ -3,6 +3,7 @@ package com.thesis.kbgenerator;
 
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
@@ -23,7 +24,8 @@ class GeneralisedSubGraph {
     private OWLOntology owlOntologyGraph;        // Instantiate OWLOntology for the graph, The bread and butter of this class
     private OWLDataFactory dataFactory;     // Instantiate the DataFactory.
     private List<String> SubGraphStoredasStrings;
-    private HashMap<String, ArrayList<String>> Verteces = new HashMap<>();
+    private HashMap<String, ArrayList<String>> Vertices = new HashMap<>();
+    private HashMap<String, String> Edges = new HashMap<>();
 
     private int instances;
     private int classes;
@@ -52,7 +54,8 @@ class GeneralisedSubGraph {
 
                 // Split string into 3 parts. 0. Relation, 1. First class/type , 2. Second class/type
                 String[] OWLAXIOMString = line.split(" ");
-
+                Edges.put(OWLAXIOMString[1]+ OWLAXIOMString[2], OWLAXIOMString[0]);
+                Edges.put(OWLAXIOMString[2]+ OWLAXIOMString[1], OWLAXIOMString[0]);
                 // Different types of possibilities.
                 // Relation, class, instance.
                 if (OWLAXIOMString[2].contains("a") && OWLAXIOMString[0].contains("ClassAssertion")){
@@ -160,11 +163,11 @@ class GeneralisedSubGraph {
 
     }
 
-    // Adds the Verteces to a array list.
+    // Adds the Vertices to a array list.
     private synchronized void addToList(String Ingoing, String Outgoing) {
 
         // Finds the array list if the list exists.
-        ArrayList<String> itemsList = Verteces.get(Ingoing);
+        ArrayList<String> itemsList = Vertices.get(Ingoing);
 
         // if list does not exist create it
         if(itemsList == null) {
@@ -174,7 +177,7 @@ class GeneralisedSubGraph {
             // Adds the link to the new array list
             itemsList.add(Outgoing);
             //Adds the link to the complete map.
-            Verteces.put(Ingoing, itemsList);
+            Vertices.put(Ingoing, itemsList);
         } else {
             // add if item is not already in list
             if(!itemsList.contains(Outgoing)) itemsList.add(Outgoing);
@@ -251,21 +254,45 @@ class GeneralisedSubGraph {
         return newList;
     }
 
+    // Gets all Vertices as set.
+    ArrayList<String> GetVerticesSet() {
+        ArrayList<String> newList = new ArrayList<String>();
+        for (String elem : this.Getvertices()){
+            newList.add(elem);
+
+        }
+        return newList;
+    }
+
 
     // TODO: Make a GetEdges function that returns all outgoing edges of the Vertex.
-//    Object[] GetEdges(String Vertex ) {
-//
-//
-//    }
+    String GetEdges(String Vertex1, String Vertex2 ) {
+        return Edges.get(Vertex1+Vertex2);
+    }
 
     // A Getvertices function that returns all outgoing vertices of the Vertex.
     ArrayList<String> GetOutvertices(String Vertex ) {
-        return Verteces.get(Vertex);
+        return Vertices.get(Vertex);
+    }
+
+
+    // A Get Out elements that returns a Array comprising of the combining Vertices and Edges for the outgoing links.
+    ArrayList<String[]> GetOutElements(String Vertex){
+        ArrayList<String[]> TempStorage = new ArrayList<String[]>();
+        ArrayList<String> VerticesSet  = Vertices.get(Vertex);
+        for (String elem : VerticesSet){
+            String[] TempString = new String[2];
+            TempString[0] = elem;
+            TempString[1] = GetEdges(Vertex, elem);
+            TempStorage.add(TempString);
+
+        }
+        return TempStorage;
     }
 
     // A Getvertices function that returns all outgoing vertices of the Vertex.
     private Set<String> Getvertices() {
-        return Verteces.keySet();
+        return Vertices.keySet();
     }
 
     // If no Parameter is found the print uses this version.

@@ -107,11 +107,34 @@ To improve the general availability of inconsistent knowledge bases we designed 
 
 \newpage
 \section{Preliminaries}
+Explain LOD-a-lot
+Explain hdt
 
+\subsection{Data}
 
 
 \newpage
-\section{Approach \& Method }
+\section{Approach \& Method}
+This chapter will explain in detail how the implementation of the model has been done. Explaining how the inconsistencies were retrieved from the LOD-a-lot, and generalized. Then the chapter goes more in detail about how the generalized inconsistencies are used in the experiments. 
+
+\subsection{Retrieval of the inconsistent subgraphs}
+>Why are the subgraphs needed?
+A reasoner is limited in the amount of data it can reason over within limited time. As more data means many different facts which will take more time to reason over. Even with optimizations it is not possible to reason over the LOD-a-lot without using massive amounts of CPU or taking a very long time. To improve the time needed to reason over we can either add more resources or make the amount of data to reason over smaller. The first option is not viable, but the second option is. 
+It does however mean that we need to generate correct subgraphs without losing any of the inconsistencies that could be found only in the complete graph.
+
+>So how are the subgraphs generated?
+Generating the subgraphs without losing information is tricky as links are broken to retrieve a small part of the graph from a large graph. The goal is to minimize the loss by making sure that the severed links will be added in later stages of the pass through the complete graph.
+
+To create a subgraph the algorithm loops through the entire graph and take a triple from this graph. From this triple the subject and >the object? are taken as root node. 
+
+
+\subsection{Generalizing the subgraphs}
+Why is generalization needed.
+
+
+As the LOD-a-lot is immensily large it is not possible to reason over the complete cloud and find any inconsistencies, if there are any to be found. 
+
+
 \begin{enumerate}
 	\item Import the LOD-a-lot
 	\item Retrieve a sub graph of the LOD cloud by choosing a vertex as root node and retrieving a small part of LOD-a-lot by expanding the root node.

@@ -1,7 +1,10 @@
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {2}Related Work}{2}
 \contentsline {section}{\numberline {3}Preliminaries}{3}
-\contentsline {section}{\numberline {4}Method \& Approach}{4}
+\contentsline {subsection}{\numberline {3.1}Data}{3}
+\contentsline {section}{\numberline {4}Approach \& Method}{4}
+\contentsline {subsection}{\numberline {4.1}Retrieval of the inconsistent subgraphs}{4}
+\contentsline {subsection}{\numberline {4.2}Generalizing the subgraphs}{4}
 \contentsline {section}{\numberline {5}Experiments}{5}
 \contentsline {section}{\numberline {6}Results}{6}
 \contentsline {section}{\numberline {7}Conclusion}{7}
