@@ -292,7 +292,7 @@ public class App
         new Thread(task).start();
 
 
-        // Create a new OWLOntology and return the filled OWL ontology with the in str//xmlns.com/foafeam.
+        // Create a new OWLOntology and return the filled OWL ontology with the in stream.
         return OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(in);
     }
 

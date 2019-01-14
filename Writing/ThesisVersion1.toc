@@ -5,9 +5,9 @@
 \contentsline {section}{\numberline {4}Approach \& Method}{4}
 \contentsline {subsection}{\numberline {4.1}Retrieval of the inconsistent patterns}{4}
 \contentsline {subsection}{\numberline {4.2}Generalizing the patterns}{4}
-\contentsline {section}{\numberline {5}Experiments}{5}
-\contentsline {section}{\numberline {6}Results}{6}
-\contentsline {section}{\numberline {7}Conclusion}{7}
-\contentsline {section}{\numberline {8}Bibliography}{8}
-\contentsline {section}{\numberline {9}Appendices}{9}
-\contentsline {subsection}{\numberline {9.1}Appendix A}{9}
+\contentsline {section}{\numberline {5}Experiments}{6}
+\contentsline {section}{\numberline {6}Results}{7}
+\contentsline {section}{\numberline {7}Conclusion}{8}
+\contentsline {section}{\numberline {8}Bibliography}{9}
+\contentsline {section}{\numberline {9}Appendices}{10}
+\contentsline {subsection}{\numberline {9.1}Appendix A}{10}
