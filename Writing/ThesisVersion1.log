@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.16)  14 JAN 2019 12:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.16)  14 JAN 2019 17:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -213,16 +213,21 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout3 = `ThesisVersion1.toc'.
 
  [4] [1] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
-[4] [5] [6] [7] [8] [9] [10] (./ThesisVersion1.aux) ) 
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 150--156
+
+ []
+
+[5] [6] [7] [8] [9] [10] (./ThesisVersion1.aux) ) 
 Here is how much of TeX's memory you used:
  1957 strings out of 494923
  28328 string characters out of 6180741
@@ -230,15 +235,15 @@ Here is how much of TeX's memory you used:
  5269 multiletter control sequences out of 15000+600000
  7014 words of font info for 25 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,5n,32p,923b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmti12.pfb>
-Output written on ThesisVersion1.pdf (15 pages, 98916 bytes).
+ 41i,6n,32p,923b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti12.pfb>
+Output written on ThesisVersion1.pdf (15 pages, 100413 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream

@@ -105,8 +105,12 @@ To improve the general availability of inconsistent knowledge bases we designed 
 \section{Related Work}
 
 
+
 \newpage
 \section{Preliminaries}
+Before we go deeper into the problem Approach and the method used it is necessary to first understand a set of key concepts that will be used in the coming chapters, although a general knowledge of mathematics is needed. it is also 
+
+
 Explain LOD-a-lot
 Explain hdt
 
@@ -137,7 +141,7 @@ Now that the large knowledge graph has been split into multiple smaller subgraph
 Each subgraph can have multiple inconsistencies, so each subgraph is checked extensively for inconsistencies.  >>TO AVOID DUPLICATES: << Each inconsistency in handled seperately.
 
 
-\subsection{Generalizing the patterns}
+\subsection{Generalizing the patterns on basis of isomorphic graphs}
 Why is generalization needed?\\
 All inconsistencies are different, but the inconsistencies can be in essence one and the same inconsistency. As the amount of inconsistencies rise to more than a >massive number<, it would be more manageable if we shrunk the list of different inconsistencies down by finding generalization between the inconsistencies, as multiple inconsistencies can be equal when we remove the specific classes and instances hanging on the vertices. This could lower the amount of inconsistencies while it is still possible to retrieve these specific inconsistencies with simple SPARQL queries that can be run over the graph. 
 
@@ -145,8 +149,22 @@ So how are the inconsistencies generalized?\\
 The first step is figuring out how it is possible to generalize the patterns without losing information about the inconsistencies or at least a minimal amount. The first step can be started with the notion of isomorphic graphs. Isomorphic graphs are a great way to generalize graphs without losing information that is irreversibly lost. But as the information on the vertices is not relevant for the inconsistencies the information in on the edges is important. As the connections between the nodes describe the possibility to be inconsistent as described in the >EXAMPLE<. While de edges are also important for the isomorphic graphs. As two graphs could be isomorphic according to normal standards, with the notion that the edges also must align graphs could now be no longer isomorphic. See >EXAMPLE<
 
 The problem however is that to check if two graphs are isomorphic is difficult to test >CITATION<. 
+To improve the efficiency of the isomorphic matching the amount of graphs are pruned such that matching the graphs will not happen with graphs that can in no way be isomorphic. There are a number of characteristic before a graph is isomorphic:\\
+ - It needs to have the same number of vertices.\\
+ - It needs to have the same number of edges.\\
+ - It needs to have the same amount of degrees.\\
+ - In our case it also needs to have the same amount of edges based on the edge types we have.\\
+ 
+If two graphs do match we then run the matching algorithm and only if the matching algorithm returns true the two graphs are matched.
+The algorithm that is used in matching is explained here >ALGORITHM<
 
 
+\subsection{Generalizing the patterns on basis of ...}
+>>>>>>>>>.................................<<<<<<<<<<
+
+
+\subsection{Locating the most used inconsistency cases}
+Finished with the generalization is it now possible to be able to retrieve meaningful statistics about the generalized inconsistencies. Interesting statistics are the top 10 most common mistakes:
 
 
 
