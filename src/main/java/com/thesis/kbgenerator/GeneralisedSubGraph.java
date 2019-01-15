@@ -3,7 +3,6 @@ package com.thesis.kbgenerator;
 
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
-import org.apache.jena.base.Sys;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
@@ -17,29 +16,21 @@ import java.util.stream.Stream;
  * @author Thomas de Groot
  */
 
-
+@SuppressWarnings("unused")
 class GeneralisedSubGraph {
 
     // Make New Subgraph
     private OWLOntology owlOntologyGraph;        // Instantiate OWLOntology for the graph, The bread and butter of this class
     private OWLDataFactory dataFactory;     // Instantiate the DataFactory.
-    private List<String> SubGraphStoredasStrings;
     private HashMap<String, ArrayList<String>> Vertices = new HashMap<>();
     private HashMap<String, String> Edges = new HashMap<>();
-    private String SPARQLString = "";
-
-    private int instances;
-    private int classes;
+    private StringBuilder SPARQLStringB = new StringBuilder();
 
     private boolean consistency;            // Store the consistency of the subgraph
 
 
     // Constructor for the Generalised Sub graph.
     GeneralisedSubGraph(List<String> Subgraph) {
-        // Storing the subgraph as String:
-        this.SubGraphStoredasStrings = Subgraph;
-        instances = 0;
-        classes = 0;
 
         // OWL ontology manager creation.
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
@@ -66,7 +57,6 @@ class GeneralisedSubGraph {
 
                     // Instantiate Instance and update instance count.
                     OWLIndividual Individual = dataFactory.getOWLNamedIndividual(OWLAXIOMString[2]);
-                    instances ++;
 
                     // Instantiate Class Assertion/
                     OWLClassAssertionAxiom Assertion = dataFactory.getOWLClassAssertionAxiom(classC2, Individual);
@@ -77,7 +67,11 @@ class GeneralisedSubGraph {
                     addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                     addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
-                    SPARQLString += "?" + OWLAXIOMString[2] + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> " + "?"+ OWLAXIOMString[1] + ". ";
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(OWLAXIOMString[2]);
+                    SPARQLStringB.append(" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?");
+                    SPARQLStringB.append(OWLAXIOMString[1]);
+                    SPARQLStringB.append(". ");
 
 
 
@@ -89,7 +83,6 @@ class GeneralisedSubGraph {
 
                     // Instantiate Instance and update instance count.
                     OWLIndividual Individual = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
-                    instances ++;
 
                     OWLClassAssertionAxiom Assertion = dataFactory.getOWLClassAssertionAxiom(classC2, Individual);
 
@@ -99,7 +92,12 @@ class GeneralisedSubGraph {
                     addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                     addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
-                    SPARQLString += "?"+OWLAXIOMString[1] + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> " + "?"+OWLAXIOMString[2] + ". ";
+
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(OWLAXIOMString[1]);
+                    SPARQLStringB.append(" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?");
+                    SPARQLStringB.append(OWLAXIOMString[2]);
+                    SPARQLStringB.append(". ");
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
                 // This could have happened with incorrect class assertion or other things.
@@ -130,7 +128,11 @@ class GeneralisedSubGraph {
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
-                            SPARQLString +="?"+ OWLAXIOMString[1] + " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " +"?"+ OWLAXIOMString[2] + ". ";
+                            SPARQLStringB.append("?");
+                            SPARQLStringB.append(OWLAXIOMString[1]);
+                            SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?");
+                            SPARQLStringB.append(OWLAXIOMString[2]);
+                            SPARQLStringB.append(". ");
                             break;
                         }
                         case "DisjointClasses": {
@@ -141,7 +143,11 @@ class GeneralisedSubGraph {
                             // Add Triple To hashMap
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
-                            SPARQLString +="?"+ OWLAXIOMString[1] + " <http://www.w3.org/2002/07/owl#disjointWith> " + "?"+OWLAXIOMString[2] + ". ";
+                            SPARQLStringB.append("?");
+                            SPARQLStringB.append(OWLAXIOMString[1]);
+                            SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#disjointWith> ?");
+                            SPARQLStringB.append(OWLAXIOMString[2]);
+                            SPARQLStringB.append(". ");
                             break;
                         }
                         case "EquivalentClasses": {
@@ -152,7 +158,11 @@ class GeneralisedSubGraph {
                             // Add Triple To hashMap
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
-                            SPARQLString += "?"+ OWLAXIOMString[1] + " <http://www.w3.org/2002/07/owl#equivalentClass> " + "?"+OWLAXIOMString[2] + ". ";
+                            SPARQLStringB.append("?");
+                            SPARQLStringB.append(OWLAXIOMString[1]);
+                            SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#equivalentClass> ?");
+                            SPARQLStringB.append(OWLAXIOMString[2]);
+                            SPARQLStringB.append(". ");
                             break;
                         }
                         default:
@@ -200,8 +210,6 @@ class GeneralisedSubGraph {
         OWLDeclarationAxiom DeclarationAxiom1 = dataFactory.getOWLDeclarationAxiom(classC2);
         // Add the declaration Axiom to the OWL ontology.
         owlOntologyGraph.add(DeclarationAxiom1);
-        // Update classes count.
-        classes ++;
         // Return the classC2
         return classC2;
     }
@@ -253,8 +261,8 @@ class GeneralisedSubGraph {
 
     // Gets the instances as set.
     ArrayList<String> GetInstancesSet() {
-        ArrayList<String> newList = new ArrayList<String>();
-        for (String elem : this.Getvertices()){
+        ArrayList<String> newList = new ArrayList<>();
+        for (String elem : this.GetVertices()){
             if( elem.contains("a")){
                 newList.add(elem);
             }
@@ -264,29 +272,25 @@ class GeneralisedSubGraph {
 
     // Gets all Vertices as set.
     ArrayList<String> GetVerticesSet() {
-        ArrayList<String> newList = new ArrayList<String>();
-        for (String elem : this.Getvertices()){
-            newList.add(elem);
-
-        }
-        return newList;
+        return new ArrayList<>(this.GetVertices());
     }
 
 
     // TODO: Make a GetEdges function that returns all outgoing edges of the Vertex.
-    String GetEdges(String Vertex1, String Vertex2 ) {
+    @SuppressWarnings("WeakerAccess")
+    public String GetEdges(String Vertex1, String Vertex2 ) {
         return Edges.get(Vertex1+Vertex2);
     }
 
-    // A Getvertices function that returns all outgoing vertices of the Vertex.
-    ArrayList<String> GetOutvertices(String Vertex ) {
+    // A GetVertices function that returns all outgoing vertices of the Vertex.
+    ArrayList<String> GetOutVertices(String Vertex ) {
         return Vertices.get(Vertex);
     }
 
 
     // A Get Out elements that returns a Array comprising of the combining Vertices and Edges for the outgoing links.
     ArrayList<String[]> GetOutElements(String Vertex){
-        ArrayList<String[]> TempStorage = new ArrayList<String[]>();
+        ArrayList<String[]> TempStorage = new ArrayList<>();
         ArrayList<String> VerticesSet  = Vertices.get(Vertex);
         for (String elem : VerticesSet){
             String[] TempString = new String[2];
@@ -298,8 +302,9 @@ class GeneralisedSubGraph {
         return TempStorage;
     }
 
-    // A Getvertices function that returns all outgoing vertices of the Vertex.
-    private Set<String> Getvertices() {
+    // A Get vertices function that returns all outgoing vertices of the Vertex.
+    @SuppressWarnings("WeakerAccess")
+    public Set<String> GetVertices() {
         return Vertices.keySet();
     }
 
@@ -307,9 +312,10 @@ class GeneralisedSubGraph {
     void print(){ print(""); }
 
     // TODO: Make pretty print of the graph.
-    void print(String printlocation){
+    @SuppressWarnings("SameParameterValue")
+    public void print( String printLocation){
         // Print the general Graph uses the print location to write the file. Default is System.out
-        if (printlocation.contains("System.out") || printlocation.isEmpty()){
+        if (printLocation.contains("System.out") || printLocation.isEmpty()){
             // Print to System out. By looping through the array and printing out the axioms.
             System.out.println("Graph to system out:");
             for (Object Axiom : getAxioms().toArray()){
@@ -320,12 +326,12 @@ class GeneralisedSubGraph {
             FileOutputStream fileWriter = null;
             try{
                 // Start the fileWriter OutputStream
-                fileWriter = new FileOutputStream(printlocation);
+                fileWriter = new FileOutputStream(printLocation);
 
             } catch (Exception e){
                 //No file yet created.
                 try {
-                    fileWriter = new FileOutputStream(new File(printlocation));
+                    fileWriter = new FileOutputStream(new File(printLocation));
                 } catch (Exception e2){
                     e2.printStackTrace();
                 }
@@ -349,11 +355,9 @@ class GeneralisedSubGraph {
     }
 
     String convertSPARQL(){
-        // Converts a generalised subgraph to a set of sparql lines.
-        SPARQLString = "SELECT * WHERE {" + SPARQLString + "}";
-        System.out.println(SPARQLString);
+        // Converts a generalised subgraph to a set of SPARQL lines.
 
-        return SPARQLString;
+        return "SELECT * WHERE {" + SPARQLStringB.toString() + "}";
 
     }
 

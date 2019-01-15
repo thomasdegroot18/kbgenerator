@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{graphicx, color}
 \usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{url}
+
 
 \newcommand{\red}[1]{{\color{red}{#1}}}
 
@@ -103,16 +105,56 @@ To improve the general availability of inconsistent knowledge bases we designed 
 
 \newpage
 \section{Related Work}
+>What is the state of the art?\\
 
+>What is the state of the art in inconsistency cleaning/removal?\\
+
+>What are the preliminary work this paper is build on?\\
+
+
+\url{http://www.semantic-web-journal.net/system/files/swj1366.pdf }
+This paper shows the work of ... In the paper the most common used linked datasets are compared on a set of criteria. And a framework for comparing knowledge bases.\\
+
+\url{https://link.springer.com/content/pdf/10.1007/978-3-642-23863-5_54.pdf}The representation of inconsistent knowledge in Advanced knowledge based systems
+\url{https://link.springer.com/content/pdf/10.1007%2F978-3-319-13704-9.pdf}Inconsistency monitoring in large scientific knowledge bases pages 87-95
+\url{https://openproceedings.org/2018/conf/edbt/paper-61.pdf}User-guided repairing of inconsistent knowledge bases
+\url{https://reader.elsevier.com/reader/sd/pii/S0004370218300523?token=CE73B0A9A46B681E239DBA5DDC88F2507D9B38328CC6707AAEE38C3669BBE495B7068DD5DB2DD3FD7B9FB75F1A9D7A81}Measuring inconsistency with constraints for propositional knowledge bases
+\url{https://dl.acm.org/citation.cfm?id=2145494} Random walk inference and learning in large scale knowledge bases
+\url{http://www.aclweb.org/anthology/D14-1044} Incorporating vector space similarity in random walk inference over knowledge bases
+\url{http://www.aaai.org/ocs/index.php/AAAI/AAAI11/paper/download/3659/3898} Learning structured embeddings of knowledge bases
+\url{https://ieeexplore.ieee.org/abstract/document/506705/} Current approaches to handling imperfect information in data and knowledge bases
+\url{https://www.sciencedirect.com/science/article/pii/S0888613X14001029} Computational approaches to finding and measuring inconsistency in arbitrary knowledge bases
+\url{https://arxiv.org/ftp/arxiv/papers/1205/1205.2613.pdf} Measuring inconsistency in probabilistic knowledge bases
+\url{https://www.hindawi.com/journals/mpe/2015/134950/} A Max-Term Counting Based Knowledge Inconsistency Checking Strategy and Inconsistency Measure Calculation of Fuzzy Knowledge Based Systems
+\url{http://vldb.org/conf/1999/P60.pdf} Extracting large-scale knowledge bases from the web
 
 
 \newpage
 \section{Preliminaries}
 Before we go deeper into the problem Approach and the method used it is necessary to first understand a set of key concepts that will be used in the coming chapters, although a general knowledge of mathematics is needed. it is also necessary to know where the data comes from.
 
+\subsection{Knowledge}
+>What is a knowledge graph?\\
+A knowledge graph is a "graphical" representation of a set of statements with information, the knowledge base. This can be anything about everything. The data is stored in triple format. These are statements that consist out of <Subject> <Predicate> <Object>. Where the Subject and Object are vertices in the graph and the Predicate is the edge between the subject and the object. Both the vertices and the edges have different properties. Even though the size of the graph can change according to the amount of triples it has, the graph is connected and thus, it is possible to connect between all the vertices in the graph. 
+
+>what is RDF(S) OWL?\\
+RDF(s)
+
+>What are Inconsistencies?\\
+Inconsistencies are mistakes in the knowledge graph. It is possible to have data that contradicts other data. An example is a >>><<< . In this example the error is in that two different parts of the data contradict each other. While this can be true in real life data and happen her the real world. Knowledge bases have a hard time understanding inconsistencies and the moment a inconsistency in the data is found it is no longer possible to reason over the data as this means that we can no longer assume that any part of the data is "correct", while it may perfectly be that case.
+
 \subsection{Data}
+To provide a good overview about natural occurring data on the web the largest possible dataset full with linked data would be the best starting point. It would not only help with finding naturally occurring errors, but would also help solve any scaling issues that could have occurred with by first experimenting on smaller datasets. The data we are talking about is of course the LOD-a-lot.
 
+\subsubsection{LOD-a-lot}
+The LOD-a-lot >>CITATION<< is the largest? open source linked data set that is readily available. The data is stored in a HDT. Where an HDT is a (Header, Dictionary, Triples) File. In this way the data is structured in a compact manner with a binary serialization format for RDF. Which has the advantage that querying large files is fast due to optimizations done which have been tailored on reading large data set. >>CITATION<<
 
+>What is Linked Open data?\\
+Linked Open data >>CITATION<< is coined by Tim Berners Lee and is used to describe data that fills the five stars that is set by him. 
+...\\
+...\\
+...\\
+This the data is stored in such a way that it is open for everyone. Linked to existing sources. And it can be used as open source.
 
 \newpage
 \section{Approach \& Method}
@@ -164,6 +206,7 @@ The algorithm that is used in matching is explained here >ALGORITHM<
 Finished with the generalization is it now possible to be able to retrieve meaningful statistics about the generalized inconsistencies. Interesting statistics are the top 10 most common mistakes:
 
 
+Extra ADDITIONS TO THE APPROACH:
 
 \begin{enumerate}
 	\item Import the LOD-a-lot
@@ -186,6 +229,8 @@ Finished with the generalization is it now possible to be able to retrieve meani
 \section{Experiments}
 Possible Experiments for testing:
 https://openproceedings.org/2018/conf/edbt/paper-61.pdf
+Tools for Finding Inconsistencies in Real-world Logic-based Systems
+
 
 \newpage
 \section{Results}
@@ -193,7 +238,10 @@ https://openproceedings.org/2018/conf/edbt/paper-61.pdf
 
 \newpage
 \section{Conclusion}
+>What conclusions can be found based upon?
 
+
+\section{Future Work}
 
 \newpage
 \section{Bibliography}
