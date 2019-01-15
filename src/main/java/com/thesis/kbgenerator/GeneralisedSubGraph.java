@@ -26,6 +26,7 @@ class GeneralisedSubGraph {
     private List<String> SubGraphStoredasStrings;
     private HashMap<String, ArrayList<String>> Vertices = new HashMap<>();
     private HashMap<String, String> Edges = new HashMap<>();
+    private String SPARQLString = "";
 
     private int instances;
     private int classes;
@@ -76,6 +77,8 @@ class GeneralisedSubGraph {
                     addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                     addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
+                    SPARQLString += "?" + OWLAXIOMString[2] + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> " + "?"+ OWLAXIOMString[1] + ". ";
+
 
 
                 // Relation, instance, class.
@@ -96,6 +99,7 @@ class GeneralisedSubGraph {
                     addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                     addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
+                    SPARQLString += "?"+OWLAXIOMString[1] + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> " + "?"+OWLAXIOMString[2] + ". ";
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
                 // This could have happened with incorrect class assertion or other things.
@@ -125,6 +129,8 @@ class GeneralisedSubGraph {
                             // Add Triple To hashMap
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+
+                            SPARQLString +="?"+ OWLAXIOMString[1] + " <http://www.w3.org/2000/01/rdf-schema#subClassOf> " +"?"+ OWLAXIOMString[2] + ". ";
                             break;
                         }
                         case "DisjointClasses": {
@@ -135,6 +141,7 @@ class GeneralisedSubGraph {
                             // Add Triple To hashMap
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                            SPARQLString +="?"+ OWLAXIOMString[1] + " <http://www.w3.org/2002/07/owl#disjointWith> " + "?"+OWLAXIOMString[2] + ". ";
                             break;
                         }
                         case "EquivalentClasses": {
@@ -145,6 +152,7 @@ class GeneralisedSubGraph {
                             // Add Triple To hashMap
                             addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                             addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                            SPARQLString += "?"+ OWLAXIOMString[1] + " <http://www.w3.org/2002/07/owl#equivalentClass> " + "?"+OWLAXIOMString[2] + ". ";
                             break;
                         }
                         default:
@@ -337,6 +345,15 @@ class GeneralisedSubGraph {
             }
 
         }
+
+    }
+
+    String convertSPARQL(){
+        // Converts a generalised subgraph to a set of sparql lines.
+        SPARQLString = "SELECT * WHERE {" + SPARQLString + "}";
+        System.out.println(SPARQLString);
+
+        return SPARQLString;
 
     }
 

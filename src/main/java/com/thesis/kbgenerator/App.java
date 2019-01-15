@@ -12,8 +12,10 @@ import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -406,7 +408,10 @@ public class App
             // Executing the query.
             QueryExecution qe = QueryExecutionFactory.create(query, model);
 
+            long TimeOut = 10000; //fetch starting time & to make sure it does not get stuck after 10 sec.
             //Get the selection of the executed query.
+            qe.setTimeout(TimeOut);
+
             results = qe.execSelect();
         } catch (Exception e) {
             // Catch Exception and print th message.
@@ -426,6 +431,24 @@ public class App
         }
     }
 
+    private static int CounterResultPrinter(Model model, String query){
+        //  Run query  and retrieve the results as ResultSet.
+        ResultSet results = SPARQLQuery(model, query);
+        // Print for every result the result line.
+        int counter = 0;
+
+        try {
+            while (results.hasNext()) {
+                counter++;
+                results.next();
+            }
+        } catch (Exception e){
+            System.out.println("Time out Exception");
+        }
+
+        return counter;
+    }
+
     private static void testQueries(Model model){
         // Running a set of test queries to check quickly if this graph can be susceptible to INCONSISTENCIES.
 
@@ -442,7 +465,6 @@ public class App
         QueryResultPrinter(model, query);
         QueryResultPrinter(model, query2);
         QueryResultPrinter(model, query3);
-
 
     }
 
@@ -534,6 +556,8 @@ public class App
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
+        Model model = null;
+
         if(verbose) {
             // Create Jena wrapper on top of HDT.
             System.out.println("Creating Jena HDT graph");
@@ -541,7 +565,7 @@ public class App
 
             // Create Models
             System.out.println("Creating model from graph");
-            Model model = ModelFactory.createModelForGraph(graph);
+            model = ModelFactory.createModelForGraph(graph);
 
             System.out.println("Creating model from n3");
             Model N3Model = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
@@ -571,6 +595,8 @@ public class App
                 // Prints the generalGraph with specialised function.
                 GeneralGraph.print();
                 GeneralCounter ++;
+                int totalNumber = CounterResultPrinter(model , GeneralGraph.convertSPARQL());
+                System.out.println("Total number of occurrences: " + totalNumber);
             }
         }
 

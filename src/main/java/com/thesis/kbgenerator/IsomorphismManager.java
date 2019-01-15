@@ -90,6 +90,7 @@ final class IsomorphismManager {
 
                 if (Used1.get(Graph1Out[0]) != null || Used2.get(Graph1Out[0]) != null ){
                     continue;
+
                 }
 
                 if (!IsoCheck) {
