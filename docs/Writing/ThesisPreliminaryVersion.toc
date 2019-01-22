@@ -12,7 +12,7 @@
 \contentsline {section}{\numberline {5}Experiments}{6}
 \contentsline {section}{\numberline {6}Results}{7}
 \contentsline {section}{\numberline {7}Conclusion}{8}
-\contentsline {section}{\numberline {8}Future Work}{8}
-\contentsline {section}{\numberline {9}Bibliography}{9}
-\contentsline {section}{\numberline {10}Appendices}{10}
-\contentsline {subsection}{\numberline {10.1}Appendix A}{10}
+\contentsline {subsection}{\numberline {7.1}Future Work}{8}
+\contentsline {section}{\numberline {8}Bibliography}{9}
+\contentsline {section}{\numberline {9}Appendices}{10}
+\contentsline {subsection}{\numberline {9.1}Appendix A}{10}

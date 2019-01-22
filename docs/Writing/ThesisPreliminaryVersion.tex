@@ -101,32 +101,35 @@ To improve the general availability of inconsistent knowledge bases we designed 
 \pagenumbering{arabic}
 
 \section{Introduction}
+> Introduction
+Error cleaning, linking instances and consistency checking are large topics researched in the field, but each researcher has his own choice of ontology on which they want to apply these new techniques that are used to 
 
+> Why is this needed?
+To illustrate the need of a good method that can provide a inconsistent knowledge base that matches a set of constraints and is easy to use. But that is not only it. Would also be possible to mimic other larger knowledge graphs that could be to big for algorithms to test on and make these knowledge bases smaller such that they can fit the algorithms without losing a lot of similarity with the larger knowledge base. 
+
+> What are others doing or is already done?
+
+
+> What are the advantages of my method?
+
+> How is this method achieved?
+
+> How is this paper written?\\
+The first chapter explains the work that this paper is based on, as well as shows the work that others have done before us that is related or could benefit from the work we have done. The second chapter goes into the preliminaries, what is needed to even start the process what for preliminary work has been done to get the method working. The Approach and method explain more in detail how the inconsistent knowledge graphs are generated and how they are build according to some sets of standards. The experiments showcase the possible applications of this knowledge base generator and the possibility to generate smaller subsets of existing knowledge bases that do still match the existing knowledge bases but are only smaller in comparison. In the results the generated models are compared on bases of a set of criteria to be added in and the speed of the algorithm for retrieving these smaller knowledge bases. We conclude with a conclusion and discussion about the use cases, with an extension of future work.
 
 \newpage
 \section{Related Work}
 >What is the state of the art?\\
+While there is a large community on trying to build "consistent" knowledge bases on data that already exists. Or merging knowledge bases with possible conflicting data or triples, no found work is done on actively building and designing real inconsistent knowledge bases. It is therefor not possible to match this problem to any of the state of the art solutions as there are none. 
+There is work done on inconsistency locating: \url{https://github.com/raki123/inconsistent-subgraph-query}\\
+A generator for databases: UIS Database Generator\\
+Sphinx generator \url{http://www.speech.cs.cmu.edu/tools/lmtool-new.html}
+Random SAT generator
 
->What is the state of the art in inconsistency cleaning/removal?\\
-
->What are the preliminary work this paper is build on?\\
-
-
-\url{http://www.semantic-web-journal.net/system/files/swj1366.pdf }
-This paper shows the work of ... In the paper the most common used linked datasets are compared on a set of criteria. And a framework for comparing knowledge bases.\\
-
-\url{https://link.springer.com/content/pdf/10.1007/978-3-642-23863-5_54.pdf}The representation of inconsistent knowledge in Advanced knowledge based systems
-\url{https://link.springer.com/content/pdf/10.1007%2F978-3-319-13704-9.pdf}Inconsistency monitoring in large scientific knowledge bases pages 87-95
-\url{https://openproceedings.org/2018/conf/edbt/paper-61.pdf}User-guided repairing of inconsistent knowledge bases
-\url{https://reader.elsevier.com/reader/sd/pii/S0004370218300523?token=CE73B0A9A46B681E239DBA5DDC88F2507D9B38328CC6707AAEE38C3669BBE495B7068DD5DB2DD3FD7B9FB75F1A9D7A81}Measuring inconsistency with constraints for propositional knowledge bases
-\url{https://dl.acm.org/citation.cfm?id=2145494} Random walk inference and learning in large scale knowledge bases
-\url{http://www.aclweb.org/anthology/D14-1044} Incorporating vector space similarity in random walk inference over knowledge bases
-\url{http://www.aaai.org/ocs/index.php/AAAI/AAAI11/paper/download/3659/3898} Learning structured embeddings of knowledge bases
-\url{https://ieeexplore.ieee.org/abstract/document/506705/} Current approaches to handling imperfect information in data and knowledge bases
-\url{https://www.sciencedirect.com/science/article/pii/S0888613X14001029} Computational approaches to finding and measuring inconsistency in arbitrary knowledge bases
-\url{https://arxiv.org/ftp/arxiv/papers/1205/1205.2613.pdf} Measuring inconsistency in probabilistic knowledge bases
-\url{https://www.hindawi.com/journals/mpe/2015/134950/} A Max-Term Counting Based Knowledge Inconsistency Checking Strategy and Inconsistency Measure Calculation of Fuzzy Knowledge Based Systems
-\url{http://vldb.org/conf/1999/P60.pdf} Extracting large-scale knowledge bases from the web
+> What papers is this research build on?
+While this subject is relatively new, the research in this subject connects to a multitude of other papers on which parts of this paper are loosely based, as well as that several test cases come forth out of these papers. \cite{Michael Färber} shows the necessity of a knowledge base generator. In his paper a set of the largest Linked Datasets are compared on a large set of different criteria and show a framework for given a set of criteria which dataset would most closely resemble your expectations. While this is a good way to select your knowledge base for your experiments, this paper takes a step further and is would use the input of the user to generate a database that would closely resemble the larger database while giving the user the freedom to choose the amount of triples and the types of inconsistency.\\
+\cite{Heiko Paulheim} showcases the need for a standardized evaluation method. In the survey the paper the research is based on shows that the papers choose sometimes different knowledge graph(s). This makes it harder to compare. Giving the user a hard time figuring out which research paper produces a good result in comparison with a different paper. Removing the this discrepancy would benefit the community as now it will be easier to compare algorithms.
+This paper uses a 
 
 
 \newpage
@@ -241,7 +244,8 @@ Tools for Finding Inconsistencies in Real-world Logic-based Systems
 >What conclusions can be found based upon?
 
 
-\section{Future Work}
+\subsection{Future Work}
+> What are the next steps for the algorithm?
 
 \newpage
 \section{Bibliography}
