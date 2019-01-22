@@ -102,17 +102,23 @@ To improve the general availability of inconsistent knowledge bases we designed 
 
 \section{Introduction}
 > Introduction
-Error cleaning, linking instances and consistency checking are large topics researched in the field, but each researcher has his own choice of ontology on which they want to apply these new techniques that are used to 
+Error cleaning, linking instances and consistency checking are large topics researched in the field, but each researcher has his own choice of ontology on which they want to apply these new techniques that they are used to. 
 
-> Why is this needed?
-To illustrate the need of a good method that can provide a inconsistent knowledge base that matches a set of constraints and is easy to use. But that is not only it. Would also be possible to mimic other larger knowledge graphs that could be to big for algorithms to test on and make these knowledge bases smaller such that they can fit the algorithms without losing a lot of similarity with the larger knowledge base. 
+> Why is this needed?\\
+To illustrate the need of a good method that can provide a inconsistent knowledge base that matches a set of constraints and is easy to use. But that is not only it. Would also be possible to mimic other larger knowledge graphs that could be to big for algorithms to test on and make these knowledge bases smaller such that they can fit the algorithms without losing a lot of similarity with the larger knowledge base. \\
 
-> What are others doing or is already done?
+> What are others doing or is already done?\\
+This subject is relatively new, there are no real knowledge graph generators that exist. Most knowledge graphs use existing data and with the help of experts and text processing new graphs are generated. There is no technique yet that returns a graph that based on user input on the amount of vertices and edges, the types of connections and the types of inconsistencies. There is however work related to locating and repairing inconsistencies. Work where parts of the extraction process is based on. To find the patterns with the correct information about the inconsistencies we use techniques to find these smaller inconsistent subgraphs. But the generation of the work is based on the new research.\\
 
+> What are the advantages of my method?\\
+It is hard to compare this new method to other techniques in the field, as most research is build to find and repair inconsistencies not to build a generator. This makes it hard to compare to other techniques. It is however a good to test this method to already existing and used knowledge graphs in the field. The method as shown in this paper is .... than the existing method because the knowledge bases this method produces is smaller in comparison to the new dataset thus it will return results much faster, while the knowledge graph within the smaller knowledge graph is still similar to the larger graph.
 
-> What are the advantages of my method?
+> How is this method achieved?\\
+Inconsistencies are exist in graphs as small subgraphs. Most inconsistencies are small consist out of a subgraph that have links that contradict each other. While a inconsistency can have a multi set of different subgraphs that are inconsistent with respect to the inconsistency, it is in this paper not possible to have multiple inconsistencies in one subgraph. When most to all inconsistencies are found we can use the most common inconsistencies as guidelines to produce new knowledge graphs. With most to all inconsistencies accounted for we now move on the the process of producing knowledge graphs. \\
+The second part of the process is producing the knowledge graphs. This is done by %TODO EXPLAIN FURTHER THE PROCESS
 
-> How is this method achieved?
+> How is this method tested?\\
+%TODO EXPLAIN METHOD TESTING
 
 > How is this paper written?\\
 The first chapter explains the work that this paper is based on, as well as shows the work that others have done before us that is related or could benefit from the work we have done. The second chapter goes into the preliminaries, what is needed to even start the process what for preliminary work has been done to get the method working. The Approach and method explain more in detail how the inconsistent knowledge graphs are generated and how they are build according to some sets of standards. The experiments showcase the possible applications of this knowledge base generator and the possibility to generate smaller subsets of existing knowledge bases that do still match the existing knowledge bases but are only smaller in comparison. In the results the generated models are compared on bases of a set of criteria to be added in and the speed of the algorithm for retrieving these smaller knowledge bases. We conclude with a conclusion and discussion about the use cases, with an extension of future work.
@@ -127,9 +133,10 @@ Sphinx generator \url{http://www.speech.cs.cmu.edu/tools/lmtool-new.html}
 Random SAT generator
 
 > What papers is this research build on?
-While this subject is relatively new, the research in this subject connects to a multitude of other papers on which parts of this paper are loosely based, as well as that several test cases come forth out of these papers. \cite{Michael Färber} shows the necessity of a knowledge base generator. In his paper a set of the largest Linked Datasets are compared on a large set of different criteria and show a framework for given a set of criteria which dataset would most closely resemble your expectations. While this is a good way to select your knowledge base for your experiments, this paper takes a step further and is would use the input of the user to generate a database that would closely resemble the larger database while giving the user the freedom to choose the amount of triples and the types of inconsistency.\\
-\cite{Heiko Paulheim} showcases the need for a standardized evaluation method. In the survey the paper the research is based on shows that the papers choose sometimes different knowledge graph(s). This makes it harder to compare. Giving the user a hard time figuring out which research paper produces a good result in comparison with a different paper. Removing the this discrepancy would benefit the community as now it will be easier to compare algorithms.
-This paper uses a 
+While this subject is relatively new, the research in this subject connects to a multitude of other papers on which parts of this paper are loosely based, as well as that several test cases come forth out of these papers. \cite{MichaelF:2017} shows the necessity of a knowledge base generator. In his paper a set of the largest Linked Datasets are compared on a large set of different criteria and show a framework for given a set of criteria which dataset would most closely resemble your expectations. While this is a good way to select your knowledge base for your experiments, this paper takes a step further and is would use the input of the user to generate a database that would closely resemble the larger database while giving the user the freedom to choose the amount of triples and the types of inconsistency.\\
+\cite{HeikoP:2016} showcases the need for a standardized evaluation method. In the survey the paper the research is based on shows that the papers choose sometimes different knowledge graph(s). This makes it harder to compare. Giving the user a hard time figuring out which research paper produces a good result in comparison with a different paper. Removing the this discrepancy would benefit the community as now it will be easier to compare algorithms.
+
+% TODO Add in more papers that could be interesting.
 
 
 \newpage
@@ -138,26 +145,37 @@ Before we go deeper into the problem Approach and the method used it is necessar
 
 \subsection{Knowledge}
 >What is a knowledge graph?\\
-A knowledge graph is a "graphical" representation of a set of statements with information, the knowledge base. This can be anything about everything. The data is stored in triple format. These are statements that consist out of <Subject> <Predicate> <Object>. Where the Subject and Object are vertices in the graph and the Predicate is the edge between the subject and the object. Both the vertices and the edges have different properties. Even though the size of the graph can change according to the amount of triples it has, the graph is connected and thus, it is possible to connect between all the vertices in the graph. 
+A knowledge graph is a "graphical" representation of a set of statements with information, the knowledge base. This can be anything about everything. The data is stored in triple format. These are statements that consist out of $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. Where the Subject and Object are vertices in the graph and the Predicate is the edge between the subject and the object. Both the vertices and the edges have different properties. Even though the size of the graph can change according to the amount of triples it has, the graph is connected and thus, it is possible to connect between all the vertices in the graph. 
 
 >what is RDF(S) OWL?\\
-RDF(s) and OWL are ontologies from the semantic web community. But they are special in the sense that these languages can be used to reason with. thus making it possible to infer new facts from th
+RDF \cite{rdfPrimer:2014} is expanded to The resource description framework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. can hold different types. The subject can be seen as a resource or link to a source, defined by an IRI. 
+The predicate represents the relation between the Subject and the Object, and finally the object is the second resource, this can be a IRI or a string with information.
+RDF is build to exchange information between processes and applications without the intervention of humans. The goal was to build a framework that is designed link resources without having to add in expensive parsers to convert the information to the correct format every time a new process is added which wants to use the information.
+
+Extending to this is RDFS, this the RDF schema, with this schema we can allow to define ontologies within RDF. It can be used to give structure to the RDF
+RDF(s) and OWL are ontologies from the semantic web community. But they are special in the sense that these languages can be used to reason with. thus making it possible to infer new facts from the knowledge of other triples.
+
+Finally OWL \cite{OWLPrimer:2012}, the Web Ontology Language, designed to represent the language tha can describe things and set of things well with regards to relations. But not only that, in OWL it is also possible to reason with that knowledge and make implicit knowledge explicit, for example reason that a subClassOf(Car, Audi) and subClassOf(Audi, A1 Sportsback). This makes it possible to reason that subClassOf(Car, A1 Sportsback) is also a type of relation that exists. The second type of reasoning that is possible now is inconsistency reasoning. A main part of this paper.
 
 >What are Inconsistencies?\\
 Inconsistencies are mistakes in the knowledge graph. It is possible to have data that contradicts other data. An example is a >>><<< . In this example the error is in that two different parts of the data contradict each other. While this can be true in real life data and happen her the real world. Knowledge bases have a hard time understanding inconsistencies and the moment a inconsistency in the data is found it is no longer possible to reason over the data as this means that we can no longer assume that any part of the data is "correct", while it may perfectly be that case.
+
+> What is SPARQL?
+SPARQL is a query language, The technique behind SPARQL is to query and find patterns in the graph and tries to match these patterns to the pattern in query. If a hit is found it can be seen as a hit to the match the complete graph pattern of the query. The advantage of SPARQL to others for finding these patterns is that SPARQL is optimized fro the linked data community.  \cite{SPARQLPrimer:2013}
+
 
 \subsection{Data}
 To provide a good overview about natural occurring data on the web the largest possible dataset full with linked data would be the best starting point. It would not only help with finding naturally occurring errors, but would also help solve any scaling issues that could have occurred with by first experimenting on smaller datasets. The data we are talking about is of course the LOD-a-lot.
 
 \subsubsection{LOD-a-lot}
-The LOD-a-lot >>CITATION<< is the largest? open source linked data set that is readily available. The data is stored in a HDT. Where an HDT is a (Header, Dictionary, Triples) File. In this way the data is structured in a compact manner with a binary serialization format for RDF. Which has the advantage that querying large files is fast due to optimizations done which have been tailored on reading large data set. >>CITATION<<
+The LOD-a-lot \cite{JavierD:2017} is one of the largest open source linked knowledge graphs that is readily available. The data is stored in a HDT. Where an HDT is a (Header, Dictionary, Triples) File. In this way the data is structured in a compact manner with a binary serialization format for RDF. Which has the advantage that querying large files is fast due to optimizations done which have been tailored on reading large data set \cite{JavierD:2013}.
 
 >What is Linked Open data?\\
-Linked Open data >>CITATION<< is coined by Tim Berners Lee and is used to describe data that fills the five stars that is set by him. 
-...\\
-...\\
-...\\
-This the data is stored in such a way that it is open for everyone. Linked to existing sources. And it can be used as open source.
+Linked Open data is the notion of data that is published on the web and conforms to the five stars given to the linked open data. /cite{ChristianB:2009}
+ - URIs are given to identify things in the data.
+ - The URI are given http, such that these can be located and found (dereferencing).
+ - The data that is returned when found is used with open standards such as RDF,
+ - the data is linked, it refers to other data that has the same linked open data qualities.
 
 \newpage
 \section{Approach \& Method}
@@ -170,7 +188,6 @@ A reasoner is limited in the amount of data it can reason over within limited ti
 It does however mean that we need to generate correct subgraphs without losing any of the inconsistencies that could be found only in the complete graph.
 
 >So how are the subgraphs generated?\\
-
 Generating the subgraphs without losing information is tricky as links are broken to retrieve a small part of the graph from a large graph. The goal is to minimize the loss by making sure that the severed links will be added in later stages of the pass through the complete graph.
 
 To retrieve subgraphs from the graph we use rootnodes. Generating rootnodes is done by taking a triple from the complete graph as our starting point. Then for this triple the subject is chosen as the root node. This is the node from which the subgraph is generated. To build the subgraph the node expanded upon such that a graph will be generated around the rootnode. 
@@ -198,11 +215,11 @@ To improve the efficiency of the isomorphic matching the amount of graphs are pr
  - In our case it also needs to have the same amount of edges based on the edge types we have.\\
  
 If two graphs do match we then run the matching algorithm and only if the matching algorithm returns true the two graphs are matched.
-The algorithm that is used in matching is explained here >ALGORITHM<
+The algorithm that is used in matching is explained here %TODO
 
 
 \subsection{Generalizing the patterns on basis of ...}
->>>>>>>>>.................................<<<<<<<<<<
+%TODO
 
 
 \subsection{Locating the most used inconsistency cases}
@@ -210,26 +227,31 @@ Finished with the generalization is it now possible to be able to retrieve meani
 
 
 Extra ADDITIONS TO THE APPROACH:
+%TODO
 
 \begin{enumerate}
-	\item Import the LOD-a-lot
-	\item Retrieve a sub graph of the LOD cloud by choosing a vertex as root node and retrieving a small part of LOD-a-lot by expanding the root node.
-	\item Check the sub graph for inconsistencies. 
-	\item Retrieve the inconsistencies and check if they can be generalized.
-	\item Generalize on basis of isomorphic, check if vertex isomorphic and edge isomorphic
-	\item Add in ... steps to further generalize.
-	\item Count the amount of occurrences per "generalized" inconsistent subgraph
-	\item Make a generator that uses input from the generalized inconsistencies and user given parameters to build a knowledge base.
-	\item The generator uses a .... ALGORITHM to build these graphs from the LOD-a-lot Cloud.
-	\item The generator returns the graph to the user.
-	\item Testing the generated graphs with the method to check if the consistencies are correct. 
-	\item Implement several methods to test whether these methods perform as well as that the researchers propose.
-	\item Show results.
+	\item Import the LOD-a-lot %DONE
+	\item Retrieve a sub graph of the LOD cloud by choosing a vertex as root node and retrieving a small part of LOD-a-lot by expanding the root node. %DONE
+	\item Check the sub graph for inconsistencies. %DONE
+	\item Retrieve the inconsistencies and check if they can be generalized. %DONE
+	\item Generalize on basis of isomorphic, check if vertex isomorphic and edge isomorphic %TODO
+	\item Add in ... steps to further generalize. %TODO
+	\item Count the amount of occurrences per "generalized" inconsistent subgraph %TODO
+	\item Make a generator that uses input from the generalized inconsistencies and user given parameters to build a knowledge base. %TODO
+	\item The generator uses a .... ALGORITHM to build these graphs from the LOD-a-lot Cloud. %TODO
+	\item The generator returns the graph to the user. %TODO
+	\item Testing the generated graphs with the method to check if the consistencies are correct. %TODO
+	\item Implement several methods to test whether these methods perform as well as that the researchers propose. %TODO
+	\item Show results. %TODO
 \end{enumerate}
 
 
 \newpage
 \section{Experiments}
+In this section the experiments are discussed. This section describes the different experiments that have been done and why these experiments are a good way to showcase the algorithm that has been produced.
+
+%TODO
+
 Possible Experiments for testing:
 https://openproceedings.org/2018/conf/edbt/paper-61.pdf
 Tools for Finding Inconsistencies in Real-world Logic-based Systems
@@ -237,19 +259,25 @@ Tools for Finding Inconsistencies in Real-world Logic-based Systems
 
 \newpage
 \section{Results}
+In this section the results of the produced method are discussed, as also the results of the experiments from the experiments section.
 
+%TODO
 
 \newpage
 \section{Conclusion}
->What conclusions can be found based upon?
+The final section discusses the conclusions of the produced method. In this chapter the reasons why this method is useful for others and why this method should be used as a successor to the previous method used. Namely the use of large knowledge graphs. As also what types of inconsistencies are common enough to solve. In the final subsection of this chapter the future work will explain what possible extensions can be added to this work and why this could benefit the community.
 
+>What conclusions can be found based upon?
+%TODO
 
 \subsection{Future Work}
 > What are the next steps for the algorithm?
+See papers in the future work for inspirations
+%TODO
 
 \newpage
-\section{Bibliography}
-
+\bibliographystyle{plain}
+\bibliography{ThesisBib}
 
 \newpage
 \section{Appendices}

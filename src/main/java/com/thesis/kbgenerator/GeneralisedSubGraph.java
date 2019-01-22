@@ -275,8 +275,6 @@ class GeneralisedSubGraph {
         return new ArrayList<>(this.GetVertices());
     }
 
-
-    // TODO: Make a GetEdges function that returns all outgoing edges of the Vertex.
     @SuppressWarnings("WeakerAccess")
     public String GetEdges(String Vertex1, String Vertex2 ) {
         return Edges.get(Vertex1+Vertex2);
@@ -311,7 +309,7 @@ class GeneralisedSubGraph {
     // If no Parameter is found the print uses this version.
     void print(){ print(""); }
 
-    // TODO: Make pretty print of the graph.
+    // TODO2: Make pretty print of the graph.
     @SuppressWarnings("SameParameterValue")
     public void print( String printLocation){
         // Print the general Graph uses the print location to write the file. Default is System.out

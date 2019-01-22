@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{JavierD:2017}
+Javier~D. Fern{\'a}ndez, Wouter Beek, Miguel~A. Mart{\'i}nez-Prieto, and Mario
+  Arias.
+\newblock Lod-a-lot - a queryable dump of the lod cloud.
+\newblock In {\em International Semantic Web Conference}, 2017.
+
+\bibitem{JavierD:2013}
+Javier~D. Fernández, Miguel~A. Martínez-Prieto, Claudio Gutiérrez, Axel
+  Polleres, and Mario Arias.
+\newblock Binary rdf representation for publication and exchange (hdt).
+\newblock {\em Web Semantics: Science, Services and Agents on the World Wide
+  Web}, 19(0), 2013.
+
+\bibitem{MichaelF:2017}
+Michael Färber, Frederic Bartscherer, Carsten Menne, and Achim Rettinger.
+\newblock Linked data quality of dbpedia, freebase, opencyc, wikidata, and
+  yago.
+\newblock {\em Semantic Web}, 9:1--53, 03 2017.
+
+\bibitem{rdfPrimer:2014}
+Y.~Raimond G.~Schreiber.
+\newblock Rdf primer 1.1.
+\newblock \url{https://www.w3.org/TR/rdf11-primer/}.
+
+\bibitem{OWLPrimer:2012}
+P.~Hitzler, M.~Krötzsch, B.~Parsia, P.~Patel-Schneider, and S.~Rudolph.
+
+\bibitem{HeikoP:2016}
+Heiko Paulheim.
+\newblock Knowledge graph refinement: A survey of approaches and evaluation
+  methods.
+\newblock {\em Semantic Web}, 8:489--508, 12 2016.
+
+\bibitem{SPARQLPrimer:2013}
+A.~Seaborne S.~Harris.
+\newblock Sparql 1.1 query language.
+\newblock \url{https://www.w3.org/TR/sparql11-query/}.
+
+\end{thebibliography}

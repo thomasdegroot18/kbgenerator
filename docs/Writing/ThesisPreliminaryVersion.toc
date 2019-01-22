@@ -4,15 +4,14 @@
 \contentsline {subsection}{\numberline {3.1}Knowledge}{3}
 \contentsline {subsection}{\numberline {3.2}Data}{3}
 \contentsline {subsubsection}{\numberline {3.2.1}LOD-a-lot}{3}
-\contentsline {section}{\numberline {4}Approach \& Method}{4}
-\contentsline {subsection}{\numberline {4.1}Retrieval of the inconsistent patterns}{4}
-\contentsline {subsection}{\numberline {4.2}Generalizing the patterns on basis of isomorphic graphs}{4}
-\contentsline {subsection}{\numberline {4.3}Generalizing the patterns on basis of ...}{5}
-\contentsline {subsection}{\numberline {4.4}Locating the most used inconsistency cases}{5}
-\contentsline {section}{\numberline {5}Experiments}{6}
-\contentsline {section}{\numberline {6}Results}{7}
-\contentsline {section}{\numberline {7}Conclusion}{8}
-\contentsline {subsection}{\numberline {7.1}Future Work}{8}
-\contentsline {section}{\numberline {8}Bibliography}{9}
-\contentsline {section}{\numberline {9}Appendices}{10}
-\contentsline {subsection}{\numberline {9.1}Appendix A}{10}
+\contentsline {section}{\numberline {4}Approach \& Method}{5}
+\contentsline {subsection}{\numberline {4.1}Retrieval of the inconsistent patterns}{5}
+\contentsline {subsection}{\numberline {4.2}Generalizing the patterns on basis of isomorphic graphs}{5}
+\contentsline {subsection}{\numberline {4.3}Generalizing the patterns on basis of ...}{6}
+\contentsline {subsection}{\numberline {4.4}Locating the most used inconsistency cases}{6}
+\contentsline {section}{\numberline {5}Experiments}{7}
+\contentsline {section}{\numberline {6}Results}{8}
+\contentsline {section}{\numberline {7}Conclusion}{9}
+\contentsline {subsection}{\numberline {7.1}Future Work}{9}
+\contentsline {section}{\numberline {8}Appendices}{11}
+\contentsline {subsection}{\numberline {8.1}Appendix A}{11}

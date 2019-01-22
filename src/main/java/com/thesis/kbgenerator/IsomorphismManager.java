@@ -25,6 +25,9 @@ final class IsomorphismManager {
             return false;
         }
 
+        // TODO: Get vertices sorted on degree and check if these match.
+        
+
         //Builds two array lists that store the used elements.
         HashMap<String, String> emptyList1= new HashMap<>();
         HashMap<String, String> emptyList2= new HashMap<>();

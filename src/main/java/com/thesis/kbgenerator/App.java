@@ -12,6 +12,8 @@ import org.rdfhdt.hdt.triples.TripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 
@@ -495,20 +497,30 @@ public class App
          * @params {@code args[4] } Inconsistency break   -- not necessary, default false, needs integer.
          * @returns void
          *
-         */gi
+         */
 
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
 
+        // Check if HDT Exists
+        boolean InputFileExists = new File(args[0]).isFile();
+
+        // Check if output dir exists
+        Path path = Paths.get(args[1]);
+        String parentDirName = path.getParent().toString();
+        boolean OutputDirexists = new File(parentDirName).exists();
+        // Throws error when incorrect location.
+        if ( (!OutputDirexists  )|| (!InputFileExists)){
+            throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
+        }
+
         // Load HDT file using the hdt-java library
-        // TODO: Throw error when incorrect location.
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
 
         // Print to the user that the HDT is finished loading.
         System.out.println("Finished Loading HDT");
 
         // Set output Writer
-        // TODO: Throw error when incorrect location.
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
 
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
