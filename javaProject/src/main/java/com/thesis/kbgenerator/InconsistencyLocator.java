@@ -36,10 +36,10 @@ import org.semanticweb.owlapi.model.OWLOntology;
  */
 
 
-public class App
+public class InconsistencyLocator
 
 {
-    private static byte[] strToBytes = ("\nNew inconsistency: \n").getBytes();  // Small string to separate different explanations.
+    private static byte[] strToBytes = ("New general inconsistency: \n").getBytes();  // Small string to separate different explanations.
     private static int MaxExplanations;                                         // Max explanation Storage.
     private static Random rand = new Random();                                  // Random Instantiation
     private static String[] classLabels;                                        // ClassLabel storage
@@ -265,10 +265,12 @@ public class App
                 GeneralSubgraphFound ++;
             }
 
-//            if(verbose && AcceptedTo ) {
-//                fileWriter.write(strToBytes);
-//            }
-//
+            if(verbose && AcceptedTo ) {
+                fileWriter.write(strToBytes);
+                fileWriter.write(("General graph number: "+ GeneralGraphNumber + "\n").getBytes());
+                fileWriter.write((GeneralGraph.convertSPARQL()+"\n\n").getBytes());
+            }
+
 //            if(verbose && AcceptedTo ) { // IF verbose write to file.
 //                // Write out all the complete inconsistencies for examples Paper.
 //                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
@@ -463,23 +465,6 @@ public class App
         }
     }
 
-    private static int CounterResultPrinter(Model model, String query){
-        //  Run query  and retrieve the results as ResultSet.
-        ResultSet results = SPARQLQuery(model, query);
-        // Print for every result the result line.
-        int counter = 0;
-
-        try {
-            while (results.hasNext()) {
-                counter++;
-                results.next();
-            }
-        } catch (Exception e){
-            System.out.println("Time out Exception");
-        }
-
-        return counter;
-    }
 
     private static void testQueries(Model model){
         // Running a set of test queries to check quickly if this graph can be susceptible to INCONSISTENCIES.
@@ -556,8 +541,6 @@ public class App
 
         // Set output Writer
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
-        FileOutputStream fileWriterStats = new FileOutputStream(new File(parentDirName+"/Statistics.txt"));
-        FileOutputStream fileWriterSPARQL = new FileOutputStream(new File(parentDirName+"/SPARQL.txt"));
 
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
@@ -630,27 +613,28 @@ public class App
         // Print to the user that the system finished finding inconsistencies.
         System.out.println("Finished locating inconsistencies");
 
-        System.out.println("Printing Generalised Graphs");
+        fileWriter.write(("Stopped").getBytes());
+
         // Prints the finalised generalised subgraphs
-        int GeneralCounter = 0;
-        if (verbose) {
-            for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
-                fileWriterStats.write(("General graph number: "+ GeneralCounter + "\t").getBytes());
-                fileWriterSPARQL.write(("General graph number: "+ GeneralCounter + "\n").getBytes());
-
-                System.out.println("General graph number: "+ GeneralCounter + "\t");
-
-                // Prints the generalGraph with specialised function.
-
-                GeneralGraph.print(fileWriter, GeneralCounter);
-                GeneralCounter ++;
-                int totalNumber = CounterResultPrinter(model , GeneralGraph.convertSPARQL());
-
-                fileWriterStats.write(("Total number of occurrences: " + totalNumber + "\n").getBytes());
-                fileWriterSPARQL.write((GeneralGraph.convertSPARQL()+"\n").getBytes());
-                System.out.println("Total number of occurrences: " + totalNumber);
-            }
-        }
+//        int GeneralCounter = 0;
+//        if (verbose) {
+//            for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
+//                fileWriterStats.write(("General graph number: "+ GeneralCounter + "\t").getBytes());
+//                fileWriterSPARQL.write(("General graph number: "+ GeneralCounter + "\n").getBytes());
+//
+//                System.out.println("General graph number: "+ GeneralCounter + "\t");
+//
+//                // Prints the generalGraph with specialised function.
+//
+//                GeneralGraph.print(fileWriter, GeneralCounter);
+//                GeneralCounter ++;
+//                int totalNumber = CounterResultPrinter(model , GeneralGraph.convertSPARQL());
+//
+//                fileWriterStats.write(("Total number of occurrences: " + totalNumber + "\n").getBytes());
+//                fileWriterSPARQL.write((GeneralGraph.convertSPARQL()+"\n").getBytes());
+//                System.out.println("Total number of occurrences: " + totalNumber);
+//            }
+//        }
 
     }
 
