@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{LCordella2004}
+L.~P. Cordella, P.~Foggia, C.~Sansone, and M.~Vento.
+\newblock A (sub)graph isomorphism algorithm for matching large graphs.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  26(10):1367--1372, Oct 2004.
+
 \bibitem{JavierD:2017}
 Javier~D. Fern{\'a}ndez, Wouter Beek, Miguel~A. Mart{\'i}nez-Prieto, and Mario
   Arias.

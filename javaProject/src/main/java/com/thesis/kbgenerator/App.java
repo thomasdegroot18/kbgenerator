@@ -50,7 +50,8 @@ public class App
     private static int TotalInconsistenciesBeforeBreak;                         // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                         // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();    // Start IsomorphismManager
-
+    private static int GeneralGraphNumber = 0;
+    private static int GeneralSubgraphFound = 0;
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
         // Instantiate a new Array List.
@@ -218,20 +219,22 @@ public class App
 
         }
 
-        // TRY to check the graph and write if needed to a file.
-        try {
-            if(verbose ) { // IF verbose write to file.
-                // Write out all the complete inconsistencies for examples Paper.
-                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
+        // SORT the ExplanationStringList to make sure the list handy to have it sorted.
+        Collections.sort(ExplanationStringList);
+//        ExplanationStringList = new ArrayList<>();
+//        ExplanationStringList2.add("ClassAssertion C2 a0");
+//        ExplanationStringList2.add("DisjointClasses C3 C1");
+//        ExplanationStringList2.add("EquivalentClasses C5 C1");
+//        ExplanationStringList2.add("EquivalentClasses C6 C0");
+//        ExplanationStringList2.add("SubClassOf C0 C1");
+//        ExplanationStringList2.add("SubClassOf C2 C3");
+//        ExplanationStringList2.add("SubClassOf C3 C4");
+//        ExplanationStringList2.add("SubClassOf C4 C0");
 
-                    // Transfer the string to bytes and send to fileWriter.
-                    fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
-                }
-                for (String StringLine : ExplanationStringList) { // Write to Output stream for Generalised output.
-                    // Generalised output written.
-                    fileWriter.write((StringLine + "\n") .getBytes());
-                }
-            }
+        // TRY to check the graph and write if needed to a file.
+
+        try {
+
 
             // Takes the Generalised Explanation and makes a generalised subgraph.
             // Adds to the list if the subgraph is not yet recognized.
@@ -242,26 +245,55 @@ public class App
             boolean AcceptedTo = true;
             // Loop through all the subgraphs.
             for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
-
                 // Check if the subgraph is equal to the compared graph.
-                if (AcceptedTo && IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph) ){
-                    AcceptedTo = false;
+                if (AcceptedTo ){
+                    if( IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph)){
+                        AcceptedTo = false;
+                    }
                 }
             }
+
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
-                System.out.println("Found A new General Graph");
+                GeneralGraphNumber ++;
+                System.out.println("Found A new General Graph, number " + GeneralGraphNumber);
+                GeneralSubgraphFound = 0;
+
+            }
+            else{
+                GeneralSubgraphFound ++;
             }
 
-            if(verbose) { // IF verbose write to file.
-                { // Write out all the complete inconsistencies for examples Paper.
-                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
-                        // Transfer the string to bytes and send to fileWriter.
-                        fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
-                }
-            }
-        } catch(IOException io) {
+//            if(verbose && AcceptedTo ) {
+//                fileWriter.write(strToBytes);
+//            }
+//
+//            if(verbose && AcceptedTo ) { // IF verbose write to file.
+//                // Write out all the complete inconsistencies for examples Paper.
+//                for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
+//
+//                    // Transfer the string to bytes and send to fileWriter.
+//                    fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+//                }
+//
+//            }
+//
+//            if (verbose && AcceptedTo ) {
+//                for (String StringLine : ExplanationStringList) { // Write to Output stream for Generalised output.
+//                    // Generalised output written.
+//                    fileWriter.write((StringLine + "\n") .getBytes());
+//                }
+//            }
+//
+//            if(verbose && AcceptedTo ) { // IF verbose write to file.
+//                { // Write out all the complete inconsistencies for examples Paper.
+//                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
+//                        // Transfer the string to bytes and send to fileWriter.
+//                        fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+//                }
+//            }
+        } catch(Exception io) {
             io.printStackTrace();
         }
     }
@@ -317,9 +349,6 @@ public class App
         // Loop through the set of explanations and standardize the Inconsistencies.
         for(Set<OWLAxiom> InconsistencyExplanation: exp){
             InconsistenciesHit ++;
-            // TODO: Do not use the fileWriter here.
-            fileWriter.write(strToBytes);
-
             // Standardize the inconsistency and write to file.
             InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
@@ -388,6 +417,10 @@ public class App
 
             if (InconsistenciesHit % 1000 == 0){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
+            }
+
+            if (GeneralSubgraphFound > 20000){
+                UnBreakable = false;
             }
 
         }
@@ -508,9 +541,10 @@ public class App
         // Check if output dir exists
         Path path = Paths.get(args[1]);
         String parentDirName = path.getParent().toString();
-        boolean OutputDirexists = new File(parentDirName).exists();
+        boolean OutputDirExists = new File(parentDirName).exists();
+
         // Throws error when incorrect location.
-        if ( (!OutputDirexists  )|| (!InputFileExists)){
+        if ( (!OutputDirExists  )|| (!InputFileExists)){
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
 
@@ -522,6 +556,8 @@ public class App
 
         // Set output Writer
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
+        FileOutputStream fileWriterStats = new FileOutputStream(new File(parentDirName+"/Statistics.txt"));
+        FileOutputStream fileWriterSPARQL = new FileOutputStream(new File(parentDirName+"/SPARQL.txt"));
 
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
@@ -599,12 +635,19 @@ public class App
         int GeneralCounter = 0;
         if (verbose) {
             for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
-                System.out.println(GeneralCounter);
+                fileWriterStats.write(("General graph number: "+ GeneralCounter + "\t").getBytes());
+                fileWriterSPARQL.write(("General graph number: "+ GeneralCounter + "\n").getBytes());
+
+                System.out.println("General graph number: "+ GeneralCounter + "\t");
 
                 // Prints the generalGraph with specialised function.
-                GeneralGraph.print();
+
+                GeneralGraph.print(fileWriter, GeneralCounter);
                 GeneralCounter ++;
                 int totalNumber = CounterResultPrinter(model , GeneralGraph.convertSPARQL());
+
+                fileWriterStats.write(("Total number of occurrences: " + totalNumber + "\n").getBytes());
+                fileWriterSPARQL.write((GeneralGraph.convertSPARQL()+"\n").getBytes());
                 System.out.println("Total number of occurrences: " + totalNumber);
             }
         }

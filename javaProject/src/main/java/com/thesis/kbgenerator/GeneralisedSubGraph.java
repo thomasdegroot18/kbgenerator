@@ -6,7 +6,6 @@ import openllet.owlapi.OpenlletReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.*;
 import java.util.stream.Stream;
@@ -259,6 +258,16 @@ class GeneralisedSubGraph {
     // Gets the classes as stream
     private Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
 
+
+    List<Integer> GetVerticesDegree() {
+        List<Integer> VerticesDegree = new ArrayList<>();
+        for (String element: this.GetVerticesSet()){
+            VerticesDegree.add(this.GetOutElements(element).size());
+        }
+        Collections.sort(VerticesDegree);
+        return VerticesDegree;
+    }
+
     // Gets the instances as set.
     ArrayList<String> GetInstancesSet() {
         ArrayList<String> newList = new ArrayList<>();
@@ -307,7 +316,30 @@ class GeneralisedSubGraph {
     }
 
     // If no Parameter is found the print uses this version.
-    void print(){ print(""); }
+    void print(){ print("System.out"); }
+
+    // TODO2: Make pretty print of the graph.
+    @SuppressWarnings("SameParameterValue")
+    public void print( FileOutputStream printLocation, int number){
+        if (printLocation != null){
+            try{
+                printLocation.write(("\nNew General Graph number: "+ number+ "\n").getBytes());
+
+                for (Object Axiom : getAxioms().toArray()){
+
+                    String AxiomString = Axiom.toString() + "\n";
+                    printLocation.write(AxiomString .getBytes());
+
+                    }
+            } catch (Exception e ){
+                e.printStackTrace();
+            }
+        } else {
+            throw new ExceptionInInitializerError("Not correctly initialized the fileOutputStream.");
+        }
+
+
+    }
 
     // TODO2: Make pretty print of the graph.
     @SuppressWarnings("SameParameterValue")
@@ -319,38 +351,23 @@ class GeneralisedSubGraph {
             for (Object Axiom : getAxioms().toArray()){
                 System.out.println(Axiom.toString());
             }
-        } else{
-            // Print to location.
-            FileOutputStream fileWriter = null;
-            try{
-                // Start the fileWriter OutputStream
-                fileWriter = new FileOutputStream(printLocation);
-
-            } catch (Exception e){
-                //No file yet created.
-                try {
-                    fileWriter = new FileOutputStream(new File(printLocation));
-                } catch (Exception e2){
-                    e2.printStackTrace();
-                }
-
-            }
-
-            for (Object Axiom : getAxioms().toArray()){
-                try{
-                    if (fileWriter != null){
-                        fileWriter.write(Axiom.toString().getBytes());
-                    } else {
-                        throw new ExceptionInInitializerError("Not correctly initialized the fileOutputStream.");
-                    }
-                } catch (Exception e ){
-                    e.printStackTrace();
-                }
-            }
-
         }
 
     }
+
+    // Gets a vertex with a degree of one and not yet in the inputted values.
+    String GetVertexDegree1(ArrayList<String> UsedElem){
+        for (String Vertex : this.GetVerticesSet()){
+            if( this.GetOutElements(Vertex).size() == 1){
+                if( !(UsedElem.contains(Vertex))){
+                    return Vertex;
+                }
+
+            }
+        }
+        return null;
+    }
+
 
     String convertSPARQL(){
         // Converts a generalised subgraph to a set of SPARQL lines.

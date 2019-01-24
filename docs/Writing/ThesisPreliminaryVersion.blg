@@ -4,55 +4,55 @@ The top-level auxiliary file: ThesisPreliminaryVersion.aux
 The style file: plain.bst
 Database file #1: ThesisBib.bib
 Warning--entry type for "rdfPrimer:2014" isn't style-file defined
---line 88 of file ThesisBib.bib
+--line 71 of file ThesisBib.bib
 Warning--entry type for "SPARQLPrimer:2013" isn't style-file defined
---line 96 of file ThesisBib.bib
+--line 79 of file ThesisBib.bib
 Warning--entry type for "OWLPrimer:2012" isn't style-file defined
---line 104 of file ThesisBib.bib
-I was expecting a `,' or a `}'---line 106 of file ThesisBib.bib
+--line 87 of file ThesisBib.bib
+I was expecting a `,' or a `}'---line 89 of file ThesisBib.bib
  :  
  :  title="OWL 2 Web Ontology Language Primer (Second Edition)"
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-You've used 7 entries,
+You've used 8 entries,
             2118 wiz_defined-function locations,
-            541 strings with 5175 characters,
-and the built_in function-call counts, 2049 in all, are:
-= -- 177
-> -- 123
+            551 strings with 5399 characters,
+and the built_in function-call counts, 2456 in all, are:
+= -- 215
+> -- 146
 < -- 0
-+ -- 49
-- -- 42
-* -- 135
-:= -- 359
-add.period$ -- 19
-call.type$ -- 7
-change.case$ -- 41
++ -- 59
+- -- 50
+* -- 173
+:= -- 427
+add.period$ -- 22
+call.type$ -- 8
+change.case$ -- 48
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 67
-empty$ -- 162
-format.name$ -- 42
-if$ -- 415
+cite$ -- 8
+duplicate$ -- 78
+empty$ -- 191
+format.name$ -- 50
+if$ -- 497
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 4
-newline$ -- 36
-num.names$ -- 14
-pop$ -- 58
+int.to.str$ -- 8
+missing$ -- 5
+newline$ -- 41
+num.names$ -- 16
+pop$ -- 63
 preamble$ -- 1
-purify$ -- 35
+purify$ -- 41
 quote$ -- 0
-skip$ -- 53
+skip$ -- 60
 stack$ -- 0
-substring$ -- 68
-swap$ -- 8
+substring$ -- 101
+swap$ -- 9
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 28
+type$ -- 32
 warning$ -- 0
-while$ -- 16
-width$ -- 8
-write$ -- 68
+while$ -- 19
+width$ -- 9
+write$ -- 79
 (There was 1 error message)

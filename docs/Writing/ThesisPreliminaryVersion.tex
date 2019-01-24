@@ -92,7 +92,7 @@
 \newpage
 \section*{Abstract}
 The development of larger knowledge based systems is growing rapidly. and the reasoners over these large datasets are following quickly behind. While reasoning over these large knowledge graphs is improving ++ADD IN CITATION++, it is mandatory that these knowledge systems are consistent. With one inconsistency the knowledge graph can break and it is no longer possible to reason of these graphs. Several methods exists that clean the knowledge bases from these inconsistencies. Other methods try to reason around the inconsistencies or use other methods to incorporate the knowledge in their reasoners. While most methods work well, the test cases that are used for these models are not a great representation of the complete world wide web of linked data. Most of the test cases are selected for their characteristics, or the datasets are specifically designed for the test purposes of the method.\\
-To improve the general availability of inconsistent knowledge bases we designed an general knowledge base generator that uses generalized forms of inconsistencies found in the LOD-a-LOT ++ADD IN CITATION++ and use these inconsistencies to build an inconsistent knowledge base that is designed according to a set of parameters that can be given by the user.\\
+To improve the general availability of inconsistent knowledge bases we designed an general knowledge base generator that uses generalized forms of inconsistencies found in the LOD-a-LOT \cite{JavierD:2017} and use these inconsistencies to build an inconsistent knowledge base that is designed according to a set of parameters that can be given by the user.\\
 
 
 \newpage
@@ -197,7 +197,8 @@ It is also expected that most to all inconsistencies will be found as the limit 
 So how are the inconsistencies retrieved from the subgraphs?\\
 Now that the large knowledge graph has been split into multiple smaller subgraphs we can start to locate the inconsistencies that coincide in these subgraphs. This is done by employing an reasoner that can locate inconsistencies, the importance is though that this reasoner does not reason over triples and adds in new triples that the reasoner could implicitly add. This way we do not find inconsistencies that could occur in the dataset without the user knowing, or that the reasoner the inconsistency "shrinks" due to the reasoner being able to shortcut inconsistencies, as seen in the EXAMPLE.
 
-Each subgraph can have multiple inconsistencies, so each subgraph is checked extensively for inconsistencies.  >>TO AVOID DUPLICATES: << Each inconsistency in handled seperately.
+
+Each subgraph can have multiple inconsistencies, so each subgraph is checked extensively for inconsistencies.  >>TO AVOID DUPLICATES: << Each inconsistency in handled separately.
 
 
 \subsection{Generalizing the patterns on basis of isomorphic graphs}
@@ -215,7 +216,7 @@ To improve the efficiency of the isomorphic matching the amount of graphs are pr
  - In our case it also needs to have the same amount of edges based on the edge types we have.\\
  
 If two graphs do match we then run the matching algorithm and only if the matching algorithm returns true the two graphs are matched.
-The algorithm that is used in matching is explained here %TODO
+The algorithm that is used in matching is explained here is the The VF2 algorithm\cite{LCordella2004} is implemented with: solving the problem. %TODO
 
 
 \subsection{Generalizing the patterns on basis of ...}
