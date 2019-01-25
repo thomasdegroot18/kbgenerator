@@ -46,7 +46,7 @@ public class InconsistencyLocator
     private static String[] individualLabels;                                   // InstanceLabel Storage
     private static boolean verbose;                                             // Verbosity storage
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
-    private static int InconsistenciesHit = 0;                                  // Counter of inconsistencies
+    private static int InconsistenciesHit = 1;                                  // Counter of inconsistencies
     private static int TotalInconsistenciesBeforeBreak;                         // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                         // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();    // Start IsomorphismManager
@@ -268,7 +268,7 @@ public class InconsistencyLocator
             if(verbose && AcceptedTo ) {
                 fileWriter.write(strToBytes);
                 fileWriter.write(("General graph number: "+ GeneralGraphNumber + "\n").getBytes());
-                fileWriter.write((GeneralGraph.convertSPARQL()+"\n\n").getBytes());
+                fileWriter.write((GeneralGraph.convertSPARQL()+"\n").getBytes());
             }
 
 //            if(verbose && AcceptedTo ) { // IF verbose write to file.
@@ -288,13 +288,14 @@ public class InconsistencyLocator
 //                }
 //            }
 //
-//            if(verbose && AcceptedTo ) { // IF verbose write to file.
-//                { // Write out all the complete inconsistencies for examples Paper.
-//                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
-//                        // Transfer the string to bytes and send to fileWriter.
-//                        fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
-//                }
-//            }
+            if(verbose && AcceptedTo ) { // IF verbose write to file.
+                { // Write out all the complete inconsistencies for examples Paper.
+                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
+                        // Transfer the string to bytes and send to fileWriter.
+                        fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
+                }
+                fileWriter.write("\n".getBytes());
+            }
         } catch(Exception io) {
             io.printStackTrace();
         }
@@ -421,9 +422,9 @@ public class InconsistencyLocator
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
             }
 
-            if (GeneralSubgraphFound > 20000){
-                UnBreakable = false;
-            }
+//            if (GeneralSubgraphFound > 20000){
+//                UnBreakable = false;
+//            }
 
         }
     }
@@ -532,9 +533,11 @@ public class InconsistencyLocator
         if ( (!OutputDirExists  )|| (!InputFileExists)){
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
+        args[1] = args[1]+"INCONSISTENCIES" +"-"+ args[0].split("/")[args[0].split("/").length-1].replace(".hdt","")+".ttl";
 
         // Load HDT file using the hdt-java library
-        HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
+
+        HDT hdt = HDTManager.mapIndexedHDT(args[0]);
 
         // Print to the user that the HDT is finished loading.
         System.out.println("Finished Loading HDT");
@@ -573,7 +576,6 @@ public class InconsistencyLocator
             UnBreakable = true;
         }
 
-
         System.out.println("InputLocation : " + args[0]);
         System.out.println("OutputLocation : " + args[1]);
         System.out.println("MaxExplanations : " + MaxExplanations);
@@ -584,7 +586,7 @@ public class InconsistencyLocator
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
-        Model model = null;
+        Model model;
 
         if(verbose) {
             // Create Jena wrapper on top of HDT.
@@ -593,6 +595,7 @@ public class InconsistencyLocator
 
             // Create Models
             System.out.println("Creating model from graph");
+
             model = ModelFactory.createModelForGraph(graph);
 
             System.out.println("Creating model from n3");

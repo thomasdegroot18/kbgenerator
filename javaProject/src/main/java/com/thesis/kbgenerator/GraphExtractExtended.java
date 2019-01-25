@@ -26,6 +26,7 @@ import java.util.Set;
 
 import org.apache.jena.graph.*;
 import org.apache.jena.util.CollectionFactory ;
+
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;

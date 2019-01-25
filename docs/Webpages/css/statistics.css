@@ -73,3 +73,16 @@ text.label {
 text.source {
   font-size: 10px;
 }
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 512px;
+    height: 256px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}

@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class Statistics {
 
@@ -133,6 +132,81 @@ public class Statistics {
         return StoredValues;
     }
 
+    private static HashMap<String, String> GraphsLoader (String fileLocation, HashMap<String, String> StoredValues) {
+        //Load the SPARQL Query Location
+
+        File file = new File(fileLocation);
+        try{
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            String key = null;
+            StringBuilder value = new StringBuilder();
+
+
+            while((line = br.readLine()) != null){
+                if (line.startsWith("SELECT")){
+                    key = line;
+                }
+                else if (line.startsWith("New general inconsistency:")){
+                    if (!(key == null )){
+                        StoredValues.put(key, value.toString());
+                        value = new StringBuilder();
+                    }
+                }
+                else if (!line.startsWith("\n") && !line.startsWith("General")){
+                    value.append(line).append(", ");
+                }
+
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return StoredValues;
+    }
+
+    private static HashMap<String, String> GraphsLoader(String fileLocation) {
+        //Load the SPARQL Query Location
+        HashMap<String, String> StoredValues = new HashMap<>();
+
+        File file = new File(fileLocation);
+        try{
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            String key = null;
+            StringBuilder value = new StringBuilder();
+
+            while((line = br.readLine()) != null){
+                if (line.startsWith("SELECT")){
+                    key = line;
+                }
+                else if (line.startsWith("New general inconsistency:")){
+                    if (!(key == null )){
+                        StoredValues.put(key, value.toString());
+                        value = new StringBuilder();
+                    }
+                }
+                else if (!line.startsWith("\n") && !line.startsWith("General")){
+                    value.append(line).append(", ");
+                }
+
+
+            }
+            StoredValues.put(key, value.toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return StoredValues;
+    }
+
     private static void writeJSON(String fileLocation, List<String> StringArray){
         try{
             FileOutputStream fileWriter = new FileOutputStream(new File(fileLocation));
@@ -151,8 +225,10 @@ public class Statistics {
 
 
     private static void ConstantLoop(Model model, String fileLocation){
+        HashMap<String, String> StoredGraphs = GraphsLoader(fileLocation);
         HashMap<String, Integer> StoredValues = InconsistencyCheck(fileLocation);
         while(ConstantLoopBoolean){
+            GraphsLoader(fileLocation, StoredGraphs);
             InconsistencyCheck(fileLocation, StoredValues);
             InconsistencySPARQL(model, StoredValues);
 
@@ -162,14 +238,13 @@ public class Statistics {
             for (String key : StoredValues.keySet()){
                 StringLines.add(LineToWrite);
 
-                LineToWrite = "{\"Graphnumber\" : \"" + IndexNumber + "\", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\"} ,";
+                LineToWrite = "{\"Graphnumber\" : \"" + IndexNumber + "\", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\", \"Graph\" : \"" + StoredGraphs.get(key) + "\"} ,";
                 IndexNumber ++;
             }
             LineToWrite = LineToWrite.substring(0, LineToWrite.length() -1) + "]";
             StringLines.add(LineToWrite);
-
             // Writes file to JSON location.
-            writeJSON("/home/thomas/thesis/kbgenerator/docs/Webpages/js/data.json", StringLines);
+            writeJSON(fileLocation.split("javaProject")[0]+"/docs/Webpages/js/data.json", StringLines);
 
             try{
                 Thread.sleep(60000);
@@ -193,12 +268,19 @@ public class Statistics {
 
         // Check if output dir exists
         Path path = Paths.get(args[1]);
-        String parentDirName = path.getParent().toString();
-        boolean OutputDirExists = new File(parentDirName).exists();
+        String parentDirName = path.toString();
+        File Folder = new File(parentDirName);
+        boolean OutputDirExists = Folder.exists();
 
         // Throws error when incorrect location.
         if ( (!OutputDirExists  )|| (!InputFileExists)){
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
+        }
+        String FileInput = "";
+        for (File file : Folder.listFiles()){
+            if (file.getName().contains(args[0].split("/")[args[0].split("/").length-1].replace(".hdt",""))){
+                FileInput = file.toString();
+            }
         }
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
@@ -211,7 +293,7 @@ public class Statistics {
         Model model = ModelFactory.createModelForGraph(graph);
 
 
-        ConstantLoop(model, args[1]);
+        ConstantLoop(model, FileInput);
 
 
     }
