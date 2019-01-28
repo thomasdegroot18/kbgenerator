@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{ChristianB:2009}
+Christian Bizer, Tom Heath, and Tim Berners-Lee.
+\newblock Linked data - the story so far.
+\newblock {\em Int. J. Semantic Web Inf. Syst.}, 5:1--22, 2009.
+
 \bibitem{LCordella2004}
 L.~P. Cordella, P.~Foggia, C.~Sansone, and M.~Vento.
 \newblock A (sub)graph isomorphism algorithm for matching large graphs.
