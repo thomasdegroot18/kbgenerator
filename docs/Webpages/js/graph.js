@@ -37,21 +37,12 @@ readTextFile("js/data.json", function(text){
     const svg = d3.select('svg');
     const svgContainer = d3.select('#container');
 
-    var nodes = [{x: 30, y: 50},
-                 {x: 50, y: 80},
-                 {x: 90, y: 120}]
-
-   var links = [
-     {source: nodes[0], target: nodes[1]},
-     {source: nodes[2], target: nodes[1]}
-   ]
-
    var nodes = []
 
    var links = []
 
-   xLoc = 100
-   yLoc = 100
+   xLoc = 300
+   yLoc = 300
 
     for (elem in nodeLinks) {
         nodesElem = {x: 0, y: 0, name: "", color: "blue"}
@@ -101,7 +92,7 @@ readTextFile("js/data.json", function(text){
 
             }
 
-            linksElem = {source: undefined, target: undefined}
+            linksElem = {source: undefined, target: undefined, type: undefined}
             for (elem in nodes){
               if (nodes[elem].name == vertexOut){
                 linksElem.source = nodes[elem]
@@ -118,7 +109,7 @@ readTextFile("js/data.json", function(text){
               nodes.push(nodesElem2);
               linksElem.target = nodes[nodes.length-1]
             }
-
+            linksElem.type = edge;
             links.push(linksElem);
           }
 
@@ -127,16 +118,20 @@ readTextFile("js/data.json", function(text){
     var vis = d3.select("#graph")
                 .append("svg");
 
-    var w = 900,
-        h = 400;
+    var width = 1200,
+        height = 700;
 
-    vis.attr("width", w)
-       .attr("height", h);
+    vis.attr("width", width)
+       .attr("height", height);
 
    vis.text("The Graph")
       .select("#graph")
 
-
+      var simulation = d3.forceSimulation()
+          .force("forceX", d3.forceX().strength(.1).x(width * .5))
+          .force("forceY", d3.forceY().strength(.1).y(height * .5))
+          .force("center", d3.forceCenter().x(width * .5).y(height * .5))
+          .force("charge", d3.forceManyBody().strength(-15));
 
 
 
@@ -159,6 +154,21 @@ readTextFile("js/data.json", function(text){
     .attr("y1", function(d) { return d.source.y })
     .attr("x2", function(d) { return d.target.x })
     .attr("y2", function(d) { return d.target.y })
-    .style("stroke", "rgb(6,120,155)");
+    .style("stroke", function(d) {
+      if(d.type == "SubClassOf"){
+        return "black"
+      }
+      if (d.type == "DisjointClasses"){
+        return "red"
+      }
+      if(d.type == "ClassAssertion"){
+        return "blue"
+      }
+      else{
+        return "black"
+      }
+    });
+
+simulation.force()
 
   })
