@@ -18,7 +18,7 @@
     };
 
     //usage:
-    readTextFile("js/data.json", function(text){
+    readTextFile("js/dataYAGOwithTails.json", function(text){
         var sample = JSON.parse(text);
         sample.sort(function (a, b) {
             return a.value < b.value
@@ -131,7 +131,7 @@
           })
 
           .on("dblclick",function(d){
-            window.location = "graph.html"+ "?Graphnumber=" + d.Graphnumber;
+            window.location = "graphTails.html"+ "?Graphnumber=" + d.Graphnumber;
           });
 
           barGroups.append("text")

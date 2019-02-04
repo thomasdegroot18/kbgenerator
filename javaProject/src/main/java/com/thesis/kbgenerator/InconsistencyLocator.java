@@ -242,6 +242,12 @@ public class InconsistencyLocator
             // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
             // the subgraph is added to the list.
 
+            if (GeneralGraph.GetVerticesDegree().contains(1)){
+                GeneralGraph.SinglesRemoval();
+                GeneralGraph.RebuildSPARQL();
+            }
+
+
             boolean AcceptedTo = true;
             // Loop through all the subgraphs.
             for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
@@ -469,6 +475,10 @@ public class InconsistencyLocator
 
     private static void testQueries(Model model){
         // Running a set of test queries to check quickly if this graph can be susceptible to INCONSISTENCIES.
+        // @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        // @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+        // @prefix owl: <http://www.w3.org/2002/07/owl#> .
+
 
         // Check an inconsistency. If the graph has this pattern the graph is inconsistent.
         String query = "SELECT ?a ?C ?D WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
@@ -476,6 +486,7 @@ public class InconsistencyLocator
         // Check a second inconsistency. If the graph has this pattern the graph is inconsistent.
         String query2 = "SELECT ?a ?C WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?C . } LIMIT 5";
 
+        //String query2 = "SELECT ?B ?C ?D WHERE { ?B <http://www.w3.org/2000/01/rdf-schema#range> ?C . ?B <http://www.w3.org/2000/01/rdf-schema#range> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
         // Final check, if the query has disjoints the graph can be inconsistent. If the query does not have disjoints it is still possible to be inconsistent. It will only be less plausible to happen.
         String query3 = "SELECT ?D ?C WHERE { ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
 
@@ -598,13 +609,10 @@ public class InconsistencyLocator
 
             model = ModelFactory.createModelForGraph(graph);
 
-            System.out.println("Creating model from n3");
-            Model N3Model = ModelFactory.createDefaultModel().read("http://lov.okfn.org/dataset/lov/vocabs/veo/versions/2014-09-01.n3");
 
             System.out.println("Running test Queries");
             // Run test Queries
             testQueries(model);
-            testQueries(N3Model);
         }
 
         // Print to the user that system started finding inconsistencies.

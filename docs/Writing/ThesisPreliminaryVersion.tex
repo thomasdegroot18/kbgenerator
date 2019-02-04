@@ -19,7 +19,6 @@
 	
 	%\includegraphics[width=\linewidth]{uvaENG}\\[2.5cm]
 	\textsc{\Large MSc Artificial Intelligence}\\[0.2cm]
-	\textsc{\normalsize Track: \red{track}}\\[1.0cm] % track
 	\textsc{\Large Master Thesis}\\[0.5cm] 
 	
 	%----------------------------------------------------------------------------------------
@@ -36,7 +35,7 @@
 	
 	by\\[0.2cm]
 	\textsc{\Large \red{Thomas de Groot}}\\[0.2cm] %your name
-	\red{student number}\\[1cm]
+	\red{11320303}\\[1cm]
 	
 	
 	%----------------------------------------------------------------------------------------
@@ -45,8 +44,8 @@
 	
 	{\Large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
 	
-	\red{Number of Credits}\\ %
-	\red{Period in which the research was carried out}\\[1cm]%
+	\red{36 EC}\\ %
+	\red{September 2018 - March 2019}\\[1cm]%
 	
 	%----------------------------------------------------------------------------------------
 	%	COMMITTEE SECTION
@@ -85,7 +84,7 @@
 
 
 \newpage
-\section*{Acknowledgements}
+\section*{Acknowledgments}
 
 
 
@@ -94,7 +93,6 @@
 The development of larger and large knowledge base systems is growing with an ever larger speed. Even though full scale developed reasoners are still lacking behind to reason over these large knowledge bases, new algorithms are designed that can still retrieve useful, although sometimes limited entailments over the large knowledge bases. The only problem however it that these knowledge bases need to be consistent. Reasoning over inconsistent knowledge bases is a larger challenge. \\
 While several methods exists that can remove or repair the inconsistencies, most of these algorithms can not be easily tested on the larger knowledge bases. To solve this problem, this paper proposes a generator that can reduce the size of the knowledge bases while keeping the characteristics of the knowledge base in tact. With this technique the test time of algorithms can be reduced while the generated knowledge bases are still accurate representations of the knowledge base.\\
 To showcase the generator and to improve the general availability of inconsistent knowledge bases we designed an general knowledge base generator that uses generalized forms of inconsistencies found in the LOD-a-LOT \cite{JavierD:2017} and use these inconsistencies to build an inconsistent knowledge base that is designed according to a set of parameters that can be given by the user.\\
-
 
 \newpage
 \tableofcontents
@@ -117,6 +115,8 @@ While there is a large community on trying to build "consistent" knowledge bases
 
 While this subject is relatively new, the research in this subject connects to a multitude of other papers on which parts of this paper are loosely based, as well as that several test cases come forth out of these papers. \cite{MichaelF:2017} shows the necessity of a knowledge base generator. In his paper a set of the largest Linked Datasets are compared on a large set of different criteria and show a framework for given a set of criteria which dataset would most closely resemble your expectations. While this is a good way to select your knowledge base for your experiments, this paper takes a step further and is would use the input of the user to generate a database that would closely resemble the larger database while giving the user the freedom to choose the amount of triples and the types of inconsistency.\\
 \cite{HeikoP:2016} showcases the need for a standardized evaluation method. In the survey the paper the research is based on shows that the papers choose sometimes different knowledge graph(s). This makes it harder to compare. Giving the user a hard time figuring out which research paper produces a good result in comparison with a different paper. Removing the this discrepancy would benefit the community as now it will be easier to compare algorithms.
+% TODO: Solved paper issue with searching for sampling instead of generating
+
 
 % TODO: Expand this
 There is work done on inconsistency locating: \url{https://github.com/raki123/inconsistent-subgraph-query}\\
@@ -149,6 +149,13 @@ Inconsistencies are mistakes in the knowledge graph. It is possible to have data
 Finally we need a language that helps us extract information or patterns from the knowledge graph. This we do with SPARQL.
 SPARQL is a query language, The technique behind SPARQL is to query and find patterns in the graph and tries to match these patterns to the pattern in query. If a hit is found it can be seen as a hit to the match the complete graph pattern of the query. The advantage of SPARQL to others for finding these patterns is that SPARQL is optimized fro the linked data community.  \cite{SPARQLPrimer:2013}
 
+\subsection{Reasoner}
+What is a reasoner?
+
+What types of reasoners are there?
+
+Why do we need to use a reasoner?
+
 
 \subsection{Data}
 To provide a good overview about natural occurring data on the web the largest possible dataset full with linked data would be the best starting point. It would not only help with finding naturally occurring errors, but would also help solve any scaling issues that could have occurred with by first experimenting on smaller datasets. The data we are talking about is of course the LOD-a-lot.
@@ -159,18 +166,17 @@ The LOD-a-lot \cite{JavierD:2017} is one of the largest open source linked knowl
 To explain further what the data holds we need to first understand what linked data exactly is, specifically linked open data. Linked Open data is the notion of data that is published on the web and conforms to the five stars given to the linked open data. \cite{ChristianB:2009}\\
  - The data is available on the web.\\
  - URIs are given to identify things in the data.\\
- - The URI are given http, such that these can be located and found (dereferencing).\\
- - The data that is returned when found is used with open standards such as RDF,\\
+ - The URI are given HTTP, such that these can be located and found (dereferencing).\\
+ - The data that is returned when found is used with open standards such as RDF.\\
  - the data is linked, it refers to other data that has the same linked open data qualities.\\
  
-
 
 \newpage
 \section{Approach \& Method}
 This chapter will explain in detail how the implementation of the model has been done. Explaining how the inconsistencies were retrieved from the LOD-a-lot, and generalized. Then the chapter goes more in detail about how the generalized inconsistencies are used in the experiments. 
 
 \subsection{Retrieval of the inconsistent patterns}
-To generate a knowledge graph with inconsistencies, the first step is locating the inconsistencies needed foor the generator. To do such a thing we start with a massive amount of data. With the data and a reasoner we start looking for inconsistencies. To make sure that the inconsistencies found are natural occuring inconsistencies we turn the reasoning capacity off, and only use the reasoner to locate inconsistencies in the data. But theres is a problem with the reasoners. A reasoner is namely,  limited in the amount of data it can reason over within limited time. As more data means many different facts which will take more time to reason over. Even with optimizations it is not possible to reason over the LOD-a-lot without using massive amounts of CPU or taking a very long time. To improve the time needed to reason over we can either add more resources or make the amount of data to reason over smaller. The first option is not viable, but the second option is. 
+To generate a knowledge graph with inconsistencies, the first step is locating the inconsistencies needed for the generator. To do such a thing we start with a massive amount of data. With the data and a reasoner we start looking for inconsistencies. To make sure that the inconsistencies found are natural occurring inconsistencies we turn the reasoning capacity off, and only use the reasoner to locate inconsistencies in the data. But there is a problem with the reasoners. A reasoner is namely,  limited in the amount of data it can reason over within limited time. As more data means many different facts which will take more time to reason over. Even with optimizations it is not possible to reason over the LOD-a-lot without using massive amounts of CPU or taking a very long time. To improve the time needed to reason over we can either add more resources or make the amount of data to reason over smaller. The first option is not viable, but the second option is. 
 It does however mean that we need to generate correct subgraphs without losing any of the inconsistencies that could be found only in the complete graph.
 
 Generating the subgraphs without losing information is tricky as links are broken to retrieve a small part of the graph from a large graph. The goal is to minimize the loss by making sure that the severed links will be added in later stages of the pass through the complete graph.
@@ -216,9 +222,9 @@ Extra ADDITIONS TO THE APPROACH:
 	\item Retrieve a sub graph of the LOD cloud by choosing a vertex as root node and retrieving a small part of LOD-a-lot by expanding the root node. %DONE
 	\item Check the sub graph for inconsistencies. %DONE
 	\item Retrieve the inconsistencies and check if they can be generalized. %DONE
-	\item Generalize on basis of isomorphic, check if vertex isomorphic and edge isomorphic %done
+	\item Generalize on basis of isomorphic, check if vertex isomorphic and edge isomorphic %DONE
 	\item Add in ... steps to further generalize. %TODO
-	\item Count the amount of occurrences per "generalized" inconsistent subgraph %doen
+	\item Count the amount of occurrences per "generalized" inconsistent subgraph %DONE
 	\item Make a generator that uses input from the generalized inconsistencies and user given parameters to build a knowledge base. %TODO
 	\item The generator uses a .... ALGORITHM to build these graphs from the LOD-a-lot Cloud. %TODO
 	\item The generator returns the graph to the user. %TODO

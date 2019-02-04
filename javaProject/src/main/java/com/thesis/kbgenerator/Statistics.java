@@ -1,5 +1,6 @@
 package com.thesis.kbgenerator;
 
+import com.sun.istack.NotNull;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -234,11 +235,11 @@ public class Statistics {
 
             String LineToWrite = "[";
             List<String> StringLines = new ArrayList<>();
-            Integer IndexNumber = 1;
+            int IndexNumber = 1;
             for (String key : StoredValues.keySet()){
                 StringLines.add(LineToWrite);
 
-                LineToWrite = "{\"Graphnumber\" : \"" + IndexNumber + "\", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\", \"Graph\" : \"" + StoredGraphs.get(key) + "\"} ,";
+                LineToWrite = "{\"Graphnumber\" : " + IndexNumber + ", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\", \"Graph\" : \"" + StoredGraphs.get(key) + "\"} ,";
                 IndexNumber ++;
             }
             LineToWrite = LineToWrite.substring(0, LineToWrite.length() -1) + "]";
@@ -257,7 +258,6 @@ public class Statistics {
         }
     }
 
-
     public static void main(String[] args) throws Exception {
 
         // Print to the user that the HDT is being loaded. Can take a while.
@@ -269,6 +269,7 @@ public class Statistics {
         // Check if output dir exists
         Path path = Paths.get(args[1]);
         String parentDirName = path.toString();
+
         File Folder = new File(parentDirName);
         boolean OutputDirExists = Folder.exists();
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-final class IsomorphismManager {
+class IsomorphismManager {
     private GeneralisedSubGraph Graph1;
     private GeneralisedSubGraph Graph2;
 
@@ -15,31 +15,34 @@ final class IsomorphismManager {
         this.Graph1 = Graph1;
         this.Graph2 = Graph2;
 
+
+
         // If Size is not equal the two graphs can not be isomorphic.
-        if (Graph1.AxiomSize() != Graph2.AxiomSize() ){
+        if (this.Graph1.AxiomSize() != this.Graph2.AxiomSize() ){
             return false;
         }
 
 
         //Get vertices sorted on degree and check if these match.
-        if (!Graph2.GetVerticesDegree().equals(Graph1.GetVerticesDegree())){
+        if (!this.Graph2.GetVerticesDegree().equals(this.Graph1.GetVerticesDegree())){
             return false;
         }
 
 
         //TODO: CHECK INSTANCES AND CLASSES
 //        // Check if instances match
-//        if(Graph1.getCountInstances() != Graph2.getCountInstances()){
+//        if(this.Graph1 .getCountInstances() != this.Graph2.getCountInstances()){
 //            return false;
 //        }
 //        // Check if classes match
-//        if(Graph1.getCountClasses() != Graph2.getCountClasses()){
+//        if(this.Graph1 .getCountClasses() != this.Graph2.getCountClasses()){
 //            return false;
 //        }
 
 
-        ArrayList<String> Graph1Vertex = Graph1.GetVerticesSet();
-        ArrayList<String> Graph2Vertex = Graph2.GetVerticesSet();
+        ArrayList<String> Graph1Vertex = this.Graph1.GetVerticesSet();
+        ArrayList<String> Graph2Vertex = this.Graph2.GetVerticesSet();
+
         //Builds two array lists that store the used elements.
         ArrayList<String> emptyList1= new ArrayList<>();
         ArrayList<String> emptyList2= new ArrayList<>();
@@ -72,6 +75,7 @@ final class IsomorphismManager {
 
         // retrieve all outgoing edge vertex combination graph 1.
         ArrayList<String[]> Graph1TempEdgeVertices = Graph1.GetOutElements(Graph1Vertex);
+
 
         // retrieve all outgoing edge vertex combination graph 2.
         ArrayList<String[]> Graph2TempEdgeVertices = Graph2.GetOutElements(Graph2Vertex);
@@ -132,9 +136,14 @@ final class IsomorphismManager {
 //                }
 
                 // ADDED IN CHECK ON EDGES TODO: DONE
-                if (!(Graph1Out[1].equals(Graph2Out[1]))){
+                try {
+                    if (!(Graph1Out[1].equals(Graph2Out[1]))){
+                        continue;
+                    }
+                } catch (Exception e ){
                     continue;
                 }
+
 
 
                 if (!IsoCheck) {

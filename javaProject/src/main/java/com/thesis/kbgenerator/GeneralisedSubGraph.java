@@ -8,6 +8,7 @@ import org.semanticweb.owlapi.model.*;
 
 import java.io.FileOutputStream;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -258,6 +259,173 @@ class GeneralisedSubGraph {
     // Gets the classes as stream
     private Stream<OWLClass> GetClasses() { return owlOntologyGraph.classesInSignature(); }
 
+    HashMap<String, Integer> GetVerticesDegreeMap() {
+        HashMap<String, Integer> VerticesDegree = new HashMap<>();
+        for (String element: this.GetVerticesSet()){
+            VerticesDegree.put(element , this.GetOutElements(element).size());
+        }
+        return VerticesDegree;
+    }
+
+    void SinglesRemoval() {
+        HashMap<String, Integer> VerticesDegree = GetVerticesDegreeMap();
+
+        for (String elem: VerticesDegree.keySet() ){
+            Integer degrees = 0;
+            for (String elemTemp: VerticesDegree.keySet() ){
+                if(!(GetEdges(elem, elemTemp) == null)){
+                    degrees ++;
+                }
+            }
+
+            if (degrees <= 1){
+                String Class = Vertices.get(elem).get(0);
+                if (elem.contains("a")){
+                    // Instantiate Instance and update instance count.
+                    OWLIndividual Individual = dataFactory.getOWLNamedIndividual(elem);
+
+
+                    OWLClass classC2 = dataFactory.getOWLClass(Class);
+                    OWLClassAssertionAxiom Assertion = dataFactory.getOWLClassAssertionAxiom(classC2, Individual);
+                    owlOntologyGraph.removeAxiom(Assertion);
+                } else {
+                    // Instantiate Instance and update instance count.
+                    OWLClass classC1 = dataFactory.getOWLClass(elem);
+                    String Edge = Edges.get(elem + Class);
+                    OWLClass classC2 = dataFactory.getOWLClass(Class);
+                    switch (Edge) {
+
+                        case "SubClassOf": {
+
+                            // Build Subclass Axiom
+                            OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC1, classC2);
+                            // Add Subclass Axiom
+                            owlOntologyGraph.removeAxiom(Assertion);
+                            break;
+                        }
+                        case "DisjointClasses": {
+                            // Build Subclass Axiom
+                            OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
+                            // Add Subclass Axiom
+                            owlOntologyGraph.removeAxiom(Assertion);
+                            break;
+                        }
+                        case "EquivalentClasses": {
+                            // Build Subclass Axiom
+                            OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
+                            // Add Subclass Axiom
+                            owlOntologyGraph.removeAxiom(Assertion);
+
+                            break;
+                        }
+                        default:
+                            throw new ClassCastException(Edge);
+
+                    }
+                    OWLDeclarationAxiom DeclarationAxiom1 = dataFactory.getOWLDeclarationAxiom(classC1);
+                    // Add the declaration Axiom to the OWL ontology.
+                    owlOntologyGraph.removeAxiom(DeclarationAxiom1);
+
+                }
+                // remove it from list.
+                RemoveEdge(elem, Class);
+                RemoveEdge(Class, elem);
+                RemoveVertex(elem, Class);
+
+                break;
+
+            }
+        }
+
+        HashMap<String, Integer> VerticesDegree2 = GetVerticesDegreeMap();
+        Boolean RecursiveActionBool = false;
+        for (String elem: VerticesDegree2.keySet() ){
+            Integer degrees = 0;
+            for (String elemTemp: VerticesDegree2.keySet() ){
+                if(!(GetEdges(elem, elemTemp) == null)){
+                    degrees ++;
+                }
+            }
+
+            if (degrees <= 1){
+                RecursiveActionBool = true;
+            }
+        }
+        if (RecursiveActionBool){
+            SinglesRemoval();
+        }
+
+
+    }
+
+    void RebuildSPARQL (){
+        SPARQLStringB = new StringBuilder();
+        for (Object elem: owlOntologyGraph.axioms().toArray()){
+            String[] line = elem.toString().split(("<"));
+            if (line.length < 3){
+                continue;
+            }
+            String elem1 = line[1].split(">")[0];
+            String elem2 = line[2].split(">")[0];
+            // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
+
+            switch (line[0].substring(0,line[0].length()-1)) {
+                case "ClassAssertion": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+
+                case "SubClassOf": {
+
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "DisjointClasses": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#disjointWith> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "EquivalentClasses": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#equivalentClass> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                default:
+                    throw new ClassCastException();
+            }
+        }
+    }
+
+    void RemoveVertex(String vertex, String vertexIn){
+        Vertices.remove(vertex);
+        ArrayList<String> newInVertices = new ArrayList<>();
+        for (String elem : Vertices.get(vertexIn)){
+            if(!elem.equals(vertex)){
+                newInVertices.add(elem);
+            }
+
+        }
+        Vertices.replace(vertexIn,newInVertices );
+
+    }
+
+    void RemoveEdge(String vertex1, String vertex2){
+        Edges.remove(vertex1+vertex2);
+    }
 
     List<Integer> GetVerticesDegree() {
         List<Integer> VerticesDegree = new ArrayList<>();
@@ -299,13 +467,21 @@ class GeneralisedSubGraph {
     ArrayList<String[]> GetOutElements(String Vertex){
         ArrayList<String[]> TempStorage = new ArrayList<>();
         ArrayList<String> VerticesSet  = Vertices.get(Vertex);
-        for (String elem : VerticesSet){
-            String[] TempString = new String[2];
-            TempString[0] = elem;
-            TempString[1] = GetEdges(Vertex, elem);
-            TempStorage.add(TempString);
+//        System.out.println(VerticesSet.size());
 
+        try {
+            for (String elem : VerticesSet) {
+                String[] TempString = new String[2];
+                TempString[0] = elem;
+                TempString[1] = GetEdges(Vertex, elem);
+                TempStorage.add(TempString);
+
+            }
+        } catch (Exception e) {
+            // Caught element with zero links will be skipped.
         }
+
+
         return TempStorage;
     }
 

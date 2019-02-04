@@ -2,8 +2,9 @@
 \contentsline {section}{\numberline {2}Related Work}{2}
 \contentsline {section}{\numberline {3}Preliminaries}{3}
 \contentsline {subsection}{\numberline {3.1}Knowledge}{3}
-\contentsline {subsection}{\numberline {3.2}Data}{3}
-\contentsline {subsubsection}{\numberline {3.2.1}LOD-a-lot}{4}
+\contentsline {subsection}{\numberline {3.2}Reasoner}{3}
+\contentsline {subsection}{\numberline {3.3}Data}{4}
+\contentsline {subsubsection}{\numberline {3.3.1}LOD-a-lot}{4}
 \contentsline {section}{\numberline {4}Approach \& Method}{5}
 \contentsline {subsection}{\numberline {4.1}Retrieval of the inconsistent patterns}{5}
 \contentsline {subsection}{\numberline {4.2}Generalizing the patterns on basis of isomorphic graphs}{5}
