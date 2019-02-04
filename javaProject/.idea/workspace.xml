@@ -262,9 +262,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Statistics" />
       <item itemvalue="Application.Generator" />
       <item itemvalue="Application.InconsistencyLocator" />
+      <item itemvalue="Application.Statistics" />
     </list>
     <recent_temporary>
       <list>
