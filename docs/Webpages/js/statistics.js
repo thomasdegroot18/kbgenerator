@@ -18,7 +18,7 @@
     };
 
     //usage:
-    readTextFile("js/data.json", function(text){
+    readTextFile("data/data.json", function(text){
         var sample = JSON.parse(text);
         sample.sort(function (a, b) {
             return a.value < b.value

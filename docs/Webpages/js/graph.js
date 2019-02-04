@@ -28,7 +28,7 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 //usage:
-readTextFile("js/data.json", function(text){
+readTextFile("data/data.json", function(text){
     var sample = JSON.parse(text);
     var graph = sample[getQueryVariable('Graphnumber')-1].Graph;
     var nodeLinks = graph.split(", ");

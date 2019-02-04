@@ -2,32 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f363c51-3bde-4c13-be99-962a4285a799" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../docs/Webpages/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Webpages/graph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Webpages/js/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/graphTails.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/dataYAGOwithTails.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Webpages/js/graph.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/graphTails.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Webpages/js/statistics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.log" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Writing/ThesisPreliminaryVersion.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_16_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/js/statisticsTails.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Webpages/statisticsTails.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kbgenerator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/kbgenerator.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GeneralisedSubGraph.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/Generator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended$ExtractionExtend.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/InconsistencyLocator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/IsomorphismManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/Statistics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,12 +29,70 @@
     <favorites_list name="kbgenerator" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
+            <state relative-caret-position="420">
+              <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3255">
+              <caret line="244" column="65" selection-start-line="244" selection-start-column="65" selection-end-line="244" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6915">
+              <caret line="471" column="124" selection-start-line="471" selection-start-column="124" selection-end-line="471" selection-end-column="124" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#364#391#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,6 +135,7 @@
       <find>1</find>
       <find>GraphsLoader</find>
       <find>StoredGraphs</find>
+      <find>VerticesDegree</find>
     </findStrings>
     <replaceStrings>
       <replace>vertices</replace>
@@ -99,7 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java" />
         <option value="$PROJECT_DIR$/kbgenerator.iml" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/graphExtractExtended.java" />
         <option value="$APPLICATION_CONFIG_DIR$/idea64.vmoptions" />
@@ -109,10 +156,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java" />
       </list>
     </option>
@@ -164,7 +212,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -199,14 +246,36 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="kbgenerator" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="javaProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="javaProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="javaProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="kbgenerator" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549273975659" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549300462704" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -262,9 +331,9 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Statistics" />
       <item itemvalue="Application.Generator" />
       <item itemvalue="Application.InconsistencyLocator" />
-      <item itemvalue="Application.Statistics" />
     </list>
     <recent_temporary>
       <list>
@@ -321,7 +390,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49777117" visible="true" weight="0.09573879" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49777117" visible="true" weight="0.19037078" />
       <window_info id="Structure" order="1" sideWeight="0.50066227" side_tool="true" weight="0.17044826" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -402,13 +471,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.attach_pid13817" />
     <entry file="file://$PROJECT_DIR$/.attach_pid17320" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/rdfhdt/hdt-java-core/2.1-SNAPSHOT/hdt-java-core-2.1-SNAPSHOT-sources.jar!/org/rdfhdt/hdt/compact/sequence/SequenceLog64.java" />
@@ -422,16 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -439,34 +491,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/thesis/kbgenerator/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="47" selection-end-line="4" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="53" column="48" lean-forward="true" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
+        <state relative-caret-position="270">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#215#216#0" expanded="true" />
+            <element signature="e#249#250#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state relative-caret-position="210">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6915">
+          <caret line="471" column="124" selection-start-line="471" selection-start-column="124" selection-end-line="471" selection-end-column="124" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#364#391#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="255">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3255">
+          <caret line="244" column="65" selection-start-line="244" selection-start-column="65" selection-end-line="244" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -475,8 +552,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="171" lean-forward="true" selection-start-line="171" selection-end-line="171" />
+        <state relative-caret-position="420">
+          <caret line="133" column="4" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

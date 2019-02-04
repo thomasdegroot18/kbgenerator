@@ -1,6 +1,5 @@
 package com.thesis.kbgenerator;
 
-import com.sun.istack.NotNull;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -278,9 +277,12 @@ public class Statistics {
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
         String FileInput = "";
-        for (File file : Folder.listFiles()){
-            if (file.getName().contains(args[0].split("/")[args[0].split("/").length-1].replace(".hdt",""))){
-                FileInput = file.toString();
+        File[] directoryListing = Folder.listFiles();
+        if (directoryListing != null) {
+            for (File file : directoryListing) {
+                if (file.getName().contains(args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", ""))) {
+                    FileInput = file.toString();
+                }
             }
         }
         // Load HDT file using the hdt-java library

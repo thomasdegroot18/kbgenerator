@@ -12,6 +12,8 @@ public class Generator {
 
         // Shortest path generation
 
+        // Go up to thing and down back again.
+
 
 
         // Inconsistency

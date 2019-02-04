@@ -242,6 +242,7 @@ public class InconsistencyLocator
             // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
             // the subgraph is added to the list.
 
+            // TODO: THIS IS USED TO REMOVE TAILS CAN BE DELETED.
             if (GeneralGraph.GetVerticesDegree().contains(1)){
                 GeneralGraph.SinglesRemoval();
                 GeneralGraph.RebuildSPARQL();
