@@ -1,0 +1,260 @@
+[
+  {
+    "InconsistencySizeTails": 3,
+    "Occurences_freebase": 4292,
+    "Occurences_yago": 5387,
+    "Occurences_dbpedia": 4643
+  },
+  {
+    "InconsistencySizeTails": 4,
+    "Occurences_freebase": 7203,
+    "Occurences_yago": 9552,
+    "Occurences_dbpedia": 5125
+  },
+  {
+    "InconsistencySizeTails": 5,
+    "Occurences_freebase": 8722,
+    "Occurences_yago": 11042,
+    "Occurences_dbpedia": 6676
+  },
+  {
+    "InconsistencySizeTails": 6,
+    "Occurences_freebase": 14374,
+    "Occurences_yago": 23674,
+    "Occurences_dbpedia": 33670
+  },
+  {
+    "InconsistencySizeTails": 7,
+    "Occurences_freebase": 24910,
+    "Occurences_yago": 9932,
+    "Occurences_dbpedia": 50531
+  },
+  {
+    "InconsistencySizeTails": 8,
+    "Occurences_freebase": 15570,
+    "Occurences_yago": 11237,
+    "Occurences_dbpedia": 11123
+  },
+  {
+    "InconsistencySizeTails": 9,
+    "Occurences_freebase": 12411,
+    "Occurences_yago": 14030,
+    "Occurences_dbpedia": 26445
+  },
+  {
+    "InconsistencySizeTails": 10,
+    "Occurences_freebase": 29794,
+    "Occurences_yago": 41925,
+    "Occurences_dbpedia": 48013
+  },
+  {
+    "InconsistencySizeTails": 11,
+    "Occurences_freebase": 19058,
+    "Occurences_yago": 15896,
+    "Occurences_dbpedia": 16825
+  },
+  {
+    "InconsistencySizeTails": 12,
+    "Occurences_freebase": 25786,
+    "Occurences_yago": 23282,
+    "Occurences_dbpedia": 17275
+  },
+  {
+    "InconsistencySizeTails": 13,
+    "Occurences_freebase": 26407,
+    "Occurences_yago": 24756,
+    "Occurences_dbpedia": 46386
+  },
+  {
+    "InconsistencySizeTails": 14,
+    "Occurences_freebase": 46782,
+    "Occurences_yago": 46865,
+    "Occurences_dbpedia": 58954
+  },
+  {
+    "InconsistencySizeTails": 15,
+    "Occurences_freebase": 32205,
+    "Occurences_yago": 25011,
+    "Occurences_dbpedia": 24805
+  },
+  {
+    "InconsistencySizeTails": 16,
+    "Occurences_freebase": 52915,
+    "Occurences_yago": 20718,
+    "Occurences_dbpedia": 47975
+  },
+  {
+    "InconsistencySizeTails": 17,
+    "Occurences_freebase": 23313,
+    "Occurences_yago": 45703,
+    "Occurences_dbpedia": 24312
+  },
+  {
+    "InconsistencySizeTails": 18,
+    "Occurences_freebase": 26803,
+    "Occurences_yago": 33850,
+    "Occurences_dbpedia": 32310
+  },
+  {
+    "InconsistencySizeTails": 19,
+    "Occurences_freebase": 43867,
+    "Occurences_yago": 41835,
+    "Occurences_dbpedia": 24148
+  },
+  {
+    "InconsistencySizeTails": 20,
+    "Occurences_freebase": 31611,
+    "Occurences_yago": 42606,
+    "Occurences_dbpedia": 33823
+  },
+  {
+    "InconsistencySizeTails": 21,
+    "Occurences_freebase": 34008,
+    "Occurences_yago": 40237,
+    "Occurences_dbpedia": 27855
+  },
+  {
+    "InconsistencySizeTails": 22,
+    "Occurences_freebase": 31165,
+    "Occurences_yago": 43768,
+    "Occurences_dbpedia": 27812
+  },
+  {
+    "InconsistencySizeTails": 23,
+    "Occurences_freebase": 31814,
+    "Occurences_yago": 49802,
+    "Occurences_dbpedia": 30666
+  },
+  {
+    "InconsistencySizeTails": 24,
+    "Occurences_freebase": 40925,
+    "Occurences_yago": 33124,
+    "Occurences_dbpedia": 39337
+  },
+  {
+    "InconsistencySizeTails": 25,
+    "Occurences_freebase": 39078,
+    "Occurences_yago": 48542,
+    "Occurences_dbpedia": 52378
+  },
+  {
+    "InconsistencySizeTails": 26,
+    "Occurences_freebase": 41050,
+    "Occurences_yago": 49680,
+    "Occurences_dbpedia": 36957
+  },
+  {
+    "InconsistencySizeTails": 27,
+    "Occurences_freebase": 39757,
+    "Occurences_yago": 34145,
+    "Occurences_dbpedia": 38084
+  },
+  {
+    "InconsistencySizeTails": 28,
+    "Occurences_freebase": 38228,
+    "Occurences_yago": 35897,
+    "Occurences_dbpedia": 37561
+  },
+  {
+    "InconsistencySizeTails": 29,
+    "Occurences_freebase": 37612,
+    "Occurences_yago": 39068,
+    "Occurences_dbpedia": 52485
+  },
+  {
+    "InconsistencySizeTails": 30,
+    "Occurences_freebase": 40567,
+    "Occurences_yago": 48313,
+    "Occurences_dbpedia": 50401
+  },
+  {
+    "InconsistencySizeTails": 31,
+    "Occurences_freebase": 50500,
+    "Occurences_yago": 50060,
+    "Occurences_dbpedia": 53440
+  },
+  {
+    "InconsistencySizeTails": 32,
+    "Occurences_freebase": 50027,
+    "Occurences_yago": 37489,
+    "Occurences_dbpedia": 56246
+  },
+  {
+    "InconsistencySizeTails": 33,
+    "Occurences_freebase": 56446,
+    "Occurences_yago": 44762,
+    "Occurences_dbpedia": 43141
+  },
+  {
+    "InconsistencySizeTails": 34,
+    "Occurences_freebase": 45652,
+    "Occurences_yago": 42556,
+    "Occurences_dbpedia": 48419
+  },
+  {
+    "InconsistencySizeTails": 35,
+    "Occurences_freebase": 46543,
+    "Occurences_yago": 55618,
+    "Occurences_dbpedia": 45427
+  },
+  {
+    "InconsistencySizeTails": 36,
+    "Occurences_freebase": 50228,
+    "Occurences_yago": 55295,
+    "Occurences_dbpedia": 53340
+  },
+  {
+    "InconsistencySizeTails": 37,
+    "Occurences_freebase": 55184,
+    "Occurences_yago": 49089,
+    "Occurences_dbpedia": 50540
+  },
+  {
+    "InconsistencySizeTails": 38,
+    "Occurences_freebase": 54782,
+    "Occurences_yago": 57034,
+    "Occurences_dbpedia": 47856
+  },
+  {
+    "InconsistencySizeTails": 39,
+    "Occurences_freebase": 54081,
+    "Occurences_yago": 44236,
+    "Occurences_dbpedia": 54781
+  },
+  {
+    "InconsistencySizeTails": 40,
+    "Occurences_freebase": 56364,
+    "Occurences_yago": 50581,
+    "Occurences_dbpedia": 53047
+  },
+  {
+    "InconsistencySizeTails": 41,
+    "Occurences_freebase": 45814,
+    "Occurences_yago": 49674,
+    "Occurences_dbpedia": 55006
+  },
+  {
+    "InconsistencySizeTails": 42,
+    "Occurences_freebase": 57274,
+    "Occurences_yago": 52848,
+    "Occurences_dbpedia": 53303
+  },
+  {
+    "InconsistencySizeTails": 43,
+    "Occurences_freebase": 53502,
+    "Occurences_yago": 50297,
+    "Occurences_dbpedia": 50187
+  },
+  {
+    "InconsistencySizeTails": 44,
+    "Occurences_freebase": 54058,
+    "Occurences_yago": 55983,
+    "Occurences_dbpedia": 50826
+  },
+  {
+    "InconsistencySizeTails": 45,
+    "Occurences_freebase": 55718,
+    "Occurences_yago": 59497,
+    "Occurences_dbpedia": 54222
+  }
+]
