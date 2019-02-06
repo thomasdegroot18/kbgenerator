@@ -1,10 +1,12 @@
 package com.thesis.kbgenerator;
 
-import org.apache.jena.query.*;
+import org.apache.jena.graph.TripleIterator;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
+import org.rdfhdt.hdt.header.Header;
+import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.BufferedReader;
@@ -17,58 +19,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class Statistics {
 
     private static boolean ConstantLoopBoolean = true;
 
-    private static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
-        // Set the result set to null.
-        ResultSet results = null;
-
-        // Try to execute the query. Could throw errors when creating the factory.
-        try {
-
-            // Use Jena ARQ to execute the query. Firstly creating the query.
-            Query query = QueryFactory.create(SPARQLQuery);
-
-            // Executing the query.
-            QueryExecution qe = QueryExecutionFactory.create(query, model);
-
-            long TimeOut = 10000; //fetch starting time & to make sure it does not get stuck after 10 sec.
-            //Get the selection of the executed query.
-            qe.setTimeout(TimeOut);
-
-            results = qe.execSelect();
-        } catch (Exception e) {
-            // Catch Exception and print the message.
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    private static int CounterResultPrinter(Model model, String query){
-        //  Run query  and retrieve the results as ResultSet.
-        ResultSet results = SPARQLQuery(model, query);
-        // Print for every result the result line.
-        int counter = 0;
-
-        try {
-            while (results.hasNext()) {
-                counter++;
-                results.next();
-            }
-        } catch (Exception e){
-            System.out.println("Time out Exception");
-        }
-
-        return counter;
-    }
-
-
     private static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
         for (String key: StoredValues.keySet()){
             if (StoredValues.get(key) == null){
-                StoredValues.replace(key, CounterResultPrinter(model, key));
+                StoredValues.replace(key, SPARQLExecutioner.CounterResultPrinter(model, key));
             }
         }
         return StoredValues;
@@ -169,6 +128,7 @@ public class Statistics {
         return StoredValues;
     }
 
+    // Retrieves the found inconsistencies from the inconsistent dataset.
     private static HashMap<String, String> GraphsLoader(String fileLocation) {
         //Load the SPARQL Query Location
         HashMap<String, String> StoredValues = new HashMap<>();
@@ -219,18 +179,24 @@ public class Statistics {
             e.printStackTrace();
         }
 
-
     }
 
 
 
-    private static void ConstantLoop(Model model, String fileLocation){
+    private static void ConstantLoop(Model model, HDT hdt,  String fileLocation){
         HashMap<String, String> StoredGraphs = GraphsLoader(fileLocation);
         HashMap<String, Integer> StoredValues = InconsistencyCheck(fileLocation);
+        // RunAll Knowledge base Statistics:
+        Object KbInfo = KbStatistics.RunAll(model, hdt);
+
         while(ConstantLoopBoolean){
             GraphsLoader(fileLocation, StoredGraphs);
             InconsistencyCheck(fileLocation, StoredValues);
+
+
+
             InconsistencySPARQL(model, StoredValues);
+
 
             String LineToWrite = "[";
             List<String> StringLines = new ArrayList<>();
@@ -241,7 +207,8 @@ public class Statistics {
                 LineToWrite = "{\"Graphnumber\" : " + IndexNumber + ", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\", \"Graph\" : \"" + StoredGraphs.get(key) + "\"} ,";
                 IndexNumber ++;
             }
-            LineToWrite = LineToWrite.substring(0, LineToWrite.length() -1) + "]";
+            LineToWrite = LineToWrite.substring(0, LineToWrite.length() -1);
+            LineToWrite = LineToWrite + "]";
             StringLines.add(LineToWrite);
             // Writes file to JSON location.
             writeJSON(fileLocation.split("javaProject")[0]+"/docs/Webpages/js/data.json", StringLines);
@@ -258,10 +225,19 @@ public class Statistics {
     }
 
     public static void main(String[] args) throws Exception {
+        /** Argument 0: input location of the HDT
+         *  Argument 1: Input directory of the ttl.
+         *
+         *
+         *
+         */
+
 
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
-
+        if (args.length == 0){
+            throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
+        }
         // Check if HDT Exists
         boolean InputFileExists = new File(args[0]).isFile();
 
@@ -287,16 +263,15 @@ public class Statistics {
         }
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
-
         // Create Jena wrapper on top of HDT.
         System.out.println("Creating Jena HDT graph");
-        HDTGraph graph = new HDTGraph(hdt);
-
         System.out.println("Creating model from graph");
-        Model model = ModelFactory.createModelForGraph(graph);
+        Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
+
+        KbStatistics.RunAll(model, hdt);
 
 
-        ConstantLoop(model, FileInput);
+        //ConstantLoop(model, hdt, FileInput);
 
 
     }
