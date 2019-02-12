@@ -1,9 +1,12 @@
 package com.thesis.kbgenerator;
 
+import openllet.core.KnowledgeBase;
+import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.graph.*;
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
@@ -28,6 +31,9 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import ru.avicomp.ontapi.OntManagers;
+import ru.avicomp.ontapi.OntologyModel;
 
 
 /**
@@ -309,7 +315,7 @@ public class InconsistencyLocator
     }
 
 
-    private static OWLOntology PipeModel(Set<String> subModel) throws Exception{
+    static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
         // Start an Input stream that uses a pipe to stream the input to an output stream, this gives the possibility
         // to convert a set of strings easy to an a OWL Ontology.
         PipedInputStream in = new PipedInputStream();
@@ -319,9 +325,9 @@ public class InconsistencyLocator
         // Lambda Runnable task to convert the set of strings to an output stream.
         Runnable task = () -> {
             try {
-                for (String Test: subModel){
+                for (String elem: subModel){
                     // Write to outputStream as bytes.
-                    out.write(Test.getBytes());
+                    out.write(elem.getBytes());
                 }
                 out.close();
             }
@@ -336,19 +342,55 @@ public class InconsistencyLocator
 
 
         // Create a new OWLOntology and return the filled OWL ontology with the in stream.
-        return OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(in);
+        return in;
     }
 
 
+    public static void printIterator(final Iterator<?> i, final String header)
+    {
+        System.out.println(header);
+        for (int c = 0; c < header.length(); c++)
+            System.out.print("=");
+        System.out.println();
+
+        if (i.hasNext())
+            while (i.hasNext())
+                System.out.println(i.next());
+        else
+            System.out.println("<EMPTY>");
+
+        System.out.println();
+    }
+
     private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
-        OWLOntology ontology = PipeModel(subModel);
+
+        OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
+
+//        // Getting manager:
+//        OWLOntologyManager manager = OntManagers.createONT();
+//
+//        manager.loadOntologyFromOntologyDocument(PipeModel(subModel));
+//
+//        Model model = ((OntologyModel)ontology).asGraphModel();
+//        final OntModel modelTest = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//
+//        modelTest.add(model);
+//
+//
+//        printIterator(modelTest.validate().getReports(), "Test");
+
 
         // Starting up the Pellet Explanation module.
         PelletExplanation.setup();
 
         // Create the reasoner and load the ontology with the open pellet reasoner.
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+
+//        KnowledgeBase kb = reasoner.getKB();
+//
+//        System.out.println("Expressivity   : " + kb.getExpressivity());
+
 
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);
@@ -365,6 +407,24 @@ public class InconsistencyLocator
         }
 
 
+    }
+
+    static Set<String> WriteInconsistencySubGraph(HDT hdt, String tripleItem, int maxValue) throws Exception{
+        // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
+        // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
+        GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
+
+        // The subgraph is a set of strings. That stores up to 5000 triples.
+        Set<String> subGraph = null;
+        try{
+            // Try to extract a the subgraph from the HDT.
+            subGraph = GraphExtract.extractExtend(tripleItem , hdt, maxValue);
+        } catch (StackOverflowError e){
+            // Can print the error if overflow happens.
+            e.printStackTrace();
+        }
+
+        return subGraph;
     }
 
 
@@ -559,7 +619,8 @@ public class InconsistencyLocator
 
         // If the third argument is empty the amount of inconsistency explanations per subgraph is set to 10 else use
         // the amount given by the user.
-        if (!args[2].isEmpty()){
+
+        if (args.length > 2){
             try{
                 MaxExplanations = Integer.parseInt(args[2]);
 
@@ -570,9 +631,8 @@ public class InconsistencyLocator
         } else {
             MaxExplanations = 10;
         }
-
         // If the fourth argument is empty the amount of
-        verbose = !args[3].isEmpty() && args[3].equals("true");
+        verbose = (args.length > 3) && args[3].equals("true");
 
         // Sets the break for the Inconsistencies for the graph. This checks for the amount and sets it accordingly.
         // The default is no break.
@@ -609,7 +669,6 @@ public class InconsistencyLocator
             System.out.println("Creating model from graph");
 
             model = ModelFactory.createModelForGraph(graph);
-
 
             System.out.println("Running test Queries");
             // Run test Queries

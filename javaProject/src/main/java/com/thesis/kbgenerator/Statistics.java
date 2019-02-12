@@ -1,5 +1,8 @@
 package com.thesis.kbgenerator;
 
+import openllet.core.KnowledgeBase;
+import openllet.core.KnowledgeBaseImpl;
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.TripleIterator;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -187,12 +190,18 @@ public class Statistics {
         HashMap<String, String> StoredGraphs = GraphsLoader(fileLocation);
         HashMap<String, Integer> StoredValues = InconsistencyCheck(fileLocation);
         // RunAll Knowledge base Statistics:
+        for (String Key : StoredGraphs.keySet()){
+            Object InconsistencyInfo = InconsistencyStatistics.RunAll(StoredGraphs.get(Key));
+        }
+
         Object KbInfo = KbStatistics.RunAll(model, hdt);
+
+
 
         while(ConstantLoopBoolean){
             GraphsLoader(fileLocation, StoredGraphs);
-            InconsistencyCheck(fileLocation, StoredValues);
 
+            InconsistencyCheck(fileLocation, StoredValues);
 
 
             InconsistencySPARQL(model, StoredValues);
@@ -261,6 +270,7 @@ public class Statistics {
                 }
             }
         }
+
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.
@@ -268,10 +278,9 @@ public class Statistics {
         System.out.println("Creating model from graph");
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
 
-        KbStatistics.RunAll(model, hdt);
 
 
-        //ConstantLoop(model, hdt, FileInput);
+        ConstantLoop(model, hdt, FileInput);
 
 
     }

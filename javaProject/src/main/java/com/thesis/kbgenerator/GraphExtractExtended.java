@@ -55,6 +55,9 @@ class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtend( String node, HDT graph ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
+    Set<String> extractExtend( String node, HDT graph, int MaxValue ) throws Exception
+    { return extractIntoExtend(new HashSet<>() , node, graph, MaxValue ); }
+
     /**
      Answer the graph <code>toUpdate</code> augmented with the sub-graph of
      <code>extractFrom</code> reachable from <code>root</code> bounded
@@ -62,6 +65,10 @@ class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      */
     private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
     { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtend( root , 0);
+        return toUpdate; }
+
+    private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom, int MaxValue ) throws Exception
+    { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtend( root , 0);
         return toUpdate; }
 
     /**
@@ -75,12 +82,22 @@ class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         private Set<String> toUpdate;
         private HDT extractFrom;
         private Set<CharSequence> active;
+        private int maxValue;
 
-        private ExtractionExtend( Set<String> toUpdate, HDT extractFrom )
+        private ExtractionExtend( Set<String> toUpdate, HDT extractFrom)
         {
             this.toUpdate = toUpdate;
             this.extractFrom = extractFrom;
             this.active = CollectionFactory.createHashedSet();
+            this.maxValue = 5000;
+        }
+
+        private ExtractionExtend( Set<String> toUpdate, HDT extractFrom, int maxValue)
+        {
+            this.toUpdate = toUpdate;
+            this.extractFrom = extractFrom;
+            this.active = CollectionFactory.createHashedSet();
+            this.maxValue = maxValue;
         }
 
         private int extractIntoExtend( CharSequence root , int counter ) throws Exception
@@ -88,7 +105,7 @@ class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             active.add( root );
 
             IteratorTripleString it = extractFrom.search(root, "", "");
-            while (it.hasNext() && counter < 5000)
+            while (it.hasNext() && counter < maxValue)
             {
                 TripleString t = it.next();
                 String subRoot = t.getObject().toString();

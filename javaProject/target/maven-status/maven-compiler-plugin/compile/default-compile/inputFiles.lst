@@ -1,6 +1,9 @@
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\GraphExtractExtended.java
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\Generator.java
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\IsomorphismManager.java
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\Statistics.java
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\InconsistencyLocator.java
-D:\Users\Thomas\Documents\thesis\kbgenerator\javaProject\src\main\java\com\thesis\kbgenerator\GeneralisedSubGraph.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/GeneralisedSubGraph.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/Statistics.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/InconsistencyStatistics.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/Generator.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/SPARQLExecutioner.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/IsomorphismManager.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java
+/home/thomas/thesis/kbgenerator/javaProject/src/main/java/com/thesis/kbgenerator/KbStatistics.java
