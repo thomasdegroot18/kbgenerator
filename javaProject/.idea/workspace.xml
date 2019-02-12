@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c276855-186e-4cd6-a3dd-51c9c6ac0552" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/GraphExtractExtended.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/KbStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/KbStatistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended$ExtractionExtend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended$ExtractionExtend.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/GraphExtractExtended.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/InconsistencyLocator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/InconsistencyLocator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/InconsistencyStatistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/InconsistencyStatistics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/KbStatistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/KbStatistics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/Statistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/thesis/kbgenerator/Statistics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/kbgenerator-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/kbgenerator-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.thesis.kbgenerator.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.thesis.kbgenerator.AppTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.thesis.kbgenerator.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.thesis.kbgenerator.AppTest.txt" afterDir="false" />
-    </list>
+    <list default="true" id="9c276855-186e-4cd6-a3dd-51c9c6ac0552" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="389" selection-start-line="389" selection-start-column="2" selection-end-line="391" selection-end-column="73" />
+            <state relative-caret-position="600">
+              <caret line="391" column="28" selection-start-line="391" selection-start-column="28" selection-end-line="391" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -335,8 +313,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyLocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="389" selection-start-line="389" selection-start-column="2" selection-end-line="391" selection-end-column="73" />
+        <state relative-caret-position="600">
+          <caret line="391" column="28" selection-start-line="391" selection-start-column="28" selection-end-line="391" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
