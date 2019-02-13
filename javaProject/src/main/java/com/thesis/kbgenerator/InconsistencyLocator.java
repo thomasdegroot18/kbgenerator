@@ -1,12 +1,9 @@
 package com.thesis.kbgenerator;
 
-import openllet.core.KnowledgeBase;
-import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.graph.*;
-import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
@@ -31,9 +28,6 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-import ru.avicomp.ontapi.OntManagers;
-import ru.avicomp.ontapi.OntologyModel;
 
 
 /**
@@ -57,7 +51,7 @@ public class InconsistencyLocator
     private static boolean UnBreakable;                                         // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();    // Start IsomorphismManager
     private static int GeneralGraphNumber = 0;
-    private static int GeneralSubgraphFound = 0;
+    private static int GeneralSubGraphFound = 0;
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
         // Instantiate a new Array List.
@@ -271,11 +265,11 @@ public class InconsistencyLocator
                 GeneralGraphs.add(GeneralGraph);
                 GeneralGraphNumber ++;
                 System.out.println("Found A new General Graph, number " + GeneralGraphNumber);
-                GeneralSubgraphFound = 0;
+                GeneralSubGraphFound = 0;
 
             }
             else{
-                GeneralSubgraphFound ++;
+                GeneralSubGraphFound ++;
             }
 
             if(verbose && AcceptedTo ) {
@@ -345,22 +339,22 @@ public class InconsistencyLocator
         return in;
     }
 
-
-    public static void printIterator(final Iterator<?> i, final String header)
-    {
-        System.out.println(header);
-        for (int c = 0; c < header.length(); c++)
-            System.out.print("=");
-        System.out.println();
-
-        if (i.hasNext())
-            while (i.hasNext())
-                System.out.println(i.next());
-        else
-            System.out.println("<EMPTY>");
-
-        System.out.println();
-    }
+//
+//    public static void printIterator(final Iterator<?> i, final String header)
+//    {
+//        System.out.println(header);
+//        for (int c = 0; c < header.length(); c++)
+//            System.out.print("=");
+//        System.out.println();
+//
+//        if (i.hasNext())
+//            while (i.hasNext())
+//                System.out.println(i.next());
+//        else
+//            System.out.println("<EMPTY>");
+//
+//        System.out.println();
+//    }
 
     private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
@@ -376,7 +370,6 @@ public class InconsistencyLocator
 //        final OntModel modelTest = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
 //
 //        modelTest.add(model);
-//
 //
 //        printIterator(modelTest.validate().getReports(), "Test");
 
@@ -465,7 +458,7 @@ public class InconsistencyLocator
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 100 triples is taken.
-            if (rand.nextDouble() < 0.01) {
+            if (rand.nextDouble() > 0.01) {
                 it.next();
                 continue;
             }
@@ -489,9 +482,9 @@ public class InconsistencyLocator
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
             }
 
-//            if (GeneralSubgraphFound > 20000){
-//                UnBreakable = false;
-//            }
+            if (GeneralSubGraphFound < 0){
+                UnBreakable = false;
+            }
 
         }
     }
