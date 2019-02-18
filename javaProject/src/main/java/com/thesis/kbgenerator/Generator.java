@@ -4,10 +4,13 @@ import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.graph.TripleBoundary;
 import org.apache.jena.rdf.model.*;
+import org.rdfhdt.hdt.enums.RDFNotation;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
+import org.rdfhdt.hdt.options.HDTSpecification;
 import org.rdfhdt.hdtjena.HDTGraph;
 
+import java.io.FileOutputStream;
 import java.util.HashSet;
 import java.util.Random;
 import java.io.File;
@@ -70,13 +73,13 @@ public class Generator {
             FinalSampledModel.add(SampledDownModel);
         }
 
-        FinalSampledModel = DownSampling(FinalSampledModel, SampleSize);
+        DownSampling(FinalSampledModel, SampleSize);
 
         return FinalSampledModel;
     }
 
-    static Model HDTtoSubgraph(Model hdtModel, StmtIterator stmtIt, long maxSize){
-        /** Generating a subgraph from the hdt
+    private static Model HDTtoSubgraph(Model hdtModel, StmtIterator stmtIt, long maxSize){
+        /* Generating a subgraph from the hdt
          *
          *
          *
@@ -136,7 +139,7 @@ public class Generator {
         return modelCStorage;
     }
 
-    static Model DownSampling(Model LargeModel, double DownSamplingSize){
+    private static Model DownSampling(Model LargeModel, double DownSamplingSize){
 
         long StartingSize = LargeModel.size();
         long NewSize = LargeModel.size();
@@ -204,7 +207,7 @@ public class Generator {
     }
 
 
-    static Set<Triple> GetSubGraph(Model model, String tripleItem, int maxValue, Model modelRemovedTriples) {
+    private static Set<Triple> GetSubGraph(Model model, String tripleItem, int maxValue, Model modelRemovedTriples) {
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
@@ -222,17 +225,56 @@ public class Generator {
         return subGraph;
     }
 
+    private static boolean WriteRDF(Model model, String outputDirectory) {
+        try{
+            FileOutputStream fileWriter = new FileOutputStream(new File(outputDirectory.replace(".hdt",".nt")));
+            model.write(fileWriter,"N-TRIPLE" );
+        } catch (Exception e){
+            System.out.println("Could not write to N-triple");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private static boolean WriteHDT(Model model,String outputDirectory) throws Exception {
+
+        try{
+            WriteRDF(model, outputDirectory);
+        } catch (Exception e){
+            System.out.println("Could not write to rdfFile");
+            return false;
+        }
+
+        String baseURI = "";
+        String rdfInput = outputDirectory.replace(".hdt",".nt");
+        String inputType = "ntriples";
+
+        // Create HDT from RDF file
+        HDT hdt = HDTManager.generateHDT(
+                rdfInput,         // Input RDF File
+                baseURI,          // Base URI
+                RDFNotation.parse(inputType), // Input Type
+                new HDTSpecification(),   // HDT Options
+                null              // Progress Listener
+        );
+
+
+        // Save generated HDT to a file
+        hdt.saveToHDT(outputDirectory, null);
+
+
+        return true;
+    }
 
 
     public static void main(String[] args)  throws Exception {
         /* main method that generates Inconsistencies when found.
          * @params {@code args[0] } location of the HDT  -- necessary
          * @params {@code args[1] } Location to store the output  -- necessary
-         * @params {@code args[2] } inconsistency explanations per subgraph  -- not necessary, default 10
-         * @params {@code args[3] } Verbose   -- not necessary, default false
-         * @params {@code args[4] } Inconsistency break   -- not necessary, default false, needs integer.
+         * @params {@code args[2] } Return Type HDT or N-TRIPLES
          * @returns void
-         *
          */
 
 
@@ -254,7 +296,7 @@ public class Generator {
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
         args[1] = args[1]+"Sample" +"-"+ args[0].split("/")[args[0].split("/").length-1];
-
+        System.out.println(args[1]);
         // Load HDT file using the hdt-java library
 
         HDT hdt = HDTManager.mapIndexedHDT(args[0]);
@@ -266,6 +308,20 @@ public class Generator {
         Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
 
         System.out.println("Finished Working Sampled Model");
+        boolean emitSuccess = false;
+        if (args[2].equals("HDT")){
+            emitSuccess = WriteHDT(FinalSampledModel, args[1]);
+        }else if (args[2].equals("N-TRIPLES")){
+            emitSuccess = WriteRDF(FinalSampledModel, args[1]);
+        } else {
+            System.out.println("Could not understand the type specification, writing the file as N-Triples");
+        }
 
+
+        if(emitSuccess){
+            System.out.println("Successfully finished writing the model to HDT");
+        } else{
+            System.out.println("Unsuccessfully written the model.");
+        }
     }
 }
