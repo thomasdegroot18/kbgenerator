@@ -229,11 +229,8 @@ public class Statistics {
     }
 
     public static void main(String[] args) throws Exception {
-        /** Argument 0: input location of the HDT
-         *  Argument 1: Input directory of the ttl.
-         *
-         *
-         *
+        /*  rgument 0: input location of the HDT
+         *  Argument 1: Input directory of the turtle.
          */
 
 
