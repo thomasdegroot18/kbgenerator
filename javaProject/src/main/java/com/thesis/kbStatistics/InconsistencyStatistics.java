@@ -1,4 +1,4 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbStatistics;
 
 
 public class InconsistencyStatistics {

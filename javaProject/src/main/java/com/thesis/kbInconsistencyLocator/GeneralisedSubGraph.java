@@ -1,4 +1,4 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbInconsistencyLocator;
 
 
 import openllet.owlapi.OpenlletReasoner;
@@ -283,7 +283,7 @@ class GeneralisedSubGraph {
             // Loop through integer other degrees to find if there is a link with only one incoming, outgoing link.
             int degrees = 0;
 
-            // Loop through the keyset.
+            // Loop through the keySet.
             for (String elemTemp: VerticesDegree.keySet() ){
                 // If there is a link add one to the amount of degrees.
                 if(!(GetEdges(elem, elemTemp) == null)){
@@ -448,7 +448,7 @@ class GeneralisedSubGraph {
     private void RemoveVertex(String vertex, String vertexIn){
         // Remove vertex
         Vertices.remove(vertex);
-        // Rebuild the new Invertices Arraylist.
+        // Rebuild the new vertices Arraylist.
         ArrayList<String> newInVertices = new ArrayList<>();
 
         // Get all the SPARQL strings.

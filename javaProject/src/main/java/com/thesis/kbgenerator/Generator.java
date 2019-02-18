@@ -1,5 +1,6 @@
 package com.thesis.kbgenerator;
 
+import com.thesis.kbInconsistencyLocator.GraphExtractExtended;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.graph.TripleBoundary;
@@ -23,7 +24,7 @@ public class Generator {
 
     private static Random rand = new Random();
 
-    private static boolean ConnectionChecker(Set<Triple> SubjectInput, Set<Triple> ObjectInput, Statement Input){
+    private static boolean DeletionChecker(Set<Triple> SubjectInput, Set<Triple> ObjectInput, Statement Input){
         Set<Node> SubjectInputCleanList = new HashSet<>();
         Set<Node> ObjectInputCleanList = new HashSet<>();
         for (Triple elem : SubjectInput){
@@ -40,10 +41,10 @@ public class Generator {
 
         for (Node elem: ObjectInputCleanList){
             if(SubjectInputCleanList.contains(elem)){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private static Model RemoveStatements(HDT hdt, double SampleSize) {
@@ -69,7 +70,7 @@ public class Generator {
             System.out.println("Started Sampling From regular Model" );
             Model SampledDownModel = DownSampling(NormalModel , SampleSize);
 
-            System.out.println("Finished First Subsampling: "+ Iterator);
+            System.out.println("Finished First SubSampling: "+ Iterator);
             FinalSampledModel.add(SampledDownModel);
         }
 
@@ -127,9 +128,9 @@ public class Generator {
                 continue;
             }
 
-            boolean CannotbeRemoved = !ConnectionChecker(SubjectInput, ObjectInput, item);
+            boolean CannotBeRemoved = DeletionChecker(SubjectInput, ObjectInput, item);
 
-            if (CannotbeRemoved){
+            if (CannotBeRemoved){
                 modelRemovedTriples.remove(item);
                 modelCStorage.add(item);
             }
@@ -185,15 +186,10 @@ public class Generator {
                 // Find all the inconsistencies in the second subgraph(Subject)
                 Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
 
-                boolean CannotbeRemoved = !ConnectionChecker(SubjectInput, ObjectInput, item);
+                boolean CannotBeRemoved = DeletionChecker(SubjectInput, ObjectInput, item);
 
-                if (CannotbeRemoved){
+                if (CannotBeRemoved){
                     modelRemovedTriples.remove(item);
-                }
-
-                // TODO: Remove Break;
-                else{
-                    break;
                 }
 
             }

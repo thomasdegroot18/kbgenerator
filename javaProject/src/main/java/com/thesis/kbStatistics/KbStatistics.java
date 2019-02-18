@@ -1,5 +1,6 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbStatistics;
 
+import com.thesis.kbInconsistencyLocator.InconsistencyLocator;
 import openllet.core.KnowledgeBase;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;

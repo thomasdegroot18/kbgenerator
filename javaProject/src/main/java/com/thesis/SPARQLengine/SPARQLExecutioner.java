@@ -1,11 +1,11 @@
-package com.thesis.kbgenerator;
+package com.thesis.SPARQLengine;
 
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 
-class SPARQLExecutioner {
+public class SPARQLExecutioner {
 
-    static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
+    public static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
         // Set the result set to null.
         ResultSet results = null;
 
@@ -30,7 +30,7 @@ class SPARQLExecutioner {
         return results;
     }
 
-    static int CounterResultPrinter(Model model, String query){
+    public static int CounterResultPrinter(Model model, String query){
         //  Run query  and retrieve the results as ResultSet.
         ResultSet results = SPARQLQuery(model, query);
         // Print for every result the result line.

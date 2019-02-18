@@ -1,5 +1,6 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbInconsistencyLocator;
 
+import com.thesis.SPARQLengine.SPARQLExecutioner;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
@@ -17,10 +18,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 
@@ -309,7 +306,7 @@ public class InconsistencyLocator
     }
 
 
-    static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
+    public static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
         // Start an Input stream that uses a pipe to stream the input to an output stream, this gives the possibility
         // to convert a set of strings easy to an a OWL Ontology.
         PipedInputStream in = new PipedInputStream();
@@ -401,8 +398,8 @@ public class InconsistencyLocator
 
 
     }
-
-    static Set<String> WriteInconsistencySubGraph(HDT hdt, String tripleItem, int maxValue) throws Exception{
+    @SuppressWarnings("SameParameterValue")
+    public static Set<String> WriteInconsistencySubGraph(HDT hdt, String tripleItem, int maxValue) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
@@ -490,35 +487,10 @@ public class InconsistencyLocator
     }
 
 
-    private static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
-        // Set the result set to null.
-        ResultSet results = null;
-
-        // Try to execute the query. Could throw errors when creating the factory.
-        try {
-
-            // Use Jena ARQ to execute the query. Firstly creating the query.
-            Query query = QueryFactory.create(SPARQLQuery);
-
-            // Executing the query.
-            QueryExecution qe = QueryExecutionFactory.create(query, model);
-
-            long TimeOut = 10000; //fetch starting time & to make sure it does not get stuck after 10 sec.
-            //Get the selection of the executed query.
-            qe.setTimeout(TimeOut);
-
-            results = qe.execSelect();
-        } catch (Exception e) {
-            // Catch Exception and print th message.
-            e.printStackTrace();
-        }
-        return results;
-    }
-
 
     private static void QueryResultPrinter(Model model, String query){
         //  Run query  and retrieve the results as ResultSet.
-        ResultSet results = SPARQLQuery(model, query);
+        ResultSet results = SPARQLExecutioner.SPARQLQuery(model, query);
 
         // Print for every result the result line.
         while (results.hasNext()){

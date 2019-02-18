@@ -1,15 +1,10 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbStatistics;
 
-import openllet.core.KnowledgeBase;
-import openllet.core.KnowledgeBaseImpl;
-import org.apache.jena.base.Sys;
-import org.apache.jena.graph.TripleIterator;
+import com.thesis.SPARQLengine.SPARQLExecutioner;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
-import org.rdfhdt.hdt.header.Header;
-import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.BufferedReader;
@@ -27,7 +22,7 @@ public class Statistics {
 
     private static boolean ConstantLoopBoolean = true;
 
-    private static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
+    static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
         for (String key: StoredValues.keySet()){
             if (StoredValues.get(key) == null){
                 StoredValues.replace(key, SPARQLExecutioner.CounterResultPrinter(model, key));

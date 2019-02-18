@@ -1,4 +1,4 @@
-package com.thesis.kbgenerator;
+package com.thesis.kbInconsistencyLocator;
 
 import java.util.ArrayList;
 import java.util.Collections;

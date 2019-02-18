@@ -19,13 +19,12 @@
  */
 
 
-package com.thesis.kbgenerator;
+package com.thesis.kbInconsistencyLocator;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import org.apache.jena.assembler.Mode;
 import org.apache.jena.graph.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
@@ -45,10 +44,10 @@ import org.rdfhdt.hdt.triples.TripleString;
  EXTENDED by:
  Thomas de Groot
  */
-class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
+public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 {
 
-    GraphExtractExtended( TripleBoundary b )
+    public GraphExtractExtended( TripleBoundary b )
     {
         super(b);
     }
@@ -64,7 +63,7 @@ class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtend( String node, HDT graph, int MaxValue ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph, MaxValue ); }
 
-    Set<Triple> extractExtendBoth( String node, Model model, int MaxValue, Model modelRemovedTriples  )
+    public Set<Triple> extractExtendBoth( String node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendBoth(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
     /**
      Answer the graph <code>toUpdate</code> augmented with the sub-graph of
