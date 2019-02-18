@@ -7,8 +7,6 @@ import org.apache.jena.rdf.model.*;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdtjena.HDTGraph;
-import rationals.transformations.Star;
-import ru.avicomp.ontapi.jena.impl.CachedAnnotationImpl;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -16,6 +14,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
+
 
 public class Generator {
 
@@ -44,7 +43,7 @@ public class Generator {
         return false;
     }
 
-    private static void RemoveStatements(HDT hdt) {
+    private static Model RemoveStatements(HDT hdt, double SampleSize) {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
         System.out.println("Creating Jena HDT graph");
         HDTGraph graph = new HDTGraph(hdt);
@@ -53,15 +52,97 @@ public class Generator {
         System.out.println("Creating model from graph");
         Model model = ModelFactory.createModelForGraph(graph);
 
-        //Model model = ModelFactory.createDefaultModel();
+        Model FinalSampledModel = ModelFactory.createDefaultModel();
 
-//        model.add(TotalTriples);
+        StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
+        int Iterator = 0;
 
-        long StartingSize = model.size();
-        long NewSize = model.size();
+        long maxSize = Math.round(model.size()*0.05);
+
+        while (stmtIt.hasNext()){
+            System.out.println("Started Sampling From HDT");
+            Model NormalModel = HDTtoSubgraph(model, stmtIt , maxSize );
+
+            System.out.println("Started Sampling From regular Model" );
+            Model SampledDownModel = DownSampling(NormalModel , SampleSize);
+
+            System.out.println("Finished First Subsampling: "+ Iterator);
+            FinalSampledModel.add(SampledDownModel);
+        }
+
+        FinalSampledModel = DownSampling(FinalSampledModel, SampleSize);
+
+        return FinalSampledModel;
+    }
+
+    static Model HDTtoSubgraph(Model hdtModel, StmtIterator stmtIt, long maxSize){
+        /** Generating a subgraph from the hdt
+         *
+         *
+         *
+         *
+         */
+
+
+        // Get the Iterator tripleString to loop through.
+        Model modelCStorage = ModelFactory.createDefaultModel();
+        // Get the Iterator tripleString to loop through.
+        Model modelRemovedTriples = ModelFactory.createDefaultModel();
+
+        while (stmtIt.hasNext() && modelCStorage.size() < maxSize ) {
+
+
+
+            // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
+            // that triples are connected to each other, not every triple needs to be evaluated.
+            // A selection of triples is chosen at random.
+            // Can be changed later to a selection of triples that meet a certain criteria.
+
+            // at the moment every 1 out of 10 triples is taken.
+            if (rand.nextDouble() > 0.1) {
+                Statement item = stmtIt.next();
+                modelCStorage.add(item);
+                continue;
+            }
+
+            // If the loop is not triggered the next element from the tripleString is taken.
+            Statement item = stmtIt.next();
+
+            // both the subject and the object are taken to build the subgraph. With the expectation that the subject
+            // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
+            // some of the depth the object graph does take into account.
+            String subject = item.getSubject().toString();
+            String object = item.getObject().toString();
+            modelRemovedTriples.add(item);
+            // Find all the inconsistencies in the first subgraph(Object)
+            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 50, modelRemovedTriples);
+
+            // Find all the inconsistencies in the second subgraph(Subject)
+            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 50, modelRemovedTriples);
+
+            if ((ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
+                continue;
+            }
+
+            boolean CannotbeRemoved = !ConnectionChecker(SubjectInput, ObjectInput, item);
+
+            if (CannotbeRemoved){
+                modelRemovedTriples.remove(item);
+                modelCStorage.add(item);
+            }
+
+        }
+
+        return modelCStorage;
+    }
+
+    static Model DownSampling(Model LargeModel, double DownSamplingSize){
+
+        long StartingSize = LargeModel.size();
+        long NewSize = LargeModel.size();
         long OldSize = 0;
         // While there is a triple the loop continues.
-        while (StartingSize*0.1 < NewSize  && OldSize != NewSize){
+        while (StartingSize*DownSamplingSize< NewSize  && OldSize != NewSize){
 
             OldSize = NewSize;
             double RemovalRate = 0.1*( (double)StartingSize/ (double)OldSize);
@@ -71,7 +152,8 @@ public class Generator {
             // Get the Iterator tripleString to loop through.
             Model modelRemovedTriples = ModelFactory.createDefaultModel();
 
-            StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
+            StmtIterator stmtIt = LargeModel.listStatements(null, null ,(RDFNode)null);
+
             while (stmtIt.hasNext() ) {
 
                 // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
@@ -95,21 +177,13 @@ public class Generator {
                 String object = item.getObject().toString();
                 modelRemovedTriples.add(item);
                 // Find all the inconsistencies in the first subgraph(Object)
-                Set<Triple> SubjectInput = GetSubGraph(model, subject, 500, modelRemovedTriples);
+                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
 
                 // Find all the inconsistencies in the second subgraph(Subject)
-                Set<Triple> ObjectInput =  GetSubGraph(model, object, 500, modelRemovedTriples);
-
-                System.out.println(SubjectInput.size());
-
-                System.out.println(ObjectInput.size());
-                if ((ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
-                    continue;
-                }
+                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
 
                 boolean CannotbeRemoved = !ConnectionChecker(SubjectInput, ObjectInput, item);
 
-                System.out.println(CannotbeRemoved);
                 if (CannotbeRemoved){
                     modelRemovedTriples.remove(item);
                 }
@@ -121,10 +195,14 @@ public class Generator {
 
             }
 
-            model.remove(modelRemovedTriples);
-            NewSize = model.size();
+            LargeModel.remove(modelRemovedTriples);
+            NewSize = LargeModel.size();
         }
+
+
+        return LargeModel;
     }
+
 
     static Set<Triple> GetSubGraph(Model model, String tripleItem, int maxValue, Model modelRemovedTriples) {
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
@@ -157,6 +235,9 @@ public class Generator {
          *
          */
 
+
+        double SampleSize = 0.1;
+
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
 
@@ -182,8 +263,9 @@ public class Generator {
         System.out.println("Finished Loading HDT");
 
         // Set output Writer
-        RemoveStatements(hdt);
+        Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
 
+        System.out.println("Finished Working Sampled Model");
 
     }
 }
