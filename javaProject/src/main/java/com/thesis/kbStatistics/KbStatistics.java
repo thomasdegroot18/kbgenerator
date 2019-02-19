@@ -5,7 +5,6 @@ import openllet.core.KnowledgeBase;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
-import org.apache.jena.rdf.model.Model;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.header.Header;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
@@ -41,7 +40,7 @@ class KbStatistics {
         return 0;
     }
 
-    private static double ClusteringCoef(HDT hdt, String input){
+    private static double ClusteringCoefficient(HDT hdt, String input){
         try {
             IteratorTripleString it = hdt.search(input,"", "");
             HashSet<String> Neighbours = new HashSet<>();
@@ -95,12 +94,13 @@ class KbStatistics {
     }
 
     // TODO: Implement Strong and Weak CC
+    @SuppressWarnings("unused")
     private static int StrongCC(HDT hdt){
 
 
         return 100;
     }
-
+    @SuppressWarnings("unused")
     private static int WeakCC(HDT hdt){
 
 
@@ -131,14 +131,12 @@ class KbStatistics {
 
         KnowledgeBase kb = reasoner.getKB();
 
-        System.out.println("Expressivity   : " + kb.getExpressivity());
-
 
         return kb.getExpressivity().toString();
     }
 
 
-    private static HashSet<String> NameSpaces(HDT hdt){
+    private static ArrayList<HashSet<String>>  NameSpaces(HDT hdt){
 
         Iterator it = hdt.getDictionary().getPredicates().getSortedEntries();
         HashSet<String> NameSpaceSet = new HashSet<>();
@@ -148,6 +146,8 @@ class KbStatistics {
             int HashNumber = NameSpaceNotCleaned.lastIndexOf("#");
             int SlashNumber = NameSpaceNotCleaned.lastIndexOf("/");
             String NameSpaceCleaned;
+
+            // Clean a set of namespaces such that the overlap a bit better.
             if(HashNumber > SlashNumber ){
                 NameSpaceCleaned = NameSpaceNotCleaned.substring(0, HashNumber + 1);
                 if(NameSpaceCleaned.contains("www.w3.org")){
@@ -181,20 +181,18 @@ class KbStatistics {
             }
             NameSpaceSet.add(NameSpaceCleaned);
         }
-        for (String elem : NameSpaceSet){
-            System.out.println(elem);
-        }
-        for (String elem2 : Elements){
-            System.out.println(elem2);
-        }
-        return NameSpaceSet;
+
+        ArrayList<HashSet<String>> Namespace = new ArrayList<>();
+        Namespace.add(NameSpaceSet);
+        Namespace.add(Elements);
+        return Namespace;
     }
 
     private static List<HashMap> GetLocalizedScores(HDT hdt){
         Iterator it = hdt.getDictionary().getSubjects().getSortedEntries();
         HashMap<Long, Integer> hashInDegree = new HashMap<>();
         HashMap<Long, Integer> hashOutDegree = new HashMap<>();
-        HashMap<Double, Integer> ClusteringCoefMap = new HashMap<>();
+        HashMap<Double, Integer> ClusteringCoefficientMap = new HashMap<>();
         int Element = 0;
         while (it.hasNext()){
             String SubjectTripleElem = it.next().toString();
@@ -219,13 +217,13 @@ class KbStatistics {
                 System.out.println(Element);
             }
             // Calculating the Cluster Coefficient
-            Double Coef = ClusteringCoef(hdt, SubjectTripleElem );
-            if(ClusteringCoefMap.containsKey(Coef)){
-                int i = ClusteringCoefMap.get(Coef);
+            Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );
+            if(ClusteringCoefficientMap.containsKey(Coefficient)){
+                int i = ClusteringCoefficientMap.get(Coefficient);
                 i++;
-                ClusteringCoefMap.replace(Coef, i);
+                ClusteringCoefficientMap.replace(Coefficient, i);
             }else{
-                ClusteringCoefMap.put(Coef, 1);
+                ClusteringCoefficientMap.put(Coefficient, 1);
             }
 
 
@@ -236,13 +234,13 @@ class KbStatistics {
         List<HashMap> arrayList = new ArrayList<>();
         arrayList.add(hashInDegree);
         arrayList.add(hashOutDegree);
-        arrayList.add(ClusteringCoefMap);
+        arrayList.add(ClusteringCoefficientMap);
 
         return arrayList;
     }
 
 
-
+    @SuppressWarnings({"unchecked", "unused"})
     static void RunAll(HDT hdt){
         String Expressivity = null;
         try{
@@ -251,12 +249,160 @@ class KbStatistics {
             e.printStackTrace();
         }
         int Size = KbSize(hdt);
-        HashSet<String> NameSpaceSet = NameSpaces(hdt);
+        ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = GetLocalizedScores(hdt);
 
-    }
+        System.out.println("The expressivity of the KB is: " + Expressivity);
+        System.out.println("The size of the KB is: " + Size);
 
-    static void uploadTo(String uploadLocation){
+        for (String cleanNameSpace: NameSpaceSet.get(0)){
+            System.out.println(cleanNameSpace);
+        }
+
+        for (String UncleanNameSpace: NameSpaceSet.get(1)){
+            System.out.println(UncleanNameSpace);
+        }
+
+        // Print the hashes of the maps.
+        HashMap<Long, Integer> hashInDegree = arrayList.get(0);
+        HashMap<Long, Integer> hashOutDegree = arrayList.get(1);
+        HashMap<Double, Integer> ClusteringCoefficientMap = arrayList.get(2);
+
+        for(Long key: hashInDegree.keySet()){
+            System.out.println(key+ " : "+  hashInDegree.get(key));
+        }
+
+        for(Long key: hashOutDegree.keySet()){
+            System.out.println(key+ " : "+  hashOutDegree.get(key));
+        }
+
+        for(Double key: ClusteringCoefficientMap.keySet()){
+            System.out.println(key+ " : "+  ClusteringCoefficientMap.get(key));
+        }
+    }
+    @SuppressWarnings("unused")
+    static void RunAll(HDT hdt, String UploadLocation){
+        String Expressivity = null;
+        try{
+            Expressivity = getExpressively(hdt);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        int Size = KbSize(hdt);
+        ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
+        List<HashMap> arrayList = GetLocalizedScores(hdt);
+
+
+        uploadTo(UploadLocation, Expressivity, Size, NameSpaceSet, arrayList);
+
+    }
+    @SuppressWarnings("unchecked")
+    private static void uploadTo(String uploadLocation, String Expressivity, int Size, ArrayList<HashSet<String>> NameSpaceSet, List<HashMap> arrayList  ){
+        List<String> StringArray = new ArrayList<>();
+
+        StringArray.add("{\"Expressivity\" : \"" + Expressivity +"\"}");
+        StringArray.add("{\"Size\" : \"" + Size +"\"}");
+
+        StringBuilder CleanNameSpace = new StringBuilder();
+        CleanNameSpace.append("{\"Namespaces\" : [ ");
+        int i = 0;
+
+        for (String cleanNameSpaceIns: NameSpaceSet.get(0)){
+            if (i > 0 ){
+                String Final = " , \"" + cleanNameSpaceIns + "\"";
+                CleanNameSpace.append(Final);
+            } else{
+                String Final = "\""+ cleanNameSpaceIns + "\"";
+                CleanNameSpace.append(Final);
+                i = 1;
+            }
+        }
+
+        CleanNameSpace.append("] } ");
+        StringArray.add(CleanNameSpace.toString());
+
+        StringBuilder Predicates = new StringBuilder();
+        Predicates.append("{\"Predicates\" : [ ");
+        i = 0;
+
+        for (String PredicatesString: NameSpaceSet.get(1)){
+            if (i > 0 ){
+                String Final = " , \"" + PredicatesString + "\"";
+                Predicates.append(Final);
+            } else{
+                String Final = "\""+ PredicatesString + "\"";
+                Predicates.append(Final);
+                i = 1;
+            }
+        }
+
+        Predicates.append("] } ");
+        StringArray.add(Predicates.toString());
+
+        // Print the hashes of the maps.
+        HashMap<Long, Integer> hashInDegree = arrayList.get(0);
+        HashMap<Long, Integer> hashOutDegree = arrayList.get(1);
+        HashMap<Double, Integer> ClusteringCoefficientMap = arrayList.get(2);
+
+
+        StringBuilder InDegree = new StringBuilder();
+        i = 0;
+        InDegree.append("{");
+        for(Long key: hashInDegree.keySet()){
+            if (i > 0 ){
+                String input = ", "+ key+ " : "+  hashInDegree.get(key);
+                InDegree.append(input);
+            } else{
+                String input = key+ " : "+  hashInDegree.get(key);
+                InDegree.append(input);
+                i = 1;
+            }
+        }
+        InDegree.append("}");
+        StringArray.add(InDegree.toString());
+
+
+        StringBuilder OutDegree = new StringBuilder();
+        i = 0;
+        OutDegree.append("{");
+
+        for(Long key: hashOutDegree.keySet()){
+            if (i > 0 ){
+                String input = ", "+ key+ " : "+  hashOutDegree.get(key);
+                OutDegree.append(input);
+            } else{
+                String input = key+ " : "+  hashOutDegree.get(key);
+                OutDegree.append(input);
+                i = 1;
+            }
+        }
+        OutDegree.append("}");
+        StringArray.add(OutDegree.toString());
+
+
+        StringBuilder ClusteringCoefficientString = new StringBuilder();
+        i = 0;
+        ClusteringCoefficientString.append("{");
+
+        for(Double key: ClusteringCoefficientMap.keySet()){
+            if (i > 0 ){
+                String input = ", "+ key+ " : "+  ClusteringCoefficientMap.get(key);
+                ClusteringCoefficientString.append(input);
+            } else{
+                String input = key+ " : "+  ClusteringCoefficientMap.get(key);
+                ClusteringCoefficientString.append(input);
+                i = 1;
+            }
+        }
+
+        ClusteringCoefficientString.append("}");
+
+
+        StringArray.add(ClusteringCoefficientString.toString());
+
+
+        Statistics.writeJSON(uploadLocation, StringArray);
+
 
 
     }

@@ -167,7 +167,7 @@ public class Statistics {
         return StoredValues;
     }
 
-    private static void writeJSON(String fileLocation, List<String> StringArray){
+    static void writeJSON(String fileLocation, List<String> StringArray){
         try{
             FileOutputStream fileWriter = new FileOutputStream(new File(fileLocation));
             for (String line : StringArray){
@@ -196,9 +196,7 @@ public class Statistics {
         }
 
         KbStatistics KBStats = new KbStatistics();
-        KBStats.RunAll(hdt);
-        KBStats.uploadTo(OutputLocation);
-
+        KBStats.RunAll(hdt, OutputLocation);
 
         while(ConstantLoopBoolean){
             GraphsLoader(fileLocation, StoredGraphs);
