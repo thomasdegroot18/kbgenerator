@@ -243,7 +243,7 @@ class KbStatistics {
 
 
 
-    static Object RunAll(Model model, HDT hdt){
+    static void RunAll(HDT hdt){
         String Expressivity = null;
         try{
             Expressivity = getExpressively(hdt);
@@ -254,10 +254,12 @@ class KbStatistics {
         HashSet<String> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = GetLocalizedScores(hdt);
 
-        Object Test = new Object();
-        return Test;
     }
 
+    static void uploadTo(String uploadLocation){
+
+
+    }
 
 
 }

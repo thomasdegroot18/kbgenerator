@@ -22,7 +22,9 @@ public class Statistics {
 
     private static boolean ConstantLoopBoolean = true;
 
-    static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
+
+
+    private static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
         for (String key: StoredValues.keySet()){
             if (StoredValues.get(key) == null){
                 StoredValues.replace(key, SPARQLExecutioner.CounterResultPrinter(model, key));
@@ -181,20 +183,32 @@ public class Statistics {
 
 
 
-    private static void ConstantLoop(Model model, HDT hdt,  String fileLocation){
+    private static void ConstantLoop(Model model, HDT hdt,  String fileLocation, String OutputLocation){
+
+
         HashMap<String, String> StoredGraphs = GraphsLoader(fileLocation);
         HashMap<String, Integer> StoredValues = InconsistencyCheck(fileLocation);
         // RunAll Knowledge base Statistics:
         for (String Key : StoredGraphs.keySet()){
-            Object InconsistencyInfo = InconsistencyStatistics.RunAll(StoredGraphs.get(Key));
+            InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics();
+            InconsistencyStats.RunAll(StoredGraphs.get(Key));
+            InconsistencyStats.uploadTo(OutputLocation);
         }
 
-        Object KbInfo = KbStatistics.RunAll(model, hdt);
-
+        KbStatistics KBStats = new KbStatistics();
+        KBStats.RunAll(hdt);
+        KBStats.uploadTo(OutputLocation);
 
 
         while(ConstantLoopBoolean){
             GraphsLoader(fileLocation, StoredGraphs);
+
+            // RunAll Knowledge base Statistics:
+            for (String Key : StoredGraphs.keySet()){
+                InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics();
+                InconsistencyStats.RunAll(StoredGraphs.get(Key));
+                InconsistencyStats.uploadTo(OutputLocation);
+            }
 
             InconsistencyCheck(fileLocation, StoredValues);
 
@@ -229,8 +243,9 @@ public class Statistics {
     }
 
     public static void main(String[] args) throws Exception {
-        /*  rgument 0: input location of the HDT
+        /*  Argument 0: input location of the HDT
          *  Argument 1: Input directory of the turtle.
+         *  Argument 2: Output location of the gathered statistics.
          */
 
 
@@ -270,9 +285,7 @@ public class Statistics {
         System.out.println("Creating model from graph");
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
 
-
-
-        ConstantLoop(model, hdt, FileInput);
+        ConstantLoop(model, hdt, FileInput, args[2]);
 
 
     }

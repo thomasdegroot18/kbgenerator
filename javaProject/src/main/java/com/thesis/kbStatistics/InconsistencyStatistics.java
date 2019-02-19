@@ -35,10 +35,14 @@ public class InconsistencyStatistics {
         return 0;
     }
 
-    public static Object RunAll(String StringOfInconsistency){
+    public static void RunAll(String StringOfInconsistency){
         StringOfInconsistency = "Declaration(Class(<C0>)), Declaration(Class(<C1>)), Declaration(Class(<C4>)), Declaration(Class(<C3>)), SubClassOf(<C0> <C1>), SubClassOf(<C4> <C0>), SubClassOf(<C3> <C4>), DisjointClasses(<C1> <C3>),";
 
 
-        return new Object();
+    }
+
+    public void uploadTo(String outputLocation){
+
+
     }
 }
