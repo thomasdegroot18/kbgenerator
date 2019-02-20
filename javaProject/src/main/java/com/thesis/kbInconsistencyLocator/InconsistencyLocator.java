@@ -240,10 +240,10 @@ public class InconsistencyLocator
             // the subgraph is added to the list.
 
             // TODO: THIS IS USED TO REMOVE TAILS CAN BE DELETED.
-            if (GeneralGraph.GetVerticesDegree().contains(1)){
-                GeneralGraph.SinglesRemoval();
-                GeneralGraph.RebuildSPARQL();
-            }
+//            if (GeneralGraph.GetVerticesDegree().contains(1)){
+//                GeneralGraph.SinglesRemoval();
+//                GeneralGraph.RebuildSPARQL();
+//            }
 
 
             boolean AcceptedTo = true;
@@ -358,29 +358,11 @@ public class InconsistencyLocator
 
         OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
 
-//        // Getting manager:
-//        OWLOntologyManager manager = OntManagers.createONT();
-//
-//        manager.loadOntologyFromOntologyDocument(PipeModel(subModel));
-//
-//        Model model = ((OntologyModel)ontology).asGraphModel();
-//        final OntModel modelTest = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-//
-//        modelTest.add(model);
-//
-//        printIterator(modelTest.validate().getReports(), "Test");
-
-
         // Starting up the Pellet Explanation module.
         PelletExplanation.setup();
 
         // Create the reasoner and load the ontology with the open pellet reasoner.
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
-
-//        KnowledgeBase kb = reasoner.getKB();
-//
-//        System.out.println("Expressivity   : " + kb.getExpressivity());
-
 
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);

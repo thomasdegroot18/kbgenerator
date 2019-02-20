@@ -19,6 +19,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
 
+// TODO: Needs to add in a function that measures the amount of Inconsistencies and makes sure that the amount of Inconsistencies
+//  stays below the correct size.
 
 public class Generator {
 

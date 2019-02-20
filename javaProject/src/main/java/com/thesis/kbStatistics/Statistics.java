@@ -23,75 +23,8 @@ public class Statistics {
     private static boolean ConstantLoopBoolean = true;
 
 
-
-    private static HashMap<String, Integer> InconsistencySPARQL(Model model, HashMap<String, Integer> StoredValues){
-        for (String key: StoredValues.keySet()){
-            if (StoredValues.get(key) == null){
-                StoredValues.replace(key, SPARQLExecutioner.CounterResultPrinter(model, key));
-            }
-        }
-        return StoredValues;
-    }
-
-
-    private static HashMap<String, Integer> InconsistencyCheck(String fileLocation, HashMap<String, Integer> StoredValues) {
-
-        File file = new File(fileLocation);
-        try{
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-
-
-            while((line = br.readLine()) != null){
-                if (line.startsWith("SELECT")){
-                    if(StoredValues.getOrDefault(line, null) == null){
-                        StoredValues.put(line, null);
-                    }
-                }
-                if (line.equals("Stopped")){
-                    ConstantLoopBoolean = false;
-                }
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        return StoredValues;
-    }
-
-
-
-    private static HashMap<String, Integer> InconsistencyCheck(String fileLocation) {
-        //Load the SPARQL Query Location
-        HashMap<String, Integer> StoredValues = new HashMap<>();
-
-        File file = new File(fileLocation);
-        try{
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-
-
-            while((line = br.readLine()) != null){
-                if (line.startsWith("SELECT")){
-                    StoredValues.put(line, null);
-                }
-
-                if (line.equals("Stopped")){
-                    ConstantLoopBoolean = false;
-                }
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        return StoredValues;
-    }
-
-    private static HashMap<String, String> GraphsLoader (String fileLocation, HashMap<String, String> StoredValues) {
+    @SuppressWarnings("UnusedReturnValue")
+    private static HashMap<String, String> GraphsLoader (String fileLocation, HashMap<String, String> StoredGraph) {
         //Load the SPARQL Query Location
 
         File file = new File(fileLocation);
@@ -110,12 +43,16 @@ public class Statistics {
                 }
                 else if (line.startsWith("New general inconsistency:")){
                     if (!(key == null )){
-                        StoredValues.put(key, value.toString());
+                        StoredGraph.put(key, value.toString());
                         value = new StringBuilder();
                     }
                 }
                 else if (!line.startsWith("\n") && !line.startsWith("General")){
                     value.append(line).append(", ");
+                }
+
+                if (line.equals("Stopped")){
+                    ConstantLoopBoolean = false;
                 }
 
 
@@ -125,47 +62,9 @@ public class Statistics {
         }
 
 
-        return StoredValues;
+        return StoredGraph;
     }
 
-    // Retrieves the found inconsistencies from the inconsistent dataset.
-    private static HashMap<String, String> GraphsLoader(String fileLocation) {
-        //Load the SPARQL Query Location
-        HashMap<String, String> StoredValues = new HashMap<>();
-
-        File file = new File(fileLocation);
-        try{
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-
-            String key = null;
-            StringBuilder value = new StringBuilder();
-
-            while((line = br.readLine()) != null){
-                if (line.startsWith("SELECT")){
-                    key = line;
-                }
-                else if (line.startsWith("New general inconsistency:")){
-                    if (!(key == null )){
-                        StoredValues.put(key, value.toString());
-                        value = new StringBuilder();
-                    }
-                }
-                else if (!line.startsWith("\n") && !line.startsWith("General")){
-                    value.append(line).append(", ");
-                }
-
-
-            }
-            StoredValues.put(key, value.toString());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        return StoredValues;
-    }
 
     static void writeJSON(String fileLocation, List<String> StringArray){
         try{
@@ -186,48 +85,27 @@ public class Statistics {
     private static void ConstantLoop(Model model, HDT hdt,  String fileLocation, String OutputLocation){
 
 
-        HashMap<String, String> StoredGraphs = GraphsLoader(fileLocation);
-        HashMap<String, Integer> StoredValues = InconsistencyCheck(fileLocation);
-        // RunAll Knowledge base Statistics:
-        for (String Key : StoredGraphs.keySet()){
-            InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics();
-            InconsistencyStats.RunAll(StoredGraphs.get(Key));
-            InconsistencyStats.uploadTo(OutputLocation);
-        }
 
-        KbStatistics KBStats = new KbStatistics();
-        KBStats.RunAll(hdt, OutputLocation);
+        // Get all the KB statistics
+        KbStatistics.RunAll(hdt, OutputLocation);
+
+        // Create object for Inconsistencies.
+        InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(model);
+
+        // Create Hashmap for StoredGraphs
+        HashMap<String, String> StoredGraphs = new HashMap<>();
 
         while(ConstantLoopBoolean){
+
+            // Load all Inconsistency graphs.
             GraphsLoader(fileLocation, StoredGraphs);
 
-            // RunAll Knowledge base Statistics:
+            // RunAll Inconsistency Statistics:
             for (String Key : StoredGraphs.keySet()){
-                InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics();
-                InconsistencyStats.RunAll(StoredGraphs.get(Key));
-                InconsistencyStats.uploadTo(OutputLocation);
+                InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
             }
-
-            InconsistencyCheck(fileLocation, StoredValues);
-
-
-            InconsistencySPARQL(model, StoredValues);
-
-
-            String LineToWrite = "[";
-            List<String> StringLines = new ArrayList<>();
-            int IndexNumber = 1;
-            for (String key : StoredValues.keySet()){
-                StringLines.add(LineToWrite);
-
-                LineToWrite = "{\"Graphnumber\" : " + IndexNumber + ", \"value\" : " + StoredValues.get(key) + ", \"SparqlRequest\" : \"" + key + "\", \"Graph\" : \"" + StoredGraphs.get(key) + "\"} ,";
-                IndexNumber ++;
-            }
-            LineToWrite = LineToWrite.substring(0, LineToWrite.length() -1);
-            LineToWrite = LineToWrite + "]";
-            StringLines.add(LineToWrite);
-            // Writes file to JSON location.
-            writeJSON(fileLocation.split("javaProject")[0]+"/docs/Webpages/js/data.json", StringLines);
+            // Write the Inconsistencies until now collected.
+            InconsistencyStats.WriteToFile(OutputLocation);
 
             try{
                 Thread.sleep(60000);
@@ -275,7 +153,6 @@ public class Statistics {
                 }
             }
         }
-
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.
