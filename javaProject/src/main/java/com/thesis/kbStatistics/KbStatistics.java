@@ -14,6 +14,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 class KbStatistics {
 
     private static long InDegreeDistribution(HDT hdt, String input){

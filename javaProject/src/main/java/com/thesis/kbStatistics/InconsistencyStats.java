@@ -6,10 +6,10 @@ class InconsistencyStats {
     private int Count;
     private String Type;
     private String ClassType;
-    private float TailEffect;
+    private double TailEffect;
 
 
-    InconsistencyStats(int Size, int Count, String Type, String ClassType, float TailEffect){
+    InconsistencyStats(int Count, int Size, String Type, String ClassType, double TailEffect){
         this.Size = Size;
         this.Count = Count;
         this.Type = Type;
@@ -26,7 +26,7 @@ class InconsistencyStats {
         return Size;
     }
 
-    float getTailEffect() {
+    double getTailEffect() {
         return TailEffect;
     }
 

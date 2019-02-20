@@ -1,6 +1,5 @@
 package com.thesis.kbStatistics;
 
-import com.thesis.SPARQLengine.SPARQLExecutioner;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
@@ -13,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -87,12 +85,13 @@ public class Statistics {
 
 
         // Get all the KB statistics
-        KbStatistics.RunAll(hdt, OutputLocation);
+
+        KbStatistics.RunAll(hdt, OutputLocation+"/kbStatistics.json");
 
         // Create object for Inconsistencies.
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(model);
 
-        // Create Hashmap for StoredGraphs
+        // Create HashMap for StoredGraphs
         HashMap<String, String> StoredGraphs = new HashMap<>();
 
         while(ConstantLoopBoolean){
@@ -105,7 +104,7 @@ public class Statistics {
                 InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
             }
             // Write the Inconsistencies until now collected.
-            InconsistencyStats.WriteToFile(OutputLocation);
+            InconsistencyStats.WriteToFile(OutputLocation+"/InconsistencyStatistics.json");
 
             try{
                 Thread.sleep(60000);
@@ -153,6 +152,8 @@ public class Statistics {
                 }
             }
         }
+
+        System.out.println(args[2]);
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.

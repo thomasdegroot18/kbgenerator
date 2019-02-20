@@ -294,7 +294,8 @@ public class InconsistencyLocator
 //
             if(verbose && AcceptedTo ) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
-                    for (Object InconsistencyExplanationLine : GeneralGraph.getAxioms().toArray())
+
+                    for (Object InconsistencyExplanationLine : GeneralGraph.getExplanationStringList())
                         // Transfer the string to bytes and send to fileWriter.
                         fileWriter.write((InconsistencyExplanationLine.toString()+"\n").getBytes());
                 }
