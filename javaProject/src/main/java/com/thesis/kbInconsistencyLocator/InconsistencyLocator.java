@@ -1,16 +1,18 @@
 package com.thesis.kbInconsistencyLocator;
 
 import com.thesis.SPARQLengine.SPARQLExecutioner;
+import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
-import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -21,10 +23,9 @@ import java.util.List;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 
+import org.rdfhdt.hdtjena.HDTGraph;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.AxiomType;
-import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.*;
 
 
 /**
@@ -134,6 +135,8 @@ public class InconsistencyLocator
         // Get the list of variables in the correct order.
         List SetOfVariables = StreamParser(InconsistencyExplanationLine);
 
+
+
         // Gets the axiom type of the line.
         AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
         // For both elements of the class/instance list.
@@ -161,6 +164,54 @@ public class InconsistencyLocator
         return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
     }
 
+    private static List<String>  AxiomConverterMultiline(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator) {
+
+        // Get the list of variables in the correct order.
+        List SetOfVariables = StreamParser(InconsistencyExplanationLine);
+
+
+        // Gets the axiom type of the line.
+        AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
+        // For both elements of the class/instance list.
+        for (Object variable : SetOfVariables) {
+            // Check if the variable map contains the key for the variable(class/Instance)
+            if (!variableMap.containsKey(variable)) {
+                // If there is no key yet made, the key is added to map.
+                // Now we check if the variable is an instance or not. By checking if it hits an certain string.
+                // TODO: low priority. Change the IndividualCheck82910283 to a less breakable check.
+                if (variable.toString().contains("IndividualCheck82910283")) {
+                    // add the variable and new label to the map and increase the value with one
+                    variableMap.put(variable, individualLabels[iterator[1]]);  // Iterator on Individual
+                    iterator[1]++;
+
+                } else {
+                    // add the variable and new label to the map and increase the value with one.
+                    variableMap.put(variable, classLabels[iterator[0]]); // Iterator on Class
+                    iterator[0]++;
+                }
+
+            }
+        }
+        int i = 0;
+        int j = 0;
+        List<String> StringLines = new ArrayList<>();
+
+        while (i < SetOfVariables.size()){
+            while ((j < SetOfVariables.size())) {
+                if (i < j) {
+                    StringLines.add(RelationType.toString() + " " + variableMap.get(SetOfVariables.get(i)) + " " + variableMap.get(SetOfVariables.get(j)));
+                }
+                j++;
+            }
+            i++;
+            j = 0;
+        }
+
+
+        // return the string line with a generalised variable, Takes RelationType + first element + second element.
+        return StringLines;
+    }
+
 
     private static void InconsistencyStandardizer(Set<OWLAxiom> InconsistencyExplanation, FileOutputStream fileWriter)
     {
@@ -177,11 +228,16 @@ public class InconsistencyLocator
 
         // Loop through the Inconsistency line per line to replace the Classes and the instances with the correct values.
         for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
+
             // Instantiate the StringLine in correct scope.
-            String StringLine;
+            String StringLine = "";
+            List<String> StringLines = new ArrayList<>();
 
             // Get the axiom type.
             AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
+
+
+            boolean MoreInformation = (StreamParser(InconsistencyExplanationLine).size() > 2);
 
             // For each relationTYPE a function is called. At the moment only these 4 RelationTypes are used.
             // TODO Add in more relation types.
@@ -189,22 +245,38 @@ public class InconsistencyLocator
             // class assertion: <a1> <rdf:type> <C1>
             if (RelationType == AxiomType.CLASS_ASSERTION){
                 // Gets the new clean relation graph with generalised names.
-                StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
 
             // Disjoint class: <C1> <owl:disjointWith> <C2>
             } else if (RelationType == AxiomType.DISJOINT_CLASSES){
                 // Gets the new clean relation graph with generalised names.
-                StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
 
             // Subclass of: <C1> <rdf:subclassOf> <C2>
             } else if (RelationType == AxiomType.SUBCLASS_OF){
                 // Gets the new clean relation graph with generalised names.
-                StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
 
             // Equivalent Class: <C1> <owl:equivalentWith> <C2>
             }  else if (RelationType == AxiomType.EQUIVALENT_CLASSES){
                 // Gets the new clean relation graph with generalised names.
-                StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
 
             // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
             } else {
@@ -212,32 +284,27 @@ public class InconsistencyLocator
             }
 
             // Adds the new cleaned line to the ExplanationList
-            ExplanationStringList.add(StringLine);
+            if(MoreInformation){
+                ExplanationStringList.addAll(StringLines);
+            } else{
+                ExplanationStringList.add(StringLine);
+            }
 
         }
 
         // SORT the ExplanationStringList to make sure the list handy to have it sorted.
         Collections.sort(ExplanationStringList);
-//        ExplanationStringList = new ArrayList<>();
-//        ExplanationStringList2.add("ClassAssertion C2 a0");
-//        ExplanationStringList2.add("DisjointClasses C3 C1");
-//        ExplanationStringList2.add("EquivalentClasses C5 C1");
-//        ExplanationStringList2.add("EquivalentClasses C6 C0");
-//        ExplanationStringList2.add("SubClassOf C0 C1");
-//        ExplanationStringList2.add("SubClassOf C2 C3");
-//        ExplanationStringList2.add("SubClassOf C3 C4");
-//        ExplanationStringList2.add("SubClassOf C4 C0");
 
         // TRY to check the graph and write if needed to a file.
 
         try {
-
 
             // Takes the Generalised Explanation and makes a generalised subgraph.
             // Adds to the list if the subgraph is not yet recognized.
             GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(ExplanationStringList);
             // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
             // the subgraph is added to the list.
+
 
             // TODO: THIS IS USED TO REMOVE TAILS CAN BE DELETED.
 //            if (GeneralGraph.GetVerticesDegree().contains(1)){
@@ -319,6 +386,11 @@ public class InconsistencyLocator
             try {
                 for (String elem: subModel){
                     // Write to outputStream as bytes.
+                    if(elem.lastIndexOf("^") > -1){
+                        if(elem.lastIndexOf("^") > elem.lastIndexOf("<")){
+                            elem = elem.substring(0,elem.lastIndexOf("^"))+'-'+elem.substring(elem.lastIndexOf("^")+1);
+                        }
+                    }
                     out.write(elem.getBytes());
                 }
                 out.close();
@@ -337,25 +409,28 @@ public class InconsistencyLocator
         return in;
     }
 
-//
-//    public static void printIterator(final Iterator<?> i, final String header)
-//    {
-//        System.out.println(header);
-//        for (int c = 0; c < header.length(); c++)
-//            System.out.print("=");
-//        System.out.println();
-//
-//        if (i.hasNext())
-//            while (i.hasNext())
-//                System.out.println(i.next());
-//        else
-//            System.out.println("<EMPTY>");
-//
-//        System.out.println();
-//    }
 
     private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
+//
+//        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//
+//        model.read(PipeModel(subModel), "","N3");
+//
+//        model.prepare();
+//
+//        // Get the KnowledgeBase object
+//        final KnowledgeBase kb = ((PelletInfGraph) model.getGraph()).getKB();
+//
+//        // perform initial consistency check
+//        long s = System.currentTimeMillis();
+//        boolean consistent = kb.isConsistent();
+//        long e = System.currentTimeMillis();
+//        System.out.println("Consistent? " + consistent + " (" + (e - s) + "ms) Expressivity: "+kb.getExpressivity());
+
+        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+        model.read(PipeModel(subModel), "","N3");
+
 
         OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
 
@@ -370,14 +445,30 @@ public class InconsistencyLocator
 
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
         Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(MaxExplanations);
+//        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
+//        while (e.hasNext()){
+//            OWLClass elem = e.next();
+//            Set<OWLAxiom> expl = expGen.getUnsatisfiableExplanation(elem );
+//
+//            for(OWLAxiom InconsistencyExp: expl){
+//                System.out.println(InconsistencyExp);
+//            }
+//        }
+
 
         // Loop through the set of explanations and standardize the Inconsistencies.
         for(Set<OWLAxiom> InconsistencyExplanation: exp){
             InconsistenciesHit ++;
+            // Loop through the set of explanations and standardize the Inconsistencies.
             // Standardize the inconsistency and write to file.
+
+            // TODO: Add this line.
             InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
         }
+
+
+
 
 
     }
@@ -410,7 +501,8 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem , hdt);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt);
+
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -438,6 +530,7 @@ public class InconsistencyLocator
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 100 triples is taken.
+
             if (rand.nextDouble() > 0.01) {
                 it.next();
                 continue;
@@ -481,7 +574,7 @@ public class InconsistencyLocator
         }
     }
 
-
+    @SuppressWarnings("unused")
     private static void testQueries(Model model){
         // Running a set of test queries to check quickly if this graph can be susceptible to INCONSISTENCIES.
         // @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -606,7 +699,6 @@ public class InconsistencyLocator
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
-        Model model;
 
         if(verbose) {
             // Create Jena wrapper on top of HDT.
@@ -616,7 +708,7 @@ public class InconsistencyLocator
             // Create Models
             System.out.println("Creating model from graph");
 
-            model = ModelFactory.createModelForGraph(graph);
+            Model model = ModelFactory.createModelForGraph(graph);
 
             System.out.println("Running test Queries");
             // Run test Queries
@@ -633,27 +725,6 @@ public class InconsistencyLocator
         System.out.println("Finished locating inconsistencies");
 
         fileWriter.write(("Stopped").getBytes());
-
-        // Prints the finalised generalised subgraphs
-//        int GeneralCounter = 0;
-//        if (verbose) {
-//            for (GeneralisedSubGraph GeneralGraph : GeneralGraphs) {
-//                fileWriterStats.write(("General graph number: "+ GeneralCounter + "\t").getBytes());
-//                fileWriterSPARQL.write(("General graph number: "+ GeneralCounter + "\n").getBytes());
-//
-//                System.out.println("General graph number: "+ GeneralCounter + "\t");
-//
-//                // Prints the generalGraph with specialised function.
-//
-//                GeneralGraph.print(fileWriter, GeneralCounter);
-//                GeneralCounter ++;
-//                int totalNumber = CounterResultPrinter(model , GeneralGraph.convertSPARQL());
-//
-//                fileWriterStats.write(("Total number of occurrences: " + totalNumber + "\n").getBytes());
-//                fileWriterSPARQL.write((GeneralGraph.convertSPARQL()+"\n").getBytes());
-//                System.out.println("Total number of occurrences: " + totalNumber);
-//            }
-//        }
 
     }
 

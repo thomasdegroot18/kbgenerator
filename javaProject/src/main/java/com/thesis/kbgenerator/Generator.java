@@ -59,24 +59,32 @@ public class Generator {
         Model model = ModelFactory.createModelForGraph(graph);
 
         Model FinalSampledModel = ModelFactory.createDefaultModel();
-
+        Model SubSampledModel = ModelFactory.createDefaultModel();
         StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
+
+        double partitions = 100.0;
         int Iterator = 0;
 
-        long maxSize = Math.round(model.size()*0.05);
-
+        long maxSize = Math.round(model.size()*(1.0/partitions));
         while (stmtIt.hasNext()){
             System.out.println("Started Sampling From HDT");
             Model NormalModel = HDTtoSubgraph(model, stmtIt , maxSize );
 
             System.out.println("Started Sampling From regular Model" );
-            Model SampledDownModel = DownSampling(NormalModel , SampleSize);
+            Model SampledDownModel = DownSampling(NormalModel , SampleSize, false);
 
-            System.out.println("Finished First SubSampling: "+ Iterator);
-            FinalSampledModel.add(SampledDownModel);
+            System.out.println("Finished First SubSampling part: "+ Iterator);
+            SubSampledModel.add(SampledDownModel);
+
+            Iterator ++;
+            if(Iterator % 10 == 0 ){
+                Model SampledFurther = DownSampling(SubSampledModel , SampleSize, false);
+                System.out.println("Finished Combined SubSampling part: "+ Iterator);
+                FinalSampledModel.add(SampledFurther);
+            }
         }
 
-        DownSampling(FinalSampledModel, SampleSize);
+        DownSampling(FinalSampledModel, SampleSize, true);
 
         return FinalSampledModel;
     }
@@ -104,9 +112,14 @@ public class Generator {
             // A selection of triples is chosen at random.
             // Can be changed later to a selection of triples that meet a certain criteria.
 
-            // at the moment every 1 out of 10 triples is taken.
+            // at the moment every 1 out of 5 triples is taken.
             if (rand.nextDouble() > 0.1) {
                 Statement item = stmtIt.next();
+                String object = item.getObject().toString();
+                Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 3, modelRemovedTriples);
+                if ((ObjectInput.size() == 0)){
+                    continue;
+                }
                 modelCStorage.add(item);
                 continue;
             }
@@ -142,18 +155,25 @@ public class Generator {
         return modelCStorage;
     }
 
-    private static Model DownSampling(Model LargeModel, double DownSamplingSize){
+    private static Model DownSampling(Model LargeModel, double DownSamplingSize, boolean FinalSampling){
 
         long StartingSize = LargeModel.size();
         long NewSize = LargeModel.size();
         long OldSize = 0;
+        boolean FinalPass = true;
+        double RemovalRate;
+        System.out.println("Final Sample size: "+ NewSize);
         // While there is a triple the loop continues.
-        while (StartingSize*DownSamplingSize< NewSize  && OldSize != NewSize){
-
-            OldSize = NewSize;
-            double RemovalRate = 0.1*( (double)StartingSize/ (double)OldSize);
-            System.out.println(OldSize);
-            System.out.println(RemovalRate );
+        while (StartingSize*DownSamplingSize < NewSize  && (OldSize != NewSize || FinalPass)){
+            if(OldSize == NewSize){
+                RemovalRate = 1.0;
+                OldSize = NewSize;
+                FinalPass = false;
+            } else{
+                FinalPass = true;
+                OldSize = NewSize;
+                RemovalRate = 0.1*( (double)StartingSize/ (double)OldSize);
+            }
 
             // Get the Iterator tripleString to loop through.
             Model modelRemovedTriples = ModelFactory.createDefaultModel();
@@ -188,7 +208,13 @@ public class Generator {
                 // Find all the inconsistencies in the second subgraph(Subject)
                 Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
 
+                if (FinalSampling && (ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
+                    continue;
+                }
+                // Takes to Subgraphs and checks for matching nodes.
                 boolean CannotBeRemoved = DeletionChecker(SubjectInput, ObjectInput, item);
+
+
 
                 if (CannotBeRemoved){
                     modelRemovedTriples.remove(item);
@@ -199,7 +225,11 @@ public class Generator {
             LargeModel.remove(modelRemovedTriples);
             NewSize = LargeModel.size();
         }
-
+        if (FinalSampling){
+            System.out.println("Final Sample size: "+ NewSize);
+        } else{
+            System.out.println("Final Sample size of partition: "+ NewSize);
+        }
 
         return LargeModel;
     }
@@ -317,7 +347,7 @@ public class Generator {
 
 
         if(emitSuccess){
-            System.out.println("Successfully finished writing the model to HDT");
+            System.out.println("Successfully finished writing the model to file.");
         } else{
             System.out.println("Unsuccessfully written the model.");
         }

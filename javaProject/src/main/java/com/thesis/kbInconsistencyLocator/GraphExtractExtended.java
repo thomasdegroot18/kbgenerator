@@ -60,11 +60,16 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtend( String node, HDT graph ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
+    Set<String> extractExtendBothClean( String node, HDT graph ) throws Exception
+    { return extractIntoExtendClean(new HashSet<>() , node, graph ); }
+
     Set<String> extractExtend( String node, HDT graph, int MaxValue ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph, MaxValue ); }
 
     public Set<Triple> extractExtendBoth( String node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendBoth(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
+
+
     /**
      Answer the graph <code>toUpdate</code> augmented with the sub-graph of
      <code>extractFrom</code> reachable from <code>root</code> bounded
@@ -74,6 +79,10 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtend( root , 0);
         return toUpdate; }
 
+    private Set<String> extractIntoExtendClean( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
+    { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtendCleanBoth( root , 0);
+        return toUpdate; }
+
     private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom, int MaxValue ) throws Exception
     { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtend( root , 0);
         return toUpdate; }
@@ -81,6 +90,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     private Set<Triple> extractIntoExtendBoth(Set<Triple> toUpdate, String root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
     { new ExtractionExtend( toUpdate, MaxValue ).extractIntoExtendBothWays( root , 0, extractFrom, modelRemovedTriples);
         return toUpdate; }
+
     /**
      This is the class that does all the work, in the established context of the
      source and destination graphs, the TripleBoundary that determines the
@@ -136,6 +146,39 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             }
             return counter;
         }
+
+        private int extractIntoExtendCleanBoth( CharSequence root , int counter ) throws Exception
+        {
+            active.add( root );
+
+            IteratorTripleString itForward = extractFrom.search(root, "", "");
+            IteratorTripleString itBackward = extractFrom.search("", "", root);
+            while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)
+            {
+                TripleString t;
+                String subRoot;
+                if( !itBackward.hasNext() ){
+                    t = itForward.next();
+                    subRoot = t.getObject().toString();
+                } else if(!itForward.hasNext() ){
+                    t = itBackward.next();
+                    subRoot = t.getSubject().toString();
+                } else if(rand.nextDouble() < 0.5001){
+                    t = itForward.next();
+                    subRoot = t.getObject().toString();
+                } else{
+                    t = itBackward.next();
+                    subRoot = t.getSubject().toString();
+                }
+                toUpdate.add( t.asNtriple().toString() );
+                if (! (active.contains( subRoot )  ) ) {  //
+                    counter = extractIntoExtendCleanBoth( subRoot, counter);
+                }
+                counter ++;
+            }
+            return counter;
+        }
+
 
         private int extractIntoExtendBothWays( CharSequence root , int counter , Model extractFromModel, Model modelRemovedTriples)
         {

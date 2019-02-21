@@ -47,7 +47,6 @@ class InconsistencyStatistics {
 
 
     private int InconsistencyCount(String SPARQLString){
-
         return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
     }
 

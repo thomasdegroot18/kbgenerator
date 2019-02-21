@@ -1,5 +1,6 @@
 package com.thesis.kbStatistics;
 
+import org.apache.jena.base.Sys;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
@@ -45,13 +46,18 @@ public class Statistics {
                         value = new StringBuilder();
                     }
                 }
+                else if (line.equals("Stopped")){
+                    if (!(key == null )){
+                        StoredGraph.put(key, value.toString());
+                        value = new StringBuilder();
+                    }
+                    ConstantLoopBoolean = false;
+                }
                 else if (!line.startsWith("\n") && !line.startsWith("General")){
                     value.append(line).append(", ");
                 }
 
-                if (line.equals("Stopped")){
-                    ConstantLoopBoolean = false;
-                }
+
 
 
             }
@@ -85,8 +91,10 @@ public class Statistics {
 
 
         // Get all the KB statistics
-
+        System.out.println("knowledge base statistics calculation");
         KbStatistics.RunAll(hdt, OutputLocation+"/kbStatistics.json");
+
+        System.out.println("Finished knowledge base statistics calculation");
 
         // Create object for Inconsistencies.
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(model);
@@ -100,9 +108,13 @@ public class Statistics {
             GraphsLoader(fileLocation, StoredGraphs);
 
             // RunAll Inconsistency Statistics:
+
+            System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
                 InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
             }
+
+            System.out.println("Finished Inconsistency Statistics");
             // Write the Inconsistencies until now collected.
             InconsistencyStats.WriteToFile(OutputLocation+"/InconsistencyStatistics.json");
 

@@ -191,6 +191,8 @@ class KbStatistics {
 
     private static List<HashMap> GetLocalizedScores(HDT hdt){
         Iterator it = hdt.getDictionary().getSubjects().getSortedEntries();
+
+
         HashMap<Long, Integer> hashInDegree = new HashMap<>();
         HashMap<Long, Integer> hashOutDegree = new HashMap<>();
         HashMap<Double, Integer> ClusteringCoefficientMap = new HashMap<>();
@@ -231,6 +233,43 @@ class KbStatistics {
             Element ++;
         }
 
+        it = hdt.getDictionary().getShared().getSortedEntries();
+        Element = 0;
+        while (it.hasNext()){
+            String SubjectTripleElem = it.next().toString();
+            long In = InDegreeDistribution(hdt, SubjectTripleElem );
+            if(hashInDegree.containsKey(In)){
+                int i = hashInDegree.get(In);
+                i++;
+                hashInDegree.replace(In, i);
+            }else{
+                hashInDegree.put(In, 1);
+            }
+
+            long Out = OutDegreeDistribution(hdt, SubjectTripleElem );
+            if(hashOutDegree.containsKey(Out)){
+                int i = hashOutDegree.get(Out);
+                i++;
+                hashOutDegree.replace(Out, i);
+            }else{
+                hashOutDegree.put(Out, 1);
+            }
+            if(Element % 1000000 == 0){
+                System.out.println(Element);
+            }
+            // Calculating the Cluster Coefficient
+            Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );
+            if(ClusteringCoefficientMap.containsKey(Coefficient)){
+                int i = ClusteringCoefficientMap.get(Coefficient);
+                i++;
+                ClusteringCoefficientMap.replace(Coefficient, i);
+            }else{
+                ClusteringCoefficientMap.put(Coefficient, 1);
+            }
+
+
+            Element ++;
+        }
 
         List<HashMap> arrayList = new ArrayList<>();
         arrayList.add(hashInDegree);
@@ -348,13 +387,13 @@ class KbStatistics {
 
         StringBuilder InDegree = new StringBuilder();
         i = 0;
-        InDegree.append("{");
+        InDegree.append("{\"InDegree\": {");
         for(Long key: hashInDegree.keySet()){
             if (i > 0 ){
-                String input = ", "+ key+ " : "+  hashInDegree.get(key);
+                String input = ",\" "+ key+ "\" : \""+  hashInDegree.get(key)+ "\"";
                 InDegree.append(input);
             } else{
-                String input = key+ " : "+  hashInDegree.get(key);
+                String input = "\""+key+ "\" : \""+  hashInDegree.get(key)+ "\"";
                 InDegree.append(input);
                 i = 1;
             }
@@ -365,38 +404,38 @@ class KbStatistics {
 
         StringBuilder OutDegree = new StringBuilder();
         i = 0;
-        OutDegree.append("{");
+        OutDegree.append("{\"OutDegree\": {");
 
         for(Long key: hashOutDegree.keySet()){
             if (i > 0 ){
-                String input = ", "+ key+ " : "+  hashOutDegree.get(key);
+                String input = ",\" "+ key+ "\" : \""+  hashOutDegree.get(key)+ "\"";
                 OutDegree.append(input);
             } else{
-                String input = key+ " : "+  hashOutDegree.get(key);
+                String input = "\""+key+ "\" : \""+  hashOutDegree.get(key)+ "\"";
                 OutDegree.append(input);
                 i = 1;
             }
         }
-        OutDegree.append("}");
+        OutDegree.append("}}");
         StringArray.add(OutDegree.toString());
 
 
         StringBuilder ClusteringCoefficientString = new StringBuilder();
         i = 0;
-        ClusteringCoefficientString.append("{");
+        ClusteringCoefficientString.append("{\"ClusteringCoefficient\": {");
 
         for(Double key: ClusteringCoefficientMap.keySet()){
             if (i > 0 ){
-                String input = ", "+ key+ " : "+  ClusteringCoefficientMap.get(key);
+                String input = ",\" "+ key+ "\" : \""+  ClusteringCoefficientMap.get(key)+ "\"";
                 ClusteringCoefficientString.append(input);
             } else{
-                String input = key+ " : "+  ClusteringCoefficientMap.get(key);
+                String input = "\""+key+ "\" : \""+  ClusteringCoefficientMap.get(key)+ "\"";
                 ClusteringCoefficientString.append(input);
                 i = 1;
             }
         }
 
-        ClusteringCoefficientString.append("}");
+        ClusteringCoefficientString.append("}}");
 
 
         StringArray.add(ClusteringCoefficientString.toString());
