@@ -5,7 +5,6 @@ import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
-import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -448,9 +447,9 @@ public class InconsistencyLocator
 //        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
 //        while (e.hasNext()){
 //            OWLClass elem = e.next();
-//            Set<OWLAxiom> expl = expGen.getUnsatisfiableExplanation(elem );
+//            Set<OWLAxiom> explanation = expGen.getUnsatisfiableExplanation(elem );
 //
-//            for(OWLAxiom InconsistencyExp: expl){
+//            for(OWLAxiom InconsistencyExp: explanation ){
 //                System.out.println(InconsistencyExp);
 //            }
 //        }

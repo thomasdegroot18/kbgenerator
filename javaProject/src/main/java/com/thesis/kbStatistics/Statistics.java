@@ -1,6 +1,5 @@
 package com.thesis.kbStatistics;
 
-import org.apache.jena.base.Sys;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;

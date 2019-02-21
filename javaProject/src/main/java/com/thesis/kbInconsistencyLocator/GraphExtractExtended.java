@@ -57,6 +57,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
      in <code>graph</code> with the terminating condition given by the
      TripleBoundary passed to the constructor.
      */
+    @SuppressWarnings("unused")
     Set<String> extractExtend( String node, HDT graph ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
