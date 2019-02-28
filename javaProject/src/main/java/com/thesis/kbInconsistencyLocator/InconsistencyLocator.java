@@ -310,6 +310,8 @@ public class InconsistencyLocator
 //                GeneralGraph.SinglesRemoval();
 //                GeneralGraph.RebuildSPARQL();
 //            }
+//
+//          GeneralGraph.generalizeFurther();
 
 
             boolean AcceptedTo = true;

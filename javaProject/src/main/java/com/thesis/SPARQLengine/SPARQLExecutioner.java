@@ -14,7 +14,6 @@ public class SPARQLExecutioner {
 
             // Use Jena ARQ to execute the query. Firstly creating the query.
             Query query = QueryFactory.create(SPARQLQuery);
-
             // Executing the query.
             QueryExecution qe = QueryExecutionFactory.create(query, model);
 

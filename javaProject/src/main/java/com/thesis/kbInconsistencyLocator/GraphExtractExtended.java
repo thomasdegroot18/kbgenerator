@@ -22,6 +22,7 @@
 package com.thesis.kbInconsistencyLocator;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.rdf.model.impl.StmtIteratorImpl;
 import org.apache.jena.util.CollectionFactory ;
 
 import org.rdfhdt.hdt.hdt.HDT;
@@ -67,7 +69,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtend( String node, HDT graph, int MaxValue ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph, MaxValue ); }
 
-    public Set<Triple> extractExtendBoth( String node, Model model, int MaxValue, Model modelRemovedTriples  )
+    public Set<Triple> extractExtendBoth( RDFNode node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendBoth(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
 
 
@@ -88,7 +90,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtend( root , 0);
         return toUpdate; }
 
-    private Set<Triple> extractIntoExtendBoth(Set<Triple> toUpdate, String root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
+    private Set<Triple> extractIntoExtendBoth(Set<Triple> toUpdate, RDFNode root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
     { new ExtractionExtend( toUpdate, MaxValue ).extractIntoExtendBothWays( root , 0, extractFrom, modelRemovedTriples);
         return toUpdate; }
 
@@ -181,35 +183,40 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         }
 
 
-        private int extractIntoExtendBothWays( CharSequence root , int counter , Model extractFromModel, Model modelRemovedTriples)
+        private int extractIntoExtendBothWays( RDFNode root , int counter , Model extractFromModel, Model modelRemovedTriples)
         {
-            active.add( root );
+            active.add( root.toString() );
+            StmtIterator itForward = null;
 
-            StmtIterator itForward = extractFromModel.listStatements(extractFromModel.createResource(root.toString()), null, (RDFNode)null);
-            StmtIterator itBackward = extractFromModel.listStatements(null, null, extractFromModel.createResource(root.toString()));
-            while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)
+            if(root.isResource()){
+                itForward = extractFromModel.listStatements(root.asResource(), null, (RDFNode)null);
+            }
+            StmtIterator itBackward = extractFromModel.listStatements(null, null, root);
+
+
+            while (((itBackward.hasNext() || (itForward != null && itForward.hasNext())) && counter < maxValue))
             {
                 Statement t;
-                String subRoot;
+                RDFNode subRoot;
                 if( !itBackward.hasNext() ){
                     t = itForward.next();
-                    subRoot = t.getObject().toString();
-                } else if(!itForward.hasNext() ){
+                    subRoot = t.getObject();
+                } else if(itForward != null && !itForward.hasNext() ){
                     t = itBackward.next();
-                    subRoot = t.getSubject().toString();
-                } else if(rand.nextDouble() < 0.5001){
+                    subRoot = t.getSubject();
+                } else if(rand.nextDouble() < 0.5001 && itForward != null){
                     t = itForward.next();
-                    subRoot = t.getObject().toString();
+                    subRoot = t.getObject();
                 } else{
                     t = itBackward.next();
-                    subRoot = t.getSubject().toString();
+                    subRoot = t.getSubject();
                 }
 
                 toUpdateTriple.add( t.asTriple() );
-                if ( (!active.contains( subRoot ) ) && (!modelRemovedTriples.contains(t) )) {  //
+                counter ++;
+                if ( (!active.contains( subRoot.toString() ) ) && (!modelRemovedTriples.contains(t) )) {  //
                     counter = extractIntoExtendBothWays( subRoot, counter, extractFromModel, modelRemovedTriples);
                 }
-                counter ++;
             }
 
 

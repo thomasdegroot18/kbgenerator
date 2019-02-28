@@ -12,12 +12,13 @@ import org.rdfhdt.hdt.options.HDTSpecification;
 import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.FileOutputStream;
-import java.util.HashSet;
-import java.util.Random;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
+import java.util.List;
 
 // TODO: Needs to add in a function that measures the amount of Inconsistencies and makes sure that the amount of Inconsistencies
 //  stays below the correct size.
@@ -25,8 +26,14 @@ import java.util.Set;
 public class Generator {
 
     private static Random rand = new Random();
+    private static InconsistencyStatementChecker InChecker;
 
     private static boolean DeletionChecker(Set<Triple> SubjectInput, Set<Triple> ObjectInput, Statement Input){
+        // Check if item is mandatory. If the model
+        if (InChecker.checkMandatory(Input)){
+            return true;
+        }
+
         Set<Node> SubjectInputCleanList = new HashSet<>();
         Set<Node> ObjectInputCleanList = new HashSet<>();
         for (Triple elem : SubjectInput){
@@ -49,7 +56,7 @@ public class Generator {
         return true;
     }
 
-    private static Model RemoveStatements(HDT hdt, double SampleSize) {
+    private static Model RemoveStatements(HDT hdt, double SampleSize ) {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
         System.out.println("Creating Jena HDT graph");
         HDTGraph graph = new HDTGraph(hdt);
@@ -98,6 +105,7 @@ public class Generator {
          */
 
 
+
         // Get the Iterator tripleString to loop through.
         Model modelCStorage = ModelFactory.createDefaultModel();
         // Get the Iterator tripleString to loop through.
@@ -112,12 +120,17 @@ public class Generator {
             // A selection of triples is chosen at random.
             // Can be changed later to a selection of triples that meet a certain criteria.
 
-            // at the moment every 1 out of 5 triples is taken.
+            // at the moment every 1 out of 10 triples is taken.
             if (rand.nextDouble() > 0.1) {
                 Statement item = stmtIt.next();
-                String object = item.getObject().toString();
-                Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 3, modelRemovedTriples);
-                if ((ObjectInput.size() == 0)){
+                if(InChecker.checkMandatory(item)){
+                    modelCStorage.add(item);
+                    continue;
+                }
+                RDFNode object = item.getObject();
+
+                Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 2, modelRemovedTriples);
+                if ((ObjectInput.size() <= 1)){
                     continue;
                 }
                 modelCStorage.add(item);
@@ -130,8 +143,8 @@ public class Generator {
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
-            String subject = item.getSubject().toString();
-            String object = item.getObject().toString();
+            RDFNode subject = item.getSubject();
+            RDFNode object = item.getObject();
             modelRemovedTriples.add(item);
             // Find all the inconsistencies in the first subgraph(Object)
             Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 50, modelRemovedTriples);
@@ -199,8 +212,10 @@ public class Generator {
                 // both the subject and the object are taken to build the subgraph. With the expectation that the subject
                 // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
                 // some of the depth the object graph does take into account.
-                String subject = item.getSubject().toString();
-                String object = item.getObject().toString();
+                RDFNode subject = item.getSubject();
+                RDFNode object = item.getObject();
+
+
                 modelRemovedTriples.add(item);
                 // Find all the inconsistencies in the first subgraph(Object)
                 Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
@@ -235,7 +250,7 @@ public class Generator {
     }
 
 
-    private static Set<Triple> GetSubGraph(Model model, String tripleItem, int maxValue, Model modelRemovedTriples) {
+    private static Set<Triple> GetSubGraph(Model model, RDFNode tripleItem, int maxValue, Model modelRemovedTriples) {
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
@@ -266,7 +281,7 @@ public class Generator {
     }
 
 
-    private static boolean WriteHDT(Model model,String outputDirectory) throws Exception {
+    static boolean WriteHDT(Model model,String outputDirectory) throws Exception {
 
         try{
             WriteRDF(model, outputDirectory);
@@ -275,7 +290,7 @@ public class Generator {
             return false;
         }
 
-        String baseURI = "";
+        String baseURI = "a";
         String rdfInput = outputDirectory.replace(".hdt",".nt");
         String inputType = "ntriples";
 
@@ -296,17 +311,38 @@ public class Generator {
         return true;
     }
 
+    private static HashMap<String, Integer> ReadInconsistency(String InputLocation){
+        HashMap<String, Integer> Inconsistencies = new HashMap<>();
+        Path path = Paths.get(InputLocation);
+        try{
+            List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            for (String line: allLines){
+                String[] lineSplit = line.split(", \"Amount\" : ");
+                Inconsistencies.put(lineSplit[0].replace("{\"Inconsistency\" : ","").replace("\"", "") , Integer.parseInt(lineSplit[1].replace("\"","").replace("}","").trim()));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return Inconsistencies;
+    }
+
 
     public static void main(String[] args)  throws Exception {
         /* main method that generates Inconsistencies when found.
          * @params {@code args[0] } location of the HDT  -- necessary
          * @params {@code args[1] } Location to store the output  -- necessary
-         * @params {@code args[2] } Return Type HDT or N-TRIPLES
+         * @params {@code args[2] } Location of the amount and types of inconsistencies.
+         * @params {@code args[3] } Return Type HDT or N-TRIPLES
          * @returns void
          */
 
+        // Read in the inconsistencies
+        HashMap<String, Integer> Inconsistencies = ReadInconsistency(args[2]);
 
+        // Setting Env Variables
         double SampleSize = 0.1;
+
 
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
@@ -324,22 +360,24 @@ public class Generator {
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
         args[1] = args[1]+"Sample" +"-"+ args[0].split("/")[args[0].split("/").length-1];
-        System.out.println(args[1]);
         // Load HDT file using the hdt-java library
-
         HDT hdt = HDTManager.mapIndexedHDT(args[0]);
 
         // Print to the user that the HDT is finished loading.
         System.out.println("Finished Loading HDT");
 
-        // Set output Writer
+        // Setting Env Variables
+        InChecker = new InconsistencyStatementChecker(Inconsistencies, hdt);
+
+        // Sampling by Removing Statements
         Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
 
+        // Set output Writer
         System.out.println("Finished Working Sampled Model");
         boolean emitSuccess = false;
-        if (args[2].equals("HDT")){
+        if (args[3].equals("HDT")){
             emitSuccess = WriteHDT(FinalSampledModel, args[1]);
-        }else if (args[2].equals("N-TRIPLES")){
+        }else if (args[3].equals("N-TRIPLES")){
             emitSuccess = WriteRDF(FinalSampledModel, args[1]);
         } else {
             System.out.println("Could not understand the type specification, writing the file as N-Triples");

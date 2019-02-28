@@ -624,4 +624,13 @@ public class GeneralisedSubGraph {
     List<String> getExplanationStringList() {
         return ExplanationStringList;
     }
+
+
+
+    // TODO: Can add in more functions to generalize the graph further:
+
+    public void generalizeFurther() {
+
+
+    }
 }
