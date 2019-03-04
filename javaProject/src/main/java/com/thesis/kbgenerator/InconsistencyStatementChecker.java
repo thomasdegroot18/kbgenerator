@@ -11,27 +11,26 @@ import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 class InconsistencyStatementChecker {
-    HDT hdt;
+    private HDT hdt;
 
     InconsistencyStatementChecker(HashMap<String, Integer> Inconsistencies, HDT hdt){
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
         Model modelResultSet = ModelFactory.createDefaultModel();
         for (String Inconsistency: Inconsistencies.keySet()){
             // Convert SPARQL TO USEFUL OTHER ITEM
-            ArrayList<String[]> InconsToList = InconsistencyToList(Inconsistency);
+            ArrayList<String[]> InconsistencyToList = InconsistencyToList(Inconsistency);
 
-            System.out.println(Inconsistency);
             int MinAmount = Inconsistencies.get(Inconsistency );
-            ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*3);
-
+            ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*10);
             while(results.hasNext()){
                 QuerySolution result = results.next();
-                for (String[] elem :InconsToList){
+                for (String[] elem :InconsistencyToList){
                     // Get the item.
                     modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
+
+                    // Build a random remover adder function.
 
                 }
             }
@@ -53,7 +52,6 @@ class InconsistencyStatementChecker {
         for (String elem : Inconsistency.substring(Inconsistency.indexOf("{")+1, Inconsistency.indexOf("}")).split("\\. ")){
             String[] CleanString = new String[3];
             String[] ArrayElem = elem.split(" ");
-            System.out.println(elem );
             CleanString[0] = ArrayElem[0].substring(1);
             CleanString[1] = ArrayElem[1].substring(1, ArrayElem[1].length()-1);
             CleanString[2] = ArrayElem[2].substring(1);

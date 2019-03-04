@@ -282,16 +282,16 @@ public class Generator {
 
 
     static boolean WriteHDT(Model model,String outputDirectory) throws Exception {
-
+        String TempDirectory = "resources/extraFiles/temp/temp.hdt";
         try{
-            WriteRDF(model, outputDirectory);
+            WriteRDF(model, TempDirectory);
         } catch (Exception e){
             System.out.println("Could not write to rdfFile");
             return false;
         }
 
         String baseURI = "a";
-        String rdfInput = outputDirectory.replace(".hdt",".nt");
+        String rdfInput = TempDirectory.replace(".hdt",".nt");
         String inputType = "ntriples";
 
         // Create HDT from RDF file
@@ -327,6 +327,18 @@ public class Generator {
         return Inconsistencies;
     }
 
+    private static void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if(files!=null) { //some JVMs return null for empty dirs
+            for(File f: files) {
+                if(f.isDirectory()) {
+                    deleteFolder(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+    }
 
     public static void main(String[] args)  throws Exception {
         /* main method that generates Inconsistencies when found.
@@ -389,5 +401,11 @@ public class Generator {
         } else{
             System.out.println("Unsuccessfully written the model.");
         }
+
+
+        deleteFolder(new File("resources/extraFiles/temp/"));
+
+
+
     }
 }
