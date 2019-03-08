@@ -1,6 +1,5 @@
 package com.thesis.kbInconsistencyLocator;
 
-import com.thesis.SPARQLengine.SPARQLExecutioner;
 import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
@@ -19,10 +18,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.Model;
-
-import org.rdfhdt.hdtjena.HDTGraph;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
@@ -569,41 +564,6 @@ public class InconsistencyLocator
 
 
 
-    private static void QueryResultPrinter(Model model, String query){
-        //  Run query  and retrieve the results as ResultSet.
-        ResultSet results = SPARQLExecutioner.SPARQLQuery(model, query);
-
-        // Print for every result the result line.
-        while (results.hasNext()){
-            System.out.println(results.next());
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private static void testQueries(Model model){
-        // Running a set of test queries to check quickly if this graph can be susceptible to INCONSISTENCIES.
-        // @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-        // @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-        // @prefix owl: <http://www.w3.org/2002/07/owl#> .
-
-
-        // Check an inconsistency. If the graph has this pattern the graph is inconsistent.
-        String query = "SELECT ?a ?C ?D WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
-
-        // Check a second inconsistency. If the graph has this pattern the graph is inconsistent.
-        String query2 = "SELECT ?a ?C WHERE { ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?C . } LIMIT 5";
-
-        //String query2 = "SELECT ?B ?C ?D WHERE { ?B <http://www.w3.org/2000/01/rdf-schema#range> ?C . ?B <http://www.w3.org/2000/01/rdf-schema#range> ?D . ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
-        // Final check, if the query has disjoints the graph can be inconsistent. If the query does not have disjoints it is still possible to be inconsistent. It will only be less plausible to happen.
-        String query3 = "SELECT ?D ?C WHERE { ?C <http://www.w3.org/2002/07/owl#disjointWith> ?D . } LIMIT 5";
-
-        // test all three queries.
-        QueryResultPrinter(model, query);
-        QueryResultPrinter(model, query2);
-        QueryResultPrinter(model, query3);
-
-    }
-
 
     private static void ClassLabelGenerator() // Generated Labels for the classes and the instances that can be used to map them.
     // LABELS are stored in the program itself.
@@ -704,21 +664,6 @@ public class InconsistencyLocator
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
-
-        if(verbose) {
-            // Create Jena wrapper on top of HDT.
-            System.out.println("Creating Jena HDT graph");
-            HDTGraph graph = new HDTGraph(hdt);
-
-            // Create Models
-            System.out.println("Creating model from graph");
-
-            Model model = ModelFactory.createModelForGraph(graph);
-
-            System.out.println("Running test Queries");
-            // Run test Queries
-            testQueries(model);
-        }
 
         // Print to the user that system started finding inconsistencies.
         System.out.println("Start locating the inconsistencies.");

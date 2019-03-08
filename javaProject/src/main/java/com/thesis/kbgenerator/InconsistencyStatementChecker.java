@@ -11,35 +11,53 @@ import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 class InconsistencyStatementChecker {
     private HDT hdt;
+    private static Random rand = new Random();
 
-    InconsistencyStatementChecker(HashMap<String, Integer> Inconsistencies, HDT hdt){
+    InconsistencyStatementChecker(HashMap<String, Integer> Inconsistencies, HDT hdt, String tempDir){
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
         Model modelResultSet = ModelFactory.createDefaultModel();
+        long oldSize = 0;
         for (String Inconsistency: Inconsistencies.keySet()){
             // Convert SPARQL TO USEFUL OTHER ITEM
             ArrayList<String[]> InconsistencyToList = InconsistencyToList(Inconsistency);
 
             int MinAmount = Inconsistencies.get(Inconsistency );
-            ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*10);
-            while(results.hasNext()){
-                QuerySolution result = results.next();
-                for (String[] elem :InconsistencyToList){
-                    // Get the item.
-                    modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
+            int offsetVal = 0;
+            while (modelResultSet.size() < MinAmount){
+                ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*5 + " OFFSET "+MinAmount*5*offsetVal);
+                int LIMITc = 0;
+                while(results.hasNext() && modelResultSet.size() < MinAmount){
+                    QuerySolution result = results.next();
+                    if(rand.nextDouble() < 0.42 ){
+                        for (String[] elem :InconsistencyToList){
+                            modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
 
-                    // Build a random remover adder function.
+                        }
 
+                    }
+                    LIMITc ++;
+                }
+                if(oldSize == modelResultSet.size()) {
+                    break;
+                }
+                oldSize = modelResultSet.size();
+                //Making sure we always get results from the next query.
+                if(LIMITc >= (MinAmount * 5 - 1)){
+                    offsetVal ++;
+                } else if(LIMITc <= MinAmount){
+                    offsetVal = 0;
                 }
             }
 
 
         }
         try{
-            Generator.WriteHDT(modelResultSet, "resources/extraFiles/temp/temporary.hdt");
-            this.hdt = HDTManager.mapIndexedHDT("resources/extraFiles/temp/temporary.hdt");
+            Generator.WriteHDT(modelResultSet, tempDir + "temporary.hdt", tempDir);
+            this.hdt = HDTManager.mapIndexedHDT(tempDir +"temporary.hdt");
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -217,7 +217,9 @@ class KbStatistics {
                 hashOutDegree.put(Out, 1);
             }
             if(Element % 1000000 == 0){
-                System.out.println(Element);
+                if(Element > 0){
+                    System.out.println(Element);
+                }
             }
             // Calculating the Cluster Coefficient
             Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );
@@ -255,7 +257,9 @@ class KbStatistics {
                 hashOutDegree.put(Out, 1);
             }
             if(Element % 1000000 == 0){
-                System.out.println(Element);
+                if(Element > 0){
+                    System.out.println(Element);
+                }
             }
             // Calculating the Cluster Coefficient
             Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );

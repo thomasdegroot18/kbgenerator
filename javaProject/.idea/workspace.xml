@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c276855-186e-4cd6-a3dd-51c9c6ac0552" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/thesis/testSuite/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/thomas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/thomas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +22,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="47" />
+            <state relative-caret-position="495">
+              <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,10 +34,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/testSuite/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+            <state relative-caret-position="393">
+              <caret line="50" column="116" selection-start-line="50" selection-start-column="116" selection-end-line="50" selection-end-column="116" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,10 +46,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+            <state relative-caret-position="-9297">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-195">
+              <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-56">
+              <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,6 +97,9 @@
       <find>writeJSON</find>
       <find>System</find>
       <find>RemoveVertex</find>
+      <find>printl</find>
+      <find>args[1]</find>
+      <find>temp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,15 +122,17 @@
         <option value="$PROJECT_DIR$/resources/RDFs/INCONSISTENCIES-yago2s.ttl" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/InconsistencyStats.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/InconsistencyStatistics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/ScratchPad/ScratchesAndTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GeneralisedSubGraph.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/SPARQLengine/SPARQLExecutioner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/testSuite/DatasetTestFile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thesis/testSuite/test.java" />
       </list>
     </option>
   </component>
@@ -113,9 +144,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="194" />
-    <option name="width" value="1843" />
-    <option name="height" value="789" />
+    <option name="x" value="67" />
+    <option name="y" value="25" />
+    <option name="width" value="1853" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -140,6 +172,12 @@
               <item name="javaProject" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="extraFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kbgenerator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="javaProject" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="Samples" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kbgenerator" type="b2602c69:ProjectViewProjectNode" />
@@ -230,7 +268,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552051573734" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552061575590" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.6413793" />
@@ -247,7 +285,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Generator">
+  <component name="RunManager" selected="Application.test">
     <configuration name="Generator" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.thesis.kbgenerator.Generator" />
       <module name="kbgenerator" />
@@ -279,11 +317,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.thesis.testSuite.test" />
+      <module name="kbgenerator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Generator" />
       <item itemvalue="Application.InconsistencyLocator" />
       <item itemvalue="Application.Statistics" />
       <item itemvalue="Application.Tests" />
+      <item itemvalue="Application.test" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -312,7 +358,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2589928" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2589928" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -322,7 +368,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997233" weight="0.24406047" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4997233" visible="true" weight="0.24406047" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -458,16 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="196" column="88" selection-start-line="196" selection-start-column="88" selection-end-line="196" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/InconsistencyStats.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -510,26 +546,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/extraFiles/temp/temporary.nt" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="94" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2831">
-          <caret line="102" column="5" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/InconsistencyStatistics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
@@ -540,20 +556,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/GraphExtractExtended.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-2100">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/KbStatistics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+        <state relative-caret-position="-364">
+          <caret line="262" column="13" selection-start-line="262" selection-start-column="13" selection-end-line="262" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -562,8 +575,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbInconsistencyLocator/InconsistencyLocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+        <state relative-caret-position="-9297">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbStatistics/Statistics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/InconsistencyStatementChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56">
+          <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/kbgenerator/Generator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thesis/testSuite/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="50" column="116" selection-start-line="50" selection-start-column="116" selection-end-line="50" selection-end-column="116" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

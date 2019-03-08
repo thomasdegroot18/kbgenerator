@@ -20,8 +20,6 @@ public class Statistics {
     // Setting boolean testing
     private static boolean testing_Bool = true;
 
-
-
     private static boolean ConstantLoopBoolean = true;
 
 
@@ -95,7 +93,7 @@ public class Statistics {
 
         // Get all the KB statistics
         System.out.println("knowledge base statistics calculation");
-        KbStatistics.RunAll(hdt, OutputLocation+"/kbStatistics.json");
+        KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
         System.out.println("Finished knowledge base statistics calculation");
 
@@ -109,7 +107,6 @@ public class Statistics {
 
             // Load all Inconsistency graphs.
             GraphsLoader(fileLocation, StoredGraphs);
-
             // RunAll Inconsistency Statistics:
 
             System.out.println("Running Inconsistency Statistics");
@@ -119,11 +116,14 @@ public class Statistics {
 
             System.out.println("Finished Inconsistency Statistics");
             // Write the Inconsistencies until now collected.
-            InconsistencyStats.WriteToFile(OutputLocation+"/InconsistencyStatistics.json");
+            InconsistencyStats.WriteToFile(OutputLocation+"InconsistencyStatistics.json");
 
             try{
-                Thread.sleep(60000);
-                System.out.println("Resending Requests");
+                if(ConstantLoopBoolean){
+                    System.out.println("Waiting 60 seconds");
+                    Thread.sleep(60000);
+                    System.out.println("Resending Requests");
+                }
 
             } catch (Exception e){
                 e.printStackTrace();
@@ -134,7 +134,7 @@ public class Statistics {
 
     public static void main(String[] args) throws Exception {
         /*  Argument 0: input location of the HDT
-         *  Argument 1: Input directory of the turtle.
+         *  Argument 1: Input directory of the Inconsistency File.
          *  Argument 2: Output location of the gathered statistics.
          */
 
@@ -162,7 +162,7 @@ public class Statistics {
         File[] directoryListing = Folder.listFiles();
         if (directoryListing != null) {
             for (File file : directoryListing) {
-                if (file.getName().contains(args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", ""))) {
+                if (file.getName().contains("INCONSISTENCIES-"+args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", ""))) {
                     FileInput = file.toString();
                 }
             }
@@ -172,10 +172,8 @@ public class Statistics {
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.
-        System.out.println("Creating Jena HDT graph");
         System.out.println("Creating model from graph");
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
-
         ConstantLoop(model, hdt, FileInput, args[2]);
 
 

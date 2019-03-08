@@ -5,6 +5,7 @@
       <w>expressivity</w>
       <w>graphnumber</w>
       <w>groot</w>
+      <w>kbgenerator</w>
       <w>ntriples</w>
       <w>openllet</w>
       <w>rdfs</w>
@@ -13,6 +14,7 @@
       <w>subgraph</w>
       <w>subgraphs</w>
       <w>webpages</w>
+      <w>yago</w>
     </words>
   </dictionary>
 </component>

@@ -287,8 +287,8 @@ public class Generator {
     }
 
 
-    static boolean WriteHDT(Model model,String outputDirectory) throws Exception {
-        String TempDirectory = "resources/extraFiles/temp/temp.hdt";
+    static boolean WriteHDT(Model model,String outputDirectory,String tempDirectory) throws Exception {
+        String TempDirectory = tempDirectory+"temp.hdt";
         try{
             WriteRDF(model, TempDirectory);
         } catch (Exception e){
@@ -354,8 +354,9 @@ public class Generator {
          * @params {@code args[0] } location of the HDT  -- necessary
          * @params {@code args[1] } Location to store the output  -- necessary
          * @params {@code args[2] } Location of the amount and types of inconsistencies.
-         * @params {@code args[3] } Return Type HDT or N-TRIPLES
-         * @params {@code args[4] } Return Sample Size, default is 0.1
+         * @params {@code args[3] } Location of the temporary Directory.
+         * @params {@code args[4] } Return Type HDT or N-TRIPLES
+         * @params {@code args[5] } Return Sample Size, default is 0.1
          * @returns void
          */
 
@@ -366,9 +367,9 @@ public class Generator {
         // Setting Env Variables
         double SampleSize;
 
-        if(args.length > 4 ){
+        if(args.length > 5 ){
             try {
-                SampleSize = Double.parseDouble(args[4]);
+                SampleSize = Double.parseDouble(args[5]);
             } catch (Exception e){
                 SampleSize = 0.1;
             }
@@ -388,8 +389,13 @@ public class Generator {
         String parentDirName = path.getParent().toString();
         boolean OutputDirExists = new File(parentDirName).exists();
 
+        // Check if output dir exists
+        Path pathTemp = Paths.get(args[3]);
+        String parentDirNameTemp = pathTemp.getParent().toString();
+        boolean TempDirExists = new File(parentDirNameTemp).exists();
+
         // Throws error when incorrect location.
-        if ( (!OutputDirExists  )|| (!InputFileExists)){
+        if ( (!OutputDirExists  )|| (!InputFileExists)|| (!TempDirExists) ){
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }
         args[1] = args[1]+"Sample" +"-"+ args[0].split("/")[args[0].split("/").length-1];
@@ -400,7 +406,7 @@ public class Generator {
         System.out.println("Finished Loading HDT");
 
         // Setting Env Variables
-        InChecker = new InconsistencyStatementChecker(Inconsistencies, hdt);
+        InChecker = new InconsistencyStatementChecker(Inconsistencies, hdt, args[3]);
 
         // Sampling by Removing Statements
         Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
@@ -408,9 +414,9 @@ public class Generator {
         // Set output Writer
         System.out.println("Finished Working Sampled Model");
         boolean emitSuccess = false;
-        if (args[3].equals("HDT")){
-            emitSuccess = WriteHDT(FinalSampledModel, args[1]);
-        }else if (args[3].equals("N-TRIPLES")){
+        if (args[4].equals("HDT")){
+            emitSuccess = WriteHDT(FinalSampledModel, args[1], args[3]);
+        }else if (args[4].equals("N-TRIPLES")){
             emitSuccess = WriteRDF(FinalSampledModel, args[1]);
         } else {
             System.out.println("Could not understand the type specification, writing the file as N-Triples");
@@ -424,7 +430,7 @@ public class Generator {
         }
 
 
-        deleteFolder(new File("resources/extraFiles/temp/"));
+        deleteFolder(new File(args[3]));
 
 
 
