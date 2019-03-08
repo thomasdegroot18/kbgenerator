@@ -36,6 +36,10 @@ import org.semanticweb.owlapi.model.*;
 public class InconsistencyLocator
 
 {
+    // Setting boolean testing
+    private static boolean testing_Bool = true;
+
+    // Setting other variables
     private static byte[] strToBytes = ("New general inconsistency: \n").getBytes();  // Small string to separate different explanations.
     private static int MaxExplanations;                                         // Max explanation Storage.
     private static Random rand = new Random();                                  // Random Instantiation

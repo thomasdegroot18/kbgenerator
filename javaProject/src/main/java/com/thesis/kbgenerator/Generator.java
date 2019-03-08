@@ -25,6 +25,12 @@ import java.util.List;
 
 public class Generator {
 
+
+    // Setting boolean testing
+    private static boolean testing_Bool = true;
+
+    // Other global variables.
+
     private static Random rand = new Random();
     private static InconsistencyStatementChecker InChecker;
 
@@ -334,7 +340,10 @@ public class Generator {
                 if(f.isDirectory()) {
                     deleteFolder(f);
                 } else {
-                    f.delete();
+                    boolean deleteChecker = f.delete();
+                    if(!deleteChecker){
+                        System.out.println("Failed to delete folder, Check for reason why.");
+                    }
                 }
             }
         }
@@ -346,14 +355,26 @@ public class Generator {
          * @params {@code args[1] } Location to store the output  -- necessary
          * @params {@code args[2] } Location of the amount and types of inconsistencies.
          * @params {@code args[3] } Return Type HDT or N-TRIPLES
+         * @params {@code args[4] } Return Sample Size, default is 0.1
          * @returns void
          */
+
 
         // Read in the inconsistencies
         HashMap<String, Integer> Inconsistencies = ReadInconsistency(args[2]);
 
         // Setting Env Variables
-        double SampleSize = 0.1;
+        double SampleSize;
+
+        if(args.length > 4 ){
+            try {
+                SampleSize = Double.parseDouble(args[4]);
+            } catch (Exception e){
+                SampleSize = 0.1;
+            }
+        } else{
+            SampleSize = 0.1;
+        }
 
 
         // Print to the user that the HDT is being loaded. Can take a while.

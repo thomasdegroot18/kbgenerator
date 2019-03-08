@@ -17,6 +17,10 @@ import java.util.List;
 
 
 public class Statistics {
+    // Setting boolean testing
+    private static boolean testing_Bool = true;
+
+
 
     private static boolean ConstantLoopBoolean = true;
 
