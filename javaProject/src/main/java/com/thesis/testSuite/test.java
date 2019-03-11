@@ -24,6 +24,7 @@ public class test {
             hdtName = args[0];
         }
 
+        // TODO: Testing for 4 different hdts
         // Setting Locations
         String hdt = "/home/thomas/thesis/kbgenerator/javaProject/resources/HDTs/";
         String rdf = "/home/thomas/thesis/kbgenerator/javaProject/resources/RDFs/";
