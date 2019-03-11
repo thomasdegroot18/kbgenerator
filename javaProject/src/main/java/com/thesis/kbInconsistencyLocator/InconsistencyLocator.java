@@ -428,8 +428,8 @@ public class InconsistencyLocator
 //        long e = System.currentTimeMillis();
 //        System.out.println("Consistent? " + consistent + " (" + (e - s) + "ms) Expressivity: "+kb.getExpressivity());
 
-        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-        model.read(PipeModel(subModel), "","N3");
+//        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//        model.read(PipeModel(subModel), "","N3");
 
 
         OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
@@ -501,8 +501,7 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt);
-
+            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 5000);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();

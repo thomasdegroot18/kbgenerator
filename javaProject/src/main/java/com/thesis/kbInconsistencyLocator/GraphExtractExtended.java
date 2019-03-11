@@ -151,7 +151,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         private int extractIntoExtendCleanBoth( CharSequence root , int counter ) throws Exception
         {
             active.add( root );
-
+            System.out.println(maxValue);
             IteratorTripleString itForward = extractFrom.search(root, "", "");
             IteratorTripleString itBackward = extractFrom.search("", "", root);
             while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)

@@ -15,22 +15,26 @@ public class test {
 
     public static void main(String[] args) throws Exception{
 
+        //String AbsoluteName = "/home/thomas/thesis/kbgenerator/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
+        //String AbsoluteName = "/home/thomasdegroot/";
+
         String hdtName;
 
         // Setting HDT name
         if (args.length == 0){
-            hdtName = "pizza.hdt";
+            hdtName = "yago2s.hdt";
         } else{
             hdtName = args[0];
         }
 
         // TODO: Testing for 4 different hdts
         // Setting Locations
-        String hdt = "/home/thomas/thesis/kbgenerator/javaProject/resources/HDTs/";
-        String rdf = "/home/thomas/thesis/kbgenerator/javaProject/resources/RDFs/";
-        String samples = "/home/thomas/thesis/kbgenerator/javaProject/resources/Samples/";
-        String inconsistencyJSON = "/home/thomas/thesis/kbgenerator/docs/Webpages/data/";
-        String temp = "/home/thomas/thesis/kbgenerator/javaProject/resources/extraFiles/temp/";
+        String hdt = AbsoluteName+"javaProject/resources/HDTs/";
+        String rdf = AbsoluteName+"javaProject/resources/RDFs/";
+        String samples = AbsoluteName+"javaProject/resources/Samples/";
+        String inconsistencyJSON = AbsoluteName+"docs/Webpages/data/";
+        String temp = AbsoluteName+"resources/extraFiles/temp/";
 
 
         // Inconsistency Locator
