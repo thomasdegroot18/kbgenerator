@@ -34,7 +34,7 @@ public class testSuite {
 
         // Setting Lod-a-lot here:
         //String hdt = AbsoluteName+"javaProject/resources/HDTs/";
-        String hdt = "/home/wbeek/data/LOD-a-lot/"
+        String hdt = "/home/wbeek/data/LOD-a-lot/";
 
         String rdf = AbsoluteName+"javaProject/resources/RDFs/";
         String samples = AbsoluteName+"javaProject/resources/Samples/";
