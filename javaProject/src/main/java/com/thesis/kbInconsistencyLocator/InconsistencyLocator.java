@@ -553,7 +553,7 @@ public class InconsistencyLocator
 
             if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
-                System.out.println("Percentage reached: "+ counterTriples/size);
+                System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
             }
 
             if (GeneralSubGraphFound < 0){
