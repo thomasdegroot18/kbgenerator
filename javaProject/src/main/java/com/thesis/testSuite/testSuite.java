@@ -17,29 +17,49 @@ public class testSuite {
 
         //String AbsoluteName = "/home/thomas/thesis/kbgenerator/";
         //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/";
+        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
+        String hdt;
         String hdtName;
 
-        // Setting HDT name/Lod-a-lot
-        if (args.length == 0){
-            // hdtName = "pizza.hdt";
-            hdtName = "LOD-a-lot.hdt";
-        } else{
-            hdtName = args[0];
+        // Setting Locations
+        switch (args[0]){
+            case "0":
+            // Setting Lod-a-lot here:
+            hdt = "/home/wbeek/data/LOD-a-lot/lod-a-lot.hdt";
+            hdtName = "lod-a-lot.hdt";
+            break;
+            case "1":
+            // Setting DBpedia here:
+            hdt = "/home/dimitris/local/dbpedia2016-04en.hdt";
+            hdtName = "dbpedia2016-04en.hdt";
+            break;
+            case "2":
+            // Setting Freebase here:
+            hdt = "/home/dimitris/local/freebase-rdf-2013-12-01-00-00.hdt";
+            hdtName = "freebase-rdf-2013-12-01-00-00.hdt";
+            break;
+            case "3":
+            //Setting Yago2s here:
+            hdt = AbsoluteName+"HDTs/yago2s.hdt";
+            hdtName = "yago2s.hdt";
+            break;
+            case "4":
+            //Setting Pizza here:
+            hdt = AbsoluteName+"HDTs/pizza.hdt";
+            hdtName = "pizza.hdt";
+            break;
+            default:
+            // Default here:
+            System.out.println("Not found value.");
+            hdt = AbsoluteName+"HDTs/pizza.hdt";
+            hdtName = "pizza.hdt";
         }
 
-        // TODO: Testing for 4 different hdts
-        // Setting Locations
-
-        // Setting Lod-a-lot here:
-        //String hdt = AbsoluteName+"javaProject/resources/HDTs/";
-        String hdt = "/home/wbeek/data/LOD-a-lot/";
-
-        String rdf = AbsoluteName+"javaProject/resources/RDFs/";
-        String samples = AbsoluteName+"javaProject/resources/Samples/";
-        String inconsistencyJSON = AbsoluteName+"docs/Webpages/data/";
-        String temp = AbsoluteName+"javaProject/resources/extraFiles/temp/";
+        String rdf = AbsoluteName+"RDFs/";
+        String samples = AbsoluteName+"Samples/";
+        String inconsistencyJSON = AbsoluteName+"StatResults/";
+        String temp = AbsoluteName+"extraFiles/temp/";
 
         System.out.println("AbsoluteName: "+AbsoluteName);
         System.out.println("rdf: "+rdf);
@@ -51,7 +71,7 @@ public class testSuite {
         // Inconsistency Locator
         System.out.println("------------------------------------------------------------------------------------------");
         System.out.println("Starting Locating Inconsistencies");
-        String[] argsInconsistency =   {hdt+hdtName,
+        String[] argsInconsistency =   {hdt,
                                         rdf,
                                         "10",
                                         "true"};
@@ -60,16 +80,20 @@ public class testSuite {
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");
-        String[] argsStatistics =  {hdt+hdtName, rdf, inconsistencyJSON};
+        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON};
         Statistics.main(argsStatistics);
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");
-        String[] argsGenerator =   {hdt+hdtName, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.1"};
-
+        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.1"};
         Generator.main(argsGenerator);
 
-
+        System.out.println("------------------------------------------------------------------------------------------");
+        // Statistics Sampled
+        System.out.println("Starting Statistics");
+        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, inconsistencyJSON+"Sampled/"};
+        Statistics.main(argsStatisticsSampled);
+        System.out.println("------------------------------------------------------------------------------------------");
 
 
     }
