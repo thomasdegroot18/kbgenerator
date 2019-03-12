@@ -529,9 +529,9 @@ public class InconsistencyLocator
             // A selection of triples is chosen at random.
             // Can be changed later to a selection of triples that meet a certain criteria.
 
-            // at the moment every 1 out of 100 triples is taken.
+            // at the moment every 1 out of 2000 triples is taken.
 
-            if (rand.nextDouble() > 0.01) {
+            if (rand.nextDouble() > 0.0005) {
                 it.next();
                 continue;
             }
@@ -543,10 +543,6 @@ public class InconsistencyLocator
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
             String subject = item.getSubject().toString();
-            String object = item.getObject().toString();
-
-            // Find all the inconsistencies in the first subgraph(Object)
-            WriteInconsistencySubGraph(hdt, object, fileWriter);
 
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
