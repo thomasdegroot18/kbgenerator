@@ -21,16 +21,21 @@ public class testSuite {
 
         String hdtName;
 
-        // Setting HDT name
+        // Setting HDT name/Lod-a-lot
         if (args.length == 0){
-            hdtName = "pizza.hdt";
+            // hdtName = "pizza.hdt";
+            hdtName = "LOD-a-lot";
         } else{
             hdtName = args[0];
         }
 
         // TODO: Testing for 4 different hdts
         // Setting Locations
-        String hdt = AbsoluteName+"javaProject/resources/HDTs/";
+
+        // Setting Lod-a-lot here:
+        //String hdt = AbsoluteName+"javaProject/resources/HDTs/";
+        String hdt = "/home/wbeek/data/LOD-a-lot/"
+
         String rdf = AbsoluteName+"javaProject/resources/RDFs/";
         String samples = AbsoluteName+"javaProject/resources/Samples/";
         String inconsistencyJSON = AbsoluteName+"docs/Webpages/data/";
