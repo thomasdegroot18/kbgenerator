@@ -24,7 +24,7 @@ public class testSuite {
         // Setting HDT name/Lod-a-lot
         if (args.length == 0){
             // hdtName = "pizza.hdt";
-            hdtName = "LOD-a-lot";
+            hdtName = "LOD-a-lot.hdt";
         } else{
             hdtName = args[0];
         }
