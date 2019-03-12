@@ -518,11 +518,12 @@ public class InconsistencyLocator
 
 
         // Get the Iterator tripleString to loop through.
+        long size = hdt.size();
         IteratorTripleString it = hdt.search("","","");
-
+        int counterTriples = 0;
         // While there is a triple the loop continues.
         while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)){
-
+            counterTriples ++;
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
             // that triples are connected to each other, not every triple needs to be evaluated.
             // A selection of triples is chosen at random.
@@ -550,8 +551,9 @@ public class InconsistencyLocator
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
-            if (InconsistenciesHit % 1000 == 0){
+            if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
+                System.out.println("Percentage reached: "+ counterTriples/size);
             }
 
             if (GeneralSubGraphFound < 0){
