@@ -36,6 +36,12 @@ public class testSuite {
         String inconsistencyJSON = AbsoluteName+"docs/Webpages/data/";
         String temp = AbsoluteName+"javaProject/resources/extraFiles/temp/";
 
+        System.out.println("AbsoluteName: "+AbsoluteName);
+        System.out.println("rdf: "+rdf);
+        System.out.println("hdt: "+hdt);
+        System.out.println("samples: "+samples);
+        System.out.println("inconsistencyJSON: "+inconsistencyJSON);
+        System.out.println("temp: "+temp);
 
         // Inconsistency Locator
         System.out.println("------------------------------------------------------------------------------------------");
