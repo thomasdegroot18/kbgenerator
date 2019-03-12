@@ -4,6 +4,9 @@ package com.thesis.kbStatistics;
 import com.thesis.SPARQLengine.SPARQLExecutioner;
 import com.thesis.kbInconsistencyLocator.GeneralisedSubGraph;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.rdfhdt.hdt.hdt.HDT;
+import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +17,9 @@ class InconsistencyStatistics {
     private Model model;
     private HashMap<String, InconsistencyStats> CollectedStatistics;
 
-    InconsistencyStatistics(Model model){
-        this.model = model;
+    InconsistencyStatistics(HDT hdt){
+        HDTGraph Graph = new HDTGraph(hdt);
+        this.model = ModelFactory.createModelForGraph(Graph );
         this.CollectedStatistics = new HashMap<>();
     }
 

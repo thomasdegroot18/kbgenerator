@@ -395,8 +395,16 @@ public class Generator {
         boolean TempDirExists = new File(parentDirNameTemp).exists();
 
         // Throws error when incorrect location.
-        if ( (!OutputDirExists  )|| (!InputFileExists)|| (!TempDirExists) ){
-            throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
+        if ( (!OutputDirExists  )){
+
+            throw new IllegalArgumentException("Did not input the correct locations of the OutputDirectory.");
+        }
+        if((!InputFileExists)){
+            throw new IllegalArgumentException("Did not input the correct locations of the InputDirectory.");
+        }
+        if ((!TempDirExists )){
+            System.out.println(args[3]);
+            throw new IllegalArgumentException("Did not input the correct locations of the TempDirectory.");
         }
         args[1] = args[1]+"Sample" +"-"+ args[0].split("/")[args[0].split("/").length-1];
         // Load HDT file using the hdt-java library

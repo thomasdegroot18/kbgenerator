@@ -1,10 +1,7 @@
 package com.thesis.kbStatistics;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
-import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -87,7 +84,7 @@ public class Statistics {
 
 
 
-    private static void ConstantLoop(Model model, HDT hdt,  String fileLocation, String OutputLocation){
+    private static void ConstantLoop( HDT hdt,  String fileLocation, String OutputLocation){
 
 
 
@@ -98,7 +95,7 @@ public class Statistics {
         System.out.println("Finished knowledge base statistics calculation");
 
         // Create object for Inconsistencies.
-        InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(model);
+        InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
 
         // Create HashMap for StoredGraphs
         HashMap<String, String> StoredGraphs = new HashMap<>();
@@ -168,13 +165,12 @@ public class Statistics {
             }
         }
 
-        System.out.println(args[2]);
+        System.out.println(args[0]);
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.
         System.out.println("Creating model from graph");
-        Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
-        ConstantLoop(model, hdt, FileInput, args[2]);
+        ConstantLoop( hdt, FileInput, args[2]);
 
 
     }
