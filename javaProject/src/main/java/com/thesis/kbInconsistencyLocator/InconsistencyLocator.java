@@ -501,7 +501,7 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 5000);
+            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 2000);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
