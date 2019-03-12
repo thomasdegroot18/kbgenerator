@@ -15,9 +15,9 @@ public class testSuite {
 
     public static void main(String[] args) throws Exception{
 
-        String AbsoluteName = "/home/thomas/thesis/kbgenerator/";
+        //String AbsoluteName = "/home/thomas/thesis/kbgenerator/";
         //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
-        //String AbsoluteName = "/home/thomasdegroot/";
+        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/";
 
         String hdtName;
 
