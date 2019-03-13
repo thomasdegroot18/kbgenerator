@@ -362,7 +362,14 @@ public class Generator {
 
 
         // Read in the inconsistencies
-        HashMap<String, Integer> Inconsistencies = ReadInconsistency(args[2]);
+        // Check if inconsistencies dir exists
+        HashMap<String, Integer> Inconsistencies;
+        if(Paths.get(args[2]).toFile().exists()){
+            Inconsistencies = ReadInconsistency(args[2]);
+        } else {
+            Inconsistencies = new HashMap<>();
+        }
+
 
         // Setting Env Variables
         double SampleSize;

@@ -61,6 +61,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtend( String node, HDT graph ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
+    @SuppressWarnings("unused")
     Set<String> extractExtendBothClean( String node, HDT graph ) throws Exception
     { return extractIntoExtendClean(new HashSet<>() , node, graph ); }
 

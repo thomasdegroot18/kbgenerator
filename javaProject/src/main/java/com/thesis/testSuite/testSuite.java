@@ -1,9 +1,12 @@
 package com.thesis.testSuite;
 
 
+import com.thesis.InconsistencyJsonCreator.InconsistencyCreator;
 import com.thesis.kbInconsistencyLocator.InconsistencyLocator;
 import com.thesis.kbStatistics.Statistics;
 import com.thesis.kbgenerator.Generator;
+
+import java.io.IOException;
 
 /**
 Testsuite holds a simple implementation of the functionality of the knowledge base generator.
@@ -71,10 +74,10 @@ public class testSuite {
         // Inconsistency Locator
         System.out.println("------------------------------------------------------------------------------------------");
         System.out.println("Starting Locating Inconsistencies");
-        String[] argsInconsistency =   {hdt,
-                                        rdf,
-                                        "10",
-                                        "true"};
+        String[] argsInconsistency =  {hdt,
+                                       rdf,
+                                       "10",
+                                       "true"};
 
         InconsistencyLocator.main(argsInconsistency);
         System.out.println("------------------------------------------------------------------------------------------");
@@ -82,6 +85,12 @@ public class testSuite {
         System.out.println("Starting Statistics");
         String[] argsStatistics =  {hdt, rdf, inconsistencyJSON};
         Statistics.main(argsStatistics);
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Making inconsistency.json");
+        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
+        InconsistencyCreator.main(argsInconsistencyCreator);
+
+        promptEnterKey();
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");
@@ -99,4 +108,13 @@ public class testSuite {
     }
 
 
+    @SuppressWarnings("unused")
+    private static void promptEnterKey(){
+        System.out.println("Press \"ENTER\" to continue...");
+        try {
+            int read = System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
