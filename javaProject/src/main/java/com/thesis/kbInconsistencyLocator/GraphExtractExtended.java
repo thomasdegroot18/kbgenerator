@@ -65,12 +65,20 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     Set<String> extractExtendBothClean( String node, HDT graph ) throws Exception
     { return extractIntoExtendClean(new HashSet<>() , node, graph ); }
 
+    @SuppressWarnings("unused")
+    Set<String> extractExtendBothClean( String node, HDT graph, int MaxValue  ) throws Exception
+    { return extractIntoExtendClean(new HashSet<>() , node, graph, MaxValue ); }
+
+    @SuppressWarnings("unused")
     Set<String> extractExtend( String node, HDT graph, int MaxValue ) throws Exception
     { return extractIntoExtend(new HashSet<>() , node, graph, MaxValue ); }
 
     public Set<Triple> extractExtendBoth( RDFNode node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendBoth(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
-
+    
+    @SuppressWarnings("unused")
+    public Set<Triple> extractExtendSingle( RDFNode node, Model model, int MaxValue, Model modelRemovedTriples  )
+    { return extractIntoExtendSingle(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
 
     /**
      Answer the graph <code>toUpdate</code> augmented with the sub-graph of
@@ -85,12 +93,20 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtendCleanBoth( root , 0);
         return toUpdate; }
 
+    private Set<String> extractIntoExtendClean( Set<String> toUpdate, String root, HDT extractFrom , int MaxValue) throws Exception
+    { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtendCleanBoth( root , 0);
+        return toUpdate; }
+
     private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom, int MaxValue ) throws Exception
     { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtend( root , 0);
         return toUpdate; }
 
     private Set<Triple> extractIntoExtendBoth(Set<Triple> toUpdate, RDFNode root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
     { new ExtractionExtend( toUpdate, MaxValue ).extractIntoExtendBothWays( root , 0, extractFrom, modelRemovedTriples);
+        return toUpdate; }
+
+    private Set<Triple> extractIntoExtendSingle(Set<Triple> toUpdate, RDFNode root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
+    { new ExtractionExtend( toUpdate, MaxValue ).extractIntoExtendSingle( root , 0, extractFrom, modelRemovedTriples);
         return toUpdate; }
 
     /**
@@ -141,46 +157,54 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
                 TripleString t = it.next();
                 String subRoot = t.getObject().toString();
                 toUpdate.add( t.asNtriple().toString() );
+                counter ++;
                 if (! (active.contains( subRoot )  ) ) {  //
                     counter = extractIntoExtend( subRoot, counter);
                 }
-                counter ++;
             }
             return counter;
         }
 
-        private int extractIntoExtendCleanBoth( CharSequence root , int counter ) throws Exception
+
+        // TODO: SPEED IT UP
+
+        private int extractIntoExtendCleanBoth( CharSequence root , int counter) throws Exception
         {
+
             active.add( root );
-            System.out.println(maxValue);
             IteratorTripleString itForward = extractFrom.search(root, "", "");
             IteratorTripleString itBackward = extractFrom.search("", "", root);
+
+
             while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)
             {
                 TripleString t;
                 String subRoot;
+
                 if( !itBackward.hasNext() ){
                     t = itForward.next();
                     subRoot = t.getObject().toString();
                 } else if(!itForward.hasNext() ){
                     t = itBackward.next();
                     subRoot = t.getSubject().toString();
-                } else if(rand.nextDouble() < 0.5001){
+                } else if(rand.nextDouble() < 0.90){
                     t = itForward.next();
                     subRoot = t.getObject().toString();
                 } else{
                     t = itBackward.next();
                     subRoot = t.getSubject().toString();
                 }
+
                 toUpdate.add( t.asNtriple().toString() );
-                if (! (active.contains( subRoot )  ) ) {  //
+                counter ++;
+                if (! (active.contains( subRoot )  ) && counter < maxValue ) {  //
                     counter = extractIntoExtendCleanBoth( subRoot, counter);
                 }
-                counter ++;
             }
             return counter;
         }
 
+        // TODO: SPEED IT UP
 
         private int extractIntoExtendBothWays( RDFNode root , int counter , Model extractFromModel, Model modelRemovedTriples)
         {
@@ -203,7 +227,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
                 } else if(itForward != null && !itForward.hasNext() ){
                     t = itBackward.next();
                     subRoot = t.getSubject();
-                } else if(rand.nextDouble() < 0.5001 && itForward != null){
+                } else if(rand.nextDouble() < 0.90 && itForward != null){
                     t = itForward.next();
                     subRoot = t.getObject();
                 } else{
@@ -213,8 +237,39 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 
                 toUpdateTriple.add( t.asTriple() );
                 counter ++;
-                if ( (!active.contains( subRoot.toString() ) ) && (!modelRemovedTriples.contains(t) )) {  //
+                if ( (!active.contains( subRoot.toString() ) ) && (!modelRemovedTriples.contains(t) ) && counter < maxValue) {  //
                     counter = extractIntoExtendBothWays( subRoot, counter, extractFromModel, modelRemovedTriples);
+                }
+            }
+
+
+
+            return counter;
+        }
+
+        private int extractIntoExtendSingle( RDFNode root , int counter , Model extractFromModel, Model modelRemovedTriples)
+        {
+            active.add( root.toString() );
+            StmtIterator itForward;
+
+            if(root.isResource()){
+                itForward = extractFromModel.listStatements(root.asResource(), null, (RDFNode)null);
+            } else{
+                return counter;
+            }
+
+
+
+            while (( (itForward != null && itForward.hasNext())) && counter < maxValue)
+            {
+
+                Statement t = itForward.next();
+                RDFNode subRoot = t.getObject();
+
+                toUpdateTriple.add( t.asTriple() );
+                counter ++;
+                if ( (!active.contains( subRoot.toString() ) ) && (!modelRemovedTriples.contains(t) ) && counter < maxValue) {  //
+                    counter = extractIntoExtendSingle( subRoot, counter, extractFromModel, modelRemovedTriples);
                 }
             }
 

@@ -89,8 +89,8 @@ public class testSuite {
         System.out.println("Making inconsistency.json");
         String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
         InconsistencyCreator.main(argsInconsistencyCreator);
-
         promptEnterKey();
+
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");

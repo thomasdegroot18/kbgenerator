@@ -266,6 +266,8 @@ public class Generator {
         try{
             // Try to extract a the subgraph from the HDT.
             subGraph = GraphExtract.extractExtendBoth(tripleItem , model, maxValue, modelRemovedTriples);
+            // To improve speed This filter can be used. TODO: CHANGE IT OUT.
+            //subGraph = GraphExtract.extractExtendSingle(tripleItem , model, maxValue, modelRemovedTriples);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();

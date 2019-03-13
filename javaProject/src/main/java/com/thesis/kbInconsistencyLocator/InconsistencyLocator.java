@@ -3,6 +3,7 @@ package com.thesis.kbInconsistencyLocator;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
@@ -44,9 +45,9 @@ public class InconsistencyLocator
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>();     // Generalised SubGraph Storage
     private static Map<GeneralisedSubGraph, Integer> SortingListMap = new HashMap<>(); // Generalised SubGraph Storage
 
-    // Setting the new Array. 1000. TODO: get it better fixed.
-    private static int[] TempStorageGenGraph = new int[1000];
-    private static int InconsistenciesHit = 1;                                      // Counter of inconsistencies
+    // Setting the new Array: 500. TODO: get it better fixed.
+    private static int[] TempStorageGenGraph = new int[500];
+    private static int InconsistenciesHit = 11;                                      // Counter of inconsistencies
     private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
@@ -336,8 +337,20 @@ public class InconsistencyLocator
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
+                try{
+                    TempStorageGenGraph[GeneralGraphNumber] = 1;
 
-                TempStorageGenGraph[GeneralGraphNumber] = 1;
+                } catch (Exception e){
+
+                    List<Integer> list11 =Arrays.stream(TempStorageGenGraph).boxed().collect(Collectors.toList());
+                    int[] TempStorageGenGraph = new int[list11.size()];
+                    Iterator<Integer> IntegerIterator = list11.iterator();
+                    for (int i = 0; i < TempStorageGenGraph.length; i++)
+                    {
+                        TempStorageGenGraph[i] = IntegerIterator.next();
+                    }
+
+                }
 
 
                 GeneralGraphNumber ++;
@@ -372,7 +385,7 @@ public class InconsistencyLocator
 //                    fileWriter.write((StringLine + "\n") .getBytes());
 //                }
 //            }
-//
+
             if(verbose && AcceptedTo ) { // IF verbose write to file.
                 { // Write out all the complete inconsistencies for examples Paper.
 
@@ -486,6 +499,8 @@ public class InconsistencyLocator
 
 
     }
+
+    // NOT USED IN THE ALGORITHM!!
     @SuppressWarnings("SameParameterValue")
     public static Set<String> WriteInconsistencySubGraph(HDT hdt, String tripleItem, int maxValue) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
@@ -496,7 +511,26 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem , hdt, maxValue);
+            long startTime = System.currentTimeMillis();
+            for (int i = 0; i < 100; i++) {
+                subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
+            }
+            long stopTime = System.currentTimeMillis();
+            long elapsedTime = stopTime - startTime;
+            System.out.println("Single Road: "+ elapsedTime);
+
+            // Try to extract a the subgraph from the HDT.
+            startTime = System.currentTimeMillis();
+            for (int i = 0; i < 100; i++) {
+                subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
+            }
+
+            stopTime = System.currentTimeMillis();
+            elapsedTime = stopTime - startTime;
+            System.out.println("Both ways: " + elapsedTime);
+
+
+
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -541,8 +575,14 @@ public class InconsistencyLocator
         // The subgraph is a set of strings. That stores up to 5000 triples.
         Set<String> subGraph = null;
         try{
-            // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 5000);
+            // Retrieve subrgraph from HDT single way 5000 triples takes as long as 250 both ways.
+
+
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+
+            //TODO: SPEED UP BOTH WAYS
+            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
+
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
