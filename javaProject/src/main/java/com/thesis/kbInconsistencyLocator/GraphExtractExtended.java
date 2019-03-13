@@ -75,7 +75,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 
     public Set<Triple> extractExtendBoth( RDFNode node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendBoth(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
-    
+
     @SuppressWarnings("unused")
     public Set<Triple> extractExtendSingle( RDFNode node, Model model, int MaxValue, Model modelRemovedTriples  )
     { return extractIntoExtendSingle(new HashSet<>() , node, model, MaxValue, modelRemovedTriples ); }
