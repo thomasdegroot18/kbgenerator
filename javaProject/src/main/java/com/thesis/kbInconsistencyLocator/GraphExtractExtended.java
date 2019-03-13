@@ -112,7 +112,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             this.toUpdate = toUpdate;
             this.extractFrom = extractFrom;
             this.active = CollectionFactory.createHashedSet();
-            this.maxValue = 2000;
+            this.maxValue = 5000;
         }
 
         private ExtractionExtend( Set<String> toUpdate, HDT extractFrom, int maxValue)

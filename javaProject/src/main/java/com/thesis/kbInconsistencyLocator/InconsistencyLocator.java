@@ -1,12 +1,9 @@
 package com.thesis.kbInconsistencyLocator;
 
-import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.apache.jena.graph.*;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
@@ -17,9 +14,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+
 
 
 /**
@@ -36,16 +36,20 @@ public class InconsistencyLocator
 
     // Setting other variables
     private static byte[] strToBytes = ("New general inconsistency: \n").getBytes();  // Small string to separate different explanations.
-    private static int MaxExplanations;                                         // Max explanation Storage.
-    private static Random rand = new Random();                                  // Random Instantiation
-    private static String[] classLabels;                                        // ClassLabel storage
-    private static String[] individualLabels;                                   // InstanceLabel Storage
-    private static boolean verbose;                                             // Verbosity storage
-    private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>(); // Generalised SubGraph Storage
-    private static int InconsistenciesHit = 1;                                  // Counter of inconsistencies
-    private static int TotalInconsistenciesBeforeBreak;                         // Break terminator for inconsistencies hit
-    private static boolean UnBreakable;                                         // Stores boolean for breaking after amount of Inconsistencies
-    private static IsomorphismManager IsoChecker = new IsomorphismManager();    // Start IsomorphismManager
+    private static int MaxExplanations;                                             // Max explanation Storage.
+    private static Random rand = new Random();                                      // Random Instantiation
+    private static String[] classLabels;                                            // ClassLabel storage
+    private static String[] individualLabels;                                       // InstanceLabel Storage
+    private static boolean verbose;                                                 // Verbosity storage
+    private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>();     // Generalised SubGraph Storage
+    private static Map<GeneralisedSubGraph, Integer> SortingListMap = new HashMap<>(); // Generalised SubGraph Storage
+
+    // Setting the new Array. 1000. TODO: get it better fixed.
+    private static int[] TempStorageGenGraph = new int[1000];
+    private static int InconsistenciesHit = 1;                                      // Counter of inconsistencies
+    private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
+    private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
+    private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
     private static int GeneralGraphNumber = 0;
     private static int GeneralSubGraphFound = 0;
 
@@ -314,20 +318,30 @@ public class InconsistencyLocator
 
 
             boolean AcceptedTo = true;
+            int counter = 0;
             // Loop through all the subgraphs.
-            for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
+            for (GeneralisedSubGraph AcceptedGraphs : GeneralGraphs){
                 // Check if the subgraph is equal to the compared graph.
                 if (AcceptedTo ){
-                    if( IsoChecker.CompareGraph(AcceptedGraph, GeneralGraph)){
+                    if( IsoChecker.CompareGraph(AcceptedGraphs, GeneralGraph)){
+                        TempStorageGenGraph[counter] ++;
+
+
                         AcceptedTo = false;
                     }
                 }
+                counter ++;
             }
 
             // If no subgraph can be found it is added to the list.
             if (AcceptedTo){
                 GeneralGraphs.add(GeneralGraph);
+
+                TempStorageGenGraph[GeneralGraphNumber] = 1;
+
+
                 GeneralGraphNumber ++;
+
                 System.out.println("Found A new General Graph, number " + GeneralGraphNumber);
                 GeneralSubGraphFound = 0;
 
@@ -491,6 +505,33 @@ public class InconsistencyLocator
         return subGraph;
     }
 
+    private static void SortGeneralList(){
+        int counter = 0;
+        for (GeneralisedSubGraph AcceptedGraph : GeneralGraphs){
+
+
+            int foundAlready = SortingListMap.getOrDefault(AcceptedGraph, 0);
+            if(foundAlready == 0){
+                SortingListMap.put(AcceptedGraph, 0);
+            }
+            foundAlready += TempStorageGenGraph[counter];
+            SortingListMap.replace(AcceptedGraph, foundAlready);
+            counter ++;
+        }
+
+
+        SortingListMap = SortingListMap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,LinkedHashMap::new));
+
+
+        // Setting the new Array. Max value plus 50. TODO: get it better fixed.
+        TempStorageGenGraph = new int[GeneralGraphNumber+50];
+
+    }
+
+
+
+
 
     private static void WriteInconsistencySubGraph(HDT hdt, String tripleItem, FileOutputStream fileWriter) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
@@ -501,7 +542,7 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 2000);
+            subGraph = GraphExtract.extractExtend(tripleItem , hdt, 5000);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -550,6 +591,8 @@ public class InconsistencyLocator
             if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
+
+                SortGeneralList();
             }
 
             if (GeneralSubGraphFound < 0){
