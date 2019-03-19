@@ -35,6 +35,7 @@ public class LODalot {
                 rdf,
                 "10",
                 "true",
+                "false",
                 "1"
                 };
 

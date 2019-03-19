@@ -691,10 +691,6 @@ public class InconsistencyLocator
          */
 
 
-
-        // Print to the user that the HDT is being loaded. Can take a while.
-        System.out.println("Print Loading in HDT");
-
         // Check if HDT Exists
         boolean InputFileExists = new File(args[0]).isFile();
 
@@ -709,12 +705,7 @@ public class InconsistencyLocator
         }
         args[1] = args[1]+"INCONSISTENCIES" +"-"+ args[0].split("/")[args[0].split("/").length-1].replace(".hdt","")+".ttl";
 
-        // Load HDT file using the hdt-java library
 
-        HDT hdt = HDTManager.mapIndexedHDT(args[0]);
-
-        // Print to the user that the HDT is finished loading.
-        System.out.println("Finished Loading HDT");
 
         // Set output Writer
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
@@ -764,10 +755,19 @@ public class InconsistencyLocator
         System.out.println("verbose : " + verbose);
         System.out.println("TotalInconsistenciesBeforeBreak : " + TotalInconsistenciesBeforeBreak);
         System.out.println("UnBreakable : " + UnBreakable);
-
+        System.out.println("TripleGap : " + TripleGap);
         // Generate labels for the classes and instances.
         ClassLabelGenerator();
 
+        // Print to the user that the HDT is being loaded. Can take a while.
+        System.out.println("Print Loading in HDT");
+
+        // Load HDT file using the hdt-java library
+
+        HDT hdt = HDTManager.mapIndexedHDT(args[0]);
+
+        // Print to the user that the HDT is finished loading.
+        System.out.println("Finished Loading HDT");
 
         // Print to the user that system started finding inconsistencies.
         System.out.println("Start locating the inconsistencies.");
