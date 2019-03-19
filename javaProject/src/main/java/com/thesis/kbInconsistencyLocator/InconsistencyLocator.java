@@ -592,7 +592,7 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
@@ -614,6 +614,7 @@ public class InconsistencyLocator
 
         // Get the Iterator tripleString to loop through.
         long size = hdt.size();
+        String subject = "";
         System.out.println("HDT size : "+ size);
         IteratorTripleString it = hdt.search("","","");
         int counterTriples = 0;
@@ -628,19 +629,17 @@ public class InconsistencyLocator
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 2000 triples is taken.
-
-            if (rand.nextDouble() > 1/TripleGap) {
-                it.next();
-                continue;
-            }
-
             // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
 
+            if (rand.nextDouble() > 1/TripleGap || subject.equals(item.getSubject().toString())) {
+                continue;
+            }
+            
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
-            String subject = item.getSubject().toString();
+            subject = item.getSubject().toString();
 
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
