@@ -458,7 +458,7 @@ public class InconsistencyLocator
     }
 
 
-    private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter) throws Exception {
+    private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter)  {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
 //
 //        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
@@ -478,9 +478,12 @@ public class InconsistencyLocator
 
 //        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
 //        model.read(PipeModel(subModel), "","N3");
-
-
-        OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
+        OWLOntology ontology;
+        try{
+            ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
+        } catch (Exception e){
+            return;
+        }
 
         // Starting up the Pellet Explanation module.
         PelletExplanation.setup();
@@ -641,8 +644,6 @@ public class InconsistencyLocator
 
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
-            System.out.println("Test323");
-
 
             if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
