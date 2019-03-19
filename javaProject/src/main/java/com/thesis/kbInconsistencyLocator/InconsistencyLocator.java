@@ -632,15 +632,22 @@ public class InconsistencyLocator
                 continue;
             }
 
+            if (counterTriples == 1){
+                System.out.println("passes first if statement");
+            }
             // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
-
+            if (counterTriples == 1){
+                System.out.println("Retrieved TripleString");
+            }
 
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
             String subject = item.getSubject().toString();
-
+            if (counterTriples == 1){
+                System.out.println("Retrieved TripleString");
+            }
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
@@ -653,6 +660,9 @@ public class InconsistencyLocator
 
             if (GeneralSubGraphFound < 0){
                 UnBreakable = false;
+            }
+            if (counterTriples == 1){
+                System.out.println("Finished First loopiteration");
             }
 
         }
