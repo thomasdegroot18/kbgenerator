@@ -650,7 +650,7 @@ public class InconsistencyLocator
 
                 SortGeneralList();
             }
-            if( counterTriples % 100 == 0){
+            if( counterTriples % 10000 == 0){
                 long estimatedTime = System.currentTimeMillis() - startTime;
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
             }
