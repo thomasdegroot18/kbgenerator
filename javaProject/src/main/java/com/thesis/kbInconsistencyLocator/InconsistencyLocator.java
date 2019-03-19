@@ -612,9 +612,11 @@ public class InconsistencyLocator
 
         // Get the Iterator tripleString to loop through.
         long size = hdt.size();
+        System.out.println("HDT size : "+ size);
         IteratorTripleString it = hdt.search("","","");
         int counterTriples = 0;
         // While there is a triple the loop continues.
+        System.out.println("Start the loop");
         while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)){
             counterTriples ++;
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
@@ -633,7 +635,6 @@ public class InconsistencyLocator
             // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
 
-            System.out.println(item.getSubject());
 
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
