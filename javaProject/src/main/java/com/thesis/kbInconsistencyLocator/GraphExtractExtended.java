@@ -151,6 +151,7 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             active.add( root );
 
             IteratorTripleString it = extractFrom.search(root, "", "");
+            System.out.println(counter);
             while (it.hasNext() && counter < maxValue)
             {
                 TripleString t = it.next();
