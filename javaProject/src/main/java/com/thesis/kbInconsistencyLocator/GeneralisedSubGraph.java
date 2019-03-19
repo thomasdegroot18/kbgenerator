@@ -91,67 +91,90 @@ public class GeneralisedSubGraph {
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
                 // This could have happened with incorrect class assertion or other things.
-                } else if (OWLAXIOMString[1].contains("a") || OWLAXIOMString[2].contains("a")){
+                } else if (OWLAXIOMString[1].contains("a") && OWLAXIOMString[2].contains("a")) {
                     // Print out the possibly incorrect string.
-                    System.out.println("Possibly Incorrect String" + OWLAXIOMString[0]);
+                    // Instantiate Instance and update instance count.
+                    OWLIndividual Individual1 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
+                    OWLIndividual Individual2 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[2]);
+                    OWLDifferentIndividualsAxiom Assertion = dataFactory.getOWLDifferentIndividualsAxiom(Individual1, Individual2);
 
-                // All instances where two classes are found.
-                } else {
-
+                    // Add triple
+                    owlOntologyGraph.add(Assertion);
+                    // Add Triple To hashMap
+                    addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                    addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                } else if (OWLAXIOMString[2].contains("a") && OWLAXIOMString[0].contains("EquivalentClasses")) {
                     // Add the two classes for the relationship cases.
                     OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
                     OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
+                    // Build Subclass Axiom
+                    OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
+                    // Add Subclass Axiom
+                    owlOntologyGraph.add(Assertion);
+                    // Add Triple To hashMap
+                    addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                    addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
-                    // Instantiate Assertion in scope.
+                } else if (OWLAXIOMString[1].contains("a") || OWLAXIOMString[2].contains("a")){
+                        throw new ClassCastException(OWLAXIOMString[0]);
+                        // All instances where two classes are found.
+                    } else {
 
-                    // TODO: Add more and different cases.
+                        // Add the two classes for the relationship cases.
+                        OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
+                        OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
 
-                    // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
-                    switch (OWLAXIOMString[0]) {
-                        case "SubClassOf": {
+                        // Instantiate Assertion in scope.
 
-                            // Build Subclass Axiom
-                            OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC1, classC2);
-                            // Add Subclass Axiom
-                            owlOntologyGraph.add(Assertion);
-                            // Add Triple To hashMap
-                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
-                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                        // TODO: Add more and different cases.
 
-                            break;
+                        // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
+                        switch (OWLAXIOMString[0]) {
+                            case "SubClassOf": {
+
+                                // Build Subclass Axiom
+                                OWLSubClassOfAxiom Assertion = dataFactory.getOWLSubClassOfAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+
+                                break;
+                            }
+                            case "DisjointClasses": {
+                                // Build Subclass Axiom
+                                OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "EquivalentClasses": {
+                                // Build Subclass Axiom
+                                OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                break;
+                            }
+                            default:
+                                throw new ClassCastException(OWLAXIOMString[0]);
                         }
-                        case "DisjointClasses": {
-                            // Build Subclass Axiom
-                            OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
-                            // Add Subclass Axiom
-                            owlOntologyGraph.add(Assertion);
-                            // Add Triple To hashMap
-                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
-                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
-                            // Disjoint Counter:
-                            disjoints ++;
-                            break;
-                        }
-                        case "EquivalentClasses": {
-                            // Build Subclass Axiom
-                            OWLEquivalentClassesAxiom Assertion = dataFactory.getOWLEquivalentClassesAxiom(classC1, classC2);
-                            // Add Subclass Axiom
-                            owlOntologyGraph.add(Assertion);
-                            // Add Triple To hashMap
-                            addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
-                            addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
-                            break;
-                        }
-                        default:
-                            throw new ClassCastException(OWLAXIOMString[0]);
                     }
                 }
-            }
+
         // If at any time an error pops up the catch will throw the stacktrace
-        } catch (OWLOntologyCreationException e)
-        {
-            e.printStackTrace();
-        }
+            } catch (OWLOntologyCreationException e)
+            {
+                e.printStackTrace();
+            }
         // Check if the consistency still holds
         // TODO: Remove unneeded disjoints:
         // Take the hashMap with vertices generated by the Vertices degree Map.
@@ -308,7 +331,15 @@ public class GeneralisedSubGraph {
 
                 // IF the link is of instance type remove so
                 // TODO: Make own function to make it easier to add stuff to it.
-                if (elem.contains("a")){
+                if (Class.contains("a") && elem.contains("a")) {
+                    // Instantiate Instance and update instance count.
+                    OWLIndividual Individual1 = dataFactory.getOWLNamedIndividual(elem);
+                    OWLIndividual Individual2 = dataFactory.getOWLNamedIndividual(Class);
+
+                    OWLDifferentIndividualsAxiom Assertion = dataFactory.getOWLDifferentIndividualsAxiom(Individual1, Individual2);
+                    owlOntologyGraph.removeAxiom(Assertion);
+                }
+                else if (elem.contains("a")){
                     // Instantiate Instance and update instance count.
                     OWLIndividual Individual = dataFactory.getOWLNamedIndividual(elem);
 
@@ -453,6 +484,14 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
                     SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#disjointWith> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "DifferentIndividuals": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#differentFrom> ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;

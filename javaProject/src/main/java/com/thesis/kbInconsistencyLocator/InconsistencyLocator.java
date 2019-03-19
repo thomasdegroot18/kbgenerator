@@ -3,7 +3,6 @@ package com.thesis.kbInconsistencyLocator;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
-import org.apache.jena.base.Sys;
 import org.apache.jena.graph.*;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
@@ -48,11 +47,14 @@ public class InconsistencyLocator
     // Setting the new Array: 500. TODO: get it better fixed.
     private static int[] TempStorageGenGraph = new int[500];
     private static int InconsistenciesHit = 11;                                      // Counter of inconsistencies
+    private static int TripleGap = 2000;
     private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
     private static int GeneralGraphNumber = 0;
     private static int GeneralSubGraphFound = 0;
+
+
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
         // Instantiate a new Array List.
@@ -198,17 +200,27 @@ public class InconsistencyLocator
         int i = 0;
         int j = 0;
         List<String> StringLines = new ArrayList<>();
-
-        while (i < SetOfVariables.size()){
+        if (RelationType.toString().equals("EquivalentClasses")){
             while ((j < SetOfVariables.size())) {
-                if (i < j) {
-                    StringLines.add(RelationType.toString() + " " + variableMap.get(SetOfVariables.get(i)) + " " + variableMap.get(SetOfVariables.get(j)));
+                if (i < j && variableMap.get(SetOfVariables.get(j)).contains("a") ) {
+                    StringLines.add(RelationType.toString() + " " + variableMap.get(SetOfVariables.get(0)) + " " + variableMap.get(SetOfVariables.get(j)));
                 }
                 j++;
             }
-            i++;
-            j = 0;
+        } else{
+            while (i < SetOfVariables.size()){
+                while ((j < SetOfVariables.size())) {
+                    if (i < j) {
+                        StringLines.add(RelationType.toString() + " " + variableMap.get(SetOfVariables.get(i)) + " " + variableMap.get(SetOfVariables.get(j)));
+                    }
+                    j++;
+                }
+                i++;
+                j = 0;
+            }
         }
+
+
 
 
         // return the string line with a generalised variable, Takes RelationType + first element + second element.
@@ -231,7 +243,6 @@ public class InconsistencyLocator
 
         // Loop through the Inconsistency line per line to replace the Classes and the instances with the correct values.
         for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
-
             // Instantiate the StringLine in correct scope.
             String StringLine = "";
             List<String> StringLines = new ArrayList<>();
@@ -272,7 +283,8 @@ public class InconsistencyLocator
                     StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
                 }
 
-            // Equivalent Class: <C1> <owl:equivalentWith> <C2>
+            // Equivalent Class: <C1> <owl:equivalentWith> <C2>.
+                // Or Class: <C1> <owl:equivalentWith> <a0>, <a1>.
             }  else if (RelationType == AxiomType.EQUIVALENT_CLASSES){
                 // Gets the new clean relation graph with generalised names.
                 if(MoreInformation){
@@ -281,9 +293,18 @@ public class InconsistencyLocator
                     StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
                 }
 
-            // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            // Equivalent Class: <a1> <owl:DifferentIndividuals> <a2>
+            }else if (RelationType == AxiomType.DIFFERENT_INDIVIDUALS){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
             } else {
-                throw new ClassCastException(RelationType.toString());
+                System.out.println(RelationType.toString());
             }
 
             // Adds the new cleaned line to the ExplanationList
@@ -463,7 +484,6 @@ public class InconsistencyLocator
 
         // Starting up the Pellet Explanation module.
         PelletExplanation.setup();
-
         // Create the reasoner and load the ontology with the open pellet reasoner.
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
 
@@ -471,7 +491,12 @@ public class InconsistencyLocator
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
-        Set<Set<OWLAxiom>> exp = expGen.getInconsistencyExplanations(MaxExplanations);
+        Set<Set<OWLAxiom>> exp;
+        try{
+            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+        } catch (Exception e){
+            return;
+        }
 //        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
 //        while (e.hasNext()){
 //            OWLClass elem = e.next();
@@ -511,23 +536,10 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            long startTime = System.currentTimeMillis();
-            for (int i = 0; i < 100; i++) {
-                subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
-            }
-            long stopTime = System.currentTimeMillis();
-            long elapsedTime = stopTime - startTime;
-            System.out.println("Single Road: "+ elapsedTime);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
 
-            // Try to extract a the subgraph from the HDT.
-            startTime = System.currentTimeMillis();
-            for (int i = 0; i < 100; i++) {
-                subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
-            }
+            // subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
 
-            stopTime = System.currentTimeMillis();
-            elapsedTime = stopTime - startTime;
-            System.out.println("Both ways: " + elapsedTime);
 
 
 
@@ -578,10 +590,10 @@ public class InconsistencyLocator
             // Retrieve subrgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
             //TODO: SPEED UP BOTH WAYS
-            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
 
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
@@ -611,8 +623,9 @@ public class InconsistencyLocator
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 2000 triples is taken.
+            // TODO: RESET BACK TO 0.0005.
 
-            if (rand.nextDouble() > 0.0005) {
+            if (rand.nextDouble() > 1/TripleGap) {
                 it.next();
                 continue;
             }
@@ -672,9 +685,12 @@ public class InconsistencyLocator
          * @params {@code args[2] } inconsistency explanations per subgraph  -- not necessary, default 10
          * @params {@code args[3] } Verbose   -- not necessary, default false
          * @params {@code args[4] } Inconsistency break   -- not necessary, default false, needs integer.
+         * @params {@code args[5] } TripleSplit   -- not necessary, default false, needs integer.
          * @returns void
          *
          */
+
+
 
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
@@ -733,7 +749,15 @@ public class InconsistencyLocator
         } else {
             UnBreakable = true;
         }
-
+        if (args.length > 5 && !args[5].isEmpty()){
+            try{
+                TripleGap = Integer.parseInt(args[5]);
+            } catch (Exception e){
+                System.out.println("Could not parse the fifth argument Will continue without inconsistencyGap");
+            }
+        } else {
+            TripleGap = 2000;
+        }
         System.out.println("InputLocation : " + args[0]);
         System.out.println("OutputLocation : " + args[1]);
         System.out.println("MaxExplanations : " + MaxExplanations);

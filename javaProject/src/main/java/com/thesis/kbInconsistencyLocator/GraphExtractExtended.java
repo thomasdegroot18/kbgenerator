@@ -41,8 +41,7 @@ import org.rdfhdt.hdt.triples.TripleString;
  specified root in some superGraph. The recursion is terminated by triples
  that satisfy some supplied boundary condition.
 
- EXTENDED by:
- Thomas de Groot
+ EXTENDED by: Thomas de Groot
  */
 public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 {

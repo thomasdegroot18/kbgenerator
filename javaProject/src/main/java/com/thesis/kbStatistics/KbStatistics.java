@@ -94,19 +94,6 @@ class KbStatistics {
         return 0;
     }
 
-    // TODO: Implement Strong and Weak CC
-    @SuppressWarnings("unused")
-    private static int StrongCC(HDT hdt){
-
-
-        return 100;
-    }
-    @SuppressWarnings("unused")
-    private static int WeakCC(HDT hdt){
-
-
-        return 200;
-    }
 
     private static String getExpressively(HDT hdt) throws Exception {
         IteratorTripleString it = hdt.search("","","");
@@ -118,7 +105,7 @@ class KbStatistics {
         // some of the depth the object graph does take into account.
         String subject = item.getSubject().toString();
 
-        // The subGraph is a set of strings. That stores up to 5000 triples.
+        // The subGraph is a set of strings. That stores up to 50000 triples.
         Set<String> subGraph = InconsistencyLocator.WriteInconsistencySubGraph(hdt, subject, 50000);
 
         OWLOntology ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(InconsistencyLocator.PipeModel(subGraph));

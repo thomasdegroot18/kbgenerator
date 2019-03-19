@@ -40,12 +40,17 @@ class InconsistencyStatistics {
     }
 
     private double TailEffect(GeneralisedSubGraph Subgraph){
-        Subgraph.SinglesRemoval();
-        Subgraph.RebuildSPARQL();
-        String NewSPARQLQuery = Subgraph.convertSPARQL();
-        int CountTail = InconsistencyCount(NewSPARQLQuery);
+        try{
+            Subgraph.SinglesRemoval();
+            Subgraph.RebuildSPARQL();
+            String NewSPARQLQuery = Subgraph.convertSPARQL();
+            int CountTail = InconsistencyCount(NewSPARQLQuery);
 
-        return (double)CountTail;
+            return (double)CountTail;
+        } catch (Exception e){
+            System.out.println("Could not remove Tail");
+            return (double)0;
+        }
     }
 
 
@@ -102,9 +107,13 @@ class InconsistencyStatistics {
             String Type = InconsistencyStats.getType();
             String ClassType = InconsistencyStats.getClassType();
             double TailEffect = InconsistencyStats.getTailEffect();
-
-            LineToWrite = "{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                          "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"}";
+            if(IndexNumber == 1){
+                LineToWrite = "{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"}";
+            } else{
+                LineToWrite = ",{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"}";
+            }
 
 
             StringLines.add(LineToWrite);
