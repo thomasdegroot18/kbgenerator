@@ -633,6 +633,8 @@ public class InconsistencyLocator
             // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
 
+            System.out.println(item.getSubject());
+
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
@@ -744,11 +746,12 @@ public class InconsistencyLocator
             try{
                 TripleGap = Integer.parseInt(args[5]);
             } catch (Exception e){
-                System.out.println("Could not parse the fifth argument Will continue without inconsistencyGap");
+                System.out.println("Could not parse the sixth argument Will continue without inconsistencyGap");
             }
         } else {
             TripleGap = 2000;
         }
+
         System.out.println("InputLocation : " + args[0]);
         System.out.println("OutputLocation : " + args[1]);
         System.out.println("MaxExplanations : " + MaxExplanations);
