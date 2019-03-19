@@ -1,4 +1,4 @@
-package com.thesis.testSuite;
+package com.thesis.lodalot;
 
 import com.thesis.kbInconsistencyLocator.InconsistencyLocator;
 
