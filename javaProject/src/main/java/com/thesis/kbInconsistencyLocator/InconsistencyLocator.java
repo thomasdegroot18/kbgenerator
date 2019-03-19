@@ -587,11 +587,12 @@ public class InconsistencyLocator
         // The subgraph is a set of strings. That stores up to 5000 triples.
         Set<String> subGraph = null;
         try{
-            // Retrieve subrgraph from HDT single way 5000 triples takes as long as 250 both ways.
+            // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-
+            System.out.println("Test");
             subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
+            System.out.println("Test1");
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
 
@@ -632,28 +633,18 @@ public class InconsistencyLocator
                 continue;
             }
 
-            if (counterTriples == 1){
-                System.out.println("passes first if statement");
-            }
             // If the loop is not triggered the next element from the tripleString is taken.
             TripleString item = it.next();
-            if (counterTriples == 1){
-                System.out.println("Retrieved TripleString");
-            }
 
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
             String subject = item.getSubject().toString();
-            if (counterTriples == 1){
-                System.out.println("Retrieved TripleString");
-            }
+
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
 
-            if (counterTriples == 1){
-                System.out.println("Write TripleString");
-            }
+
             if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
@@ -663,9 +654,6 @@ public class InconsistencyLocator
 
             if (GeneralSubGraphFound < 0){
                 UnBreakable = false;
-            }
-            if (counterTriples == 1){
-                System.out.println("Finished First loopiteration");
             }
 
         }
