@@ -589,10 +589,8 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            System.out.println("Test");
             subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
-            System.out.println("Test1");
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
 
@@ -643,6 +641,7 @@ public class InconsistencyLocator
 
             // Find all the inconsistencies in the second subgraph(Subject)
             WriteInconsistencySubGraph(hdt, subject, fileWriter);
+            System.out.println("Test323");
 
 
             if (InconsistenciesHit % 5000 <= 10){
