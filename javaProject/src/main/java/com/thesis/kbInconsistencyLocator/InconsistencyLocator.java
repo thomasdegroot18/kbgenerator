@@ -592,7 +592,7 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
 
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
@@ -619,6 +619,7 @@ public class InconsistencyLocator
         int counterTriples = 0;
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
+        long startTime = System.currentTimeMillis();
         while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)){
             counterTriples ++;
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
@@ -627,7 +628,6 @@ public class InconsistencyLocator
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 2000 triples is taken.
-            // TODO: RESET BACK TO 0.0005.
 
             if (rand.nextDouble() > 1/TripleGap) {
                 it.next();
@@ -650,6 +650,10 @@ public class InconsistencyLocator
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
 
                 SortGeneralList();
+            }
+            if( counterTriples % 10000 == 0){
+                long estimatedTime = System.currentTimeMillis() - startTime;
+                System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
             }
 
             if (GeneralSubGraphFound < 0){

@@ -36,7 +36,7 @@ public class LODalot {
         System.out.println("Starting Locating Inconsistencies");
         String[] argsInconsistency =  {hdt,
                 rdf,
-                "10",
+                "20",
                 "true",
                 "false",
                 "1"
