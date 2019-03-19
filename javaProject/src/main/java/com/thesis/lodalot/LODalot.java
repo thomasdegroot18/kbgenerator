@@ -15,7 +15,7 @@ public class LODalot {
         //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
         String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
-        String hdt = "/home/wbeek/data/LOD-a-lot/lod-a-lot.hdt";
+        String hdt = "/home/wbeek/data/LOD-a-lot/LOD-a-lot.hdt";
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";
         String inconsistencyJSON = AbsoluteName+"StatResults/";
