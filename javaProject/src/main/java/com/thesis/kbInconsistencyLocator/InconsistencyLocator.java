@@ -592,7 +592,7 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
 
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
@@ -635,7 +635,7 @@ public class InconsistencyLocator
             if (rand.nextDouble() > 1/TripleGap || subject.equals(item.getSubject().toString())) {
                 continue;
             }
-            
+
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
@@ -650,7 +650,7 @@ public class InconsistencyLocator
 
                 SortGeneralList();
             }
-            if( counterTriples % 10000 == 0){
+            if( counterTriples % 100 == 0){
                 long estimatedTime = System.currentTimeMillis() - startTime;
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
             }
