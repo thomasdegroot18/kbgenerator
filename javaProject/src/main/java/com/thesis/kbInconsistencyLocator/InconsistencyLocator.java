@@ -584,10 +584,10 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
+            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
 
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
@@ -605,10 +605,10 @@ public class InconsistencyLocator
 
 
         // Get the Iterator tripleString to loop through.
-        long size = hdt.size();
         String subject = "";
-        System.out.println("HDT size : "+ size);
         IteratorTripleString it = hdt.search("","","");
+        long size = it.estimatedNumResults();
+        System.out.println("HDT size : "+ size);
         long counterTriples = 0;
         List<String> triples;
 
@@ -640,7 +640,7 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
-                if( counterTriples % 100 == 0){
+                if( counterTriples % 10000 == 0){
                     long estimatedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
                 }
