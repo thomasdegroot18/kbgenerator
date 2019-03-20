@@ -617,7 +617,7 @@ public class InconsistencyLocator
         int numberThreads = 20;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 540000;
+        long valueLoop = 0;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);
@@ -640,6 +640,10 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
+                if( counterTriples % 10000 == 0){
+                    long estimatedTime = System.currentTimeMillis() - startTime;
+                    System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
+                }
 
                 // at the moment every 1 out of 2000 triples is taken.
                 // If the loop is not triggered the next element from the tripleString is taken.
@@ -685,10 +689,6 @@ public class InconsistencyLocator
                 System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
 
                 SortGeneralList();
-            }
-            if( counterTriples % 10000 == 0){
-                long estimatedTime = System.currentTimeMillis() - startTime;
-                System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
             }
 
             if (GeneralSubGraphFound < 0){
