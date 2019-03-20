@@ -640,7 +640,7 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
-                if( counterTriples % 10000 == 0){
+                if( counterTriples % 100 == 0){
                     long estimatedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
                 }
