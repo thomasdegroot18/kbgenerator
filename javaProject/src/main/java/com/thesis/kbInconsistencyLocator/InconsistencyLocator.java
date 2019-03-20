@@ -668,6 +668,9 @@ public class InconsistencyLocator
 
             // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
             Set<Set<OWLAxiom>> exp = new HashSet<>();
+            triples.forEach();
+
+
             for (String subjectString: triples){
                 exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
             }
