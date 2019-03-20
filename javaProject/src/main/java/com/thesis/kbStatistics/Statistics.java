@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.rmi.server.ExportException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -99,9 +100,9 @@ public class Statistics {
 
         // Create HashMap for StoredGraphs
         HashMap<String, String> StoredGraphs = new HashMap<>();
-
-        while(ConstantLoopBoolean){
-
+        boolean firstLoop = true;
+        while(firstLoop ||ConstantLoopBoolean){
+            firstLoop = false;
             // Load all Inconsistency graphs.
             GraphsLoader(fileLocation, StoredGraphs);
             // RunAll Inconsistency Statistics:
@@ -159,17 +160,24 @@ public class Statistics {
         File[] directoryListing = Folder.listFiles();
         if (directoryListing != null) {
             for (File file : directoryListing) {
-                if (file.getName().contains("INCONSISTENCIES-"+args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", ""))) {
+                if (file.getName().contains("INCONSISTENCIES-"+args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", "").replace("Sample-",""))) {
                     FileInput = file.toString();
                 }
             }
         }
 
-        System.out.println(args[0]);
+        System.out.println(FileInput);
         // Load HDT file using the hdt-java library
         HDT hdt = HDTManager.mapIndexedHDT(args[0], null);
         // Create Jena wrapper on top of HDT.
         System.out.println("Creating model from graph");
+
+        File newFolder = new File(args[2]);
+        boolean created = newFolder.mkdir();
+        if (!created){
+            System.out.println("No OUTPUT DIR CREATED");
+        }
+
         ConstantLoop( hdt, FileInput, args[2]);
 
 

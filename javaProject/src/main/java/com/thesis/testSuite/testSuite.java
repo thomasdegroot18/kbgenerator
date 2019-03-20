@@ -59,8 +59,9 @@ public class testSuite {
 
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";
-        String inconsistencyJSON = AbsoluteName+"StatResults/";
+        String inconsistencyJSON = AbsoluteName+"StatResults/" +hdtName.replace(".hdt", "")+"/";
         String temp = AbsoluteName+"extraFiles/temp/";
+        String SampledLocationStats = AbsoluteName+"StatResults/Sampled/" +hdtName.replace(".hdt", "")+"/";
 
         System.out.println("AbsoluteName: "+AbsoluteName);
         System.out.println("rdf: "+rdf);
@@ -98,7 +99,7 @@ public class testSuite {
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics Sampled
         System.out.println("Starting Statistics");
-        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, inconsistencyJSON+"Sampled/"};
+        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
         Statistics.main(argsStatisticsSampled);
         System.out.println("------------------------------------------------------------------------------------------");
 

@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 
@@ -458,7 +460,7 @@ public class InconsistencyLocator
     }
 
 
-    private static void WriteInconsistencyModel(Set<String> subModel, FileOutputStream fileWriter)  {
+    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
 //
 //        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
@@ -478,11 +480,15 @@ public class InconsistencyLocator
 
 //        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
 //        model.read(PipeModel(subModel), "","N3");
+
+        // Find the Set of the Explanations that show that the SubGraph is inconsistent.
+        Set<Set<OWLAxiom>> exp = Collections.emptySet();
+
         OWLOntology ontology;
         try{
             ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
         } catch (Exception e){
-            return;
+            return exp;
         }
 
         // Starting up the Pellet Explanation module.
@@ -493,12 +499,11 @@ public class InconsistencyLocator
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
-        // Find the Set of the Explanations that show that the SubGraph is inconsistent.
-        Set<Set<OWLAxiom>> exp;
+
         try{
             exp = expGen.getInconsistencyExplanations(MaxExplanations);
         } catch (Exception e){
-            return;
+            return exp;
         }
 //        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
 //        while (e.hasNext()){
@@ -511,20 +516,7 @@ public class InconsistencyLocator
 //        }
 
 
-        // Loop through the set of explanations and standardize the Inconsistencies.
-        for(Set<OWLAxiom> InconsistencyExplanation: exp){
-            InconsistenciesHit ++;
-            // Loop through the set of explanations and standardize the Inconsistencies.
-            // Standardize the inconsistency and write to file.
-
-            // TODO: Add this line.
-            InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
-
-        }
-
-
-
-
+        return exp;
 
     }
 
@@ -582,7 +574,7 @@ public class InconsistencyLocator
 
 
 
-    private static void WriteInconsistencySubGraph(HDT hdt, String tripleItem, FileOutputStream fileWriter) throws Exception{
+    private static Set<Set<OWLAxiom>>  WriteInconsistencySubGraph(HDT hdt, String tripleItem) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
@@ -592,10 +584,10 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
+            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
 
             //TODO: SPEED UP BOTH WAYS
-            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 250);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
 
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
@@ -603,7 +595,7 @@ public class InconsistencyLocator
         }
 
         // Go to next step. Find (if any) Inconsistencies.
-        WriteInconsistencyModel(subGraph, fileWriter);
+        return WriteInconsistencyModel(subGraph);
 
     }
 
@@ -617,32 +609,76 @@ public class InconsistencyLocator
         String subject = "";
         System.out.println("HDT size : "+ size);
         IteratorTripleString it = hdt.search("","","");
-        int counterTriples = 0;
+        long counterTriples = 0;
+        List<String> triples;
+
+
+        // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
+        int numberThreads = 20;
+        ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
+        // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
+        long valueLoop = 540000;
+
+
+        System.out.println("Skipping part of the loop to: " + valueLoop);
+        while(it.hasNext() && counterTriples < valueLoop){
+            counterTriples ++;
+            it.next();
+        }
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
-        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)){
-            counterTriples ++;
+
+        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)) {
+
+            triples = new ArrayList<>();
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
             // that triples are connected to each other, not every triple needs to be evaluated.
             // A selection of triples is chosen at random.
             // Can be changed later to a selection of triples that meet a certain criteria.
 
-            // at the moment every 1 out of 2000 triples is taken.
-            // If the loop is not triggered the next element from the tripleString is taken.
-            TripleString item = it.next();
+            while (it.hasNext() && triples.size() < numberThreads) {
+                TripleString item = it.next();
+                counterTriples++;
 
-            if (rand.nextDouble() > 1/TripleGap || subject.equals(item.getSubject().toString())) {
-                continue;
+                // at the moment every 1 out of 2000 triples is taken.
+                // If the loop is not triggered the next element from the tripleString is taken.
+                TripleGap =1;
+                if (rand.nextDouble() > 1 / TripleGap || subject.equals(item.getSubject().toString()))
+                {
+                    continue;
+                }
+                subject = item.getSubject().toString();
+                triples.add(subject);
+
+
             }
 
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
-            subject = item.getSubject().toString();
+
 
             // Find all the inconsistencies in the second subgraph(Subject)
-            WriteInconsistencySubGraph(hdt, subject, fileWriter);
+
+
+            // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
+            Set<Set<OWLAxiom>> exp = new HashSet<>();
+            for (String subjectString: triples){
+                exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
+            }
+
+
+            // Process all the Inconsistencies.
+            // Loop through the set of explanations and standardize the Inconsistencies.
+            for(Set<OWLAxiom> InconsistencyExplanation: exp){
+                InconsistenciesHit ++;
+                // Loop through the set of explanations and standardize the Inconsistencies.
+                // Standardize the inconsistency and write to file.
+                InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
+
+            }
+
 
             if (InconsistenciesHit % 5000 <= 10){
                 System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
