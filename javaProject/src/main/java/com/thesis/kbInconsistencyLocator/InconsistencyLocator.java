@@ -614,10 +614,10 @@ public class InconsistencyLocator
 
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
-        int numberThreads = 20;
+        int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 0;
+        long valueLoop = 539999;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);
@@ -640,7 +640,7 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
-                if( counterTriples % 10000 == 0){
+                if( counterTriples % 100 == 0){
                     long estimatedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
                 }
