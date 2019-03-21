@@ -78,7 +78,7 @@ public class testSuite {
                                        "10",
                                        "true"};
 
-        InconsistencyLocator.main(argsInconsistency);
+        // InconsistencyLocator.main(argsInconsistency);
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");
