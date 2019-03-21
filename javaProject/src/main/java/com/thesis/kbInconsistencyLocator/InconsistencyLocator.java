@@ -49,7 +49,7 @@ public class InconsistencyLocator
     // Setting the new Array: 500. TODO: get it better fixed.
     private static int[] TempStorageGenGraph = new int[500];
     private static int InconsistenciesHit = 11;                                      // Counter of inconsistencies
-    private static int TripleGap = 2000;
+    private static int TripleGap = 500;
     private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
@@ -617,7 +617,7 @@ public class InconsistencyLocator
         int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 539999;
+        long valueLoop = 1000000;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);
@@ -640,15 +640,13 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
-                if( counterTriples % 100 == 0){
+                if( counterTriples % 100000 == 0){
                     long estimatedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
                 }
-
                 // at the moment every 1 out of 2000 triples is taken.
                 // If the loop is not triggered the next element from the tripleString is taken.
-                TripleGap =1;
-                if (rand.nextDouble() > 1 / TripleGap || subject.equals(item.getSubject().toString()))
+                if (rand.nextDouble() > 1.0 / TripleGap || subject.equals(item.getSubject().toString()))
                 {
                     continue;
                 }
@@ -668,7 +666,6 @@ public class InconsistencyLocator
 
             // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
             Set<Set<OWLAxiom>> exp = new HashSet<>();
-            triples.forEach();
 
 
             for (String subjectString: triples){
@@ -793,7 +790,7 @@ public class InconsistencyLocator
                 System.out.println("Could not parse the sixth argument Will continue without inconsistencyGap");
             }
         } else {
-            TripleGap = 2000;
+            TripleGap = 100;
         }
 
         System.out.println("InputLocation : " + args[0]);
