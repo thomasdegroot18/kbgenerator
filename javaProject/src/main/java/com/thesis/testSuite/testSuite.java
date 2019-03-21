@@ -32,7 +32,7 @@ public class testSuite {
             break;
             case "1":
             // Setting DBpedia here:
-            hdt = "/home/dimitris/local/dbpedia2016-04en.hdt";
+            hdt = AbsoluteName+"HDTs/dbpedia2016-04en.hdt";
             hdtName = "dbpedia2016-04en.hdt";
             break;
             case "2":
