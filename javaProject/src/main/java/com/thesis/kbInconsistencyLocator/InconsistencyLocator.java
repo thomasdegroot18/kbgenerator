@@ -584,7 +584,7 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 5000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
 
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
@@ -617,7 +617,7 @@ public class InconsistencyLocator
         int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 1000000;
+        long valueLoop = 1300000;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);

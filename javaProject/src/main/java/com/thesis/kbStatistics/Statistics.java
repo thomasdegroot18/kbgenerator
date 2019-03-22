@@ -90,10 +90,13 @@ public class Statistics {
 
 
         // Get all the KB statistics
-        System.out.println("knowledge base statistics calculation");
-        KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
+        if(testing_Bool){
+            System.out.println("knowledge base statistics calculation");
+            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
-        System.out.println("Finished knowledge base statistics calculation");
+            System.out.println("Finished knowledge base statistics calculation");
+
+        }
 
         // Create object for Inconsistencies.
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
@@ -134,8 +137,13 @@ public class Statistics {
         /*  Argument 0: input location of the HDT
          *  Argument 1: Input directory of the Inconsistency File.
          *  Argument 2: Output location of the gathered statistics.
+         *  Argument 3: Skipping First step of statistics.
          */
-
+        if(args.length > 3){
+            if (args[3].equals("1")){
+                testing_Bool = false;
+            }
+        }
 
         // Print to the user that the HDT is being loaded. Can take a while.
         System.out.println("Print Loading in HDT");
@@ -160,9 +168,12 @@ public class Statistics {
         File[] directoryListing = Folder.listFiles();
         if (directoryListing != null) {
             for (File file : directoryListing) {
+
                 if (file.getName().contains("INCONSISTENCIES-"+args[0].split("/")[args[0].split("/").length - 1].replace(".hdt", "").replace("Sample-",""))) {
                     FileInput = file.toString();
                 }
+                // TODO: DELETE LINK
+                FileInput = args[1]+"INCONSISTENCIES-yago2s.ttl";
             }
         }
 

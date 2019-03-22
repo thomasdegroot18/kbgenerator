@@ -37,7 +37,7 @@ public class testSuite {
             break;
             case "2":
             // Setting Freebase here:
-            hdt = "/home/dimitris/local/freebase-rdf-2013-12-01-00-00.hdt";
+            hdt = AbsoluteName+"HDTs/freebase-rdf-2013-12-01-00-00.hdt";
             hdtName = "freebase-rdf-2013-12-01-00-00.hdt";
             break;
             case "3":
@@ -93,7 +93,7 @@ public class testSuite {
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");
-        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.1"};
+        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
         Generator.main(argsGenerator);
 
         System.out.println("------------------------------------------------------------------------------------------");

@@ -84,9 +84,11 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         ax.spines["bottom"].set_visible(False)
         ax.spines["right"].set_visible(False)
         ax.spines["left"].set_visible(False)
+        ax.set_yscale("log")
+        ax.set_xscale("log")
 
         # Ensure that the axis ticks only show up on the bottom and left of the plot.
         # Ticks on the right and top of the plot are generally unnecessary chartjunk.
         ax.get_xaxis().tick_bottom()
         ax.get_yaxis().tick_left()
-        plt.savefig("plots/"+Sample+'figure%d.eps' % current, bbox_inches="tight")
+        plt.savefig("plots/"+Sample+'figure%d.png' % current, bbox_inches="tight")

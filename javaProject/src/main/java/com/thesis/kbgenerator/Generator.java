@@ -224,10 +224,10 @@ public class Generator {
 
                 modelRemovedTriples.add(item);
                 // Find all the inconsistencies in the first subgraph(Object)
-                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
+                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 50, modelRemovedTriples);
 
                 // Find all the inconsistencies in the second subgraph(Subject)
-                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
+                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 50, modelRemovedTriples);
 
                 if (FinalSampling && (ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                     continue;
