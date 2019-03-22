@@ -71,7 +71,7 @@ public class samplingtest {
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");
-        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "HDT", "0.2"};
+        String[] argsGenerator =   {hdt, samples, "", temp, "N-TRIPLES", "0.2"};
         Generator.main(argsGenerator);
 
         System.out.println("------------------------------------------------------------------------------------------");

@@ -617,7 +617,7 @@ public class InconsistencyLocator
         int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 1300000;
+        long valueLoop = 2000000;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);

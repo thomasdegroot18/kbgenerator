@@ -23,6 +23,7 @@ public class testSuite {
 
         String hdt;
         String hdtName;
+        String args3 = "0";
         // Setting Locations
         switch (args[0]){
             case "0":
@@ -44,6 +45,7 @@ public class testSuite {
             //Setting Yago2s here:
             hdt = AbsoluteName+"HDTs/yago2s.hdt";
             hdtName = "yago2s.hdt";
+            args3 = "1";
             break;
             case "4":
             //Setting Pizza here:
@@ -82,7 +84,7 @@ public class testSuite {
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");
-        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON};
+        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
         Statistics.main(argsStatistics);
         System.out.println("------------------------------------------------------------------------------------------");
         System.out.println("Making inconsistency.json");

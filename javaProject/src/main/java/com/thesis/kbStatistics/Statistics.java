@@ -112,12 +112,8 @@ public class Statistics {
 
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
-                if(testing_Bool){
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
-                }
-                else{
-                    InconsistencyStats.RunExists(Key, StoredGraphs.get(Key));
-                }
+                InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+
             }
 
             System.out.println("Finished Inconsistency Statistics");
@@ -178,7 +174,7 @@ public class Statistics {
                     FileInput = file.toString();
                 }
                 // TODO: DELETE LINK
-                FileInput = args[1]+"INCONSISTENCIES-yago2s.ttl";
+                FileInput = args[1]+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
             }
         }
 
