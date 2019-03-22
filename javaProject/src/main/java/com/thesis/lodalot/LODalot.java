@@ -33,33 +33,22 @@ public class LODalot {
         System.out.println("temp: "+temp);
 
         // Inconsistency Locator
-        if(args.length > 0){
-            if (args[0].equals("0")){
-                System.out.println("------------------------------------------------------------------------------------------");
-                // Statistics
-                System.out.println("Starting Statistics");
-                String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, "1"};
-                Statistics.main(argsStatistics);
-            }
-        }
-        else{
-            System.out.println("------------------------------------------------------------------------------------------");
-            System.out.println("Starting Locating Inconsistencies");
-            String[] argsInconsistency =  {hdt,
-                    rdf,
-                    "20",
-                    "true",
-                    "false",
-                    "2000"
-            };
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Starting Locating Inconsistencies");
+        String[] argsInconsistency =  {hdt,
+                rdf,
+                "20",
+                "true",
+                "false",
+                "2000"
+        };
 
-            InconsistencyLocator.main(argsInconsistency);
-            System.out.println("------------------------------------------------------------------------------------------");
-        }
+        InconsistencyLocator.main(argsInconsistency);
+        System.out.println("------------------------------------------------------------------------------------------");
+
 
         System.out.println("Finished");
 
     }
 
 }
-
