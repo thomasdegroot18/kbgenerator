@@ -112,7 +112,12 @@ public class Statistics {
 
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
-                InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+                if(testing_Bool){
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+                }
+                else{
+                    InconsistencyStats.RunExists(Key, StoredGraphs.get(Key));
+                }
             }
 
             System.out.println("Finished Inconsistency Statistics");

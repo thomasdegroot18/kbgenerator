@@ -59,6 +59,9 @@ class InconsistencyStatistics {
         return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
     }
 
+    private int InconsistencyExistsChecker(String SPARQLString){
+        return SPARQLExecutioner.ExistsPrinter(this.model, SPARQLString);
+    }
 
     void RunAll(String SPARQLQuery, String StringOfInconsistency){
         if(CollectedStatistics.containsKey(SPARQLQuery)){
@@ -82,6 +85,24 @@ class InconsistencyStatistics {
         String Type = InconsistencyType(SPARQLQuery);
         String ClassType = InconsistencyClassType(SPARQLQuery);
 
+        // Store results in array for this query with a array.
+        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect);
+
+        CollectedStatistics.put(SPARQLQuery, InconsistencyStats);
+    }
+
+    void RunExists(String SPARQLQuery, String StringOfInconsistency) {
+        if (CollectedStatistics.containsKey(SPARQLQuery)) {
+            return;
+        }
+
+        // Run tests for single inconsistency
+        int Count = InconsistencyExistsChecker(SPARQLQuery);
+        int Size = 0;
+        double TailEffect = 0;
+
+        String Type = "";
+        String ClassType = "";
         // Store results in array for this query with a array.
         InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect);
 
