@@ -327,6 +327,7 @@ public class Generator {
             for (String line: allLines){
                 String[] lineSplit = line.split(", \"Amount\" : ");
                 Inconsistencies.put(lineSplit[0].replace("{\"Inconsistency\" : ","").replace("\"", "") , Integer.parseInt(lineSplit[1].replace("\"","").replace("}","").trim()));
+
             }
         } catch (Exception e){
             e.printStackTrace();

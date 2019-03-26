@@ -55,6 +55,7 @@ class InconsistencyStatementChecker {
 
 
         }
+        model.close();
         try{
             Generator.WriteHDT(modelResultSet, tempDir + "temporary.hdt", tempDir);
             this.hdt = HDTManager.mapIndexedHDT(tempDir +"temporary.hdt");

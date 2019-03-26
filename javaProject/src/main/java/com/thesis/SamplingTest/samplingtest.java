@@ -16,9 +16,9 @@ public class samplingtest {
      */
 
     public static void main(String[] args) throws Exception{
-        //String AbsoluteName = "/home/thomas/thesis/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomas/thesis/kbgenerator/javaProject/resources/";
+        AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
+        AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt;
         String hdtName;
@@ -62,6 +62,9 @@ public class samplingtest {
         String temp = AbsoluteName+"extraFiles/temp/";
         String SampledLocationStats = AbsoluteName+"StatResults/Sampled/" +hdtName.replace(".hdt", "")+"/";
 
+        String TestInconsistency = AbsoluteName+"extraFiles/InconsistencyFile/SampledInconsistency.json";
+
+
         System.out.println("AbsoluteName: "+AbsoluteName);
         System.out.println("rdf: "+rdf);
         System.out.println("hdt: "+hdt);
@@ -73,7 +76,7 @@ public class samplingtest {
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
         System.out.println("Starting Generation");
-        String[] argsGenerator =   {hdt, samples, "", temp, "N-TRIPLES", "0.2"};
+        String[] argsGenerator =   {hdt, samples,TestInconsistency, temp, "N-TRIPLES", "0.2"};
         Generator.main(argsGenerator);
 
         System.out.println("------------------------------------------------------------------------------------------");
