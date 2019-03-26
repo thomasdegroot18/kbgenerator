@@ -29,6 +29,29 @@ public class SPARQLExecutioner {
         return results;
     }
 
+    public static ResultSet SPARQLQuery(Model model, String SPARQLQuery, long TimeOut) {
+        // Set the result set to null.
+        ResultSet results = null;
+
+        // Try to execute the query. Could throw errors when creating the factory.
+        try {
+
+            // Use Jena ARQ to execute the query. Firstly creating the query.
+            Query query = QueryFactory.create(SPARQLQuery);
+            // Executing the query.
+            QueryExecution qe = QueryExecutionFactory.create(query, model);
+
+            //Get the selection of the executed query.
+            qe.setTimeout(TimeOut);
+
+            results = qe.execSelect();
+        } catch (Exception e) {
+            // Catch Exception and print the message.
+            e.printStackTrace();
+        }
+        return results;
+    }
+
     public static int CounterResultPrinter(Model model, String query){
         //  Run query  and retrieve the results as ResultSet.
         ResultSet results = SPARQLQuery(model, query);

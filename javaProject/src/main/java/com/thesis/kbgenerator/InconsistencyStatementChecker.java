@@ -27,22 +27,32 @@ class InconsistencyStatementChecker {
 
             int MinAmount = Inconsistencies.get(Inconsistency );
             int offsetVal = 0;
+            long TimeOutDelay = 0;
             while (modelResultSet.size() < MinAmount){
-                ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*5 + " OFFSET "+MinAmount*5*offsetVal);
+                ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*5 + " OFFSET "+MinAmount*5*offsetVal, 20000+TimeOutDelay);
                 int LIMITc = 0;
-                while(results.hasNext() && modelResultSet.size() < MinAmount){
-                    QuerySolution result = results.next();
-                    if(rand.nextDouble() < 0.42 ){
-                        for (String[] elem :InconsistencyToList){
-                            modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
+                try{
+                    while(results.hasNext() && modelResultSet.size() < MinAmount){
+                        QuerySolution result = results.next();
+                        if(rand.nextDouble() < 0.42 ){
+                            for (String[] elem :InconsistencyToList){
+                                modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
+
+                            }
 
                         }
-
+                        LIMITc ++;
                     }
-                    LIMITc ++;
-                }
-                if(oldSize == modelResultSet.size()) {
-                    break;
+                    if(oldSize == modelResultSet.size()) {
+                        break;
+                    }
+                } catch (Exception e){
+                    offsetVal = 0;
+                    TimeOutDelay += 20000;
+                    if (TimeOutDelay > 60000){
+                        System.out.println("Could not find the minimal amount of Inconsistencies for this type:" + Inconsistency);
+                        break;
+                    }
                 }
                 oldSize = modelResultSet.size();
                 //Making sure we always get results from the next query.
