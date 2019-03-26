@@ -6,6 +6,7 @@ import com.thesis.kbInconsistencyLocator.InconsistencyLocator;
 import com.thesis.kbStatistics.Statistics;
 import com.thesis.kbgenerator.Generator;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -66,7 +67,7 @@ public class testSuite {
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";
         String inconsistencyJSON = AbsoluteName+"StatResults/" +hdtName.replace(".hdt", "")+"/";
-        String temp = AbsoluteName+"extraFiles/temp/";
+        String temp = AbsoluteName+"extraFiles/temp/"+hdtName.replace(".hdt", "")+"/";
         String SampledLocationStats = AbsoluteName+"StatResults/Sampled/" +hdtName.replace(".hdt", "")+"/";
 
         System.out.println("AbsoluteName: "+AbsoluteName);
@@ -84,7 +85,7 @@ public class testSuite {
                                        "10",
                                        "true"};
 
-        // InconsistencyLocator.main(argsInconsistency);
+        InconsistencyLocator.main(argsInconsistency);
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");
@@ -98,6 +99,12 @@ public class testSuite {
 
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
+
+        File newFolder = new File(temp);
+        boolean created = newFolder.mkdir();
+        if (!created){
+            System.out.println("No temp DIR CREATED");
+        }
         System.out.println("Starting Generation");
         String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
         Generator.main(argsGenerator);
