@@ -3,6 +3,8 @@ package com.thesis.SamplingTest;
 import com.thesis.kbStatistics.Statistics;
 import com.thesis.kbgenerator.Generator;
 
+import java.io.File;
+
 import static com.thesis.testSuite.testSuite.promptEnterKey;
 
 
@@ -59,7 +61,7 @@ public class samplingtest {
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";
         String inconsistencyJSON = AbsoluteName+"StatResults/" +hdtName.replace(".hdt", "")+"/";
-        String temp = AbsoluteName+"extraFiles/temp/";
+        String temp = AbsoluteName+"extraFiles/temp/"+hdtName.replace(".hdt", "")+"/";
         String SampledLocationStats = AbsoluteName+"StatResults/Sampled/" +hdtName.replace(".hdt", "")+"/";
 
         String TestInconsistency = AbsoluteName+"extraFiles/InconsistencyFile/SampledInconsistency.json";
@@ -75,6 +77,12 @@ public class samplingtest {
 
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator
+
+        File newFolder = new File(temp);
+        boolean created = newFolder.mkdir();
+        if (!created){
+            System.out.println("No temp DIR CREATED");
+        }
         System.out.println("Starting Generation");
         String[] argsGenerator =   {hdt, samples,TestInconsistency, temp, "N-TRIPLES", "0.2"};
         Generator.main(argsGenerator);
