@@ -127,7 +127,7 @@ public class Generator {
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 10 triples is taken.
-            if (rand.nextDouble() > 0.1) {
+            if (rand.nextDouble() > 0.3) {
                 Statement item = stmtIt.next();
                 if(InChecker.checkMandatory(item)){
                     modelCStorage.add(item);
@@ -191,7 +191,7 @@ public class Generator {
             } else{
                 FinalPass = true;
                 OldSize = NewSize;
-                RemovalRate = 0.1*( (double)StartingSize/ (double)OldSize);
+                RemovalRate = 0.3*( (double)StartingSize/ (double)OldSize);
             }
 
             // Get the Iterator tripleString to loop through.

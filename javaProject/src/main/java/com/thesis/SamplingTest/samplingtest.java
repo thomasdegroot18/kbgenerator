@@ -24,6 +24,8 @@ public class samplingtest {
 
         String hdt;
         String hdtName;
+
+        String TestInconsistency = AbsoluteName+"extraFiles/InconsistencyFile/SampledInconsistency.json";
         // Setting Locations
         switch (args[0]){
             case "0":
@@ -45,6 +47,7 @@ public class samplingtest {
                 //Setting Yago2s here:
                 hdt = AbsoluteName+"HDTs/yago2s.hdt";
                 hdtName = "yago2s.hdt";
+                TestInconsistency = AbsoluteName+"extraFiles/InconsistencyFile/SampledInconsistencyYAGO.json";
                 break;
             case "4":
                 //Setting Pizza here:
@@ -64,7 +67,7 @@ public class samplingtest {
         String temp = AbsoluteName+"extraFiles/temp/"+hdtName.replace(".hdt", "")+"/";
         String SampledLocationStats = AbsoluteName+"StatResults/Sampled/" +hdtName.replace(".hdt", "")+"/";
 
-        String TestInconsistency = AbsoluteName+"extraFiles/InconsistencyFile/SampledInconsistency.json";
+
 
 
         System.out.println("AbsoluteName: "+AbsoluteName);
