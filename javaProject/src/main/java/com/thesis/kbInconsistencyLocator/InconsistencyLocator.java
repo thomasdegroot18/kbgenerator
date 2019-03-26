@@ -430,30 +430,32 @@ public class InconsistencyLocator
         PipedInputStream in = new PipedInputStream();
         // Start an PipedOutputStream with input the PipedInputStream.
         PipedOutputStream out = new PipedOutputStream(in);
-
-        // Lambda Runnable task to convert the set of strings to an output stream.
-        Runnable task = () -> {
-            try {
-                for (String elem: subModel){
-                    // Write to outputStream as bytes.
-                    if(elem.lastIndexOf("^") > -1){
-                        if(elem.lastIndexOf("^") > elem.lastIndexOf("<")){
-                            elem = elem.substring(0,elem.lastIndexOf("^"))+'-'+elem.substring(elem.lastIndexOf("^")+1);
+        try {
+            // Lambda Runnable task to convert the set of strings to an output stream.
+            Runnable task = () -> {
+                try {
+                    for (String elem : subModel) {
+                        // Write to outputStream as bytes.
+                        if (elem.lastIndexOf("^") > -1) {
+                            if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
+                                elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
+                            }
                         }
+                        out.write(elem.getBytes());
                     }
-                    out.write(elem.getBytes());
+                    out.close();
                 }
-                out.close();
-            }
-            //When Error happens catch it and print stacktrace.
-            catch(IOException io) {
-                io.printStackTrace();
-            }
-        };
+                //When Error happens catch it and print stacktrace.
+                catch (IOException io) {
+                    io.printStackTrace();
+                }
+            };
 
-        // Starts the new tread. to push the strings to the OWLOntology.
-        new Thread(task).start();
-
+            // Starts the new tread. to push the strings to the OWLOntology.
+            new Thread(task).start();
+        } catch (Exception e){
+            return in;
+        }
 
         // Create a new OWLOntology and return the filled OWL ontology with the in stream.
         return in;
@@ -617,7 +619,7 @@ public class InconsistencyLocator
         int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 0;//71000000;
+        long valueLoop = 80000000;
 
 
         System.out.println("Skipping part of the loop to: " + valueLoop);
