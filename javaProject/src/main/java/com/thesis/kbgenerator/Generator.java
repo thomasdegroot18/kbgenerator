@@ -88,12 +88,13 @@ public class Generator {
 
             System.out.println("Finished First SubSampling part: "+ Iterator);
             SubSampledModel.add(SampledDownModel);
-
+            SampledDownModel.close();
             Iterator ++;
             if(Iterator % 10 == 0 ){
-                Model SampledFurther = DownSampling(SubSampledModel , SampleSize, false);
                 System.out.println("Finished Combined SubSampling part: "+ Iterator);
-                FinalSampledModel.add(SampledFurther);
+                FinalSampledModel.add(DownSampling(SubSampledModel , SampleSize, false));
+                SubSampledModel.close();
+                SubSampledModel = ModelFactory.createDefaultModel();
             }
         }
 
@@ -184,14 +185,14 @@ public class Generator {
         System.out.println("Final Sample size: "+ NewSize);
         // While there is a triple the loop continues.
         while (StartingSize*DownSamplingSize < NewSize  && (OldSize != NewSize || FinalPass)){
-            if(OldSize == NewSize){
+            if( NewSize > 0.95*OldSize ){
                 RemovalRate = 1.0;
                 OldSize = NewSize;
                 FinalPass = false;
             } else{
                 FinalPass = true;
                 OldSize = NewSize;
-                RemovalRate = 0.3*( (double)StartingSize/ (double)OldSize);
+                RemovalRate = 0.5;
             }
 
             // Get the Iterator tripleString to loop through.
