@@ -75,7 +75,7 @@ public class Generator {
         Model SubSampledModel = ModelFactory.createDefaultModel();
         StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
 
-        double partitions = 100.0;
+        double partitions = 1000.0;
         int Iterator = 0;
 
         long maxSize = Math.round(model.size()*(1.0/partitions));

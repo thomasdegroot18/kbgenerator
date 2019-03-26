@@ -110,7 +110,7 @@ public class testSuite {
 
 
     @SuppressWarnings("unused")
-    private static void promptEnterKey(){
+    public static void promptEnterKey(){
         System.out.println("Press \"ENTER\" to continue...");
         try {
             int read = System.in.read();

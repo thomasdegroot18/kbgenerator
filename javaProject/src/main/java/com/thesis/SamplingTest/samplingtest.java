@@ -3,6 +3,8 @@ package com.thesis.SamplingTest;
 import com.thesis.kbStatistics.Statistics;
 import com.thesis.kbgenerator.Generator;
 
+import static com.thesis.testSuite.testSuite.promptEnterKey;
+
 
 public class samplingtest {
 
@@ -76,6 +78,7 @@ public class samplingtest {
 
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics Sampled
+        promptEnterKey();
         System.out.println("Starting Statistics");
         String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
         Statistics.main(argsStatisticsSampled);
