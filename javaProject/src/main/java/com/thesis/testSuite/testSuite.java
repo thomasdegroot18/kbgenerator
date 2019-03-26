@@ -52,6 +52,10 @@ public class testSuite {
             hdt = AbsoluteName+"HDTs/pizza.hdt";
             hdtName = "pizza.hdt";
             break;
+            case "5":
+            hdt = AbsoluteName+"HDTs/wordnet31.hdt";
+            hdtName = "wordnet31.hdt";
+            break;
             default:
             // Default here:
             System.out.println("Not found value.");
