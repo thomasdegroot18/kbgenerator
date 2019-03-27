@@ -35,10 +35,6 @@ public class Generator {
     private static InconsistencyStatementChecker InChecker;
 
     private static boolean DeletionChecker(Set<Triple> SubjectInput, Set<Triple> ObjectInput, Statement Input){
-        // Check if item is mandatory. If the model
-        if (InChecker.checkMandatory(Input)){
-            return true;
-        }
 
         Set<Node> SubjectInputCleanList = new HashSet<>();
         Set<Node> ObjectInputCleanList = new HashSet<>();
@@ -146,7 +142,10 @@ public class Generator {
 
             // If the loop is not triggered the next element from the tripleString is taken.
             Statement item = stmtIt.next();
-
+            if(InChecker.checkMandatory(item)){
+                modelCStorage.add(item);
+                continue;
+            }
             // both the subject and the object are taken to build the subgraph. With the expectation that the subject
             // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
             // some of the depth the object graph does take into account.
@@ -174,7 +173,6 @@ public class Generator {
             }
 
         }
-        System.out.println("MaxSize: " + maxSize + " Amount Of Triples Used to reach: " + StartIterator);
         return modelCStorage;
     }
 
@@ -219,6 +217,9 @@ public class Generator {
                 // If the loop is not triggered the next element from the tripleString is taken.
                 Statement item = stmtIt.next();
 
+                if(InChecker.checkMandatory(item)){
+                    continue;
+                }
                 // both the subject and the object are taken to build the subgraph. With the expectation that the subject
                 // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
                 // some of the depth the object graph does take into account.
@@ -227,11 +228,20 @@ public class Generator {
 
 
                 modelRemovedTriples.add(item);
+                Set<Triple> SubjectInput = null;
+                Set<Triple> ObjectInput = null;
                 // Find all the inconsistencies in the first subgraph(Object)
-                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 1000, modelRemovedTriples);
+                if (!FinalSampling){
+                    SubjectInput = GetSubGraph(LargeModel, subject, 1000, modelRemovedTriples);
 
-                // Find all the inconsistencies in the second subgraph(Subject)
-                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 1000, modelRemovedTriples);
+                    // Find all the inconsistencies in the second subgraph(Subject)
+                    ObjectInput =  GetSubGraph(LargeModel, object, 1000, modelRemovedTriples);
+                } else{
+                    SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
+
+                    // Find all the inconsistencies in the second subgraph(Subject)
+                    ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
+                }
 
                 if (FinalSampling && (ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                     continue;
