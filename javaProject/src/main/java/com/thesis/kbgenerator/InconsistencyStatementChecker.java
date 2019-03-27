@@ -67,8 +67,9 @@ class InconsistencyStatementChecker {
         }
         model.close();
         try{
-            Generator.WriteHDT(modelResultSet, tempDir + "temporary.hdt", tempDir);
-            this.hdt = HDTManager.mapIndexedHDT(tempDir +"temporary.hdt");
+            long startTime = System.currentTimeMillis();
+            Generator.WriteHDT(modelResultSet, tempDir + startTime+"temporary.hdt", tempDir);
+            this.hdt = HDTManager.mapIndexedHDT(tempDir +startTime+"temporary.hdt");
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -308,7 +308,8 @@ public class Generator {
 
 
     static boolean WriteHDT(Model model,String outputDirectory,String tempDirectory) throws Exception {
-        String TempDirectory = tempDirectory+"temp.hdt";
+        long startTime = System.currentTimeMillis();
+        String TempDirectory = tempDirectory+startTime+"temp.hdt";
         try{
             WriteRDF(model, TempDirectory);
         } catch (Exception e){
