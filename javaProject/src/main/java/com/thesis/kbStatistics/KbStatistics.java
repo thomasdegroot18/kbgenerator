@@ -203,10 +203,9 @@ class KbStatistics {
             }else{
                 hashOutDegree.put(Out, 1);
             }
-            if(Element % 1000000 == 0){
-                if(Element > 0){
-                    System.out.println(Element);
-                }
+            if(Element % 10000 == 0){
+                System.out.println("Element: " + Element);
+
             }
             // Calculating the Cluster Coefficient
             Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );
@@ -243,10 +242,9 @@ class KbStatistics {
             }else{
                 hashOutDegree.put(Out, 1);
             }
-            if(Element % 1000000 == 0){
-                if(Element > 0){
-                    System.out.println(Element);
-                }
+            if(Element % 10000 == 0){
+                System.out.println("Element: " + Element);
+
             }
             // Calculating the Cluster Coefficient
             Double Coefficient = ClusteringCoefficient(hdt, SubjectTripleElem );
@@ -261,6 +259,7 @@ class KbStatistics {
 
             Element ++;
         }
+        System.out.println("Finished Searching Element");
 
         List<HashMap> arrayList = new ArrayList<>();
         arrayList.add(hashInDegree);
@@ -323,7 +322,7 @@ class KbStatistics {
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = GetLocalizedScores(hdt);
 
-
+        System.out.println("Start Writing");
         uploadTo(UploadLocation, Expressivity, Size, NameSpaceSet, arrayList);
 
     }
