@@ -128,7 +128,7 @@ public class Generator {
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 10 triples is taken.
-            if (rand.nextDouble() > 0.5) {
+            if (rand.nextDouble() > 1) {
                 Statement item = stmtIt.next();
                 if(InChecker.checkMandatory(item)){
                     modelCStorage.add(item);
@@ -154,10 +154,10 @@ public class Generator {
             RDFNode object = item.getObject();
             modelRemovedTriples.add(item);
             // Find all the inconsistencies in the first subgraph(Object)
-            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 50, modelRemovedTriples);
+            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 200, modelRemovedTriples);
 
             // Find all the inconsistencies in the second subgraph(Subject)
-            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 50, modelRemovedTriples);
+            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 200, modelRemovedTriples);
 
             if ((ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                 continue;
