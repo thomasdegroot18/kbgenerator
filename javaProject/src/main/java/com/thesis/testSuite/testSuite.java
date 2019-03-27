@@ -18,9 +18,9 @@ Testsuite holds a simple implementation of the functionality of the knowledge ba
 public class testSuite {
 
     public static void main(String[] args) throws Exception{
-        //String AbsoluteName = "/home/thomas/thesis/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomas/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt;
         String hdtName;

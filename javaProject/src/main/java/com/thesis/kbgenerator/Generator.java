@@ -71,7 +71,7 @@ public class Generator {
         Model SubSampledModel = ModelFactory.createDefaultModel();
         StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
 
-        double partitions = 2000.0;
+        double partitions = 10000.0;
         int Iterator = 0;
         long startTime = System.currentTimeMillis();
         long maxSize = Math.round(model.size()*(1.0/partitions));
@@ -177,6 +177,7 @@ public class Generator {
             }
 
         }
+        System.out.println("Amount of Triples Parsed: " + StartIterator + "Size : "+ modelCStorage.size());
         return modelCStorage;
     }
 
@@ -236,10 +237,10 @@ public class Generator {
                 Set<Triple> ObjectInput = null;
                 // Find all the inconsistencies in the first subgraph(Object)
                 if (!FinalSampling){
-                    SubjectInput = GetSubGraph(LargeModel, subject, 1000, modelRemovedTriples);
+                    SubjectInput = GetSubGraph(LargeModel, subject, 300, modelRemovedTriples);
 
                     // Find all the inconsistencies in the second subgraph(Subject)
-                    ObjectInput =  GetSubGraph(LargeModel, object, 1000, modelRemovedTriples);
+                    ObjectInput =  GetSubGraph(LargeModel, object, 300, modelRemovedTriples);
                 } else{
                     SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
 

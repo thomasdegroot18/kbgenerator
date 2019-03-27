@@ -5,14 +5,18 @@ import openllet.core.KnowledgeBase;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import openllet.owlapi.explanation.PelletExplanation;
+import org.apache.jena.rdf.model.*;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.header.Header;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
+import org.rdfhdt.hdtjena.HDTGraph;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 
 import java.util.*;
+
+import static org.apache.jena.rdf.model.ResourceFactory.createResource;
 
 @SuppressWarnings("unused")
 class KbStatistics {
@@ -41,6 +45,50 @@ class KbStatistics {
         return 0;
     }
 
+    private static double ClusteringCoefficient(Model hdt, String input){
+        try {
+            Resource ResourceElem = createResource(input);
+            StmtIterator it = hdt.listStatements(ResourceElem, null ,(RDFNode)null);
+            HashSet<RDFNode> Neighbours = new HashSet<>();
+            double LocalizedTriangle = 0;
+            while(it.hasNext()){
+                RDFNode Object = it.next().getObject();
+//                if (Object.isLiteral()){
+//                    continue;
+//                }
+                Neighbours.add(it.next().getObject());
+            }
+
+            for (RDFNode Neighbour: Neighbours){
+
+                StmtIterator it3 = hdt.listStatements(Neighbour.asResource(), null ,(RDFNode)null);
+
+                while(it3.hasNext()){
+                    RDFNode NeighbourNeighbour = it3.next().getObject();
+//                    if (NeighbourNeighbour.isLiteral()){
+//                        continue;
+//                    }
+                    if (Neighbours.contains(NeighbourNeighbour)){
+                        LocalizedTriangle ++;
+                    }
+                }
+            }
+            double k = Neighbours.size();
+            if (k < 2){
+                return 0;
+            }
+
+            System.out.println(k);
+            System.out.println(LocalizedTriangle);
+
+            return LocalizedTriangle/(k*(k-1));
+        } catch (Exception e){
+            System.out.println("Could not find the inserted string");
+        }
+
+        return 0;
+    }
+
     private static double ClusteringCoefficient(HDT hdt, String input){
         try {
             IteratorTripleString it = hdt.search(input,"", "");
@@ -48,6 +96,10 @@ class KbStatistics {
             double LocalizedTriangle = 0;
             while(it.hasNext()){
                 Neighbours.add(it.next().getObject().toString());
+
+            }
+            if (Neighbours.size() < 1){
+                return 0;
             }
 
             for (CharSequence Neighbour: Neighbours){
@@ -179,6 +231,13 @@ class KbStatistics {
     private static List<HashMap> GetLocalizedScores(HDT hdt){
         Iterator it = hdt.getDictionary().getSubjects().getSortedEntries();
 
+//        // Locates the inconsistencies by looping through the graph over a large selection of triples.
+//        System.out.println("Creating Jena HDT graph");
+//        HDTGraph graph = new HDTGraph(hdt);
+//
+//        // Create Models
+//        System.out.println("Creating model from graph");
+//        Model model = ModelFactory.createModelForGraph(graph);
 
         HashMap<Long, Integer> hashInDegree = new HashMap<>();
         HashMap<Long, Integer> hashOutDegree = new HashMap<>();
