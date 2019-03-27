@@ -71,11 +71,15 @@ public class Generator {
         Model SubSampledModel = ModelFactory.createDefaultModel();
         StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
 
-        double partitions = 10000.0;
+        double partitions = 2000.0;
         int Iterator = 0;
-
+        long startTime = System.currentTimeMillis();
         long maxSize = Math.round(model.size()*(1.0/partitions));
         while (stmtIt.hasNext()){
+
+            long estimatedTime = System.currentTimeMillis() - startTime;
+            System.out.println(" Time passed: "+ estimatedTime);
+
             System.out.println("Started Sampling From HDT");
             Model NormalModel = HDTtoSubgraph(model, stmtIt , maxSize );
 
