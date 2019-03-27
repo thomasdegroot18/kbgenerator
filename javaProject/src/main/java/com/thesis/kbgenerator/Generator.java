@@ -75,7 +75,7 @@ public class Generator {
         Model SubSampledModel = ModelFactory.createDefaultModel();
         StmtIterator stmtIt = model.listStatements(null, null ,(RDFNode)null);
 
-        double partitions = 100.0;
+        double partitions = 10000.0;
         int Iterator = 0;
 
         long maxSize = Math.round(model.size()*(1.0/partitions));
@@ -128,7 +128,7 @@ public class Generator {
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 10 triples is taken.
-            if (rand.nextDouble() > 0.3) {
+            if (rand.nextDouble() > 0.5) {
                 Statement item = stmtIt.next();
                 if(InChecker.checkMandatory(item)){
                     modelCStorage.add(item);
