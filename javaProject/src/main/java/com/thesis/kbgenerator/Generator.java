@@ -153,11 +153,14 @@ public class Generator {
             RDFNode subject = item.getSubject();
             RDFNode object = item.getObject();
             modelRemovedTriples.add(item);
+            if (object.isLiteral()){
+                continue;
+            }
             // Find all the inconsistencies in the first subgraph(Object)
-            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 200, modelRemovedTriples);
+            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 100, modelRemovedTriples);
 
             // Find all the inconsistencies in the second subgraph(Subject)
-            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 200, modelRemovedTriples);
+            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 100, modelRemovedTriples);
 
             if ((ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                 continue;
@@ -225,10 +228,10 @@ public class Generator {
 
                 modelRemovedTriples.add(item);
                 // Find all the inconsistencies in the first subgraph(Object)
-                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 50, modelRemovedTriples);
+                Set<Triple> SubjectInput = GetSubGraph(LargeModel, subject, 1000, modelRemovedTriples);
 
                 // Find all the inconsistencies in the second subgraph(Subject)
-                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 50, modelRemovedTriples);
+                Set<Triple> ObjectInput =  GetSubGraph(LargeModel, object, 1000, modelRemovedTriples);
 
                 if (FinalSampling && (ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                     continue;
