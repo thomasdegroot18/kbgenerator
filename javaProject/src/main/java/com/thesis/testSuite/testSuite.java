@@ -25,6 +25,7 @@ public class testSuite {
         String hdt;
         String hdtName;
         String args3 = "0";
+        boolean CheckingInconsistency = true;
         // Setting Locations
         switch (args[0]){
             case "0":
@@ -41,6 +42,7 @@ public class testSuite {
             // Setting Freebase here:
             hdt = AbsoluteName+"HDTs/freebase-rdf-2013-12-01-00-00.hdt";
             hdtName = "freebase-rdf-2013-12-01-00-00.hdt";
+            CheckingInconsistency = false;
             break;
             case "3":
             //Setting Yago2s here:
@@ -84,8 +86,9 @@ public class testSuite {
                                        rdf,
                                        "10",
                                        "true"};
-
-        InconsistencyLocator.main(argsInconsistency);
+        if (CheckingInconsistency ){
+            InconsistencyLocator.main(argsInconsistency);
+        }
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");
