@@ -91,8 +91,8 @@ public class Generator {
             SampledDownModel.close();
             Iterator ++;
             if(Iterator % 10 == 0 ){
-                System.out.println("Finished Combined SubSampling part: "+ Iterator);
                 FinalSampledModel.add(DownSampling(SubSampledModel , SampleSize, false));
+                System.out.println("Finished Combined SubSampling part: "+ Iterator);
                 SubSampledModel.close();
                 SubSampledModel = ModelFactory.createDefaultModel();
             }
@@ -117,9 +117,9 @@ public class Generator {
         Model modelCStorage = ModelFactory.createDefaultModel();
         // Get the Iterator tripleString to loop through.
         Model modelRemovedTriples = ModelFactory.createDefaultModel();
-
+        long StartIterator = 0;
         while (stmtIt.hasNext() && modelCStorage.size() < maxSize ) {
-
+            StartIterator ++;
 
 
             // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
@@ -171,7 +171,7 @@ public class Generator {
             }
 
         }
-
+        System.out.println("MaxSize: " + maxSize + " Amount Of Triples Used to reach: " + StartIterator);
         return modelCStorage;
     }
 
@@ -182,7 +182,7 @@ public class Generator {
         long OldSize = 0;
         boolean FinalPass = true;
         double RemovalRate;
-        System.out.println("Final Sample size: "+ NewSize);
+        System.out.println("Starting Sample size: "+ NewSize);
         // While there is a triple the loop continues.
         while (StartingSize*DownSamplingSize < NewSize  && (OldSize != NewSize || FinalPass)){
             if( NewSize > 0.95*OldSize ){
