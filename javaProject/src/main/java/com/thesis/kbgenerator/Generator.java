@@ -87,15 +87,15 @@ public class Generator {
             Model SampledDownModel = DownSampling(NormalModel , SampleSize, false);
 
             System.out.println("Finished First SubSampling part: "+ Iterator);
-            SubSampledModel.add(SampledDownModel);
+            FinalSampledModel.add(SampledDownModel);
             SampledDownModel.close();
             Iterator ++;
-            if(Iterator % 1000 == 0 ){
-                FinalSampledModel.add(DownSampling(SubSampledModel , SampleSize, false));
-                System.out.println("Finished Combined SubSampling part: "+ Iterator);
-                SubSampledModel.close();
-                SubSampledModel = ModelFactory.createDefaultModel();
-            }
+//            if(Iterator % 1000 == 0 ){
+//                FinalSampledModel.add(DownSampling(SubSampledModel , SampleSize, false));
+//                System.out.println("Finished Combined SubSampling part: "+ Iterator);
+//                SubSampledModel.close();
+//                SubSampledModel = ModelFactory.createDefaultModel();
+//            }
         }
 
         DownSampling(FinalSampledModel, SampleSize, true);
