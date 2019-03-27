@@ -90,7 +90,7 @@ public class Generator {
             SubSampledModel.add(SampledDownModel);
             SampledDownModel.close();
             Iterator ++;
-            if(Iterator % 10 == 0 ){
+            if(Iterator % 1000 == 0 ){
                 FinalSampledModel.add(DownSampling(SubSampledModel , SampleSize, false));
                 System.out.println("Finished Combined SubSampling part: "+ Iterator);
                 SubSampledModel.close();
