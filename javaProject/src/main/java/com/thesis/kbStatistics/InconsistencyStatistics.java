@@ -9,6 +9,7 @@ import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdtjena.HDTGraph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,6 +60,12 @@ class InconsistencyStatistics {
         return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
     }
 
+    private int InconsistencyCountperDataset(String SPARQLString, String DataSet){
+        SPARQLString = SPARQLString.replace("SELECT * WHERE", "SELECT * FROM "+DataSet+" WHERE");
+
+        return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
+    }
+
     private int InconsistencyExistsChecker(String SPARQLString){
         return SPARQLExecutioner.ExistsPrinter(this.model, SPARQLString);
     }
@@ -81,12 +88,45 @@ class InconsistencyStatistics {
         int Count = InconsistencyCount(SPARQLQuery);
         int Size = InconsistencySize(GeneralGraph);
         double TailEffect = TailEffect(GeneralGraph);
+        int[] CountArray = new int[1];
+        String Type = InconsistencyType(SPARQLQuery);
+        String ClassType = InconsistencyClassType(SPARQLQuery);
+
+        // Store results in array for this query with a array.
+        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect, CountArray );
+
+        CollectedStatistics.put(SPARQLQuery, InconsistencyStats);
+    }
+
+    void RunAll(String SPARQLQuery, String StringOfInconsistency, String[] Datasets){
+        if(CollectedStatistics.containsKey(SPARQLQuery)){
+            return;
+        }
+
+        // Take information, Check if information is already tested, by checking a "hash"
+        List<String> Subgraph = new ArrayList<>();
+        for (String s: StringOfInconsistency.split(", ")){
+            if(s.length() > 1){
+                Subgraph.add(s);
+            }
+        }
+
+        GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(Subgraph);
+        // Run tests for single inconsistency
+        int[] CountArray = new int[Datasets.length];
+        int i = 0;
+        for (String DataSet : Datasets){
+            CountArray[i] = InconsistencyCountperDataset(SPARQLQuery,DataSet);
+        }
+        int Count = InconsistencyCount(SPARQLQuery);
+        int Size = InconsistencySize(GeneralGraph);
+        double TailEffect = TailEffect(GeneralGraph);
 
         String Type = InconsistencyType(SPARQLQuery);
         String ClassType = InconsistencyClassType(SPARQLQuery);
 
         // Store results in array for this query with a array.
-        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect);
+        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect, CountArray);
 
         CollectedStatistics.put(SPARQLQuery, InconsistencyStats);
     }
@@ -100,11 +140,11 @@ class InconsistencyStatistics {
         int Count = InconsistencyExistsChecker(SPARQLQuery);
         int Size = 0;
         double TailEffect = 0;
-
+        int[] CountArray = new int[1];
         String Type = "";
         String ClassType = "";
         // Store results in array for this query with a array.
-        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect);
+        InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect, CountArray);
 
         CollectedStatistics.put(SPARQLQuery, InconsistencyStats);
     }
@@ -128,12 +168,13 @@ class InconsistencyStatistics {
             String Type = InconsistencyStats.getType();
             String ClassType = InconsistencyStats.getClassType();
             double TailEffect = InconsistencyStats.getTailEffect();
+            int[] CountArray = InconsistencyStats.getCountDataSet();
             if(IndexNumber == 1){
                 LineToWrite = "{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"}";
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"\", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
             } else{
                 LineToWrite = ",{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"}";
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"\", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
             }
 
 

@@ -2,6 +2,8 @@ package com.thesis.kbStatistics;
 
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
+import org.rdfhdt.hdt.triples.IteratorTripleString;
+import org.rdfhdt.hdt.triples.TripleString;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.rmi.server.ExportException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,7 +69,6 @@ public class Statistics {
         return StoredGraph;
     }
 
-
     static void writeJSON(String fileLocation, List<String> StringArray){
         try{
             FileOutputStream fileWriter = new FileOutputStream(new File(fileLocation));
@@ -84,19 +84,39 @@ public class Statistics {
     }
 
 
+    static String[] GetDataSets(HDT hdt ){
+        String[] DatasetList = new String[100];
+        try {
+            IteratorTripleString it = hdt.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
+            while(it.hasNext()) {
+                TripleString ts = it.next();
+                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return DatasetList;
+    }
+
+
 
     private static void ConstantLoop( HDT hdt,  String fileLocation, String OutputLocation){
 
 
 
         // Get all the KB statistics
-        if(testing_Bool){
-            System.out.println("knowledge base statistics calculation");
-            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
+//        if(testing_Bool){
+//            System.out.println("knowledge base statistics calculation");
+//            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
+//
+//            System.out.println("Finished knowledge base statistics calculation");
+//
+//        }
 
-            System.out.println("Finished knowledge base statistics calculation");
-
-        }
+        String[] Datasets = GetDataSets(hdt);
 
         // Create object for Inconsistencies.
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
@@ -112,7 +132,11 @@ public class Statistics {
 
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
-                InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+                if (Datasets.length > 1){
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
+                } else{
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+                }
 
             }
 
@@ -147,7 +171,10 @@ public class Statistics {
         }
 
         // Print to the user that the HDT is being loaded. Can take a while.
+
+
         System.out.println("Print Loading in HDT");
+
         if (args.length == 0){
             throw new IllegalArgumentException("Did not input the correct locations of the output or the input locations.");
         }

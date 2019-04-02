@@ -7,16 +7,20 @@ class InconsistencyStats {
     private String Type;
     private String ClassType;
     private double TailEffect;
+    private int[] CountDataSet;
 
 
-    InconsistencyStats(int Count, int Size, String Type, String ClassType, double TailEffect){
+    InconsistencyStats(int Count, int Size, String Type, String ClassType, double TailEffect, int[] CountDataSet){
         this.Size = Size;
         this.Count = Count;
         this.Type = Type;
         this.ClassType = ClassType;
         this.TailEffect = TailEffect;
+        this.CountDataSet = CountDataSet;
 
     }
+
+    int[] getCountDataSet() { return CountDataSet; }
 
     int getCount() {
         return Count;
