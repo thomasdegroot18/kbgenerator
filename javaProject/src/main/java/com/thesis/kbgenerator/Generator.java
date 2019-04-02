@@ -177,7 +177,7 @@ public class Generator {
             }
 
         }
-        System.out.println("Amount of Triples Parsed: " + StartIterator + "Size : "+ modelCStorage.size());
+        System.out.println("Amount of Triples Parsed: " + StartIterator + " Size : "+ modelCStorage.size());
         return modelCStorage;
     }
 
