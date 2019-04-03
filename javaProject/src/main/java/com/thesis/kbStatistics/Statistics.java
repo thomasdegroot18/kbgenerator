@@ -94,15 +94,17 @@ public class Statistics {
                 System.out.println(ts.asNtriple());
                 IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
 
-
+                System.out.println(itNew.next().asNtriple());
 
                 }
+            System.out.println("Finished Check Now Header");
             Header elem = hdt.getHeader();
             it = elem.search("", "", "");
             while(it.hasNext()) {
                 TripleString ts = it.next();
                 System.out.println(ts.asNtriple());
-                // IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                System.out.println(itNew.next().asNtriple());
             }
 
             } catch (Exception e){
