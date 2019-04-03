@@ -92,9 +92,9 @@ public class Statistics {
             int i = 0;
             while(it.hasNext() && i < 100) {
                 TripleString ts = it.next();
-                System.out.println(ts.asNtriple());
+                System.out.println(ts.getSubject());
                 try {
-                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "", "");
                     if (itNew.hasNext()){
                         System.out.println(itNew.next().asNtriple());
                     } else{
