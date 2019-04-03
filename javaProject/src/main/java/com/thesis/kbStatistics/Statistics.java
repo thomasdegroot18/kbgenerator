@@ -12,8 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class Statistics {
@@ -86,19 +85,28 @@ public class Statistics {
 
 
     static String[] GetDataSets(HDT hdt ){
-        String[] DatasetList = new String[100];
+        TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+
+        int smallestnumber = 0;
         try {
             IteratorTripleString it = hdt.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
             int i = 0;
             while(it.hasNext() && i < 100) {
                 TripleString ts = it.next();
-                System.out.println(ts.getSubject());
                 try {
                     IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://rdfs.org/ns/void#triples", "");
                     if (itNew.hasNext()) {
-                        while (itNew.hasNext()) {
-                            System.out.println(itNew.next().asNtriple());
+                        Integer triples = Integer.parseInt((itNew.next().getObject().toString().replace("^^<http://www.w3.org/2001/XMLSchema#integer>","")));
+                        System.out.println(triples);
+                        if (triples > smallestnumber){
+                            map.putIfAbsent(triples, ts.getSubject().toString()) ;
                         }
+                        if( map.size() > 100){
+                            map.remove(smallestnumber);
+                            smallestnumber = map.firstKey();
+                        }
+
+
                     } else{
                         System.out.println("No Triple Found");
                     }
@@ -113,7 +121,8 @@ public class Statistics {
         }
 
         System.out.println("Finished Check");
-        return DatasetList;
+
+        return map.values().toArray(new String[0]);
 
     }
 
@@ -149,6 +158,7 @@ public class Statistics {
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
                 if (Datasets.length > 1){
+                    System.out.println(Arrays.toString(Datasets));
                     //InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
                 } else{
                     InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
