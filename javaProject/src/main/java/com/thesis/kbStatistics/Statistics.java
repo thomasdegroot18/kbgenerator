@@ -93,10 +93,11 @@ public class Statistics {
             int i = 0;
             while(it.hasNext() && i < 100) {
                 TripleString ts = it.next();
+
                 try {
                     IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://rdfs.org/ns/void#triples", "");
                     if (itNew.hasNext()) {
-                        Integer triples = Integer.parseInt((itNew.next().getObject().toString().replace("^^<http://www.w3.org/2001/XMLSchema#integer>","")));
+                        Integer triples = Integer.valueOf((itNew.next().getObject().toString().replace("^^<http://www.w3.org/2001/XMLSchema#integer>","").replace("\"","")));
                         System.out.println(triples);
                         if (triples > smallestnumber){
                             map.putIfAbsent(triples, ts.getSubject().toString()) ;
@@ -110,6 +111,24 @@ public class Statistics {
                     } else{
                         System.out.println("No Triple Found");
                     }
+
+                    itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triplesnumTriples", "");
+                    if (itNew.hasNext()) {
+                        Integer triples = Integer.valueOf((itNew.next().getObject().toString().replace("^^<http://www.w3.org/2001/XMLSchema#integer>","").replace("\"","")));
+                        System.out.println(triples);
+                        if (triples > smallestnumber){
+                            map.putIfAbsent(triples, ts.getSubject().toString()) ;
+                        }
+                        if( map.size() > 100){
+                            map.remove(smallestnumber);
+                            smallestnumber = map.firstKey();
+                        }
+
+
+                    } else{
+                        System.out.println("No Triple Found");
+                    }
+
                 } catch (Exception e){
                     System.out.println("Not Found"); i ++;
                 }
@@ -158,8 +177,7 @@ public class Statistics {
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
                 if (Datasets.length > 1){
-                    System.out.println(Arrays.toString(Datasets));
-                    //InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
                 } else{
                     InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
                 }
