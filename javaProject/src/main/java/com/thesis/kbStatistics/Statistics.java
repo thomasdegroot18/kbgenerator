@@ -95,11 +95,9 @@ public class Statistics {
                 System.out.println(ts.getSubject());
                 try {
                     IteratorTripleString itNew = hdt.search(ts.getSubject(), "", "");
-                    if (itNew.hasNext()){
+                    while (itNew.hasNext()){
                         System.out.println(itNew.next().asNtriple());
-                    } else{
-                        i ++;
-                    }
+                    } 
                 } catch (Exception e){
                     System.out.println("Not Found"); i ++;
                 }
