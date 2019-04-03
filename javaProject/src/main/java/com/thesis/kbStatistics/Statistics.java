@@ -98,18 +98,18 @@ public class Statistics {
 
                 }
             Header elem = hdt.getHeader();
-            it = elem.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
+            it = elem.search("", "", "");
             while(it.hasNext()) {
                 TripleString ts = it.next();
                 System.out.println(ts.asNtriple());
-                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                // IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
             }
 
             } catch (Exception e){
                 e.printStackTrace();
         }
 
-
+        System.out.println("Finished Check");
         return DatasetList;
     }
 
