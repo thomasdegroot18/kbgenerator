@@ -2,6 +2,7 @@ package com.thesis.kbStatistics;
 
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
+import org.rdfhdt.hdt.header.Header;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
 
@@ -90,11 +91,22 @@ public class Statistics {
             IteratorTripleString it = hdt.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
             while(it.hasNext()) {
                 TripleString ts = it.next();
+                System.out.println(ts.asNtriple());
                 IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
 
+
+
+                }
+            Header elem = hdt.getHeader();
+            it = elem.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
+            while(it.hasNext()) {
+                TripleString ts = it.next();
+                System.out.println(ts.asNtriple());
+                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
             }
-        } catch (Exception e){
-            e.printStackTrace();
+
+            } catch (Exception e){
+                e.printStackTrace();
         }
 
 
