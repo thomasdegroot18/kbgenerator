@@ -89,22 +89,31 @@ public class Statistics {
         String[] DatasetList = new String[100];
         try {
             IteratorTripleString it = hdt.search("", "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://rdfs.org/ns/void#Dataset");
-            while(it.hasNext()) {
+            int i = 0;
+            while(it.hasNext() && i < 100) {
                 TripleString ts = it.next();
                 System.out.println(ts.asNtriple());
-                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
-
-                System.out.println(itNew.next().asNtriple());
+                try {
+                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                    System.out.println(itNew.next().asNtriple());
+                } catch (Exception e){
+                    System.out.println("Not Found"); i ++;
+                }
 
                 }
             System.out.println("Finished Check Now Header");
             Header elem = hdt.getHeader();
             it = elem.search("", "", "");
-            while(it.hasNext()) {
+            i = 0;
+            while(it.hasNext() && i < 100) {
                 TripleString ts = it.next();
                 System.out.println(ts.asNtriple());
-                IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
-                System.out.println(itNew.next().asNtriple());
+                try {
+                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
+                    System.out.println(itNew.next().asNtriple());
+                } catch (Exception e){
+                    System.out.println("Not Found"); i ++;
+                }
             }
 
             } catch (Exception e){
