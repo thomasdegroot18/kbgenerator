@@ -94,33 +94,19 @@ public class Statistics {
                 TripleString ts = it.next();
                 System.out.println(ts.getSubject());
                 try {
-                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "", "");
-                    while (itNew.hasNext()){
-                        System.out.println(itNew.next().asNtriple());
-                    } 
+                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://rdfs.org/ns/void#triples", "");
+                    if (itNew.hasNext()) {
+                        while (itNew.hasNext()) {
+                            System.out.println(itNew.next().asNtriple());
+                        }
+                    } else{
+                        System.out.println("No Triple Found");
+                    }
                 } catch (Exception e){
                     System.out.println("Not Found"); i ++;
                 }
 
                 }
-            System.out.println("Finished Check Now Header");
-            Header elem = hdt.getHeader();
-            it = elem.search("", "", "");
-            i = 0;
-            while(it.hasNext() && i < 100) {
-                TripleString ts = it.next();
-                System.out.println(ts.asNtriple());
-                try {
-                    IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
-                    if (itNew.hasNext()){
-                        System.out.println(itNew.next().asNtriple());
-                    } else{
-                        i ++;
-                    }
-                } catch (Exception e){
-                    System.out.println("Not Found"); i ++;
-                }
-            }
 
             } catch (Exception e){
                 e.printStackTrace();
