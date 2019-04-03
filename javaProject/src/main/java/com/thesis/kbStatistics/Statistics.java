@@ -95,7 +95,11 @@ public class Statistics {
                 System.out.println(ts.asNtriple());
                 try {
                     IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
-                    System.out.println(itNew.next().asNtriple());
+                    if (itNew.hasNext()){
+                        System.out.println(itNew.next().asNtriple());
+                    } else{
+                        i ++;
+                    }
                 } catch (Exception e){
                     System.out.println("Not Found"); i ++;
                 }
@@ -110,7 +114,11 @@ public class Statistics {
                 System.out.println(ts.asNtriple());
                 try {
                     IteratorTripleString itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triples", "");
-                    System.out.println(itNew.next().asNtriple());
+                    if (itNew.hasNext()){
+                        System.out.println(itNew.next().asNtriple());
+                    } else{
+                        i ++;
+                    }
                 } catch (Exception e){
                     System.out.println("Not Found"); i ++;
                 }
@@ -122,6 +130,7 @@ public class Statistics {
 
         System.out.println("Finished Check");
         return DatasetList;
+
     }
 
 
@@ -156,7 +165,7 @@ public class Statistics {
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
                 if (Datasets.length > 1){
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
+                    //InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
                 } else{
                     InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
                 }
