@@ -63,6 +63,9 @@ class InconsistencyStatistics {
     private int InconsistencyCountperDataset(String SPARQLString, String DataSet){
         SPARQLString = SPARQLString.replace("SELECT * WHERE", "SELECT * FROM <"+DataSet+"> WHERE");
         System.out.println(SPARQLString);
+        SPARQLString = "SELECT ?triples WHERE { <"+ DataSet+"> <http://lodlaundromat.org/ontology/triples> ?triples }";
+        SPARQLExecutioner.ResultPrinter(this.model, SPARQLString);
+
         return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
     }
 

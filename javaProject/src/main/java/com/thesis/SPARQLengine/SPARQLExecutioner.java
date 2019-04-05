@@ -70,6 +70,24 @@ public class SPARQLExecutioner {
         return counter;
     }
 
+    public static int ResultPrinter(Model model, String query){
+        //  Run query  and retrieve the results as ResultSet.
+        ResultSet results = SPARQLQuery(model, query);
+        // Print for every result the result line.
+        int counter = 0;
+        // This way the query will break after a 60 second execution time.
+        try {
+            while (results.hasNext()) {
+                counter++;
+                System.out.println(results.next().toString());
+            }
+        } catch (Exception e){
+            System.out.println("Time out Exception");
+        }
+
+        return counter;
+    }
+
     public static int ExistsPrinter(Model model, String query){
         //  Run query  and retrieve the results as ResultSet.
         ResultSet results = SPARQLQuery(model, query);
