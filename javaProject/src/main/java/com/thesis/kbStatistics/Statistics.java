@@ -1,5 +1,6 @@
 package com.thesis.kbStatistics;
 
+import org.apache.jena.query.Dataset;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.header.Header;
@@ -152,6 +153,19 @@ public class Statistics {
 
     }
 
+    private static void RetrieveDataSet(HDT hdt, String Dataset){
+        try{
+            IteratorTripleString it = hdt.search(Dataset, "", "");
+            while(it.hasNext()) {
+                TripleString ts = it.next();
+                System.out.println(ts.asNtriple());
+            }
+        } catch (Exception e){
+
+        }
+
+    }
+
 
 
     private static void ConstantLoop( HDT hdt,  String fileLocation, String OutputLocation){
@@ -170,6 +184,9 @@ public class Statistics {
         String[] Datasets = GetDataSets(hdt);
         writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
         // Create object for Inconsistencies.
+        for (String Dataset: Datasets){
+            RetrieveDataSet(hdt, Dataset);
+        }
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
 
         // Create HashMap for StoredGraphs
