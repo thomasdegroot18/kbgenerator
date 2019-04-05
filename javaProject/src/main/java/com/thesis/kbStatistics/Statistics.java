@@ -155,6 +155,7 @@ public class Statistics {
 
     private static void RetrieveDataSet(HDT hdt, String Dataset){
         try{
+            System.out.println(Dataset);
             IteratorTripleString it = hdt.search(Dataset, "", "");
             while(it.hasNext()) {
                 TripleString ts = it.next();
