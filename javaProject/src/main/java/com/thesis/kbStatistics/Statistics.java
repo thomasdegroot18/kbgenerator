@@ -127,7 +127,6 @@ public class Statistics {
                     itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triplesnumTriples", "");
                     if (itNew.hasNext()) {
                         Integer triples = Integer.valueOf((itNew.next().getObject().toString().replace("^^<http://www.w3.org/2001/XMLSchema#integer>","").replace("\"","")));
-                        System.out.println(triples);
                         if (triples > smallestnumber){
                             map.putIfAbsent(triples, ts.getSubject().toString()) ;
                         }
