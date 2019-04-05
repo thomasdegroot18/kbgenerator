@@ -117,6 +117,8 @@ class InconsistencyStatistics {
         int i = 0;
         for (String DataSet : Datasets){
             CountArray[i] = InconsistencyCountperDataset(SPARQLQuery,DataSet);
+            System.out.println(DataSet+ " : "+ CountArray[i]);
+            i ++;
         }
         int Count = InconsistencyCount(SPARQLQuery);
         int Size = InconsistencySize(GeneralGraph);
