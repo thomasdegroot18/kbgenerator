@@ -122,8 +122,6 @@ public class Statistics {
                         }
 
 
-                    } else{
-                        System.out.println("No Triple Found");
                     }
 
                     itNew = hdt.search(ts.getSubject(), "http://purl.org/HDT/hdt#triplesnumTriples", "");
@@ -139,12 +137,9 @@ public class Statistics {
                         }
 
 
-                    } else{
-                        System.out.println("No Triple Found");
                     }
 
                 } catch (Exception e){
-                    System.out.println("Not Found"); i ++;
                 }
 
                 }
