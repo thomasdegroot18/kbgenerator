@@ -83,6 +83,20 @@ public class Statistics {
 
     }
 
+    static void writeJSON(String fileLocation, String[] StringArray){
+        try{
+            FileOutputStream fileWriter = new FileOutputStream(new File(fileLocation));
+            for (String line : StringArray){
+                fileWriter.write(line.getBytes());
+            }
+            fileWriter.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     static String[] GetDataSets(HDT hdt ){
         TreeMap<Integer, String> map = new TreeMap<Integer, String>();
@@ -161,7 +175,7 @@ public class Statistics {
 //        }
 
         String[] Datasets = GetDataSets(hdt);
-
+        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
         // Create object for Inconsistencies.
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
 
