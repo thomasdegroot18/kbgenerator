@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>KiteWithEquivalence</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/graphs.css">
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript">
+    //usage:
+    readTextFile("data/Inconsistencies.json", function(text1){
+      readTextFile("data/StatResults/pizza/InconsistencyStatistics.json", function(text2){
+        readTextFile("data/StatResults/dbpedia2016-04en/InconsistencyStatistics.json", function(text3){
+          readTextFile("data/StatResults/LOD/InconsistencyStatistics.json", function(text4){
+            readTextFile("data/StatResults/yago2s/InconsistencyStatistics.json", function(text5){
+              var sample = JSON.parse(text1);
+              var graphNumberItems = JSON.parse(text2);
+              var dbpedia = JSON.parse(text3);
+              var lOD = JSON.parse(text4);
+              var yago2s = JSON.parse(text5);
+              for (elemSample in sample){
+                var inconsistencyInfo = graphNumberItems[elemSample]
+                if (inconsistencyInfo.Type == "KiteWithEquivalence" && lOD[elemSample].Count > 0){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
+                  var graph = sample[elemSample].Graph
+                  var nodeLinks = graph.split(", ");
+                  var nodesEdges = RetrieveNodes(nodeLinks)
+                  nodes = nodesEdges[0]
+                  links = nodesEdges[1]
+                  var sparqlRequest = sample[elemSample].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
+                  var bodySection = d3.select("body").append("div");
+                  bodySection.append("p").attr("width", "600px").html(sparqlRequest);
+                  build(nodes, links, bodySection)
+
+                  inconsistencyInfo.LODaLot = lOD[elemSample].Count
+                  if(yago2s[elemSample] == undefined){
+                    inconsistencyInfo.YAGO = 0;
+                  } else{
+                    inconsistencyInfo.YAGO = yago2s[elemSample].Count
+                  }
+                  if(dbpedia[elemSample] == undefined){
+                    inconsistencyInfo.dbpedia = 0;
+                  } else{
+                    inconsistencyInfo.dbpedia = dbpedia[elemSample].Count
+                  }
+                  delete inconsistencyInfo.PerDatasetCount
+                  delete inconsistencyInfo.ClassType
+                  delete inconsistencyInfo.TailEffect
+                  delete inconsistencyInfo.Count
+
+
+                  values = []
+                  values.push(inconsistencyInfo);
+                  tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
+
+                }
+              }
+            })
+          })
+        })
+      })
+    })
+
+    </script>
+  </body>
+</html>

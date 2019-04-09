@@ -3,20 +3,21 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-div#layout {
-  text-align: center;
-}
-
-div#container {
-  width: 1000px;
-  height: 600px;
-  margin: auto;
-  background-color: #2F4A6D;
-}
 
 svg {
-  width: 100%;
-  height: 100%;
+  float:left;
+}
+
+.group1 {
+  width: 1000px;
+}
+
+.group2 {
+  width: 1000px;
+}
+
+.group3 {
+  width: 1000px;
 }
 
 .bar {
@@ -88,7 +89,6 @@ div.tooltip {
 }
 
 .slider-wrapper {
-  overflow:hidden; /* to remove page scrollbars */
   padding: 25px 0 0;
   white-space:nowrap;
   font-size:0; /* to remove ~4px whitespace */
@@ -97,9 +97,9 @@ div.tooltip {
 .portfolio-single {
   /*reset fontsize if needed*/
   display:inline-block;
-  width:300px;
+  width:200px;
 }
 .portfolio-single img{
   vertical-align:top;
-  width:300px;
+  width:200px;
 }

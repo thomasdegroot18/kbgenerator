@@ -26,6 +26,7 @@ public class GeneralisedSubGraph {
     private HashMap<String, String> Edges = new HashMap<>();
     private StringBuilder SPARQLStringB = new StringBuilder();
     private List<String>  ExplanationStringList;
+    private boolean EquivalenceType = false;
 
     private boolean consistency;            // Store the consistency of the subgraph
 
@@ -115,6 +116,8 @@ public class GeneralisedSubGraph {
                     addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                     addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
 
+                    EquivalenceType = true;
+
                 } else if (OWLAXIOMString[1].contains("a") || OWLAXIOMString[2].contains("a")){
                         throw new ClassCastException(OWLAXIOMString[0]);
                         // All instances where two classes are found.
@@ -162,6 +165,7 @@ public class GeneralisedSubGraph {
                                 // Add Triple To hashMap
                                 addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
                                 addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                EquivalenceType = true;
                                 break;
                             }
                             default:
@@ -261,6 +265,10 @@ public class GeneralisedSubGraph {
     // Returns a stream of Axioms to the user.
     private Stream<OWLAxiom> getAxioms(){
         return owlOntologyGraph.axioms();
+    }
+
+    public boolean getEquivalenceType() {
+        return EquivalenceType;
     }
 
     // gets the consistency.
