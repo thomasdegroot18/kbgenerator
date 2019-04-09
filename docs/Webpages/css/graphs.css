@@ -6,3 +6,28 @@
     stroke: #999;
     stroke-opacity: .6;
 }
+
+p{
+    float:left;
+    width: 600px
+}
+
+div {
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+  border-bottom: hidden;
+  overflow: hidden;
+  width: 1200px;
+}
+svg {
+  float:left;
+}
+
+table {
+  border: 1px solid black;
+  overflow: hidden;
+  float:left;
+  position:relative;
+  top: 20px;
+}

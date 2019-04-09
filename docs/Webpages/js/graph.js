@@ -27,18 +27,8 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.split(search).join(replacement);
 };
 
-//usage:
-readTextFile("data/data.json", function(text){
-    var sample = JSON.parse(text);
-    var graph = sample[getQueryVariable('Graphnumber')-1].Graph;
-    var nodeLinks = graph.split(", ");
-    var sparqlRequest = sample[getQueryVariable('Graphnumber')-1].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
-    d3.select("body").select("p")
-        .append("p")
-        .html(sparqlRequest);
 
-    const svg = d3.select('svg');
-    const svgContainer = d3.select('#container');
+function RetrieveNodes(nodeLinks){
 
    var nodes = []
 
@@ -70,8 +60,8 @@ readTextFile("data/data.json", function(text){
             if (reuse == undefined){
               nodesElem.color = "green";
               nodesElem.name = vertexIn;
-              nodesElem.x = xLoc + Math.floor(Math.random() * 100) - 50;
-              nodesElem.y = yLoc + Math.floor(Math.random() * 100) - 50;
+              nodesElem.x = xLoc + Math.floor(Math.random() * 50) - 20;
+              nodesElem.y = yLoc + Math.floor(Math.random() * 50) - 20;
               nodes.push(nodesElem);
             } else{
               nodes[reuse].color = "green";
@@ -87,8 +77,8 @@ readTextFile("data/data.json", function(text){
             }
             if (reuse == undefined){
               nodesElem.name = vertexOut;
-              nodesElem.x = xLoc + Math.floor(Math.random() * 200) - 100;
-              nodesElem.y = yLoc + Math.floor(Math.random() * 200) - 100;
+              nodesElem.x = xLoc + Math.floor(Math.random() * 50) - 50;
+              nodesElem.y = yLoc + Math.floor(Math.random() * 50) - 50;
 
 
               nodes.push(nodesElem);
@@ -107,8 +97,8 @@ readTextFile("data/data.json", function(text){
             if (linksElem.target == undefined){
               nodesElem2 = {x: 0, y: 0, name: "", color: "blue"}
               nodesElem2.name = vertexIn;
-              nodesElem2.x = xLoc + Math.floor(Math.random() * 400) - 100;
-              nodesElem2.y = yLoc + Math.floor(Math.random() * 200) - 100;
+              nodesElem2.x = xLoc + Math.floor(Math.random() * 100) - 50;
+              nodesElem2.y = yLoc + Math.floor(Math.random() * 100) - 50;
               nodes.push(nodesElem2);
               linksElem.target = nodes[nodes.length-1]
             }
@@ -116,11 +106,17 @@ readTextFile("data/data.json", function(text){
             links.push(linksElem);
           }
 
+        }
+        return [nodes, links]
     }
 
 
-    var width = 400,
-        height = 300;
+
+function build(nodes, links, divSection) {
+    const svg = divSection.append('svg').attr("width","300px").attr("height","300px");
+
+    var width = 200,
+        height = 200;
 
 
 
@@ -139,7 +135,7 @@ var node = svg.append("g")
        .attr("cx", function(d) { return d.x; })
        .attr("cy", function(d) { return d.y; })
        .attr("text", function(d) {return d.name})
-       .attr("r", "10px")
+       .attr("r", "5px")
        .attr("fill", function(d) {return d.color})
 
 
@@ -149,7 +145,7 @@ var node = svg.append("g")
 
        var link_force =  d3.forceLink(links)
                                .id(function(d) { return d.name; })
-                               .distance(50)
+                               .distance(10)
 
 
 
@@ -167,7 +163,7 @@ var node = svg.append("g")
     .attr("y1", function(d) { return d.source.y })
     .attr("x2", function(d) { return d.target.x })
     .attr("y2", function(d) { return d.target.y })
-    .attr("stroke-width", "2px")
+    .attr("stroke-width", "1px")
     .style("stroke", function(d) {
       if(d.type == "SubClassOf"){
         return "black"
@@ -199,5 +195,58 @@ var node = svg.append("g")
             .attr("y2", function(d) { return d.target.y; });
 
       }
+    }
 
+function tablebuild(columns, data, bodySection){
+    var table = bodySection.append('table')
+    		var	tbody = table.append('tbody');
+
+        // create a row for each object in the data
+    		var rows = tbody.selectAll('td')
+    		  .data(data)
+    		  .enter()
+    		  .append('td');
+
+        // create a cell in each row for each column
+    		var cells = rows.selectAll('tr')
+    		  .data(function (row) {
+    		    return columns.map(function (column) {
+    		      return {column: column, value: row[column]};
+    		    });
+    		  })
+    		  .enter()
+          .append('tr')
+            .text(function (d) { return d.column; })
+    		  .append('td')
+    		    .text(function (d) { return d.value; });
+
+    	  return table;
+    	}
+
+
+
+//usage:
+readTextFile("data/data.json", function(text1){
+  readTextFile("data/Graphnumber.json", function(text2){
+    var sample = JSON.parse(text1);
+    var GraphNumberItems = JSON.parse(text2);
+    for (elem in sample){
+      var graph = sample[elem].Graph
+      var graphInfo = GraphNumberItems[elem]
+      var nodeLinks = graph.split(", ");
+      var nodesEdges = RetrieveNodes(nodeLinks)
+      nodes = nodesEdges[0]
+      links = nodesEdges[1]
+    // var graph = sample[getQueryVariable('Graphnumber')-1].Graph;
+    //var sparqlRequest = sample[getQueryVariable('Graphnumber')-1].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
+    var sparqlRequest = sample[elem].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
+    var bodySection = d3.select("body").append("div");
+    bodySection.append("p").attr("width", "600px").html(sparqlRequest);
+    build(nodes, links, bodySection)
+
+    values = []
+    values.push(graphInfo);
+    tablebuild(Object.keys(graphInfo), values, bodySection)
+  }
+  })
   })
