@@ -128,7 +128,7 @@ public class Generator {
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 10 triples is taken.
-            if (rand.nextDouble() > 0.5) {
+            if (rand.nextDouble() > 1) {
                 Statement item = stmtIt.next();
                 if(InChecker.checkMandatory(item)){
                     modelCStorage.add(item);
@@ -160,10 +160,10 @@ public class Generator {
                 continue;
             }
             // Find all the inconsistencies in the first subgraph(Object)
-            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 100, modelRemovedTriples);
+            Set<Triple> SubjectInput = GetSubGraph(hdtModel, subject, 50, modelRemovedTriples);
 
             // Find all the inconsistencies in the second subgraph(Subject)
-            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 100, modelRemovedTriples);
+            Set<Triple> ObjectInput =  GetSubGraph(hdtModel, object, 50, modelRemovedTriples);
 
             if ((ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
                 continue;
@@ -198,7 +198,7 @@ public class Generator {
             } else{
                 FinalPass = true;
                 OldSize = NewSize;
-                RemovalRate = 0.5;
+                RemovalRate = 0.75;
             }
 
             // Get the Iterator tripleString to loop through.
@@ -242,10 +242,10 @@ public class Generator {
                     // Find all the inconsistencies in the second subgraph(Subject)
                     ObjectInput =  GetSubGraph(LargeModel, object, 300, modelRemovedTriples);
                 } else{
-                    SubjectInput = GetSubGraph(LargeModel, subject, 100, modelRemovedTriples);
+                    SubjectInput = GetSubGraph(LargeModel, subject, 300, modelRemovedTriples);
 
                     // Find all the inconsistencies in the second subgraph(Subject)
-                    ObjectInput =  GetSubGraph(LargeModel, object, 100, modelRemovedTriples);
+                    ObjectInput =  GetSubGraph(LargeModel, object, 300, modelRemovedTriples);
                 }
 
                 if (FinalSampling && (ObjectInput.size() == 0) || (SubjectInput.size() == 0)){
