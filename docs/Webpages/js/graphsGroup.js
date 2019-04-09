@@ -41,17 +41,16 @@ function RetrieveNodes(nodeLinks){
         nodesElem = {x: 0, y: 0, name: "", color: "blue"}
 
 
-
-          edge = nodeLinks[elem].split(" ")[0]
-          vertexIn = nodeLinks[elem].split(" ")[1]
+          nodeLinks[elem]
+          edge = nodeLinks[elem].split("(")[0]
+          vertexIn = nodeLinks[elem].split("(")[1]
           if (vertexIn == undefined){
             continue;
           }
-          vertexOut = nodeLinks[elem].split(" ")[2];
-          console.log(vertexOut)
-          vertexIn = vertexIn.split(" ")[0];
-          if (vertexIn.includes("C")){
-            vertexType = "Class";
+          vertexIn = vertexIn.split(" ")[0].replace("<","").replace(">","");
+          if (vertexIn == "Class"){
+            vertexType = vertexIn;
+            vertexIn = nodeLinks[elem].split("(")[2].replaceAll(")","").replace("<","").replace(">","");
             reuse = undefined;
             for (elem in nodes){
               if (nodes[elem].name == vertexIn){
@@ -68,26 +67,8 @@ function RetrieveNodes(nodeLinks){
               nodes[reuse].color = "green";
             }
 
-          }
-          if (vertexOut.includes("C")){
-            vertexType = "Class";
-            reuse = undefined;
-            for (elem in nodes){
-              if (nodes[elem].name == vertexOut){
-                reuse = elem
-              }
-            }
-            if (reuse == undefined){
-              nodesElem.color = "green";
-              nodesElem.name = vertexIn;
-              nodesElem.x = xLoc + Math.floor(Math.random() * 50) - 20;
-              nodesElem.y = yLoc + Math.floor(Math.random() * 50) - 20;
-              nodes.push(nodesElem);
-            } else{
-              nodes[reuse].color = "green";
-            }
-
-          }
+          } else {
+            vertexOut = nodeLinks[elem].split("(")[1].split(" ")[1].replaceAll(")","").replace("<","").replace(">","")
             reuse = undefined;
             for (elem in nodes){
               if (nodes[elem].name == vertexOut){
@@ -102,7 +83,7 @@ function RetrieveNodes(nodeLinks){
 
               nodes.push(nodesElem);
 
-
+            }
 
             linksElem = {source: undefined, target: undefined, type: undefined}
             for (elem in nodes){
@@ -245,27 +226,46 @@ function tablebuild(columns, data, bodySection){
 
 
 //usage:
-readTextFile("data/Inconsistencies.json", function(text1){
-  readTextFile("data/Graphnumber.json", function(text2){
-    var sample = JSON.parse(text1);
-    var GraphNumberItems = JSON.parse(text2);
-    for (elem in sample){
-      var graph = sample[elem].Graph
-      var graphInfo = GraphNumberItems[elem]
-      var nodeLinks = graph.split(", ");
-      var nodesEdges = RetrieveNodes(nodeLinks)
-      nodes = nodesEdges[0]
-      links = nodesEdges[1]
-    // var graph = sample[getQueryVariable('Graphnumber')-1].Graph;
-    //var sparqlRequest = sample[getQueryVariable('Graphnumber')-1].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
-    var sparqlRequest = sample[elem].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
-    var bodySection = d3.select("body").append("div");
-    bodySection.append("p").attr("width", "600px").html(sparqlRequest);
-    build(nodes, links, bodySection)
+readTextFile("data/data.json", function(text1){
+  var group1 = 0;
+  var group2 = 0;
+  var group3 = 0;
 
-    values = []
-    values.push(graphInfo);
-    tablebuild(Object.keys(graphInfo), values, bodySection)
+    var sample = JSON.parse(text1);
+    for (elem in sample){
+      console.log(elem)
+      if(sample[elem].GraphGroup == 1 && group1 < 5){
+        group1 ++;
+        var graph = sample[elem].Graph
+        var graphInfo = GraphNumberItems[elem]
+        var nodeLinks = graph.split(", ");
+        var nodesEdges = RetrieveNodes(nodeLinks)
+        nodes = nodesEdges[0]
+        links = nodesEdges[1]
+        var bodySection = d3.select(".group1").append("div");
+        build(nodes, links, bodySection)
+      } else if(sample[elem].GraphGroup == 2 && group2 < 5){
+        group2 ++;
+        var graph = sample[elem].Graph
+        var graphInfo = GraphNumberItems[elem]
+        var nodeLinks = graph.split(", ");
+        var nodesEdges = RetrieveNodes(nodeLinks)
+        nodes = nodesEdges[0]
+        links = nodesEdges[1]
+        var bodySection = d3.select(".group2").append("div");
+        build(nodes, links, bodySection)
+      } else if(sample[elem].GraphGroup == 3 && group3 < 5){
+        group3 ++;
+        var graph = sample[elem].Graph
+        var graphInfo = GraphNumberItems[elem]
+        var nodeLinks = graph.split(", ");
+        var nodesEdges = RetrieveNodes(nodeLinks)
+        nodes = nodesEdges[0]
+        links = nodesEdges[1]
+        var bodySection = d3.select(".group3").append("div");
+        build(nodes, links, bodySection)
+      }
+
+
   }
-  })
-  })
+})
