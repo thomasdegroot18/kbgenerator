@@ -59,6 +59,15 @@ public class testSuite {
             hdt = AbsoluteName+"HDTs/wordnet31.hdt";
             hdtName = "wordnet31.hdt";
             break;
+            case "6":
+                hdt = AbsoluteName+"HDTs/swdf.hdt";
+                hdtName = "swdf.hdt";
+                break;
+            case "7":
+                hdt = AbsoluteName+"HDTs/dblp-2012-11-28b.hdt";
+                hdtName = "dblp-2012-11-28b.hdt";
+                CheckingInconsistency = false;
+                break;
             default:
             // Default here:
             System.out.println("Not found value.");
@@ -98,7 +107,7 @@ public class testSuite {
         System.out.println("Making inconsistency.json");
         String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
         InconsistencyCreator.main(argsInconsistencyCreator);
-        promptEnterKey();
+        //promptEnterKey();
 
         System.out.println("------------------------------------------------------------------------------------------");
         // Generator

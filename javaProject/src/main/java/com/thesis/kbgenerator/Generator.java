@@ -128,7 +128,7 @@ public class Generator {
             // Can be changed later to a selection of triples that meet a certain criteria.
 
             // at the moment every 1 out of 10 triples is taken.
-            if (rand.nextDouble() > 1) {
+            if (rand.nextDouble() > 0.5) {
                 Statement item = stmtIt.next();
                 if(InChecker.checkMandatory(item)){
                     modelCStorage.add(item);

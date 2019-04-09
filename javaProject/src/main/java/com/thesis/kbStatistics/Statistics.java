@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -174,20 +175,20 @@ public class Statistics {
 
 
         // Get all the KB statistics
-//        if(testing_Bool){
-//            System.out.println("knowledge base statistics calculation");
-//            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
-//
-//            System.out.println("Finished knowledge base statistics calculation");
-//
-//        }
+        if(testing_Bool){
+            System.out.println("knowledge base statistics calculation");
+            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
-        String[] Datasets = GetDataSets(hdt);
-        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
-        // Create object for Inconsistencies.
-        for (String Dataset: Datasets){
-            RetrieveDataSet(hdt, Dataset);
+            System.out.println("Finished knowledge base statistics calculation");
+
         }
+        String[] Datasets= new String [1];
+//        Datasets = GetDataSets(hdt);
+//        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
+        // Create object for Inconsistencies.
+//        for (String Dataset: Datasets){
+//            RetrieveDataSet(hdt, Dataset);
+//        }
         InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
 
         // Create HashMap for StoredGraphs
