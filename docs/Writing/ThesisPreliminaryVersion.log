@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.16)  22 APR 2019 14:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.27)  1 MAY 2019 00:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -407,11 +407,11 @@ File: images/figure5.png Graphic file (type png)
 Package pdftex.def Info: images/figure5.png  used on input line 417.
 (pdftex.def)             Requested size: 159.62085pt x 113.62207pt.
 Package epstopdf Info: Source file: <images/Samplefigure4.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 28173 bytes
 (epstopdf)             Output file: <images/Samplefigure4-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:50
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 18748 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure4-eps-c
 onverted-to.pdf images/Samplefigure4.eps>
@@ -424,11 +424,11 @@ Package pdftex.def Info: images/Samplefigure4-eps-converted-to.pdf  used on inp
 ut line 421.
 (pdftex.def)             Requested size: 159.62085pt x 125.00475pt.
 Package epstopdf Info: Source file: <images/Samplefigure5.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 26346 bytes
 (epstopdf)             Output file: <images/Samplefigure5-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:50
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 17000 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure5-eps-c
 onverted-to.pdf images/Samplefigure5.eps>
@@ -441,11 +441,11 @@ Package pdftex.def Info: images/Samplefigure5-eps-converted-to.pdf  used on inp
 ut line 424.
 (pdftex.def)             Requested size: 159.62085pt x 112.04283pt.
 Package epstopdf Info: Source file: <images/Samplefigure5.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 26346 bytes
 (epstopdf)             Output file: <images/Samplefigure5-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:50
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 17000 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure5-eps-c
 onverted-to.pdf images/Samplefigure5.eps>
@@ -482,11 +482,11 @@ File: images/figure3.png Graphic file (type png)
 Package pdftex.def Info: images/figure3.png  used on input line 443.
 (pdftex.def)             Requested size: 159.62085pt x 127.08276pt.
 Package epstopdf Info: Source file: <images/Samplefigure1.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 26474 bytes
 (epstopdf)             Output file: <images/Samplefigure1-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:52
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 19014 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure1-eps-c
 onverted-to.pdf images/Samplefigure1.eps>
@@ -499,11 +499,11 @@ Package pdftex.def Info: images/Samplefigure1-eps-converted-to.pdf  used on inp
 ut line 447.
 (pdftex.def)             Requested size: 159.62085pt x 126.2193pt.
 Package epstopdf Info: Source file: <images/Samplefigure2.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 26800 bytes
 (epstopdf)             Output file: <images/Samplefigure2-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:54
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 18840 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure2-eps-c
 onverted-to.pdf images/Samplefigure2.eps>
@@ -516,11 +516,11 @@ Package pdftex.def Info: images/Samplefigure2-eps-converted-to.pdf  used on inp
 ut line 450.
 (pdftex.def)             Requested size: 159.62085pt x 126.83653pt.
 Package epstopdf Info: Source file: <images/Samplefigure3.eps>
-(epstopdf)                    date: 2019-03-21 11:25:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 27146 bytes
 (epstopdf)             Output file: <images/Samplefigure3-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-03-21 12:39:48
+(epstopdf)                    date: 2019-04-25 16:23:39
 (epstopdf)                    size: 18244 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/Samplefigure3-eps-c
 onverted-to.pdf images/Samplefigure3.eps>
@@ -574,7 +574,7 @@ Missing character: There is no ¡ in font cmr10!
 [15] [16] (./ThesisPreliminaryVersion.aux) ) 
 Here is how much of TeX's memory you used:
  3532 strings out of 494923
- 56748 string characters out of 6180741
+ 56748 string characters out of 6180742
  120797 words of memory out of 5000000
  6797 multiletter control sequences out of 15000+600000
  7827 words of font info for 28 fonts, out of 8000000 for 9000
@@ -591,7 +591,7 @@ sfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ThesisPreliminaryVersion.pdf (20 pages, 1086198 bytes).
+Output written on ThesisPreliminaryVersion.pdf (20 pages, 1086421 bytes).
 PDF statistics:
  329 PDF objects out of 1000 (max. 8388607)
  100 compressed objects within 1 object stream

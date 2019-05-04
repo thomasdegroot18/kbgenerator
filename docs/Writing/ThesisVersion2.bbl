@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{DBpedia}
+S\"{o}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
+  Cyganiak, and Zachary Ives.
+\newblock Dbpedia: A nucleus for a web of open data.
+\newblock In {\em Proceedings of the 6th International The Semantic Web and 2Nd
+  Asian Conference on Asian Semantic Web Conference}, ISWC'07/ASWC'07, pages
+  722--735, Berlin, Heidelberg, 2007. Springer-Verlag.
+
+\bibitem{JavierD:2017}
+Javier~D. Fern{\'a}ndez, Wouter Beek, Miguel~A. Mart{\'i}nez-Prieto, and Mario
+  Arias.
+\newblock Lod-a-lot - a queryable dump of the lod cloud.
+\newblock In {\em International Semantic Web Conference}, 2017.
+
+\bibitem{rdfPrimer:2014}
+Y.~Raimond G.~Schreiber.
+\newblock Rdf primer 1.1.
+\newblock \url{https://www.w3.org/TR/rdf11-primer/}.
+
+\bibitem{OWLPrimer:2012}
+P.~Hitzler, M.~Krötzsch, B.~Parsia, P.~Patel-Schneider, and S.~Rudolph.
+
+\bibitem{Horridge:2009}
+Matthew Horridge, Bijan Parsia, and Ulrike Sattler.
+\newblock Explaining inconsistencies in owl ontologies.
+\newblock In {\em SUM}, 2009.
+
+\bibitem{YAGO}
+Fabian~M. Suchanek, Gjergji Kasneci, and Gerhard Weikum.
+\newblock Yago: A large ontology from wikipedia and wordnet.
+\newblock {\em Web Semant.}, 6(3):203--217, September 2008.
+
+\end{thebibliography}
