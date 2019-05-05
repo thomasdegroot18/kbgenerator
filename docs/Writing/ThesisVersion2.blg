@@ -1,6 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: ThesisVersion2.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ThesisVersion2.aux
 The style file: plain.bst
 Database file #1: ThesisBib.bib
 Warning--entry type for "rdfPrimer:2014" isn't style-file defined
@@ -11,6 +9,14 @@ I was expecting a `,' or a `}'---line 89 of file ThesisBib.bib
  :  
  :  title="OWL 2 Web Ontology Language Primer (Second Edition)"
 (Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 136 of file ThesisBib.bib
+ : @article{HeikoP:2016
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 148 of file ThesisBib.bib
+ : @article{MichaelF:2017
+ :                       ,
 I'm skipping whatever remains of this entry
 Repeated entry---line 171 of file ThesisBib.bib
  : @inproceedings{JavierD:2017
@@ -24,45 +30,12 @@ Repeated entry---line 237 of file ThesisBib.bib
  : @online{OWLPrimer:2012
  :                       ,
 I'm skipping whatever remains of this entry
-You've used 6 entries,
-            2118 wiz_defined-function locations,
-            538 strings with 5128 characters,
-and the built_in function-call counts, 2127 in all, are:
-= -- 191
-> -- 127
-< -- 1
-+ -- 50
-- -- 44
-* -- 146
-:= -- 353
-add.period$ -- 17
-call.type$ -- 6
-change.case$ -- 39
-chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 76
-empty$ -- 167
-format.name$ -- 44
-if$ -- 443
-int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 4
-newline$ -- 31
-num.names$ -- 12
-pop$ -- 57
-preamble$ -- 1
-purify$ -- 34
-quote$ -- 0
-skip$ -- 58
-stack$ -- 0
-substring$ -- 87
-swap$ -- 17
-text.length$ -- 1
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 24
-warning$ -- 0
-while$ -- 17
-width$ -- 7
-write$ -- 61
-(There were 4 error messages)
+Warning--entry type for "Openllet:2019" isn't style-file defined
+--line 348 of file ThesisBib.bib
+Warning--I didn't find a database entry for "pizza"
+Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
+while executing---line 1049 of file plain.bst
+Warning--empty journal in Jin:2011
+Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
+while executing---line 1090 of file plain.bst
+(There were 8 error messages)

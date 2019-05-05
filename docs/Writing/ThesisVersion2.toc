@@ -4,19 +4,38 @@
 \contentsline {subsection}{\numberline {1.3}Contribution}{2}
 \contentsline {subsection}{\numberline {1.4}Outline}{2}
 \contentsline {section}{\numberline {2}Background}{3}
-\contentsline {subsection}{\numberline {2.1}Knowlegde graph elements}{3}
+\contentsline {subsection}{\numberline {2.1}Knowledge graph elements}{3}
 \contentsline {subsection}{\numberline {2.2}Example introduction}{3}
-\contentsline {subsection}{\numberline {2.3}Reasoner}{3}
-\contentsline {subsection}{\numberline {2.4}Data}{4}
-\contentsline {subsubsection}{\numberline {2.4.1}Pizza-ontology}{4}
-\contentsline {subsubsection}{\numberline {2.4.2}LOD-a-lot}{4}
-\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{4}
-\contentsline {subsubsection}{\numberline {2.4.4}YAGO}{4}
-\contentsline {section}{\numberline {3}Related Work}{5}
-\contentsline {section}{\numberline {4}Problem formalization}{6}
-\contentsline {section}{\numberline {5}Method}{7}
-\contentsline {section}{\numberline {6}Implementations}{7}
-\contentsline {section}{\numberline {7}Experiments}{8}
-\contentsline {section}{\numberline {8}Conclusion}{9}
-\contentsline {section}{\numberline {9}Appendices}{11}
-\contentsline {subsection}{\numberline {9.1}Appendix A}{11}
+\contentsline {subsection}{\numberline {2.3}Reasoner}{4}
+\contentsline {subsubsection}{\numberline {2.3.1}Framework}{4}
+\contentsline {subsubsection}{\numberline {2.3.2}Reasoning types}{5}
+\contentsline {subsection}{\numberline {2.4}Data}{5}
+\contentsline {subsubsection}{\numberline {2.4.1}Pizza-ontology}{5}
+\contentsline {subsubsection}{\numberline {2.4.2}LOD-a-lot}{5}
+\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{5}
+\contentsline {subsubsection}{\numberline {2.4.4}YAGO}{6}
+\contentsline {section}{\numberline {3}Related Work}{7}
+\contentsline {subsection}{\numberline {3.1}Preliminaries}{7}
+\contentsline {subsection}{\numberline {3.2}Analysis}{7}
+\contentsline {subsection}{\numberline {3.3}Sampling}{7}
+\contentsline {section}{\numberline {4}AntiPatternDefinition}{8}
+\contentsline {section}{\numberline {5}Problem Definition}{9}
+\contentsline {subsection}{\numberline {5.1}Problem Description}{9}
+\contentsline {subsection}{\numberline {5.2}Proposed Method}{9}
+\contentsline {subsection}{\numberline {5.3}Proposed Experiments}{10}
+\contentsline {section}{\numberline {6}Method}{11}
+\contentsline {subsection}{\numberline {6.1}Subgraph retrieval}{11}
+\contentsline {subsection}{\numberline {6.2}Justification retrieval}{12}
+\contentsline {subsection}{\numberline {6.3}Justification generalization to `anti-patterns'}{12}
+\contentsline {section}{\numberline {7}Implementations}{14}
+\contentsline {subsection}{\numberline {7.1}Analysing inconsistent knowledge graphs}{14}
+\contentsline {subsection}{\numberline {7.2}Sampling inconsistent graphs}{14}
+\contentsline {section}{\numberline {8}Experiments}{16}
+\contentsline {subsection}{\numberline {8.1}Experimental Setup}{16}
+\contentsline {subsection}{\numberline {8.2}Anti-pattern Analysis}{16}
+\contentsline {subsection}{\numberline {8.3}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{16}
+\contentsline {subsection}{\numberline {8.4}Experiment 2: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{16}
+\contentsline {subsection}{\numberline {8.5}Experiment 3: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{16}
+\contentsline {section}{\numberline {9}Conclusion}{18}
+\contentsline {section}{\numberline {10}Appendices}{21}
+\contentsline {subsection}{\numberline {10.1}Appendix A}{21}
