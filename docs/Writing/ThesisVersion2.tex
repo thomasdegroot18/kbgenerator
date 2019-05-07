@@ -97,14 +97,14 @@
 
 \section{Introduction}
 \subsection{Motivation}
-\textit{Background}. Blaise Pascal once said, "Contradiction is not a sign of falsity, nor the lack of contradiction a sign of truth." Large amounts of data has been made available for everyone to use and Multi-billion facts, also called statements or triples, for a linked-data dataset being the standard in stead of the exception. We are sitting on a large amount of open data, but the problem however is that we do not know if all the facts available to use can be considered as the truth. We know that data is inherently dirty and it is known that finding new facts from the data is impossible if the data holds facts that are contradicting each other. While there is active development in solving the problem of contradictions in datasets by ignoring the contradictory facts and still use the rest of the "true" facts to still find new information that is hidden in the dataset. This method however, would still miss facts that could have been found if we could have removed the contradictory facts and used a datasets that is devoid of contradictions. So while a contradiction is no sign of a false dataset, a lack of contradictions would certainly be a step in the right direction to the truth. The only challenge is then to find if it is the correct truth!
+\textit{Background}. Blaise Pascal once said, "Contradiction is not a sign of falsity, nor the lack of contradiction a sign of truth." Large amounts of data has been made available for everyone to use and Multi-billion facts, also called statements or triples, for a linked-data dataset being the standard in stead of the exception. We are sitting on a large amount of open data, but the problem however is that we do not know if all the facts available to use can be considered as the truth. We know that data is inherently dirty and it is known that finding new facts from the data is impossible if the data holds facts that are contradicting each other. While there is active development in solving the problem of contradictions in datasets by ignoring the contradictory facts and still use the rest of the "true" facts to still find new information that is hidden in the dataset. This method however, would still miss facts that could have been found if we could have removed the contradictory facts and used a datasets that is devoid of contradictions. So while a contradiction is no sign of a false dataset, a lack of contradictions would certainly be a step in the right direction to the truth. The only challenge is then to find if it is the correct truth!\\
 
 \textit{Motivation}. Finding and removing contradictions from datasets in a simple and systematic way will have a number of benefits. Firstly we could study the types of mistakes that have been made in the datasets, and how these mistakes are made, by automatic algorithms, or by people in the process. This could help us clean problems by the source, the generation of the data, in stead of later in the process, during the cleaning. 
-Secondly we can generalize the contradictions we have found and design blueprints that can be used to describe groups of contradictions, that can be applied to different datasets. 
-Thirdly, we could use the found contradictions to analyze existing datasets. We can for example use the blueprints to find if there are contradictions in other datasets as well, and we could even count the amount to contradictions to analyze the datasets further. 
-Finally, we can use the contradictions now that we understand them, to build benchmarks designed to test tools, that require large datasets with known characteristics.
+Secondly we can generalize the contradictions we have found and design blueprints that can be used to describe groups of contradictions, that can be applied to different datasets. Thirdly, we could use the found contradictions to analyze existing datasets. We can for example use the blueprints to find if there are contradictions in other datasets as well, and we could even count the amount to contradictions to analyze the datasets further. 
+Finally, we can use the contradictions now that we understand them, to build benchmarks designed to test tools, that require large datasets with known characteristics.\\
 
-\textit{Method} In this work, we developed a method of extracting contradictions from linked datasets. We call these generalised contradictions `anti-patterns', as these contradictions can be seen as common mistakes made in dataset. Most commonly used in software design, http://wiki.c2.com/?AntiPattern, describes an anti-pattern as a bad solution for a problem. We describe a formal notion of `anti-patterns' in chapter \ref{AntiPatternDefinition}.
+\textit{Method} In this work, we developed a method of extracting contradictions from linked datasets. We call these generalised contradictions `anti-patterns', as these contradictions can be seen as common mistakes made in dataset. Most commonly used in software design, http://wiki.c2.com/?AntiPattern, describes an anti-pattern as a bad solution for a problem. We describe a formal notion of `anti-patterns' in chapter \ref{AntiPatternDefinition}.\\
+
 For the extractions of the `anti-patterns' we have designed an extraction pipeline that can extract `anti-patterns' for an arbitrary, inconsistent linked-data dataset can retrieve the `almost' complete set `anti-patterns'. We show this by retrieving such `anti-patterns' from the LOD-a-lot\cite{JavierD:2017} a dataset containing 28 billion facts. We also use the set of `anti-patterns' we have found in the LOD-a-lot as input for the two implementations we designed. The two implementations we designed are, analysis for inconsistent knowledge graphs and a sampling method, and these implementations make extensive use of the found `anti-patterns'. 
 
 \subsection{Research questions}
@@ -122,9 +122,10 @@ For the extractions of the `anti-patterns' we have designed an extraction pipeli
 \end{itemize}
 
 \subsection{Contribution}
-\textit{Experiments and implementations}. We test our extraction pipeline on two points, firstly if it is possible to retrieve all `anti-patterns' from a linked dataset. This is done by using a benchmark dataset, the "pizza-ontology". The "pizza-ontology" is a dummy dataset that holds only a small number of facts and a few contradictions, simple enough to check by hand. Secondly we test our extraction pipeline on the LOD-a-lot. One of the largest open datsets, we use the `anti-patterns' from this dataset as input for the later parts of our experiment.
+\textit{Experiments and implementations}. We test our extraction pipeline on two points, firstly if it is possible to retrieve all `anti-patterns' from a linked dataset. This is done by using a benchmark dataset, the "pizza-ontology". The "pizza-ontology" is a dummy dataset that holds only a small number of facts and a few contradictions, simple enough to check by hand. Secondly we test our extraction pipeline on the LOD-a-lot. One of the largest open datsets, we use the `anti-patterns' from this dataset as input for the later parts of our experiment.\\
+
 Finally we have selected two implementations to evaluate our method with real-world examples. Firstly, we have designed a system that can analyse linked datasets. The system retrieves `almost' all the  `anti-patterns' based on contradictions in the LOD-a-lot, and calculates the number of times the `anti-patterns' occur in the linked datasets. Then, the system return a detailed report of characteristics of linked datasets.
-Secondly, we show the implementation that samples a linked dataset and then generates sample of the original datasets that can be tweaked with a user-specified sample-size and the number of contradictions per `anti-patterns'. 
+Secondly, we show the implementation that samples a linked dataset and then generates sample of the original datasets that can be tweaked with a user-specified sample-size and the number of contradictions per `anti-patterns'. \\
 
 \textit{Findings}. We have tested our pipeline by extracting an `almost' complete set of `anti-patterns' from the LOD-a-lot\cite{JavierD:2017}, which we made available >>LINK<<. We developed a set of characteristics that can be used to describe `anti-patterns' more consisely. 
 We show that there is a correlation between the size of the `anti-pattern' and the amount of different `anti-patterns'. 
@@ -148,7 +149,7 @@ The main contributions in this works, with respect to the research questions can
 \section{Background}
 This chapter we introduce the set of preliminary key concept that are needed to understand the research that is presented in this work. To help the reader we also introduce a set of examples that we will use in this work to help the reader understand the work that we present here.
 
-\subsection{Knowledge graph elements}
+\subsection{Knowledge graph elements}\label{graphElements}
 \textit{Knowledge graph}. The first term we introduce is the knowledge graph. A knowledge graph can be seen as a part of a knowledge based system. Where the knowledge base stores all the statements, which represent the facts about the known world. The second part of the knowledge based systems are is the reasoner, which will be discussed in a later part of the this chapter. A knowledge graph consist out of a large amount of facts, also known as statements or triples. Which can be seen as instantiated basic triples patterns, statements that do not contain any changeable elements.\\
 
 \textit{Basic Triple Pattern}. Basic triple patterns(BTP) are the building blocks of knowledge graphs, with each basic triple pattern consisting out three elements.
@@ -158,7 +159,8 @@ These three elements are $<$Subject$>$, $<$Predicate$>$, and $<$Object$>$. All t
 can consist out of BTPs that are connected, either through $<$Subject$>$ and $<$Subject$>$, $<$Subject$>$ and $<$Object$>$, or $<$Object$>$ and $<$Object$>$.
 Alternatively, the BGP consists out of disconnected BTPs. Same as the BTP a BGP can be instantiated, without variables, or uninstantiated, thus parts of the BGP have been replaced with variables. With basic graph patterns, we can ask more informed questions to the knowledge graph, or find if a BGP exists in the knowledge graph.\\
 
-\textit{Justification}. The final part of essential information about the knowlegde graph is the justification\cite{Horridge:2009}. A justification is a set of axioms that acts as an explanation for an entailment.
+\textit{Justification}. The final part of essential information about the knowledge graph is the justification\cite{Horridge:2009}. A justification is a set of axioms that acts as an explanation for an entailment.\\
+
 Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justification are instantiated BPGs and are always minimal set of axioms for a single contradiction. 
 
 \textit{ontology}
@@ -168,25 +170,21 @@ Now that the basic notions of a knowledge graph are explained we will show a kno
 \begin{figure}[ht]
 	\centering
 	\subfloat[Example contradiction 1.\label{fig:Example1}]{%
-		\includegraphics[width=0.33\textwidth]{images/Example1.png}
+		\includegraphics[width=0.5\textwidth]{images/Example1.png}
 	}
 	\subfloat[Example contradiction 2.\label{fig:Example2}]{%
-		\includegraphics[width=0.33\textwidth]{images/Example2.png}
-	}
-	\subfloat[Example contradiction 3.\label{fig:Example3}]{%
-		\includegraphics[width=0.33\textwidth]{images/Example3.png}
+		\includegraphics[width=0.5\textwidth]{images/Example2.png}
 	}
 	\caption{Showing 3 Examples to help understand the concepts we introduce in this work.}
 	\label{fig:Antipattern}
 \end{figure}
 
 \textit{Example 1}. The first example\ref{fig:Example1} shows a simple contradiction, in this example we see an individual[I1], that is of two classes, for example "Monaco" is of type \textit{city in Europe}[C1] and of type \textit{country in Europe}[C3]. This is still correct, a instance can be of two different types. Now we define that a \textit{city in Europe} is a sub class of a \textit{City} and that a \textit{country in Europe} is a sub class of a \textit{Country}. This is still correct assumption. We now define that an \textit{City} can not be a \textit{Country} or the other way around by saying that a both classes can never have a individual in common. We now created an contradiction, as \textit{Monaco} is a individual of both, but it can not be.\\
+
 Fixing this contradiction is possible, but it means that we need to change some things, we can either remove the disjoint axiom, meaning that now we can have a \textit{City} that is also a \textit{Country}. We could also split \textit{Monaco} into \textit{Monaco(City)} and \textit{Monaco(Country)}, which is also a possible solution. Both solutions have their positives and negatives, which need to be always taken into account.\\
 
 \textit{Example 2}. The second example\ref{fig:Example2}, shows a different type of contradiction. This time we only have one rdf:type relation. This individual belongs to only one class, For example we have a individual \textit{}[I1] now is of the class \textit{ }[C1], This class has two subClass relations, with \textit{ }[C6] and \textit{ }[C2]. Where \textit{ }[C2] is also a sub class relation with \textit{ }[C5]. Which in turn is disjoint with \textit{ }[C6]. This makes the circle complete and generates another contradiction, as both \textit{ }[C5] and \textit{ }[C6] have an individual[I1] in common. \\
 
-\textit{Example 3}. The final example\ref{fig:Example3} is similar with example 2 but we expanded the amount of relations, In this example we introduce owl:equivalentClass, meaning that both class extensions contain exactly the same set of individuals. In this example it means that both class \textit{}[C2] 
-and \textit{}[C4] contain the same set of individuals, namely \textit{}[I1]. \\
 
 \subsection{Reasoner}
 Now that we understand how the data is represented in knowledge graphs we can move on to the next part, reasoning. Reasoning is a method to find new information about your dataset. Reasoning comes in a multitude of flavours, but the two most common are deductive and inductive reasoning. Before we can start reasoning we first need to define the framework.
@@ -217,7 +215,8 @@ In this work we will only focus on reasoning for Satisfiability. ...
 We introduce four datasets that we use in this work, namely the pizza-ontology, DBpedia, YAGO, and LOD-a-lot.
 
 \subsubsection{Pizza-ontology}
-The first ontology we use in our work is the pizza ontology, it is developed by Manchester university. \cite{pizza}. The ontology describes pizza's and is used as an example ontology to explain how ontologies are created and how an ontology is used and expanded. The advantage of using this ontologies over others, or own made, is that this ontology is widely known, everyone can find this ontology on the web, and due to the ontology is a concrete example, we all know what a pizza is and what goes and does not go with a pizza. 
+The first ontology we use in our work is the pizza ontology, it is developed by Manchester university. \cite{pizza}. The ontology describes pizza's and is used as an example ontology to explain how ontologies are created and how an ontology is used and expanded. The advantage of using this ontologies over others, or own made, is that this ontology is widely known, everyone can find this ontology on the web, and due to the ontology is a concrete example, we all know what a pizza is and what goes and does not go with a pizza. \\
+
 The ontology consists out of x statements, and we know that the ontology is inconsistent, which can be found by hand.
 >>Instantiated<<
 
@@ -239,27 +238,45 @@ Justifications are first introduced by Horridge et al. in their paper explaining
 
 \subsection{Analysis}
 Paulheim \cite{HeikoP:2016} showcases the need for a standardised evaluation method. In the survey, they show that researchers sometimes choose different knowledge graph(s) according to their needs, this makes it harder to compare different algorithms. Removing this discrepancy would benefit all of us.\\ 
+
 F\'arber et al. \cite{MichaelF:2017} give an in-depth comparison of several large knowledge graphs, and demonstrates that knowledge graphs hold different metrics. The paper by F\"arber et al. \cite{MichaelF:2017} is expanded upon by Debattista et al. in \cite{Debattista:2018}, in which they analysed 130 datasets from the Linked Open Data Cloud using 27 Linked Data quality metrics. Both papers show that each graph has a different underlying structure and in theory, this even can result in different behaviour of algorithms.
 
 \subsection{Sampling}
 In the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} several sampling techniques are proposed and compared, and with it they show that even naive sampling such as random walks and 'forest fire' show accurate results, even sampling to 15\% of the original size. 
 \cite{Jin:2011} Albatross sampling, shows a sampling technique designed for loosely connected or disconnected networks, especially for social networks, while
-This technique could be useful for sampling graph networks, as the algorithm gives an even more accurate sample, but due to an extra constraint we've put on with the justifications, this sampling technique could not be applied.
+This technique could be useful for sampling graph networks, as the algorithm gives an even more accurate sample, but due to an extra constraint we've put on with the justifications, this sampling technique could not be applied.\\
+
 \cite{Kurant:2011} Towards Unbiased BFS Sampling, In this paper the Kurant et al. are explaining the bias that forms when implementing breath first sampling.
-While this paper has no direct effect on the implementation the information described in the paper is useful to explain why our samples have some discrepancies when it comes to the differences in indegree and outdegree. 
+While this paper has no direct effect on the implementation the information described in the paper is useful to explain why our samples have some discrepancies when it comes to the differences in indegree and outdegree. \\
+
 Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use, in their case SPARQL coverage is possible, this shows that sampling a knowledge base, for targeted cases can generally be relevant for multiple reasons.
 
+
+
+
+
 \newpage
-\section[AntiPatternDefinition]{Defining `anti-patterns'}
-In this chapter we will introduce the definition `anti-pattern'. This term will be used throughout this work. Justifications describe a single contradiction, with each justification being an instantiated BGP. Due to the instantiation, the justification can only describe one contradiction. Anti-patterns are generalisations over justifications as uninstantiated patterns, that match  multiple inconsistent justifications in the knowledge graph. 
-%We denote a formal definition of an \textit{`Anti-pattern'}:\\
+\section{Defining `anti-patterns'}\label{AntiPatternDefinition}
+ We already explained the term  `anti-pattern' a bit in the introduction, but in this chapter we will introduce the term officially, and come to a definition of what a `anti-pattern' exactly is, and how we can derive `anti-patterns' from sets contradictions. \\
+ 
+ To understand how an `anti-pattern' is formed we first need to understand what a contradiction is. As shown in the examples we see a logical contradiction, with it we mean that a there is a logical mismatch between to rules that force the model to be inconsistent. Either one rule is true, in the first example it could be that the rule is `rdfs:subClassOf' between Class C1 and C2 is true, but then the rule `owl:disjointWith' should not be there. Or it can be the other way around, the rule `rdfs:subClassOf' is removed and only the rule `owl:disjointWith' exists. But it can not be that both rules exist, as this creates an contradiction. \\
+ 
+ The second example shows we can a similar contradiction. In the second example we find two different contradictions, the first ... and the second... What is noticable is that in this example we can proof a contradiction in two seperate ways, while using some of the same axioms. \\
+ 
+ As explained in chapter \ref{graphElements} a justification is a description of a single contradiction, we can see it as a proof that an ontology is inconsistent. Each justification is an instantiated BGP, within the knowledge graph. Due to the instantiation, the justification can only describe one contradiction, and is thus limited to a single knowledge graph. To use justifications in other knowledge graphs, to check if this knowledge graph has the same contradiction, without having the same information, we need to generalize the jsutification. If for example we have a knowledge graph describing the contradictions in the knowledge graph of Countries in Europe, wherein we wrongfully declared Monaco a city and a country, without the consideration that they are disjoint. we want to quickly check if the same has happened for our knowledge graph from Asia. Without a generalisation, we first need to check if what relations are in the knowledge graph in Asia, and if there is a city matching the particulars.\\
+ 
+ For generalization we created `anti-patterns'. `Anti-patterns' are generalisations over justifications, to transform an justification into an `anti-pattern' we remove all information on the subject and object position of the BGP. Removing the information on the predicate position("owl:disjointWith", "rdfs:subclassOf", "rdf:type", etc) would break the contradiction, as it it would be possible to match a "rdfs:subClassOf" on the place where the "owl:disjointWith" belongs. This would make the contradiction no longer a contradiction.  
+ Now that we removed all the information that blocks generalization, we are left with the `anti-pattern'. Now the `anti-pattern' can be used to match various inconsistent justifications in the knowledge graph. We define an \textit{`Anti-pattern'} in the following definition:\\
 
 \begin{definition} 
 	An \textit{`Anti-pattern'} \textit{of a knowledge graph G is a minimal set of uninstantiated Basic Triple Patterns that match a justification of an inconsistent subgraph of G.}
 \end{definition}
 
-The conversion of a justification(instantiated BPG) to an `Anti pattern' in figure (uninstantiated BPG) is shown in figure  \ref{fig:JustificationtoGeneral}.
-We will show how we retrieve the `anti-pattern' from a instantiated graph in the following examples.
+We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
+
+
+
+
 
 \newpage
 \section{Problem Definition}
@@ -402,6 +419,8 @@ The sampling by random deletion now continues to delete triples until the sample
 \subsection{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
 \textit{Experiment description}. The purpose of this experiment is to show that we can indeed extract inconsistencies from an arbitrary knowledge graph, with the pipeline. 
+
+
 To show that the pipeline works we have tested the algorithm on two extreme cases — the first case being the pizza ontology and the second case the LOD-a-lot.
 The pizza knowledge graph is great for measuring the completeness of the inconsistencies found and shows it is measurable if the reasoner can find the different inconsistencies. Which can be easily checked by hand.\\
 Because we can not prove that our pipeline guarantees the completeness, we test if the pipeline still retrieves all `anti-patterns' even when the size of the subgraph is 
@@ -520,7 +539,7 @@ of the statistics match the original knowledge graph. \\
 		\includegraphics[width=0.33\textwidth]{images/Samplefigure3.eps}
 	}
 	\caption{Figures showing several statistics about the Anti patterns.}
-	\label{fig:Antipattern}
+	\label{fig:AntipatternStats}
 \end{figure}
 
 \newpage
