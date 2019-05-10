@@ -252,9 +252,6 @@ While this paper has no direct effect on the implementation the information desc
 Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use, in their case SPARQL coverage is possible, this shows that sampling a knowledge base, for targeted cases can generally be relevant for multiple reasons.
 
 
-
-
-
 \newpage
 \section{Defining `anti-patterns'}\label{AntiPatternDefinition}
  We already explained the term  `anti-pattern' a bit in the introduction, but in this chapter we will introduce the term officially, and come to a definition of what a `anti-pattern' exactly is, and how we can derive `anti-patterns' from sets contradictions. \\
@@ -273,8 +270,6 @@ Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use
 \end{definition}
 
 We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
-
-
 
 
 
@@ -363,7 +358,6 @@ If we, for example, change the `owl:disjointWith' into `rdfs:subclassOf' and tra
 With the justifications now devoid of information on the nodes we now group the justifications per `anti-pattern'. This means that each justification that has the same underlying `anti-pattern' is isomorphic, even with respect to the edges in the pattern. \\
 To find these isomorphisms we have implemented a version of the VF2 algorithm\cite{LCordella:2004}, with the addition to the algorithm that we also match the edges of the two justifications. Checking if two graphs are not isomorphic is NP-intermediate. Therefore we added in additional heuristics that need to match first before we apply the VF2 algorithm. Firstly we check if a graph has the same number of vertices, the same number of edges, the same amount of degrees, and in our case it also needs to have the same amount of edges based on the edge types we have. If all these matches then we apply the VF2 algorithm to the two `anti-patterns'. If the algorithm matches a justification to the found `anti-patterns', it adds this particular justification to this `anti-patterns', but if no pattern can be matched to the justification, a new `anti-patterns' is formed from this justification. This algorithm continues until all patterns have been matched to their correct `anti-pattern' group.\\
 
-
 \newpage
 \section{Implementations}
 As shown in figure \ref{fig:PipelinePart45} we show the two implementations that make use of `anti-patterns' that we can findwith the previous section. The first implementation is the use case of analysing the knowledge graph in its entirety, as well as looking at how the inconsistencies occur within the larger knowledge graph. We use the analytics of the knowledge graph later in the sampling implementation. Secondly, we showcase that the sampling technique, with respect to the found `anti-patterns' in the graph that we used, produces similar albeit smaller knowledge graphs.
@@ -410,17 +404,14 @@ The sampling by random deletion now continues to delete triples until the sample
 
 \newpage
 \section{Experiments}
+In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. Next we will show the results of the two implementations we designed, which we will also analyze.
+
 \subsection{Experimental Setup}
-
-
-
-\subsection{Anti-pattern Analysis}
+\textit{Datasets} In the section background we already described the datasets we used for our experiments. 
 
 \subsection{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
 \textit{Experiment description}. The purpose of this experiment is to show that we can indeed extract inconsistencies from an arbitrary knowledge graph, with the pipeline. 
-
-
 To show that the pipeline works we have tested the algorithm on two extreme cases — the first case being the pizza ontology and the second case the LOD-a-lot.
 The pizza knowledge graph is great for measuring the completeness of the inconsistencies found and shows it is measurable if the reasoner can find the different inconsistencies. Which can be easily checked by hand.\\
 Because we can not prove that our pipeline guarantees the completeness, we test if the pipeline still retrieves all `anti-patterns' even when the size of the subgraph is 
@@ -446,7 +437,10 @@ The results are summarized in Table \ref{table:GraphStats}. Results of our metho
 	\label{table:PizzaOntology}
 \end{table}
 
-\subsection{Experiment 2: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
+\subsection{Experiment 2: Anti-pattern Analysis}
+
+
+\subsection{Experiment 3: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
 \textit{Experiment description}. We retrieved the statistics of YAGO, DBpedia knowledge graphs as explained in section 6.  \\
 
 \textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
@@ -466,7 +460,7 @@ differ between the three test cases.\\
 	\label{table:GraphStats}
 \end{table}
 
-\subsection{Experiment 3: \textbf{RQ3}: Use case 2, Sampling inconsistent graphs} 
+\subsection{Experiment 4: \textbf{RQ3}: Use case 2, Sampling inconsistent graphs} 
 \textit{Experiment description}. To test the sampling a sample size of 20\% is taken, as the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} shows that samples
 up to 15\% still hold the characteristics of the original graph well, even with simpler sampling methods. \\
 
