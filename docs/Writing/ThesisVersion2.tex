@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \newtheorem{definition}{Definition}
 \newcommand{\red}[1]{{\color{red}{#1}}}
+\usepackage[]{algorithm2e}
 
 \begin{document}
 
@@ -316,6 +317,22 @@ Thirdly we test if we can sample a set of inconsistent knowledge graphs. We exam
 \end{figure}
 Our extraction method consists of three aspects: Firstly, we retrieve smaller subgraphs from the knowledge graph from which we want the contradictions. Secondly, from each subgraph, we check if the graph is inconsistent and retrieve the justifications. Finally, with the justifications, we create the `anti-patterns'. The entire pipeline is shown in figure \ref{fig:simplePipeline}.\\
 Our pipeline is designed to find `almost' all the `anti-patterns' in any knowledge graph. We implemented techniques to find these smaller inconsistent subgraphs with OWLAPI\cite{Horridge:2011} and Openllet\cite{Openllet:2019} which based on work of Pellet\cite{Pellet:2007}.\\
+\subsection{Algorithmic overview}
+\begin{algorithm}[H]
+	\KwData{this text}
+	\KwResult{how to write algorithm with \LaTeX2e }
+	initialization\;
+	\While{not at end of this document}{
+		read current\;
+		\eIf{understand}{
+			go to next section\;
+			current section becomes this one\;
+		}{
+			go back to the beginning of current section\;
+		}
+	}
+	\caption{How to write algorithms}
+\end{algorithm}
 
 \subsection{Subgraph retrieval}
 \begin{figure}[!t]
@@ -407,7 +424,9 @@ The sampling by random deletion now continues to delete triples until the sample
 In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. Next we will show the results of the two implementations we designed, which we will also analyze.
 
 \subsection{Experimental Setup}
-\textit{Datasets} In the section background we already described the datasets we used for our experiments. 
+\textit{Datasets}. In the section background we already described the datasets we used for our experiments. We use the pizza ontology in the first experiment to showcase how we retrieve the `anti-patterns' from knowledge graphs. In the second experiment we show the retrieved `anti-patterns' from the LOD-a-lot. In the third and fourth experiment we use YAGO, and DBpedia for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
+
+\textit{Method and Implementation software}. Both the method and the implementations have been written in JAVA. We choose JAVA as the programming language for the amount of libraries that have been made available in JAVA. The the most important libraries we used for the implementation are, jena, rdf2hdt, openllet and OWLapi, all available as open source. It is noted that the retrieval of the `anti-patterns' has been done on the LOD server, due to the time it took to retrieve the `anti-patterns' from the LOD-a-lot. 
 
 \subsection{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
@@ -438,7 +457,7 @@ The results are summarized in Table \ref{table:GraphStats}. Results of our metho
 \end{table}
 
 \subsection{Experiment 2: Anti-pattern Analysis}
-
+On \url{https://thomasdegroot18.github.io/kbgenerator/} we showcase the `anti-patterns' we found in the LOD-a-lot.
 
 \subsection{Experiment 3: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
 \textit{Experiment description}. We retrieved the statistics of YAGO, DBpedia knowledge graphs as explained in section 6.  \\
@@ -540,8 +559,6 @@ of the statistics match the original knowledge graph. \\
 
 
 \section{Conclusion}
-
-
 In this paper, we have created a formal notion for `anti-patterns', patterns describing an error in a knowledge graph that makes the knowledge graph inconsistent. 
 We have constructed a pipeline that can extract the `anti-patterns' from any knowledge graph. We then tested the extraction pipeline by extracting `almost' all `anti-patterns' from the LOD-a-lot. \\
 We have shown two implementations that make extensive use of the `anti-patterns', knowledge graph analysis and knowledge graph sampling with respect to `anti-patterns'.

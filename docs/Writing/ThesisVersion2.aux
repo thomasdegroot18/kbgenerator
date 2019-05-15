@@ -72,7 +72,8 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {A diagram that shows the retrieval and splitting of subgraphs from the knowledge graph.}}}{11}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {A diagram that shows the retrieval of justifications from a single subgraph.}}}{11}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Method}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Subgraph retrieval}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Algorithmic overview}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Subgraph retrieval}{11}}
 \citation{LCordella:2004}
 \newlabel{fig:PatternGeneralizing}{{4a}{12}}
 \newlabel{sub@fig:PatternGeneralizing}{{(a)}{a}}
@@ -82,8 +83,8 @@
 \newlabel{fig:PipelinePart3}{{4}{12}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {A schematic diagram showcasing how the justifications are transformed into Generalized inconsistency patterns.}}}{12}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {A diagram that shows the transformation from Justification to a `anti-pattern'.}}}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Justification retrieval}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Justification generalization to `anti-patterns'}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Justification retrieval}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Justification generalization to `anti-patterns'}{12}}
 \citation{FMPGPA:13}
 \citation{MPAF:12}
 \newlabel{fig:AnalyticsDrawing}{{5a}{14}}
@@ -97,59 +98,39 @@
 \@writefile{toc}{\contentsline {section}{\numberline {7}Implementations}{14}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analysing inconsistent knowledge graphs}{14}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Sampling inconsistent graphs}{14}}
-\citation{Leskovec:2006}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces table showing the reasoners to test the pizza ontology.\relax }}{16}}
 \newlabel{table:PizzaOntology}{{1}{16}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces table showing several statistics about graphs.\relax }}{16}}
-\newlabel{table:GraphStats}{{2}{16}}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Experiments}{16}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Experimental Setup}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Anti-pattern Analysis}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Experiment 1: \textbf  {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Experiment 2: \textbf  {RQ3}: Implementation 1, Analysing inconsistent graphs}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Experiment 3: \textbf  {RQ3}: Use case 2, Sampling inconsistent graphs}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Experiment 1: \textbf  {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Experiment 2: Anti-pattern Analysis}{16}}
+\citation{Leskovec:2006}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces table showing several statistics about graphs.\relax }}{17}}
+\newlabel{table:GraphStats}{{2}{17}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces table showing several statistics about graphs.\relax }}{17}}
 \newlabel{table:GraphStatsSample}{{3}{17}}
-\newlabel{fig:indegree}{{6a}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Experiment 3: \textbf  {RQ3}: Implementation 1, Analysing inconsistent graphs}{17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Experiment 4: \textbf  {RQ3}: Use case 2, Sampling inconsistent graphs}{17}}
+\newlabel{fig:indegree}{{6a}{18}}
 \newlabel{sub@fig:indegree}{{(a)}{a}}
-\newlabel{fig:outdegree}{{6b}{17}}
+\newlabel{fig:outdegree}{{6b}{18}}
 \newlabel{sub@fig:outdegree}{{(b)}{b}}
-\newlabel{fig:Coeff}{{6c}{17}}
+\newlabel{fig:Coeff}{{6c}{18}}
 \newlabel{sub@fig:Coeff}{{(c)}{c}}
-\newlabel{fig:indegreeSample}{{6d}{17}}
+\newlabel{fig:indegreeSample}{{6d}{18}}
 \newlabel{sub@fig:indegreeSample}{{(d)}{d}}
-\newlabel{fig:outdegreeSample}{{6e}{17}}
+\newlabel{fig:outdegreeSample}{{6e}{18}}
 \newlabel{sub@fig:outdegreeSample}{{(e)}{e}}
-\newlabel{fig:CoeffSample}{{6f}{17}}
+\newlabel{fig:CoeffSample}{{6f}{18}}
 \newlabel{sub@fig:CoeffSample}{{(f)}{f}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Figures showing several statistics about graphs.\relax }}{17}}
-\newlabel{fig:GraphStats}{{6}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {The distribution of indegree over all nodes.}}}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {The distribution of outdegree over all nodes.}}}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {The distribution of the Clustering Coefficient over all nodes.}}}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {The distribution of indegree over all nodes of the sample.}}}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {The distribution of outdegree over all nodes of the sample.}}}{17}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {The distribution of the Clustering Coefficient over all nodes of the sample.}}}{17}}
-\newlabel{fig:Size}{{7a}{18}}
-\newlabel{sub@fig:Size}{{(a)}{a}}
-\newlabel{fig:SizeSample}{{7b}{18}}
-\newlabel{sub@fig:SizeSample}{{(b)}{b}}
-\newlabel{fig:SizeSample2}{{7c}{18}}
-\newlabel{sub@fig:SizeSample2}{{(c)}{c}}
-\newlabel{fig:Occurences}{{7d}{18}}
-\newlabel{sub@fig:Occurences}{{(d)}{d}}
-\newlabel{fig:OccurenceseSample}{{7e}{18}}
-\newlabel{sub@fig:OccurenceseSample}{{(e)}{e}}
-\newlabel{fig:OccurenceseSample2}{{7f}{18}}
-\newlabel{sub@fig:OccurenceseSample2}{{(f)}{f}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Figures showing several statistics about the Anti patterns.\relax }}{18}}
-\newlabel{fig:AntipatternStats}{{7}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Plot showing the Distribution of size.}}}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Plot showing the Distribution of occurrences.}}}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Plot showing the Distribution of occurrences.}}}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Plot showing the Distribution of size of the Sample.}}}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {Plot showing the Distribution of occurrences of Size of the Sample.}}}{18}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {Plot showing the Distribution of occurrences of Size of the Sample.}}}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Figures showing several statistics about graphs.\relax }}{18}}
+\newlabel{fig:GraphStats}{{6}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {The distribution of indegree over all nodes.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {The distribution of outdegree over all nodes.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {The distribution of the Clustering Coefficient over all nodes.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {The distribution of indegree over all nodes of the sample.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {The distribution of outdegree over all nodes of the sample.}}}{18}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {The distribution of the Clustering Coefficient over all nodes of the sample.}}}{18}}
 \@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{18}}
 \bibstyle{plain}
 \bibdata{ThesisBib}
@@ -164,6 +145,26 @@
 \bibcite{OWLPrimer:2012}{9}
 \bibcite{YAGO2:2013}{10}
 \bibcite{Horridge:2011}{11}
+\newlabel{fig:Size}{{7a}{19}}
+\newlabel{sub@fig:Size}{{(a)}{a}}
+\newlabel{fig:SizeSample}{{7b}{19}}
+\newlabel{sub@fig:SizeSample}{{(b)}{b}}
+\newlabel{fig:SizeSample2}{{7c}{19}}
+\newlabel{sub@fig:SizeSample2}{{(c)}{c}}
+\newlabel{fig:Occurences}{{7d}{19}}
+\newlabel{sub@fig:Occurences}{{(d)}{d}}
+\newlabel{fig:OccurenceseSample}{{7e}{19}}
+\newlabel{sub@fig:OccurenceseSample}{{(e)}{e}}
+\newlabel{fig:OccurenceseSample2}{{7f}{19}}
+\newlabel{sub@fig:OccurenceseSample2}{{(f)}{f}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Figures showing several statistics about the Anti patterns.\relax }}{19}}
+\newlabel{fig:AntipatternStats}{{7}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Plot showing the Distribution of size.}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Plot showing the Distribution of occurrences.}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Plot showing the Distribution of occurrences.}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Plot showing the Distribution of size of the Sample.}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {Plot showing the Distribution of occurrences of Size of the Sample.}}}{19}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {Plot showing the Distribution of occurrences of Size of the Sample.}}}{19}}
 \bibcite{Horridge:2009}{12}
 \bibcite{Jin:2011}{13}
 \bibcite{Kurant:2011}{14}
