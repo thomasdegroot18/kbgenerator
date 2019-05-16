@@ -55,14 +55,14 @@
 	\begin{minipage}[t]{0.4\textwidth}
 		\begin{flushleft} \large
 			\emph{Supervisor:} \\
-			\red{Dr A \textsc{Person} }% Supervisor's Name
+			\red{Dr \textsc{Stefan Schlobach } }% Supervisor's Name
 		\end{flushleft}
 	\end{minipage}
 	~
 	\begin{minipage}[t]{0.4\textwidth}
 		\begin{flushright} \large
 			\emph{Assessor:} \\
-			\red{Dr A  \textsc{Person}}\\
+			\red{Dr  \textsc{Joe Raad}}\\
 		\end{flushright}
 	\end{minipage}\\[2cm]
 	
@@ -160,11 +160,17 @@ These three elements are $<$Subject$>$, $<$Predicate$>$, and $<$Object$>$. All t
 can consist out of BTPs that are connected, either through $<$Subject$>$ and $<$Subject$>$, $<$Subject$>$ and $<$Object$>$, or $<$Object$>$ and $<$Object$>$.
 Alternatively, the BGP consists out of disconnected BTPs. Same as the BTP a BGP can be instantiated, without variables, or uninstantiated, thus parts of the BGP have been replaced with variables. With basic graph patterns, we can ask more informed questions to the knowledge graph, or find if a BGP exists in the knowledge graph.\\
 
-\textit{Justification}. The final part of essential information about the knowledge graph is the justification\cite{Horridge:2009}. A justification is a set of axioms that acts as an explanation for an entailment.\\
+\textit{Justification}. The final part of essential information about the knowledge graph is the justification\cite{Horridge:2009}. A justification is a set of axioms that acts as an explanation for an entailment.
+Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justification are instantiated BPGs and are always minimal set of axioms for a single contradiction. \\
 
-Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justification are instantiated BPGs and are always minimal set of axioms for a single contradiction. 
+\textit{Ontology} An ontology is a description of a collection of concepts, most of time the ontology is focussed on a specifc domain, such as for example biology, autoraces, or political parties. With an ontology we can describe concepts with the use of several components. The components consist out of:
+ - individuals: instances of objects, which can been seen as instantiated or grounded elements of classes. This can be for example the person "Berners-Lee", "Wouter Beek", and "kleine Piep"
+ - Classes: groups of individuals can be classified within a class. "Persons" or "Dogs"
+ - Both classes and individuals can have attributes, also called properties, or features. A person has an height, or a weight, has a language he or she can talk. Different classes can have different properties. 
+ - Relations, are connections between individuals, and classes, describing links between individuals. a person can know a another person. "Berners-Lee" is of type person. 
 
-\textit{ontology}
+An ontology can be seen as a set of triples, describing the elements of the ontology, Each of the triple can be a combination of the above.
+
 
 \subsection{Example introduction}
 Now that the basic notions of a knowledge graph are explained we will show a knowledge graph work in three examples. 
@@ -210,7 +216,8 @@ Now that we showed the framework we can explain reasoning. Reasoning is deriving
  	\item Check an individual - check whether the individual is an instance of a class
 \end{itemize}
 
-In this work we will only focus on reasoning for Satisfiability. ...
+In this work we will focus on satifisfiability, but instead of finding the concepts that are satisfiable we will instead look for the opposite, and find the concepts and individuals that are unsatisfiable. 
+
 
 \subsection{Data}
 We introduce four datasets that we use in this work, namely the pizza-ontology, DBpedia, YAGO, and LOD-a-lot.
@@ -272,8 +279,6 @@ Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use
 
 We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
 
-
-
 \newpage
 \section{Problem Definition}
 In the last chapter we introduced the related work we used in this work as a basis for the method we introduce in the method. In this section we introduce a formal approach to the problem we introduced in the introduction. The problem formalization crucial in the aim of this work in order to understand the method we propose in the next section.
@@ -319,19 +324,21 @@ Our extraction method consists of three aspects: Firstly, we retrieve smaller su
 Our pipeline is designed to find `almost' all the `anti-patterns' in any knowledge graph. We implemented techniques to find these smaller inconsistent subgraphs with OWLAPI\cite{Horridge:2011} and Openllet\cite{Openllet:2019} which based on work of Pellet\cite{Pellet:2007}.\\
 \subsection{Algorithmic overview}
 \begin{algorithm}[H]
-	\KwData{this text}
-	\KwResult{how to write algorithm with \LaTeX2e }
-	initialization\;
-	\While{not at end of this document}{
-		read current\;
-		\eIf{understand}{
-			go to next section\;
-			current section becomes this one\;
+	\KwData{The knowledge graph that holds contradictions we want to extract}
+	\KwResult{the set of `anti-patterns' found in the knowledge graph}
+	KnowledgeSubgraphs split(knowledge graph)\\
+	\ForEach{subgraph \textbf{in} KnowledgeSubgraphs }{
+		retrieve all contradictions in the subgraph\\
+		\forEach{contradiction in list of contradictions}\\
+		retrieve `anti-pattern' from contradiction\\
+		\eIf{`anti-pattern' is not known}{
+			add `anti-pattern' to list of known `anti-patterns'
 		}{
-			go back to the beginning of current section\;
+			skip `anti-pattern' as we already know it.
 		}
 	}
-	\caption{How to write algorithms}
+	return list of `anti-patterns'
+	\caption{Algorithmic view of the method}
 \end{algorithm}
 
 \subsection{Subgraph retrieval}

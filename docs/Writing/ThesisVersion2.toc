@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {2.4}Data}{5}
 \contentsline {subsubsection}{\numberline {2.4.1}Pizza-ontology}{5}
 \contentsline {subsubsection}{\numberline {2.4.2}LOD-a-lot}{5}
-\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{5}
+\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{6}
 \contentsline {subsubsection}{\numberline {2.4.4}YAGO}{6}
 \contentsline {section}{\numberline {3}Related Work}{7}
 \contentsline {subsection}{\numberline {3.1}Preliminaries}{7}
