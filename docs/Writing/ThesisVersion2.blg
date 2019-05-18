@@ -1,0 +1,41 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: ThesisVersion2.aux
+The style file: plain.bst
+Database file #1: ThesisBib.bib
+Warning--entry type for "rdfPrimer:2014" isn't style-file defined
+--line 71 of file ThesisBib.bib
+Warning--entry type for "OWLPrimer:2012" isn't style-file defined
+--line 87 of file ThesisBib.bib
+I was expecting a `,' or a `}'---line 89 of file ThesisBib.bib
+ :  
+ :  title="OWL 2 Web Ontology Language Primer (Second Edition)"
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 136 of file ThesisBib.bib
+ : @article{HeikoP:2016
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 148 of file ThesisBib.bib
+ : @article{MichaelF:2017
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 171 of file ThesisBib.bib
+ : @inproceedings{JavierD:2017
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 221 of file ThesisBib.bib
+ : @online{rdfPrimer:2014
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 237 of file ThesisBib.bib
+ : @online{OWLPrimer:2012
+ :                       ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "Openllet:2019" isn't style-file defined
+--line 348 of file ThesisBib.bib
+Warning--I didn't find a database entry for "pizza"
+Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
+while executing---line 1049 of file plain.bst
+Warning--empty journal in Jin:2011
+Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
+while executing---line 1090 of file plain.bst
+(There were 8 error messages)

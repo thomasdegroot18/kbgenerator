@@ -1,12 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.31)  11 MAR 2019 22:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.27)  1 MAY 2019 00:33
 entering extended mode
-**./ThesisPreliminaryVersion.tex
-(ThesisPreliminaryVersion.tex
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**ThesisPreliminaryVersion.tex
+(./ThesisPreliminaryVersion.tex
 LaTeX2e <2017-04-15>
-Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
-("D:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Babel <3.18> and hyphenation patterns for 3 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("D:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -21,62 +23,54 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
-File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
-
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count87
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("D:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count88
-\Gm@cntv=\count89
-\c@Gm@tempcnt=\count90
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
 \Gm@bindingoffset=\dimen105
 \Gm@wd@mp=\dimen106
 \Gm@odd@mp=\dimen107
@@ -86,83 +80,139 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layouthoffset=\dimen111
 \Gm@layoutvoffset=\dimen112
 \Gm@dimlist=\toks15
-
-("D:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-(C:\Users\thoma\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(ThesisPreliminaryVersion.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen113
+\captionmargin@=\dimen114
+\captionwidth=\dimen115
+\caption@tempdima=\dimen116
+\caption@indent=\dimen117
+\caption@parindent=\dimen118
+\caption@hangindent=\dimen119
+)
+\c@ContinuedFloat=\count90
+)
+\c@KVtest=\count91
+\sf@farskip=\skip43
+\sf@captopadj=\dimen120
+\sf@capskip=\skip44
+\sf@nearskip=\skip45
+\c@subfigure=\count92
+\c@subfigure@save=\count93
+\c@lofdepth=\count94
+\c@subtable=\count95
+\c@subtable@save=\count96
+\c@lotdepth=\count97
+\sf@top=\skip46
+\sf@bottom=\skip47
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks16
+\thm@bodyfont=\toks17
+\thm@headfont=\toks18
+\thm@notefont=\toks19
+\thm@headpunct=\toks20
+\thm@preskip=\skip48
+\thm@postskip=\skip49
+\thm@headsep=\skip50
+\dth@everypar=\toks21
+)
+\c@definition=\count98
+
+(./ThesisPreliminaryVersion.aux)
 \openout1 = `ThesisPreliminaryVersion.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
 
-(C:\Users\thoma\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count91
-\scratchdimen=\dimen113
+\scratchcounter=\count99
+\scratchdimen=\dimen121
 \scratchbox=\box26
-\nofMPsegments=\count92
-\nofMParguments=\count93
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count94
-\MPscratchDim=\dimen114
-\MPnumerator=\count95
-\makeMPintoPDFobject=\count96
-\everyMPtoPDFconversion=\toks17
-) ("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
-)
+\nofMPsegments=\count100
+\nofMParguments=\count101
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count102
+\MPscratchDim=\dimen122
+\MPnumerator=\count103
+\makeMPintoPDFobject=\count104
+\everyMPtoPDFconversion=\toks23
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
-Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
-("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
-Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
-Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
-Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 38.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -197,69 +247,306 @@ G,.JBIG2,.JB2,.eps]
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [1] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 93--96
-
- []
-
-[3] (ThesisPreliminaryVersion.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] [2]
+(./ThesisPreliminaryVersion.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 4.
+(Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 4.
+(Font)              <5> on input line 3.
 )
 \tf@toc=\write3
 \openout3 = `ThesisPreliminaryVersion.toc'.
 
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 103--111
-
- []
-
-[1]
-Overfull \hbox (12.68987pt too wide) in paragraph at lines 122--125
-[]\OT1/cmr/m/n/10 There is work done on in-con-sis-tency lo-cat-ing: $\OT1/cmtt
-/m/n/10 https : / / github . com / raki123 / inconsistent-[]subgraph-[]query$ 
- []
+ [3]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 113.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--125
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
+ [1] [2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 166--172
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 198--204
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
 
  []
 
-[5] [6] [7] [8] [9] (ThesisPreliminaryVersion.bbl
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--208
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 222--223
+
+ []
+
+[6]
+<images/SimplifiedPipelineMissingPart.png, id=43, 3494.05376pt x 1757.56625pt>
+File: images/SimplifiedPipelineMissingPart.png Graphic file (type png)
+<use images/SimplifiedPipelineMissingPart.png>
+Package pdftex.def Info: images/SimplifiedPipelineMissingPart.png  used on inpu
+t line 232.
+(pdftex.def)             Requested size: 386.95897pt x 194.64697pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 237--239
+
+ []
+
+<images/SubgraphRetrieval.png, id=45, 1661.20625pt x 1155.31625pt>
+File: images/SubgraphRetrieval.png Graphic file (type png)
+<use images/SubgraphRetrieval.png>
+Package pdftex.def Info: images/SubgraphRetrieval.png  used on input line 244.
+(pdftex.def)             Requested size: 217.66211pt x 151.3775pt.
+<images/JustificationRetrieval.png, id=46, 844.15375pt x 576.1525pt>
+File: images/JustificationRetrieval.png Graphic file (type png)
+<use images/JustificationRetrieval.png>
+Package pdftex.def Info: images/JustificationRetrieval.png  used on input line 
+248.
+(pdftex.def)             Requested size: 217.66211pt x 148.55652pt.
+[7 <./images/SimplifiedPipelineMissingPart.png> <./images/SubgraphRetrieval.png
+> <./images/JustificationRetrieval.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 257--261
+
+ []
+
+<images/PatternGeneralizing.png, id=54, 927.465pt x 686.565pt>
+File: images/PatternGeneralizing.png Graphic file (type png)
+<use images/PatternGeneralizing.png>
+Package pdftex.def Info: images/PatternGeneralizing.png  used on input line 268
+.
+(pdftex.def)             Requested size: 217.66211pt x 161.12279pt.
+<images/JustificationtoGeneral.png, id=55, 937.5025pt x 536.0025pt>
+File: images/JustificationtoGeneral.png Graphic file (type png)
+<use images/JustificationtoGeneral.png>
+Package pdftex.def Info: images/JustificationtoGeneral.png  used on input line 
+272.
+(pdftex.def)             Requested size: 217.66211pt x 124.43936pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--280
+
+ []
+
+[8 <./images/PatternGeneralizing.png> <./images/JustificationtoGeneral.png>]
+<images/AnalyticsDrawing.png, id=61, 1907.125pt x 788.9475pt>
+File: images/AnalyticsDrawing.png Graphic file (type png)
+<use images/AnalyticsDrawing.png>
+Package pdftex.def Info: images/AnalyticsDrawing.png  used on input line 307.
+(pdftex.def)             Requested size: 217.66211pt x 90.03484pt.
+<images/SamplingDrawing.png, id=62, 1800.7275pt x 788.9475pt>
+File: images/SamplingDrawing.png Graphic file (type png)
+<use images/SamplingDrawing.png>
+Package pdftex.def Info: images/SamplingDrawing.png  used on input line 311.
+(pdftex.def)             Requested size: 217.66211pt x 95.35579pt.
+
+[9] [10 <./images/AnalyticsDrawing.png> <./images/SamplingDrawing.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 327--329
+
+ []
+
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ” in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--364
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 365--367
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--385
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 386--392
+
+ []
+
+<images/figure4.png, id=75, 414.8298pt x 330.2739pt>
+File: images/figure4.png Graphic file (type png)
+<use images/figure4.png>
+Package pdftex.def Info: images/figure4.png  used on input line 411.
+(pdftex.def)             Requested size: 159.62085pt x 127.08276pt.
+<images/figure5.png, id=76, 463.9734pt x 330.2739pt>
+File: images/figure5.png Graphic file (type png)
+<use images/figure5.png>
+Package pdftex.def Info: images/figure5.png  used on input line 414.
+(pdftex.def)             Requested size: 159.62085pt x 113.62207pt.
+File: images/figure5.png Graphic file (type png)
+<use images/figure5.png>
+Package pdftex.def Info: images/figure5.png  used on input line 417.
+(pdftex.def)             Requested size: 159.62085pt x 113.62207pt.
+Package epstopdf Info: Source file: <images/Samplefigure4.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 28173 bytes
+(epstopdf)             Output file: <images/Samplefigure4-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 18748 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure4-eps-c
+onverted-to.pdf images/Samplefigure4.eps>
+(epstopdf)             \includegraphics on input line 421.
+Package epstopdf Info: Output file is already uptodate.
+<images/Samplefigure4-eps-converted-to.pdf, id=77, 416.55624pt x 326.21875pt>
+File: images/Samplefigure4-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure4-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure4-eps-converted-to.pdf  used on inp
+ut line 421.
+(pdftex.def)             Requested size: 159.62085pt x 125.00475pt.
+Package epstopdf Info: Source file: <images/Samplefigure5.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 26346 bytes
+(epstopdf)             Output file: <images/Samplefigure5-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 17000 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure5-eps-c
+onverted-to.pdf images/Samplefigure5.eps>
+(epstopdf)             \includegraphics on input line 424.
+Package epstopdf Info: Output file is already uptodate.
+<images/Samplefigure5-eps-converted-to.pdf, id=78, 464.73625pt x 326.21875pt>
+File: images/Samplefigure5-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure5-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure5-eps-converted-to.pdf  used on inp
+ut line 424.
+(pdftex.def)             Requested size: 159.62085pt x 112.04283pt.
+Package epstopdf Info: Source file: <images/Samplefigure5.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 26346 bytes
+(epstopdf)             Output file: <images/Samplefigure5-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 17000 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure5-eps-c
+onverted-to.pdf images/Samplefigure5.eps>
+(epstopdf)             \includegraphics on input line 427.
+Package epstopdf Info: Output file is already uptodate.
+File: images/Samplefigure5-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure5-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure5-eps-converted-to.pdf  used on inp
+ut line 427.
+(pdftex.def)             Requested size: 159.62085pt x 112.04283pt.
+
+Overfull \hbox (5.16566pt too wide) in paragraph at lines 411--428
+[][][][]
+ []
+
+
+Overfull \hbox (5.16566pt too wide) in paragraph at lines 411--428
+[][][] 
+ []
+
+<images/figure1.png, id=79, 431.4519pt x 330.2739pt>
+File: images/figure1.png Graphic file (type png)
+<use images/figure1.png>
+Package pdftex.def Info: images/figure1.png  used on input line 437.
+(pdftex.def)             Requested size: 159.62085pt x 122.18933pt.
+<images/figure2.png, id=80, 414.8298pt x 330.2739pt>
+File: images/figure2.png Graphic file (type png)
+<use images/figure2.png>
+Package pdftex.def Info: images/figure2.png  used on input line 440.
+(pdftex.def)             Requested size: 159.62085pt x 127.08276pt.
+<images/figure3.png, id=81, 414.8298pt x 330.2739pt>
+File: images/figure3.png Graphic file (type png)
+<use images/figure3.png>
+Package pdftex.def Info: images/figure3.png  used on input line 443.
+(pdftex.def)             Requested size: 159.62085pt x 127.08276pt.
+Package epstopdf Info: Source file: <images/Samplefigure1.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 26474 bytes
+(epstopdf)             Output file: <images/Samplefigure1-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 19014 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure1-eps-c
+onverted-to.pdf images/Samplefigure1.eps>
+(epstopdf)             \includegraphics on input line 447.
+Package epstopdf Info: Output file is already uptodate.
+<images/Samplefigure1-eps-converted-to.pdf, id=82, 412.54124pt x 326.21875pt>
+File: images/Samplefigure1-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure1-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure1-eps-converted-to.pdf  used on inp
+ut line 447.
+(pdftex.def)             Requested size: 159.62085pt x 126.2193pt.
+Package epstopdf Info: Source file: <images/Samplefigure2.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 26800 bytes
+(epstopdf)             Output file: <images/Samplefigure2-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 18840 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure2-eps-c
+onverted-to.pdf images/Samplefigure2.eps>
+(epstopdf)             \includegraphics on input line 450.
+Package epstopdf Info: Output file is already uptodate.
+<images/Samplefigure2-eps-converted-to.pdf, id=83, 410.53375pt x 326.21875pt>
+File: images/Samplefigure2-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure2-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure2-eps-converted-to.pdf  used on inp
+ut line 450.
+(pdftex.def)             Requested size: 159.62085pt x 126.83653pt.
+Package epstopdf Info: Source file: <images/Samplefigure3.eps>
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 27146 bytes
+(epstopdf)             Output file: <images/Samplefigure3-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-04-25 16:23:39
+(epstopdf)                    size: 18244 bytes
+(epstopdf)             Command: <repstopdf --outfile=images/Samplefigure3-eps-c
+onverted-to.pdf images/Samplefigure3.eps>
+(epstopdf)             \includegraphics on input line 453.
+Package epstopdf Info: Output file is already uptodate.
+<images/Samplefigure3-eps-converted-to.pdf, id=84, 416.55624pt x 326.21875pt>
+File: images/Samplefigure3-eps-converted-to.pdf Graphic file (type pdf)
+<use images/Samplefigure3-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure3-eps-converted-to.pdf  used on inp
+ut line 453.
+(pdftex.def)             Requested size: 159.62085pt x 125.00475pt.
+
+Overfull \hbox (5.16566pt too wide) in paragraph at lines 437--454
+ [][][][] 
+ []
+
+
+Overfull \hbox (8.499pt too wide) in paragraph at lines 437--454
+ [][][] 
+ []
+
+[12 <./images/figure4.png> <./images/figure5.png> <./images/Samplefigure4-eps-c
+onverted-to.pdf> <./images/Samplefigure5-eps-converted-to.pdf>] [13 <./images/f
+igure1.png> <./images/figure2.png> <./images/figure3.png> <./images/Samplefigur
+e1-eps-converted-to.pdf> <./images/Samplefigure2-eps-converted-to.pdf> <./image
+s/Samplefigure3-eps-converted-to.pdf>] (./ThesisPreliminaryVersion.bbl
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -267,31 +554,47 @@ Missing character: There is no ­ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 Missing character: There is no Ã in font cmr10!
+Missing character: There is no ¡ in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ­ in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¤ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¶ in font cmr10!
-) [10] [11]
-(ThesisPreliminaryVersion.aux) ) 
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ­ in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ¡ in font cmr10!
+ [14])
+[15] [16] (./ThesisPreliminaryVersion.aux) ) 
 Here is how much of TeX's memory you used:
- 2098 strings out of 493323
- 30161 string characters out of 3139065
- 101497 words of memory out of 3000000
- 5624 multiletter control sequences out of 15000+200000
- 7528 words of font info for 27 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 39i,5n,32p,1050b,265s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmbx12.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmc
-sc10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ThesisPreliminaryVersion.pdf (16 pages, 158900 bytes).
+ 3532 strings out of 494923
+ 56748 string characters out of 6180742
+ 120797 words of memory out of 5000000
+ 6797 multiletter control sequences out of 15000+600000
+ 7827 words of font info for 28 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 44i,10n,49p,1045b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ThesisPreliminaryVersion.pdf (20 pages, 1086421 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 329 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

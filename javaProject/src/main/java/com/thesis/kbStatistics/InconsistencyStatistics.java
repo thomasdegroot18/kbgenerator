@@ -29,9 +29,27 @@ class InconsistencyStatistics {
     }
 
     @SuppressWarnings("unused")
-    private static String InconsistencyType(String SPARQLString){
+    private static String InconsistencyType(String SPARQLString, GeneralisedSubGraph Subgraph){
+        int SizeBefore = Subgraph.GetVertices().size();
+        Subgraph.SinglesRemoval();
+        int SizeAfter = Subgraph.GetVertices().size();
+        boolean Equivalence = Subgraph.getEquivalenceType();
+        if(SizeBefore == SizeAfter && !Equivalence){
+            return "LoopWithoutEquivalence";
+        }
 
-        return "Test";
+        if(SizeBefore > SizeAfter && !Equivalence){
+            return "KiteWithoutEquivalence";
+        }
+
+        if(SizeBefore == SizeAfter){
+            return "LoopWithEquivalence";
+        }
+
+        if(SizeBefore > SizeAfter){
+            return "KiteWithEquivalence";
+        }
+        return "NoClassFound";
     }
 
     @SuppressWarnings("unused")
@@ -88,10 +106,11 @@ class InconsistencyStatistics {
         // Run tests for single inconsistency
         int Count = InconsistencyCount(SPARQLQuery);
         int Size = InconsistencySize(GeneralGraph);
-        double TailEffect = TailEffect(GeneralGraph);
         int[] CountArray = new int[1];
-        String Type = InconsistencyType(SPARQLQuery);
+        String Type = InconsistencyType(SPARQLQuery, GeneralGraph);
         String ClassType = InconsistencyClassType(SPARQLQuery);
+        double TailEffect = TailEffect(GeneralGraph);
+        System.out.println(Type);
 
         // Store results in array for this query with a array.
         InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect, CountArray );
@@ -123,10 +142,13 @@ class InconsistencyStatistics {
         }
         int Count = InconsistencyCount(SPARQLQuery);
         int Size = InconsistencySize(GeneralGraph);
+
+        String Type = InconsistencyType(SPARQLQuery, GeneralGraph);
+        String ClassType = InconsistencyClassType(SPARQLQuery);
+        System.out.println(Type);
         double TailEffect = TailEffect(GeneralGraph);
 
-        String Type = InconsistencyType(SPARQLQuery);
-        String ClassType = InconsistencyClassType(SPARQLQuery);
+
 
         // Store results in array for this query with a array.
         InconsistencyStats InconsistencyStats = new InconsistencyStats(Count, Size, Type, ClassType, TailEffect, CountArray);
@@ -174,10 +196,10 @@ class InconsistencyStatistics {
             int[] CountArray = InconsistencyStats.getCountDataSet();
             if(IndexNumber == 1){
                 LineToWrite = "{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"\", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
             } else{
                 LineToWrite = ",{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +"\", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
+                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
             }
 
 

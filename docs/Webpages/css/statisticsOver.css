@@ -1,0 +1,105 @@
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+svg {
+  float:left;
+}
+
+.group1 {
+  width: 1000px;
+}
+
+.group2 {
+  width: 1000px;
+}
+
+.group3 {
+  width: 1000px;
+}
+
+.bar {
+  fill: #80cbc4;
+}
+
+text {
+  font-size: 12px;
+  fill: #fff;
+}
+
+path {
+  stroke: gray;
+}
+
+line {
+  stroke: gray;
+}
+
+line#limit {
+  stroke: #FED966;
+  stroke-width: 3;
+  stroke-dasharray: 3 6;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+.grid .tick line {
+  stroke: #9FAAAE;
+  stroke-opacity: 0.3;
+}
+
+text.divergence {
+  font-size: 14px;
+  fill: #2F4A6D;
+}
+
+text.value {
+  font-size: 14px;
+}
+
+text.title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+text.label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+text.source {
+  font-size: 10px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 512px;
+    height: 256px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.slider-wrapper {
+  padding: 25px 0 0;
+  white-space:nowrap;
+  font-size:0; /* to remove ~4px whitespace */
+}
+
+.portfolio-single {
+  /*reset fontsize if needed*/
+  display:inline-block;
+  width:200px;
+}
+.portfolio-single img{
+  vertical-align:top;
+  width:200px;
+}
