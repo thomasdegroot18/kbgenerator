@@ -96,7 +96,7 @@
 \newpage
 \pagenumbering{arabic}
 
-\section{Introduction}
+\section{Introduction}\label{Introduction}
 \subsection{Motivation}
 \textit{Background}. Blaise Pascal once said, "Contradiction is not a sign of falsity, nor the lack of contradiction a sign of truth." Large amounts of data has been made available for everyone to use and Multi-billion facts, also called statements or triples, for a linked-data dataset being the standard in stead of the exception. We are sitting on a large amount of open data, but the problem however is that we do not know if all the facts available to use can be considered as the truth. We know that data is inherently dirty and it is known that finding new facts from the data is impossible if the data holds facts that are contradicting each other. While there is active development in solving the problem of contradictions in datasets by ignoring the contradictory facts and still use the rest of the "true" facts to still find new information that is hidden in the dataset. This method however, would still miss facts that could have been found if we could have removed the contradictory facts and used a datasets that is devoid of contradictions. So while a contradiction is no sign of a false dataset, a lack of contradictions would certainly be a step in the right direction to the truth. The only challenge is then to find if it is the correct truth!\\
 
@@ -147,7 +147,7 @@ The main contributions in this works, with respect to the research questions can
  The second and third chapter explain the work that this paper is based on, as well as give some background to the reader about the definitions that we use in this work. In the method, we explain more in detail how the method of `anti-pattern' retrieval works. Section 6  showcases the possible applications that make extensive use from the `anti-pattern' that we retrieved in the method. In section 7 we show the experiments that test our hypotheses, we set in the introduction, and analyse the results. We conclude with a conclusion, with an extension of future work.
 
 \newpage
-\section{Background}
+\section{Background}\label{Background}
 This chapter we introduce the set of preliminary key concept that are needed to understand the research that is presented in this work. To help the reader we also introduce a set of examples that we will use in this work to help the reader understand the work that we present here.
 
 \subsection{Knowledge graph elements}\label{graphElements}
@@ -238,7 +238,7 @@ DBpedia\cite{DBpedia} is a crowd sourced project that extracts structural inform
 The final dataset we will use for experimentation is YAGO\cite{YAGO2:2013}, this dataset has derived 160 million statements from Wikipedia, WordNet and geoNames, about 10 million entities. This dataset is also made open source and is a joint project of the Max Planck Institute for Informatics and the Telecom ParisTech University. This dataset has great qualities for our experiments. The dataset has an temporal and special dimension, making it possibly prone to contradictions. The dataset is also manually evaluated and has according to \cite{YAGO2:2013} not a mistake free dataset, which is a good promise for our tests.
 
 \newpage
-\section{Related Work}
+\section{Related Work}\label{RelatedWork}
 In this section an overview of work in various related research areas is provided. More specifically, we show the research on which this work is created on, the types of analyses that already have been implemented for knowledge graphs, and the techniques that show promise for sampling from knowledge graphs. \\
 
 \subsection{Preliminaries}
@@ -280,7 +280,7 @@ Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use
 We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
 
 \newpage
-\section{Problem Definition}
+\section{Problem Definition}\label{ProblemDefintion}
 In the last chapter we introduced the related work we used in this work as a basis for the method we introduce in the method. In this section we introduce a formal approach to the problem we introduced in the introduction. The problem formalization crucial in the aim of this work in order to understand the method we propose in the next section.
 
 \subsection{Problem Description}
@@ -312,7 +312,7 @@ With this experiment we want to show the use of `anti-patterns' to get a better 
 Thirdly we test if we can sample a set of inconsistent knowledge graphs. We examine this by experimenting with a set of large knowledge graphs and test if we have replicated the original knowledge graph in a smaller variant, as well as a measure if the number of contradictions matches the number of contradictions we have set.
 
 \newpage
-\section{Method}
+\section{Method}\label{Method}
 \begin{figure}[!t]
 	\centering
 	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/SimplifiedPipelineMissingPart.png}}%
@@ -385,7 +385,7 @@ With the justifications now devoid of information on the nodes we now group the 
 To find these isomorphisms we have implemented a version of the VF2 algorithm\cite{LCordella:2004}, with the addition to the algorithm that we also match the edges of the two justifications. Checking if two graphs are not isomorphic is NP-intermediate. Therefore we added in additional heuristics that need to match first before we apply the VF2 algorithm. Firstly we check if a graph has the same number of vertices, the same number of edges, the same amount of degrees, and in our case it also needs to have the same amount of edges based on the edge types we have. If all these matches then we apply the VF2 algorithm to the two `anti-patterns'. If the algorithm matches a justification to the found `anti-patterns', it adds this particular justification to this `anti-patterns', but if no pattern can be matched to the justification, a new `anti-patterns' is formed from this justification. This algorithm continues until all patterns have been matched to their correct `anti-pattern' group.\\
 
 \newpage
-\section{Implementations}
+\section{Implementations}\label{Implementation}
 As shown in figure \ref{fig:PipelinePart45} we show the two implementations that make use of `anti-patterns' that we can findwith the previous section. The first implementation is the use case of analysing the knowledge graph in its entirety, as well as looking at how the inconsistencies occur within the larger knowledge graph. We use the analytics of the knowledge graph later in the sampling implementation. Secondly, we showcase that the sampling technique, with respect to the found `anti-patterns' in the graph that we used, produces similar albeit smaller knowledge graphs.
 
 \subsection{Analysing inconsistent knowledge graphs}
@@ -429,7 +429,7 @@ The second set of triples that can not be deleted are the triples that break the
 The sampling by random deletion now continues to delete triples until the sample reaches the size given by the user, or when it is no longer able to delete triples. This can happen either because the only triples that can be deleted split the graph into subgraphs, or the only triples that can be safely deleted belong to the non-deletable contradictions.
 
 \newpage
-\section{Experiments}
+\section{Experiments}\label{Experiments}
 In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. Next we will show the results of the two implementations we designed, which we will also analyze.
 
 \subsection{Experimental Setup}
@@ -444,8 +444,8 @@ To show that the pipeline works we have tested the algorithm on two extreme case
 The pizza knowledge graph is great for measuring the completeness of the inconsistencies found and shows it is measurable if the reasoner can find the different inconsistencies. Which can be easily checked by hand.\\
 Because we can not prove that our pipeline guarantees the completeness, we test if the pipeline still retrieves all `anti-patterns' even when the size of the subgraph is 
 smaller than the size of the knowledge graph.\\
-\textit{analysis}. We compare the results of our method for retrieving the `anti-patterns' from the pizza ontology with the inconsistencies found by the reasoners in prot\'{e}g\'{e}.
-The results are summarized in Table \ref{table:GraphStats}. Results of our method show that even with 
+\textit{analysis}. We compare the results of our method for retrieving the `anti-patterns' from the pizza ontology with the contradictions found by the reasoners in prot\'{e}g\'{e}.
+The results are summarized in Table \ref{table:GraphStats}. The first column shows the size of triple subgraphs we used, In the first part of the algorithm we split the knowledge graph into smaller subgraphs, this size can be adjusted to improve speed vs redundant triples. In this table we show that even with smaller subgraph sizes our algorithm still retrieves the same `anti-patterns' as the reasoners. The `anti-patterns' found by the reasoners are contradictions which are then transformed by hand to `anti-patterns'. 
 
 \begin{table}[!t]
 	\centering
@@ -466,10 +466,11 @@ The results are summarized in Table \ref{table:GraphStats}. Results of our metho
 \end{table}
 
 \subsection{Experiment 2: Anti-pattern Analysis}
+\textit{Experiment description}. 
 On \url{https://thomasdegroot18.github.io/kbgenerator/} we showcase the `anti-patterns' we found in the LOD-a-lot. 
 
 \subsection{Experiment 3: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
-\textit{Experiment description}. We retrieved the statistics of YAGO, DBpedia knowledge graphs as explained in section 6.  \\
+\textit{Experiment description}. We retrieved the statistics of YAGO, DBpedia knowledge graphs as explained in section .  \\
 
 \textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
 differ between the three test cases.\\
@@ -566,7 +567,7 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 \newpage
 
 
-\section{Conclusion}
+\section{Conclusion}\label{Conclusion}
 In this paper, we have created a formal notion for `anti-patterns', patterns describing an error in a knowledge graph that makes the knowledge graph inconsistent. 
 We have constructed a pipeline that can extract the `anti-patterns' from any knowledge graph. We then tested the extraction pipeline by extracting `almost' all `anti-patterns' from the LOD-a-lot. \\
 We have shown two implementations that make extensive use of the `anti-patterns', knowledge graph analysis and knowledge graph sampling with respect to `anti-patterns'.
