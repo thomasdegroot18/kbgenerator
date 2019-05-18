@@ -327,17 +327,19 @@ Our pipeline is designed to find `almost' all the `anti-patterns' in any knowled
 	\KwData{The knowledge graph that holds contradictions we want to extract}
 	\KwResult{the set of `anti-patterns' found in the knowledge graph}
 	KnowledgeSubgraphs split(knowledge graph)\\
+	
 	\ForEach{subgraph \textbf{in} KnowledgeSubgraphs }{
 		retrieve all contradictions in the subgraph\\
-		\forEach{contradiction in list of contradictions}\\
+		\ForEach{contradiction in list of contradictions}{
 		retrieve `anti-pattern' from contradiction\\
-		\eIf{`anti-pattern' is not known}{
-			add `anti-pattern' to list of known `anti-patterns'
-		}{
-			skip `anti-pattern' as we already know it.
+			\eIf{`anti-pattern' is not known}{
+				add `anti-pattern' to list of known `anti-patterns'
+			}{
+				skip `anti-pattern' as we already know it.
+			}
 		}
 	}
-	return list of `anti-patterns'
+\Return list of `anti-patterns'\\
 	\caption{Algorithmic view of the method}
 \end{algorithm}
 
