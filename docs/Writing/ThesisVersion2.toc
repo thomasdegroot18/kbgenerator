@@ -12,31 +12,30 @@
 \contentsline {subsection}{\numberline {2.4}Data}{5}
 \contentsline {subsubsection}{\numberline {2.4.1}Pizza-ontology}{5}
 \contentsline {subsubsection}{\numberline {2.4.2}LOD-a-lot}{5}
-\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{6}
-\contentsline {subsubsection}{\numberline {2.4.4}YAGO}{6}
-\contentsline {section}{\numberline {3}Related Work}{7}
-\contentsline {subsection}{\numberline {3.1}Preliminaries}{7}
-\contentsline {subsection}{\numberline {3.2}Analysis}{7}
-\contentsline {subsection}{\numberline {3.3}Sampling}{7}
-\contentsline {section}{\numberline {4}Defining `anti-patterns'}{8}
-\contentsline {section}{\numberline {5}Problem Definition}{9}
-\contentsline {subsection}{\numberline {5.1}Problem Description}{9}
-\contentsline {subsection}{\numberline {5.2}Proposed Method}{9}
-\contentsline {subsection}{\numberline {5.3}Proposed Experiments}{10}
-\contentsline {section}{\numberline {6}Method}{11}
-\contentsline {subsection}{\numberline {6.1}Algorithmic overview}{11}
-\contentsline {subsection}{\numberline {6.2}Subgraph retrieval}{11}
-\contentsline {subsection}{\numberline {6.3}Justification retrieval}{12}
-\contentsline {subsection}{\numberline {6.4}Justification generalization to `anti-patterns'}{12}
-\contentsline {section}{\numberline {7}Implementations}{14}
-\contentsline {subsection}{\numberline {7.1}Analysing inconsistent knowledge graphs}{14}
-\contentsline {subsection}{\numberline {7.2}Sampling inconsistent graphs}{14}
-\contentsline {section}{\numberline {8}Experiments}{16}
-\contentsline {subsection}{\numberline {8.1}Experimental Setup}{16}
-\contentsline {subsection}{\numberline {8.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{16}
-\contentsline {subsection}{\numberline {8.3}Experiment 2: Anti-pattern Analysis}{16}
-\contentsline {subsection}{\numberline {8.4}Experiment 3: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{17}
-\contentsline {subsection}{\numberline {8.5}Experiment 4: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{17}
-\contentsline {section}{\numberline {9}Conclusion}{18}
-\contentsline {section}{\numberline {10}Appendices}{21}
-\contentsline {subsection}{\numberline {10.1}Appendix A}{21}
+\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{5}
+\contentsline {subsubsection}{\numberline {2.4.4}YAGO}{5}
+\contentsline {section}{\numberline {3}Related Work}{6}
+\contentsline {subsection}{\numberline {3.1}Preliminaries}{6}
+\contentsline {subsection}{\numberline {3.2}Analysis}{6}
+\contentsline {subsection}{\numberline {3.3}Sampling}{6}
+\contentsline {section}{\numberline {4}Defining `anti-patterns'}{7}
+\contentsline {section}{\numberline {5}Problem Definition}{8}
+\contentsline {subsection}{\numberline {5.1}Problem Description}{8}
+\contentsline {subsection}{\numberline {5.2}Proposed Method}{8}
+\contentsline {subsection}{\numberline {5.3}Proposed Experiments}{8}
+\contentsline {section}{\numberline {6}Method}{10}
+\contentsline {subsection}{\numberline {6.1}Algorithmic overview}{10}
+\contentsline {subsection}{\numberline {6.2}Subgraph retrieval}{10}
+\contentsline {subsection}{\numberline {6.3}Justification retrieval}{11}
+\contentsline {subsection}{\numberline {6.4}Justification generalization to `anti-patterns'}{11}
+\contentsline {section}{\numberline {7}Experiments}{13}
+\contentsline {subsection}{\numberline {7.1}Experimental Setup}{13}
+\contentsline {subsection}{\numberline {7.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{13}
+\contentsline {subsection}{\numberline {7.3}Experiment 2: Anti-pattern Analysis}{13}
+\contentsline {section}{\numberline {8}Implementations}{14}
+\contentsline {subsection}{\numberline {8.1}Analysing inconsistent knowledge graphs}{14}
+\contentsline {subsection}{\numberline {8.2}Sampling inconsistent graphs}{14}
+\contentsline {section}{\numberline {9}Implementation Experiments}{16}
+\contentsline {subsection}{\numberline {9.1}Experiment 3: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{16}
+\contentsline {subsection}{\numberline {9.2}Experiment 4: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{16}
+\contentsline {section}{\numberline {10}Conclusion}{17}

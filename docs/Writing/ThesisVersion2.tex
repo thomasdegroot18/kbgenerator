@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx, color}
-\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 \usepackage{url}
 \usepackage{subfig}
 \usepackage{amsthm}
@@ -81,11 +81,6 @@
 \end{titlepage}
 \pagenumbering{roman}
 % Writing of the report
-
-
-\newpage
-\section*{Acknowledgments}
-
 
 
 \newpage
@@ -385,6 +380,52 @@ With the justifications now devoid of information on the nodes we now group the 
 To find these isomorphisms we have implemented a version of the VF2 algorithm\cite{LCordella:2004}, with the addition to the algorithm that we also match the edges of the two justifications. Checking if two graphs are not isomorphic is NP-intermediate. Therefore we added in additional heuristics that need to match first before we apply the VF2 algorithm. Firstly we check if a graph has the same number of vertices, the same number of edges, the same amount of degrees, and in our case it also needs to have the same amount of edges based on the edge types we have. If all these matches then we apply the VF2 algorithm to the two `anti-patterns'. If the algorithm matches a justification to the found `anti-patterns', it adds this particular justification to this `anti-patterns', but if no pattern can be matched to the justification, a new `anti-patterns' is formed from this justification. This algorithm continues until all patterns have been matched to their correct `anti-pattern' group.\\
 
 \newpage
+\section{Experiments}\label{Experiments}
+In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. 
+
+\subsection{Experimental Setup}
+\textit{Datasets}. In the section background we already described the datasets we used for our experiments. We use the pizza ontology in the first experiment to showcase how we retrieve the `anti-patterns' from knowledge graphs. In the second experiment we show the retrieved `anti-patterns' from the LOD-a-lot.
+
+\textit{Method and Implementation software}. Both the method and the implementations, which we will explain in section \ref{Implementation} have been written in JAVA. We choose JAVA as the programming language for the amount of libraries that have been made available in JAVA. The the most important libraries we used for the implementation are, jena, rdf2hdt, openllet and OWLapi, all available as open source. It is noted that the retrieval of the `anti-patterns' has been done on the LOD server, due to the time it took to retrieve the `anti-patterns' from the LOD-a-lot. 
+
+\subsection{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
+% Describe how the creation of the inconsistencies from the lod cloud worked.
+\textit{Experiment description}. The purpose of this experiment is to show that we can indeed extract inconsistencies from an arbitrary knowledge graph, with the pipeline. 
+To show that the pipeline works we have tested the algorithm on two extreme cases — the first case being the pizza ontology and the second case the LOD-a-lot.
+The pizza knowledge graph is great for measuring the completeness of the inconsistencies found and shows it is measurable if the reasoner can find the different inconsistencies. Which can be easily checked by hand.\\
+Because we can not prove that our pipeline guarantees the completeness, we test if the pipeline still retrieves all `anti-patterns' even when the size of the subgraph is 
+smaller than the size of the knowledge graph.\\
+\textit{analysis}. We compare the results of our method for retrieving the `anti-patterns' from the pizza ontology with the contradictions found by the reasoners in prot\'{e}g\'{e}.
+The results are summarized in Table \ref{table:GraphStats}. The first column shows the size of triple subgraphs we used, In the first part of the algorithm we split the knowledge graph into smaller subgraphs, this size can be adjusted to improve speed vs redundant triples. In this table we show that even with smaller subgraph sizes our algorithm still retrieves the same `anti-patterns' as the reasoners. The `anti-patterns' found by the reasoners are contradictions which are then transformed by hand to `anti-patterns'. 
+
+\begin{table}[!t]
+	\centering
+	\makebox[\textwidth]{
+		\begin{tabular}{|l|l|l|}
+			\hline
+			& Inconsistent? & Found inconsistencies \\ \hline \hline
+			250 triple subgraphs     & Yes           & 9\\ \hline
+			500 triple subgraphs     & Yes           & 9\\ \hline
+			1,000 triple subgraphs     & Yes           & 9\\ \hline
+			5,000 triple subgraphs     & Yes           & 9\\ \hline
+			Pellet                     & Yes           & 6\\ \hline
+			HermiT                     & Yes           & 6\\ \hline
+			Pellet                     & Yes           & 6\\ \hline
+	\end{tabular}}
+	\caption{table showing the reasoners to test the pizza ontology.}
+	\label{table:PizzaOntology}
+\end{table}
+
+\subsection{Experiment 2: Anti-pattern Analysis}
+\textit{Experiment description}. 
+
+\textit{Retrieval} The second experiment shows the retrieval of the `anti-patterns' from the LOD-a-lot. We posted all the `anti-patterns' found on the website \url{https://thomasdegroot18.github.io/kbgenerator/}. On this website we generate the SPARQL queries for every `anti-pattern' and we show an visualization of the found `anti-patterns'.  
+
+\textit{Analysis} In the images ... and ... We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. The second group is a circle with an attachment. There is only one isntance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. The third group is equal to the first group circle, but with the addition of \textit{owl:equivalentWith}. The fourth group is equal to the second group, but also with one or multiple \textit{owl:equivalentWith}. \\
+
+Each group has several distinct features 
+
+\newpage
 \section{Implementations}\label{Implementation}
 As shown in figure \ref{fig:PipelinePart45} we show the two implementations that make use of `anti-patterns' that we can findwith the previous section. The first implementation is the use case of analysing the knowledge graph in its entirety, as well as looking at how the inconsistencies occur within the larger knowledge graph. We use the analytics of the knowledge graph later in the sampling implementation. Secondly, we showcase that the sampling technique, with respect to the found `anti-patterns' in the graph that we used, produces similar albeit smaller knowledge graphs.
 
@@ -429,53 +470,12 @@ The second set of triples that can not be deleted are the triples that break the
 The sampling by random deletion now continues to delete triples until the sample reaches the size given by the user, or when it is no longer able to delete triples. This can happen either because the only triples that can be deleted split the graph into subgraphs, or the only triples that can be safely deleted belong to the non-deletable contradictions.
 
 \newpage
-\section{Experiments}\label{Experiments}
-In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. Next we will show the results of the two implementations we designed, which we will also analyze.
+\section{Implementation Experiments}
+Next we will show the results of the two implementations we designed, which we will also analyze. In these experiment we use YAGO, and DBpedia for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
 
-\subsection{Experimental Setup}
-\textit{Datasets}. In the section background we already described the datasets we used for our experiments. We use the pizza ontology in the first experiment to showcase how we retrieve the `anti-patterns' from knowledge graphs. In the second experiment we show the retrieved `anti-patterns' from the LOD-a-lot. In the third and fourth experiment we use YAGO, and DBpedia for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
-
-\textit{Method and Implementation software}. Both the method and the implementations have been written in JAVA. We choose JAVA as the programming language for the amount of libraries that have been made available in JAVA. The the most important libraries we used for the implementation are, jena, rdf2hdt, openllet and OWLapi, all available as open source. It is noted that the retrieval of the `anti-patterns' has been done on the LOD server, due to the time it took to retrieve the `anti-patterns' from the LOD-a-lot. 
-
-\subsection{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
-% Describe how the creation of the inconsistencies from the lod cloud worked.
-\textit{Experiment description}. The purpose of this experiment is to show that we can indeed extract inconsistencies from an arbitrary knowledge graph, with the pipeline. 
-To show that the pipeline works we have tested the algorithm on two extreme cases — the first case being the pizza ontology and the second case the LOD-a-lot.
-The pizza knowledge graph is great for measuring the completeness of the inconsistencies found and shows it is measurable if the reasoner can find the different inconsistencies. Which can be easily checked by hand.\\
-Because we can not prove that our pipeline guarantees the completeness, we test if the pipeline still retrieves all `anti-patterns' even when the size of the subgraph is 
-smaller than the size of the knowledge graph.\\
-\textit{analysis}. We compare the results of our method for retrieving the `anti-patterns' from the pizza ontology with the contradictions found by the reasoners in prot\'{e}g\'{e}.
-The results are summarized in Table \ref{table:GraphStats}. The first column shows the size of triple subgraphs we used, In the first part of the algorithm we split the knowledge graph into smaller subgraphs, this size can be adjusted to improve speed vs redundant triples. In this table we show that even with smaller subgraph sizes our algorithm still retrieves the same `anti-patterns' as the reasoners. The `anti-patterns' found by the reasoners are contradictions which are then transformed by hand to `anti-patterns'. 
-
-\begin{table}[!t]
-	\centering
-	\makebox[\textwidth]{
-		\begin{tabular}{|l|l|l|}
-			\hline
-			& Inconsistent? & Found inconsistencies \\ \hline \hline
-			250 triple subgraphs     & Yes           & 9\\ \hline
-			500 triple subgraphs     & Yes           & 9\\ \hline
-			1,000 triple subgraphs     & Yes           & 9\\ \hline
-			5,000 triple subgraphs     & Yes           & 9\\ \hline
-			Pellet                     & Yes           & 6\\ \hline
-			HermiT                     & Yes           & 6\\ \hline
-			Pellet                     & Yes           & 6\\ \hline
-	\end{tabular}}
-	\caption{table showing the reasoners to test the pizza ontology.}
-	\label{table:PizzaOntology}
-\end{table}
-
-\subsection{Experiment 2: Anti-pattern Analysis}
-\textit{Experiment description}. 
-
-\textit{Retrieval} The second experiment shows the retrieval of the `anti-patterns' from the LOD-a-lot. We posted all the `anti-patterns' found on the website \url{https://thomasdegroot18.github.io/kbgenerator/}. On this website we generate the SPARQL queries for every `anti-pattern' and we show an visualization of the found `anti-patterns'.  
-
-\textit{Analysis} In the images ... and ... We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. The second group is a circle with an attachment. There is only one isntance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. The third group is equal to the first group circle, but with the addition of \textit{owl:equivalentWith}. The fourth group is equal to the second group, but also with one or multiple \textit{owl:equivalentWith}. \\
-
-Each group has several distinct features 
 
 \subsection{Experiment 3: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
-\textit{Experiment description}. We retrieved the statistics of YAGO, DBpedia knowledge graphs as explained in section .  \\
+\textit{Experiment description}. We retrieved the statistics from several knowledge graphs differing in size. This implementation of knowledge graph analysis a typical showcase. In this experiment we retrieve relevant statistics from YAGO, DBpedia knowledge graphs and ... as we explained in section \ref{Implementation}.   \\
 
 \textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
 differ between the three test cases.\\
@@ -586,12 +586,5 @@ We show that sampled knowledge graphs still have the same characteristics with o
 \bibliographystyle{plain}
 \bibliography{ThesisBib}
 
-\newpage
-\section{Appendices}
-\subsection{Appendix A}
 
 \end{document}
-
-
-	
-
