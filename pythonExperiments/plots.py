@@ -11,6 +11,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
     labels2 = []
     width = (1-0.1)/len(FileListInconsistency)
     for file in FileListInconsistency:
+        print(file)
         datasetName = file.split("/")[-2]
         ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
         labels1.append(datasetName)
@@ -38,16 +39,19 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         plt.figure(2)
 
-        SizeSum[:] = [x / float(sum(SizeSum)) for x in SizeSum]
+        SizeSum[:] = [x / float(sum(SizeSum)+0.0000001) for x in SizeSum]
         plt.title('Plot showing the normalised Distribution of Occurences')
         Size = np.arange(0,25)
-        plt.bar(Size+width*counter, SizeSum, width, color=ColorScheme[datasetName])
+        try:
+            plt.bar(Size+width*counter, SizeSum, width, color=ColorScheme[datasetName])
+        except:
+            pass
         counter += 1
         plt.ylabel('Occurrences of the "Anti-pattern"')
         plt.xlabel('Size of the "Anti-pattern"')
 
         CountCoor.sort(reverse = True)
-        CountCoor[:] = [x / float(sum(CountCoor)) for x in CountCoor]
+        CountCoor[:] = [x / float(sum(CountCoor)+0.0000001) for x in CountCoor]
         plt.figure(3)
         plt.title('Plot showing the normalised Distribution of Occurences')
         plt.plot( CountCoor, color=ColorScheme[datasetName])
@@ -66,7 +70,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         XcoorIn = []
         YcoorIn = []
-        for key in sorted(data["InDegree"].iterkeys(), key=int):
+        for key in sorted(data["InDegree"].keys(), key=int):
             XcoorIn.append(int(key))
             YcoorIn.append(int(data["InDegree"][key]))
 
@@ -79,7 +83,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         XcoorOut = []
         YcoorOut = []
-        for key in sorted(data["OutDegree"].iterkeys(), key=int):
+        for key in sorted(data["OutDegree"].keys(), key=int):
             XcoorOut.append(int(key))
             YcoorOut.append(int(data["OutDegree"][key]))
 
@@ -92,7 +96,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         XcoorCluster = []
         YcoorCluster = []
 
-        for key in sorted(data["ClusteringCoefficient"].iterkeys(), key=float):
+        for key in sorted(data["ClusteringCoefficient"].keys(), key=float):
             XcoorCluster.append(float(key))
             YcoorCluster.append(int(data["ClusteringCoefficient"][key]))
 

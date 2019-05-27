@@ -518,6 +518,53 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 	\label{table:GraphStatsSample}
 \end{table}
 
+\begin{table}[ht]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		& Amount of 'Anti-patterns' & sum of 'Anti-patterns' &  Largest Inconsistency  \\ \hline \hline
+		DBpedia & 13 & 101349 & 19\\ \hline
+		Yago & 135 & 1808977348 & 19\\ \hline
+		wordnet & 0 & 0 & 19\\ \hline
+		dblp-2012-11-28b & 0 & 0 & 19\\ \hline
+		swdf & 0 & 0 & 19\\ \hline
+		LOD & 222 & 1107375273 & 19\\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& Size & Expressivity & Namespaces & Distinct predicates \\ \hline \hline
+		DBpedia & 1040358853 & EL+ & 20 & 18\\ \hline
+		Yago & 158991568 & EL+ & 11 & 5\\ \hline
+		wordnet & 5558748 & EL & 5 & 5\\ \hline
+		dblp-2012-11-28b & 55586971 & EL & 4 & 7\\ \hline
+		swdf & 242256 & EL & 60 & 22\\ \hline
+	\end{tabular}
+\end{table}
+\begin{table}[ht]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		& Amount of 'Anti-patterns' & sum of 'Anti-patterns' &  Largest Inconsistency  \\ \hline \hline
+		dbpedia2016-04en & 2 & 7081 & 19\\ \hline
+		yago2s & 0 & 0 & 19\\ \hline
+		wordnet31 & 0 & 0 & 19\\ \hline
+		dblp-2012-11-28b & 0 & 0 & 19\\ \hline
+		swdf & 0 & 0 & 19\\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& Size & Expressivity & Namespaces & Distinct predicates \\ \hline \hline
+		dbpedia2016-04en & 83464390 & EL & 14 & 13\\ \hline
+		yago2s & 62562330 & EL & 7 & 4\\ \hline
+		wordnet31 & 769026 & EL & 4 & 4\\ \hline
+		dblp-2012-11-28b & 16812580 & EL & 3 & 7\\ \hline
+		swdf & 53942 & EL & 52 & 21\\ \hline
+	\end{tabular}
+\end{table}
 
 \begin{figure}[!t]
 	\subfloat[The distribution of indegree over all nodes.\label{fig:indegree}]{%
@@ -527,17 +574,17 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 		\includegraphics[width=0.33\textwidth]{images/figure5.png}
 	}
 	\subfloat[The distribution of the Clustering Coefficient over all nodes.\label{fig:Coeff}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure5.png}
+		\includegraphics[width=0.33\textwidth]{images/figure6.png}
 	}
 	\vspace{\floatsep}
 	\subfloat[The distribution of indegree over all nodes of the sample.\label{fig:indegreeSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure4.eps}
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure4.png}
 	}
 	\subfloat[The distribution of outdegree over all nodes of the sample.\label{fig:outdegreeSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure5.eps}
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure5.png}
 	}
 	\subfloat[The distribution of the Clustering Coefficient over all nodes of the sample.\label{fig:CoeffSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure5.eps}
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure6.png}
 	}
 	\caption{Figures showing several statistics about graphs.}
 	\label{fig:GraphStats}
@@ -554,16 +601,6 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 	}
 	\subfloat[Plot showing the Distribution of occurrences.\label{fig:SizeSample2}]{%
 		\includegraphics[width=0.33\textwidth]{images/figure3.png}
-	}
-	\vspace{\floatsep}
-	\subfloat[Plot showing the Distribution of size of the Sample.\label{fig:Occurences}]{
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure1.eps}
-	}
-	\subfloat[Plot showing the Distribution of occurrences of Size of the Sample.\label{fig:OccurenceseSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure2.eps}
-	}
-	\subfloat[Plot showing the Distribution of occurrences of Size of the Sample.\label{fig:OccurenceseSample2}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure3.eps}
 	}
 	\caption{Figures showing several statistics about the Anti patterns.}
 	\label{fig:AntipatternStats}

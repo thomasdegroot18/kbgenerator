@@ -378,6 +378,7 @@ class KbStatistics {
             e.printStackTrace();
         }
         int Size = KbSize(hdt);
+
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = GetLocalizedScores(hdt);
 

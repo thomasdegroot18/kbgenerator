@@ -1,11 +1,32 @@
 import plots
 import tables
 
-FileListInconsistency = 	   ['StatResults/DBpedia/InconsistencyStatistics.json','StatResults/Yago/InconsistencyStatistics.json','StatResults/LOD/InconsistencyStatistics.json']
-FileListInconsistencySample =  ['StatResults/Sampled/DBpedia/InconsistencyStatistics.json', 'StatResults/Sampled/Yago/InconsistencyStatistics.json']
-FileListKB =            	   ['StatResults/DBpedia/kbStatistics.json','StatResults/Yago/kbStatistics.json','StatResults/wordnet/kbStatistics.json']
-FileListKBSample =             ['StatResults/Sampled/DBpedia/kbStatistics.json','StatResults/Sampled/Yago/kbStatistics.json']
+SString = "StatResults/Sampled/"
+sString = "StatResults/"
+incon = "/InconsistencyStatistics.json"
+kbStaaa = "/kbStatistics.json"
 
+FileListInconsistency = 	   [sString+'DBpedia'+incon,
+								sString+'Yago'+incon,
+								sString+'wordnet'+incon,
+								sString+'dblp-2012-11-28b'+incon,
+								sString+'swdf'+incon,
+								sString+'LOD'+incon]
+FileListInconsistencySample =  [SString+'dbpedia2016-04en'+incon,
+								SString+'yago2s'+incon,
+								SString+'wordnet31'+incon,
+								SString+'dblp-2012-11-28b'+incon,
+								SString+'swdf'+incon]
+FileListKB =            	   [sString+'DBpedia'+kbStaaa,
+								sString+'Yago'+kbStaaa,
+								sString+'wordnet'+kbStaaa,
+								sString+'dblp-2012-11-28b'+kbStaaa,
+								sString+'swdf'+kbStaaa]
+FileListKBSample =  			[SString+'dbpedia2016-04en'+kbStaaa,
+								SString+'yago2s'+kbStaaa,
+								SString+'wordnet31'+kbStaaa,
+								SString+'dblp-2012-11-28b'+kbStaaa,
+								SString+'swdf'+kbStaaa]
 #plots.plotting(FileListInconsistencySample, FileListKBSample, "Sample")
 plots.plotting(FileListInconsistency, FileListKB, "")
 
@@ -13,4 +34,4 @@ plots.plotting(FileListInconsistency, FileListKB, "")
 tables.tabling(FileListInconsistency, FileListKB)
 
 # tables stats sampled
-#tables.tabling(FileListInconsistencySample, FileListKBSample)
+tables.tabling(FileListInconsistencySample, FileListKBSample)
