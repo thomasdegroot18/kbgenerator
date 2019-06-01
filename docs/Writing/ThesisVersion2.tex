@@ -91,7 +91,7 @@
 \newpage
 \pagenumbering{arabic}
 
-\\ Rewriting titles to better fit the method
+% Rewriting titles to better fit the method
 
 \chapter{Introduction}\label{Introduction}
 \section{Motivation}
@@ -106,10 +106,10 @@ Finally, we can use the contradictions now that we understand them, to build ben
 For the extractions of the `anti-patterns' we have designed an extraction pipeline that can extract `anti-patterns' for an arbitrary, inconsistent linked-data dataset can retrieve the `almost' complete set `anti-patterns'. We show this by retrieving such `anti-patterns' from the LOD-a-lot\cite{JavierD:2017} a dataset containing 28 billion facts. We also use the set of `anti-patterns' we have found in the LOD-a-lot as input for the two implementations we designed. The two implementations we designed are, analysis for inconsistent knowledge graphs and a sampling method, and these implementations make extensive use of the found `anti-patterns'. 
 
 \section{Research questions}
-\textit{Research questions}. The main research goal of this work is the task if we can discover a effective method of finding contradictions and generalize the contradictions we found into `anti-patterns'. In the above section we alreadyy described our method informally. To formalise our we wrote down three research questions that form this paper.
+\textit{Research questions}. The main research goal of this work is the task if we can discover a effective method of finding contradictions and generalize the contradictions we found into `anti-patterns'. In the above section we already described our method informally. To formalise our we wrote down three research questions that form this paper.
 
 \begin{itemize}
-	# Vijlen
+%  Vijlen
 	\item \textbf{RQ1}: Can we describe and define a formal definition for general contradiction patterns, which <>stand for inconsistent subgraphs independent throughout all knowledge graphs?
 	
 	\item \textbf{RQ2}: How can we retrieve the general contradiction patterns that have occurred in natural knowledge graphs? 
@@ -151,7 +151,7 @@ This chapter we introduce the set of preliminary key concept that are needed to 
 
 \section{Knowledge graph elements}\label{graphElements}
 \textit{Knowledge graph}. The first term we introduce is the knowledge graph. A knowledge graph can be seen as a part of a knowledge based system. Where the knowledge base stores all the statements, which represent the facts about the known world. The second part of the knowledge based systems are is the reasoner, which will be discussed in a later part of the this chapter. A knowledge graph consist out of a large amount of facts, also known as statements or triples. Which can be seen as instantiated basic triples patterns, statements that do not contain any changeable elements.\\
-
+% Herstructuren
 
  - RDF Triple
  - BTP
@@ -206,7 +206,7 @@ Now that we understand how the data is represented in knowledge graphs we can mo
 
 \subsection{Framework}
 The basic framework most reasoners work with consists out of three parts, RDF, RDFS, and OWL. \\
-
+% Talen naar boven
 - Talen, en daarna beschrijving
 
 \textit{RDF} \cite{rdfPrimer:2014} stands for \textbf{r}esource \textbf{d}escription \textbf{f}ramework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. can hold different types. The subject can be defined as a URI or a blank node. The predicate represents the relation between the Subject and the Object, and is always defined as a URI. finally the object is the second resource, this can be a URI, blank node or a literal.
@@ -248,7 +248,7 @@ The second dataset we use is the LOD-a-lot\cite{JavierD:2017} knowledge graph. T
 \chapter{Related Work}\label{RelatedWork}
 In this section an overview of work in various related research areas is provided. More specifically, we show the research on which this work is created on, the types of analyses that already have been implemented for knowledge graphs, and the techniques that show promise for sampling from knowledge graphs. \\
 
-\section{Preliminaries} \\ Splitsen in general method and general solution
+\section{Preliminaries} %  Splitsen in general method and general solution
 Justifications are first introduced by Horridge et al. in their paper explaining inconsistent OWL ontologies \cite{Horridge:2009}. In this paper the writers describe the framework used to retrieve the justifications from inconsistent knowledge graphs as minimal subsets of the graphs preserving the inconsistency. This forms an integral part of our algorithm. In the paper, they also explain why it is often time-consuming to retrieve all justifications for ontologies. In the paper by T\"{o}pper et al. \cite{Topper:2012} they, propose a solution to identify contradictions in DBpedia, with handcrafted `anti-patterns'. With the extraction of `anti-patterns' from the Lod-a-lot we have a generalised approach that works on any knowledge graph. \\
 
 \section{Analysis}
@@ -308,7 +308,7 @@ The second implementation, sampling is a common use case for other research topi
 
 We designed a different sampling technique that uses `anti-patterns' as a basis for testing, this sampling technique uses the found `anti-patterns' to build a knowledge graph that is inconsistent, with respect to the original knowledge graphs. ...
 
-INSERT Research questions
+% Research questions
 
 \section{Proposed Experiments}
 Now that we set up our method, we show the how this method performs by three experiments. 
@@ -450,7 +450,7 @@ The results are summarized in Table \ref{table:GraphStats}. The first column sho
 \section{Experiment 2: \textbf{RQ1}:  Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
 
-\section{Experiment 3: Anti-pattern Analysis} \\ Renaming
+\section{Experiment 3: Anti-pattern Analysis} % Renaming
 \textit{Experiment description}. 
 
 \textit{Retrieval} The second experiment shows the retrieval of the `anti-patterns' from the LOD-a-lot. We posted all the `anti-patterns' found on the website \url{https://thomasdegroot18.github.io/kbgenerator/}. On this website we generate the SPARQL queries for every `anti-pattern' and we show an visualization of the found `anti-patterns'.  
@@ -508,7 +508,7 @@ The sampling by random deletion now continues to delete triples until the sample
 Next we will show the results of the two implementations we designed, which we will also analyze. In these experiment we use YAGO, and DBpedia for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
 
 
-\section{Experiment 3: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
+\section{Experiment 4: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
 \textit{Experiment description}. We retrieved the statistics from several knowledge graphs differing in size. This implementation of knowledge graph analysis a typical showcase. In this experiment we retrieve relevant statistics from YAGO, DBpedia knowledge graphs and ... as we explained in section \ref{Implementation}.   \\
 
 \textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
@@ -528,7 +528,7 @@ differ between the three test cases.\\
 	\label{table:GraphStats}
 \end{table}
 
-\section{Experiment 4: \textbf{RQ3}: Use case 2, Sampling inconsistent graphs} 
+\section{Experiment 5: \textbf{RQ3}: Use case 2, Sampling inconsistent graphs} 
 \textit{Experiment description}. To test the sampling a sample size of 20\% is taken, as the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} shows that samples
 up to 15\% still hold the characteristics of the original graph well, even with simpler sampling methods. \\
 
