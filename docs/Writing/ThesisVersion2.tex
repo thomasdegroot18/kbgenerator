@@ -206,8 +206,8 @@ Now that we understand how the data is represented in knowledge graphs we can mo
 
 \subsection{Framework}
 The basic framework most reasoners work with consists out of three parts, RDF, RDFS, and OWL. \\
-% Talen naar boven
-- Talen, en daarna beschrijving
+% Talen naar boven en daarna beschrijving
+
 
 \textit{RDF} \cite{rdfPrimer:2014} stands for \textbf{r}esource \textbf{d}escription \textbf{f}ramework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. can hold different types. The subject can be defined as a URI or a blank node. The predicate represents the relation between the Subject and the Object, and is always defined as a URI. finally the object is the second resource, this can be a URI, blank node or a literal.
 RDF is designed to exchange information between processes and applications without the intervention of humans. The goal was to build a framework that is designed link resources without having to add in expensive parsers to convert the information to the correct format every time a new process is added which wants to use the information.\\
@@ -384,7 +384,8 @@ While all justifications are different as each justification is a set of instant
 	\caption{zoomed in the diagram of the third part of the pipeline, as well as a closer look into justifications and general graphs.}
 	\label{fig:PipelinePart3}
 \end{figure}
-To get the `anti-pattern' from the justification, we first generalise the justification by removing the instantiated subject and object on the nodes as shown in figure \ref{fig:JustificationtoGeneral}. This gives the possibility to generalise the justification purely on its structure instead of its instantiated subject and object. While the information in the nodes is not essential, the information on the edges is. Graphs with different edges can be seen as different contradictions. \\
+To get the `anti-pattern' from the justification, we first generalise the justification by removing the instantiated subject and object on the nodes as shown in figure \ref{fig:JustificationtoGeneral}. This gives the possibility to generalise the justification purely on its structure instead of its instantiated subject and object. While the informat
+ion in the nodes is not essential, the information on the edges is. Graphs with different edges can be seen as different contradictions. \\
 If we, for example, change the `owl:disjointWith' into `rdfs:subclassOf' and transform one of the `rdfs:subclassOf' into an `owl:disjointWith' We have a different inconsistency pattern. For this reason, we need to store the edges in the `anti-pattern'.\\
 With the justifications now devoid of information on the nodes we now group the justifications per `anti-pattern'. This means that each justification that has the same underlying `anti-pattern' is isomorphic, even with respect to the edges in the pattern. \\
 To find these isomorphisms we have implemented a version of the VF2 algorithm\cite{LCordella:2004}, with the addition to the algorithm that we also match the edges of the two justifications. Checking if two graphs are not isomorphic is NP-intermediate. Therefore we added in additional heuristics that need to match first before we apply the VF2 algorithm. Firstly we check if a graph has the same number of vertices, the same number of edges, the same amount of degrees, and in our case it also needs to have the same amount of edges based on the edge types we have. If all these matches then we apply the VF2 algorithm to the two `anti-patterns'. If the algorithm matches a justification to the found `anti-patterns', it adds this particular justification to this `anti-patterns', but if no pattern can be matched to the justification, a new `anti-patterns' is formed from this justification. This algorithm continues until all patterns have been matched to their correct `anti-pattern' group.\\
