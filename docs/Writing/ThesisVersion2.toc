@@ -1,41 +1,44 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {subsection}{\numberline {1.1}Motivation}{1}
-\contentsline {subsection}{\numberline {1.2}Research questions}{1}
-\contentsline {subsection}{\numberline {1.3}Contribution}{2}
-\contentsline {subsection}{\numberline {1.4}Outline}{2}
-\contentsline {section}{\numberline {2}Background}{3}
-\contentsline {subsection}{\numberline {2.1}Knowledge graph elements}{3}
-\contentsline {subsection}{\numberline {2.2}Example introduction}{3}
-\contentsline {subsection}{\numberline {2.3}Reasoner}{4}
-\contentsline {subsubsection}{\numberline {2.3.1}Framework}{4}
-\contentsline {subsubsection}{\numberline {2.3.2}Reasoning types}{5}
-\contentsline {subsection}{\numberline {2.4}Data}{5}
-\contentsline {subsubsection}{\numberline {2.4.1}Pizza-ontology}{5}
-\contentsline {subsubsection}{\numberline {2.4.2}LOD-a-lot}{5}
-\contentsline {subsubsection}{\numberline {2.4.3}DBpedia}{5}
-\contentsline {subsubsection}{\numberline {2.4.4}YAGO}{5}
-\contentsline {section}{\numberline {3}Related Work}{6}
-\contentsline {subsection}{\numberline {3.1}Preliminaries}{6}
-\contentsline {subsection}{\numberline {3.2}Analysis}{6}
-\contentsline {subsection}{\numberline {3.3}Sampling}{6}
-\contentsline {section}{\numberline {4}Defining `anti-patterns'}{7}
-\contentsline {section}{\numberline {5}Problem Definition}{8}
-\contentsline {subsection}{\numberline {5.1}Problem Description}{8}
-\contentsline {subsection}{\numberline {5.2}Proposed Method}{8}
-\contentsline {subsection}{\numberline {5.3}Proposed Experiments}{8}
-\contentsline {section}{\numberline {6}Method}{10}
-\contentsline {subsection}{\numberline {6.1}Algorithmic overview}{10}
-\contentsline {subsection}{\numberline {6.2}Subgraph retrieval}{10}
-\contentsline {subsection}{\numberline {6.3}Justification retrieval}{11}
-\contentsline {subsection}{\numberline {6.4}Justification generalization to `anti-patterns'}{11}
-\contentsline {section}{\numberline {7}Experiments}{13}
-\contentsline {subsection}{\numberline {7.1}Experimental Setup}{13}
-\contentsline {subsection}{\numberline {7.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{13}
-\contentsline {subsection}{\numberline {7.3}Experiment 2: Anti-pattern Analysis}{13}
-\contentsline {section}{\numberline {8}Implementations}{14}
-\contentsline {subsection}{\numberline {8.1}Analysing inconsistent knowledge graphs}{14}
-\contentsline {subsection}{\numberline {8.2}Sampling inconsistent graphs}{14}
-\contentsline {section}{\numberline {9}Implementation Experiments}{16}
-\contentsline {subsection}{\numberline {9.1}Experiment 3: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{16}
-\contentsline {subsection}{\numberline {9.2}Experiment 4: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{16}
-\contentsline {section}{\numberline {10}Conclusion}{17}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Motivation}{1}
+\contentsline {section}{\numberline {1.2}Research questions}{2}
+\contentsline {section}{\numberline {1.3}Contribution}{3}
+\contentsline {section}{\numberline {1.4}Outline}{4}
+\contentsline {chapter}{\numberline {2}Background}{5}
+\contentsline {section}{\numberline {2.1}Knowledge graph elements}{5}
+\contentsline {section}{\numberline {2.2}Example introduction}{6}
+\contentsline {section}{\numberline {2.3}Reasoner}{8}
+\contentsline {subsection}{\numberline {2.3.1}Framework}{8}
+\contentsline {subsection}{\numberline {2.3.2}Reasoning types}{8}
+\contentsline {section}{\numberline {2.4}Data}{9}
+\contentsline {subsection}{\numberline {2.4.1}Pizza-ontology}{9}
+\contentsline {subsection}{\numberline {2.4.2}LOD-a-lot}{9}
+\contentsline {subsection}{\numberline {2.4.3}DBpedia}{10}
+\contentsline {subsection}{\numberline {2.4.4}YAGO}{10}
+\contentsline {chapter}{\numberline {3}Related Work}{11}
+\contentsline {section}{\numberline {3.1}Preliminaries}{11}
+\contentsline {section}{\numberline {3.2}Analysis}{11}
+\contentsline {section}{\numberline {3.3}Sampling}{12}
+\contentsline {chapter}{\numberline {4}Problem Definition}{13}
+\contentsline {section}{\numberline {4.1}Problem Description}{13}
+\contentsline {section}{\numberline {4.2}Anti-pattern definition}{14}
+\contentsline {section}{\numberline {4.3}Proposed Method}{15}
+\contentsline {section}{\numberline {4.4}Proposed Experiments}{16}
+\contentsline {chapter}{\numberline {5}Method}{17}
+\contentsline {section}{\numberline {5.1}Algorithmic overview}{18}
+\contentsline {section}{\numberline {5.2}Proof of method}{18}
+\contentsline {section}{\numberline {5.3}Subgraph retrieval}{18}
+\contentsline {section}{\numberline {5.4}Justification retrieval}{19}
+\contentsline {section}{\numberline {5.5}Justification generalization to `anti-patterns'}{19}
+\contentsline {section}{\numberline {5.6}Justifications of design decisions}{21}
+\contentsline {chapter}{\numberline {6}Experiments}{22}
+\contentsline {section}{\numberline {6.1}Experimental Setup}{22}
+\contentsline {section}{\numberline {6.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?[Completeness]}{22}
+\contentsline {section}{\numberline {6.3}Experiment 2: \textbf {RQ1}: Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}{23}
+\contentsline {section}{\numberline {6.4}Experiment 3: Anti-pattern Analysis}{23}
+\contentsline {chapter}{\numberline {7}Applications}{25}
+\contentsline {section}{\numberline {7.1}Analysing inconsistent knowledge graphs}{25}
+\contentsline {section}{\numberline {7.2}Sampling inconsistent graphs}{26}
+\contentsline {chapter}{\numberline {8}Implementation Experiments}{28}
+\contentsline {section}{\numberline {8.1}Experiment 3: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{28}
+\contentsline {section}{\numberline {8.2}Experiment 4: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{28}
+\contentsline {chapter}{\numberline {9}Conclusion}{32}
