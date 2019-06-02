@@ -109,9 +109,7 @@ For the extractions of the `anti-patterns' we have designed an extraction pipeli
 \textit{Research questions}. The main research goal of this work is the task if we can discover a effective method of finding contradictions and generalize the contradictions we found into `anti-patterns'. In the above section we already described our method informally. To formalise our we wrote down three research questions that form this paper.
 
 \begin{itemize}
-%  Vijlen
-	\item \textbf{RQ1}: Can we describe and define a formal definition for general contradiction patterns, which <>stand for inconsistent subgraphs independent throughout all knowledge graphs?
-	
+	\item \textbf{RQ1}: Can we describe and define a formal definition for general contradiction patterns, where general contradiction patterns are inconsistent subgraphs which are persistent throughout all natural knowledge graphs?
 	\item \textbf{RQ2}: How can we retrieve the general contradiction patterns that have occurred in natural knowledge graphs? 
 	\item \textbf{RQ3}: What classifications are there which can classify groups of general contradiction patterns? And what main characteristics can describe the classes of contradiction patterns best? Can we use these commonalities to give better qualitative and quantitative information about the graph?
 	\item \textbf{RQ4}: Are there methods, or can we design methods that could benefit from using general contradiction patterns in their algorithm? 
@@ -147,36 +145,39 @@ The main contributions in this works, with respect to the research questions can
 
 \newpage
 \chapter{Background}\label{Background}
-This chapter we introduce the set of preliminary key concept that are needed to understand the research that is presented in this work. To help the reader we also introduce a set of examples that we will use in this work to help the reader understand the work that we present here.
+In this chapter, we introduce the set of essential preliminary concepts that are needed to understand the research that we present in this work. To help the reader, we also introduce a set of examples that are used in this paper to help the reader understand.
 
 \section{Knowledge graph elements}\label{graphElements}
-\textit{Knowledge graph}. The first term we introduce is the knowledge graph. A knowledge graph can be seen as a part of a knowledge based system. Where the knowledge base stores all the statements, which represent the facts about the known world. The second part of the knowledge based systems are is the reasoner, which will be discussed in a later part of the this chapter. A knowledge graph consist out of a large amount of facts, also known as statements or triples. Which can be seen as instantiated basic triples patterns, statements that do not contain any changeable elements.\\
-% Herstructuren
+Knowledge graphs are the basis of some of the most advanced systems, Google for example uses a knowledge graph to enchance its search results, with other information about the search question shown in the box next to the question. Searching for "Frank van Harmelen", not only shows the results, but also shows other information about him, without even having to click on the wikipedia link. The information that is shown, comes from the knowledge graph Google has build. But what is exactly a knowledge graph?
 
- - RDF Triple
- - BTP
- - BTG
- - Justification
- - Ontology
+\textit{RDF triple}. To understand how a knowledge graph works we first need to introduce the RDF triple. RDF triples are the building blocks of knowledge graphs and are used to describe facts. These facts can be anything. For example, Lisa owns Sam, or Sam is of type Rabbit, Sam is Brown.  The challenge is that each RDF triple consists out three elements.
+These three elements are $<$Subject$>$, $<$Predicate$>$, and $<$Object$>$. Where the subject and the object are two entities and the predicate is the link between them, describing the relation between the two entities. 
 
-\textit{Basic Triple Pattern}. Basic triple patterns(BTP) are the building blocks of knowledge graphs, with each basic triple pattern consisting out three elements.
-These three elements are $<$Subject$>$, $<$Predicate$>$, and $<$Object$>$. All three elements hold different types. The Subject can be defined as a (Uniform Resource Identifier) URI, an set of characters that unambiguously identifies an abstract or physical resource. Or the subject can defined as a blank node or it can be interpreted as a variable. The Predicate represents the relation between the Subject and the Object and is defined as a URI or if unknown as a variable. Finally, the Object is the second resource; this can be a URI, blank node, a literal, or a final variable. A BTP can be instantiated, meaning no element of the triple pattern has a variable, or uninstantiated, an element or multiple elements of the BTP have been replaced with a variable. With an uninstantiated BTP, we can ask a question to the knowledge graph and retrieve instantiated BTPs back. Alternatively, we can check with an instantiated BTP if it exists in the knowledge graph.\\
+There are however a few problems with writing $<$Lisa$>$ $<$owns$>$ $<$Sam$>$ . What if there is more than one Sam? To counter this we use (Uniform Resource Identifier) or otherwise known as URI to define an entity. A URI is a set of characters that unambiguously identifies an abstract or physical resource. Lisa would become $<$https://data.persons.com/world/Europe/Netherlands/amsterdam/122341$>$ $<$https://names.org/hasname$>$ "Lisa". Where this statement links the identifier, to the name Lisa. Now every time Lisa is mentioned the long identifier is used. 
+The second problem that needs solving is the standardization of the relation description, such that each relation type has an unique meaning, which can be related back to a language describing this meaning. This also opens the gate for reasoning because if we know the meaning of the fact we can learn new facts. Before we can get to that languages need to be defined. Starting with RDF, RDFs, and OWL.
+
+\textit{RDF} \cite{rdfPrimer:2014} stands for \textbf{r}esource \textbf{d}escription \textbf{f}ramework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. can hold different types. The subject can be defined as a URI or a blank node. The predicate represents the relation between the Subject and the Object, and is always defined as a URI. finally the object is the second resource, this can be a URI, blank node or a literal.
+RDF is designed to exchange information between processes and applications without the intervention of humans. The goal was to build a framework that is designed link resources without having to add in expensive parsers to convert the information to the correct format every time a new process is added which wants to use the information.\\
+
+\textit{RDFS} \cite{} Extending to this is RDFS, this the RDF schema, with this schema we can allow to define ontologies within RDF. It can be used to give structure to the RDF ontology. Both RDF(s) and OWL are ontologies from the semantic web community. But they are special in the sense that these languages can be used to reason with. thus making it possible to infer new facts from the knowledge of other triples.\\
+
+\textit{OWL}\cite{OWLPrimer:2012}, the Web Ontology Language, designed to represent the language that can describe things and set of things well with regards to relations. But not only that, in OWL it is also possible to reason with that knowledge and make implicit knowledge explicit, for example reason that a subClassOf(Car, Audi) and subClassOf(Audi, A1 Sportsback). This makes it possible to reason that subClassOf(Car, A1 Sportsback) is also a type of relation that exists. 
+
+\textit{Knowledge graph}. 
+Now that the building blocks of a knowledge graph are covered it is time to introduce the knowledge graph. A knowledge graph can be seen as a part of a knowledge based system. Where the knowledge base stores all the statements, which represent the facts about the known world. The second part of the knowledge based systems are is the reasoner, which will be discussed in a later part of the this chapter. A knowledge graph consist out of a large amount of RDF triples, also known as statements or facts.
+
+\textit{Basic Triple Pattern}. The problem with RDF triples is that each triple is instantiated, meaning that all triples have a value, which can be a URI, or a literal,  a fixed value in the statements, such as "Lisa", "12", "True". 
+To have the ability to generalise within a knowledge graph we use Basic triple patterns(BTP). BTPs can be seen as RDFtriples, but where it is possible to change one, two or all three elements from the RDFtriple into variables. With an uninstantiated BTP, we can ask a question to the knowledge graph and retrieve instantiated BTPs back. Alternatively, we can check with an instantiated BTP if it exists in the knowledge graph.\\
 
 \textit{Basic Graph Pattern}. A basic graph pattern (BGP) is a set of basic triple patterns and forms the basis of query matching. The basic graph pattern
 can consist out of BTPs that are connected, either through $<$Subject$>$ and $<$Subject$>$, $<$Subject$>$ and $<$Object$>$, or $<$Object$>$ and $<$Object$>$.
 Alternatively, the BGP consists out of disconnected BTPs. Same as the BTP a BGP can be instantiated, without variables, or uninstantiated, thus parts of the BGP have been replaced with variables. With basic graph patterns, we can ask more informed questions to the knowledge graph, or find if a BGP exists in the knowledge graph.\\
 
-- Inconsistency:
-Rewrite with entailment en expressive knowlegde graphs. Toevoeging sematisch vocab
-
-\textit{Justification}. The final part of essential information about the knowledge graph is the justification\cite{Horridge:2009}. A justification is a set of axioms that acts as an explanation for an entailment.
-Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justification are instantiated BPGs and are always minimal set of axioms for a single contradiction. \\
-
 \textit{Ontology} An ontology is a description of a collection of concepts, most of time the ontology is focussed on a specifc domain, such as for example biology, autoraces, or political parties. With an ontology we can describe concepts with the use of several components. The components consist out of:
- - individuals: instances of objects, which can been seen as instantiated or grounded elements of classes. This can be for example the person "Berners-Lee", "Wouter Beek", and "kleine Piep"
- - Classes: groups of individuals can be classified within a class. "Persons" or "Dogs"
- - Both classes and individuals can have attributes, also called properties, or features. A person has an height, or a weight, has a language he or she can talk. Different classes can have different properties. 
- - Relations, are connections between individuals, and classes, describing links between individuals. a person can know a another person. "Berners-Lee" is of type person. 
+- individuals: instances of objects, which can been seen as instantiated or grounded elements of classes. This can be for example the person "Berners-Lee", "Wouter Beek", and "kleine Piep"
+- Classes: groups of individuals can be classified within a class. "Persons" or "Dogs"
+- Both classes and individuals can have attributes, also called properties, or features. A person has an height, or a weight, has a language he or she can talk. Different classes can have different properties. 
+- Relations, are connections between individuals, and classes, describing links between individuals. a person can know a another person. "Berners-Lee" is of type person. 
 
 An ontology can be seen as a set of triples, describing the elements of the ontology, Each of the triple can be a combination of the above.
 
@@ -202,31 +203,24 @@ Fixing this contradiction is possible, but it means that we need to change some 
 
 
 \section{Reasoner}
-Now that we understand how the data is represented in knowledge graphs we can move on to the next part, reasoning. Reasoning is a method to find new information about your dataset. Reasoning comes in a multitude of flavours, but the two most common are deductive and inductive reasoning. Before we can start reasoning we first need to define the framework.
-
-\subsection{Framework}
-The basic framework most reasoners work with consists out of three parts, RDF, RDFS, and OWL. \\
-% Talen naar boven en daarna beschrijving
-
-
-\textit{RDF} \cite{rdfPrimer:2014} stands for \textbf{r}esource \textbf{d}escription \textbf{f}ramework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$. can hold different types. The subject can be defined as a URI or a blank node. The predicate represents the relation between the Subject and the Object, and is always defined as a URI. finally the object is the second resource, this can be a URI, blank node or a literal.
-RDF is designed to exchange information between processes and applications without the intervention of humans. The goal was to build a framework that is designed link resources without having to add in expensive parsers to convert the information to the correct format every time a new process is added which wants to use the information.\\
-
-\textit{RDFS} \cite{} Extending to this is RDFS, this the RDF schema, with this schema we can allow to define ontologies within RDF. It can be used to give structure to the RDF ontology. Both RDF(s) and OWL are ontologies from the semantic web community. But they are special in the sense that these languages can be used to reason with. thus making it possible to infer new facts from the knowledge of other triples.\\
-
-\textit{OWL}\cite{OWLPrimer:2012}, the Web Ontology Language, designed to represent the language that can describe things and set of things well with regards to relations. But not only that, in OWL it is also possible to reason with that knowledge and make implicit knowledge explicit, for example reason that a subClassOf(Car, Audi) and subClassOf(Audi, A1 Sportsback). This makes it possible to reason that subClassOf(Car, A1 Sportsback) is also a type of relation that exists. 
+Now that we understand how the data is represented in knowledge graphs we can move on to the next part, reasoning. Reasoning is a method to find new information in the knowledge graph that was not explicitly written down. Reasoning comes in a multitude of flavours, but the two most common are deductive and inductive reasoning. 
 
 \subsection{Reasoning types}
-Now that we showed the framework we can explain reasoning. Reasoning is deriving facts from the ontology or knowledge base that has not yet been explicitly denoted. We can classify reasoning in several different subcategories, that are not a lot different from each other, but can have other optimized algorithms specialized in solving the different subcategories.
+Reasoning is deriving facts from the ontology or knowledge base that has not yet been explicitly denoted. We can classify reasoning in several different subcategories, that are not a lot different from each other, but can have other optimized algorithms specialized in solving the different subcategories.
 
 \begin{itemize}
 	\item Satisfiability of a concept, determining if a description of a Class/Concept is not contradictory, As we shown in the examples, can we find an individual that satisfies the Class without creating a contradiction in the knowledge graph. 
 	\item Subsumption of concepts, can we determine if a Class C is more general than Class D
 	\item Consistency with respect to the ontology - determine whether individuals do not violate descriptions and statements that are described by the ontology.
- 	\item Check an individual - check whether the individual is an instance of a class
+	\item Check an individual - check whether the individual is an instance of a class
 \end{itemize}
 
-In this work we will focus on satifisfiability, but instead of finding the concepts that are satisfiable we will instead look for the opposite, and find the concepts and individuals that are unsatisfiable. 
+In this work we will focus on satifisfiability, but instead of finding the concepts that are satisfiable we will instead look for the opposite, and find the concepts and individuals that are unsatisfiable — thus finding if the knowledge graph is inconsistent, holding contradictory statements.
+
+\textit{Inconsistency} An inconsistent knowledge graph is a graph that has one or more statements that are inconsistent with each other. A knowledge graph can have several types of inconsistency. It can be grammatically inconsistent. This happens when a statement is defined with the incorrect datatype. Here we focus on semantically inconsistency. This happens when a constraints that have been set by the language used in the knowledge graph have been broken. Shown in example \ref{} this happens when an instance is linked to two classes that are disjoint with each other. To find where a knowledge graph is inconsistent we use justifications.   
+
+\textit{Justification}. A justification\cite{Horridge:2009} is a set of axioms that acts as an explanation for an entailment.
+Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justification are instantiated BPGs and are always minimal set of axioms for a single contradiction. \\
 
 
 \section{Data}
@@ -267,7 +261,7 @@ While this paper has no direct effect on the implementation the information desc
 Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use, in their case SPARQL coverage is possible, this shows that sampling a knowledge base, for targeted cases can generally be relevant for multiple reasons.
 
 \newpage
-\chapter{Problem Definition}\label{ProblemDefintion}
+\chapter{Defining the problem}\label{ProblemDefintion}
 In the last chapter we introduced the related work we used in this work as a basis for the method we introduce in the method. In this section we introduce a formal approach to the problem we introduced in the introduction. The problem formalization crucial in the aim of this work in order to understand the method we propose in the next section.
 
 \section{Problem Description}
@@ -277,6 +271,19 @@ To solve the issues, we split it into three parts. The first part is to locate t
 The second part of the problem is the knowledge graph analysis. Analysing the graph gives useful statistics about the knowledge graph, and helps us understand the knowledge graph also with respect to the found inconsistencies in the first part.
 
 The final part of the problem is the sampling of the knowledge graph. Is it even possible to sample from the original knowledge base and keep the characteristics we measured in the second part of the problem on the same level as the original large knowledge graph? Moreover, can we make sure that the sampled graph still holds the number of inconsistencies we want the graph to have? 
+
+\subsection{Research questions}
+To formalize the problem description, the following research questions are formulated.
+\begin{itemize}
+	\item \textbf{RQ1}: Can we describe and define a formal definition for general contradiction patterns, where general contradiction patterns are inconsistent subgraphs which are persistent throughout all natural knowledge graphs?
+	\item \textbf{RQ2}: How can we retrieve the general contradiction patterns that have occurred in natural knowledge graphs? 
+	\item \textbf{RQ3}: What classifications are there which can classify groups of general contradiction patterns? And what main characteristics can describe the classes of contradiction patterns best? Can we use these commonalities to give better qualitative and quantitative information about the graph?
+	\item \textbf{RQ4}: Are there methods, or can we design methods that could benefit from using general contradiction patterns in their algorithm? 
+	\begin{itemize}
+		\item Are we able to improve analytics about contradictions for large linked datasets, by giving qualitative and quantitative information about a linked datasets?
+		\item Can we use the anti-patterns, to build benchmarks. Benchmarks that have been sampled from large, but inconsistent datasets with general contradiction patterns. Would it be possible to keep the sampled characteristics invariant from sampling?
+	\end{itemize}
+\end{itemize}
 
 \section{Anti-pattern definition}
  We already explained the term  `anti-pattern' a bit in the introduction, but in this chapter we will introduce the term officially, and come to a definition of what a `anti-pattern' exactly is, and how we can derive `anti-patterns' from sets contradictions. \\
@@ -297,20 +304,18 @@ Now that we removed all the information that blocks generalization, we are left 
 We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
 
 
-\section{StappenPlan}
+\section{Plan of attack}
 The first step before we can do any analysis is to retrieve the `anti-patterns'. The method we developed is not based on any work that has been previously created, instead we opted to develop our own method. The method is designed specifically to retrieve `anti-patterns' from large knowledge graphs. Which are generalised contradictions, and can be seen as common mistakes made in dataset. We described a formal notion of `anti-patterns' in chapter \ref{AntiPatternDefinition}. Our method for retrieval is a three stage pipeline, the results of the previous stage flow into the next stage. With the input being a knowledge graph, in our case this is the LOD-a-lot\cite{JavierD:2017} a dataset containing 28 billion statements. The output from the final stage will be the found `anti-patterns'. 
 
-The `Anti-patterns' we found can now be used to answer our first question. ... 
-
+\subsection{Proposed Applications}
 With the `Anti-patterns' found we we developed two implementations that benefit greatly from `anti-patterns', The first being analysis for inconsistent knowledge graphs and the second a sampling method which uses `anti-pattern' in its sampling. The first implementation, analysis takes any arbitrary knowledge graph and analysis this graph on the basis of the found `anti-patterns'. Which helps us understand what types of `anti-patterns' occur in a knowledge graph, giving us a better overview of inconsistent knowledge graphs in general, answering our second research question.
 
 The second implementation, sampling is a common use case for other research topics as well. The reason for this implementation is that benchmarking for a number of research topics, such .... all use knowledge graphs that have been specifically designed for testing, such as ... and  .... . While this could work for testing, it could be that algorithms perform not as well on natural knowledge graphs. But due to the size of natural knowledge graphs, such as YAGO, DBpedia, and LOD-a-lot, it will be time-consuming to test on these knowledge graphs without knowing if the algorithm even works. To combat this sampling can be used to retrieve a smaller part of the knowledge graph we want to test on and use this sample to test the algorithm on. While sampling is a good practice to shrink the testspace, it could be that the sample lost some of the characteristics of the original knowledge graph. 
 
-We designed a different sampling technique that uses `anti-patterns' as a basis for testing, this sampling technique uses the found `anti-patterns' to build a knowledge graph that is inconsistent, with respect to the original knowledge graphs. ...
+We designed a different sampling technique that uses `anti-patterns' as a basis for sampling, this sampling technique uses the found `anti-patterns' to build a knowledge graph that is inconsistent, with respect to the original knowledge graphs. Secondly the sampling can be used to sample a knowledge graph that only has a set of specific `anti-patterns'.
 
-% Research questions
 
-\section{Proposed Experiments}
+\subsection{Proposed Experiments}
 Now that we set up our method, we show the how this method performs by three experiments. 
 Firstly we test if we can retrieve `all' justifications from the knowledge graph, due to the extraction process in the pipeline we can not guarantee that we can extract every contradiction from the knowledge graph. Which means that it is possible for the method to miss contradictions, and thus it can be possible that we miss the accompanying `anti-patterns' that we could have derived from the contradictions. To test this hypothesis that we can retrieve most to all `anti-patterns' we developed a experiment by extracting all the contradictions from the pizza-ontology. We choose this ontology as it is a simple to use ontology with concrete statements that are understood by everyone. It makes it simple to check by hand if the amount of `anti-patterns we found, matches the amount of `anti-patterns' we found with our extraction method.
 
@@ -323,14 +328,17 @@ Thirdly we test if we can sample a set of inconsistent knowledge graphs. We exam
 \chapter{Finding `Anti-patterns'}\label{Method}
 \begin{figure}[!t]
 	\centering
-	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/SimplifiedPipelineMissingPart.png}}%
+	\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/SimplifiedPipelineMissingPart.png}}
 	\caption{A schematic diagram that shows the pipeline used to extract subgraphs, find justifications and their `anti-patterns'. Finally 
 		we use the information that we retrieved, to analyse and sample the Knowledge graph.}
 	\label{fig:simplePipeline}
 \end{figure}
 Our extraction method consists of three aspects: Firstly, we retrieve smaller subgraphs from the knowledge graph from which we want the contradictions. Secondly, from each subgraph, we check if the graph is inconsistent and retrieve the justifications. Finally, with the justifications, we create the `anti-patterns'. The entire pipeline is shown in figure \ref{fig:simplePipeline}.\\
 Our pipeline is designed to find `almost' all the `anti-patterns' in any knowledge graph. We implemented techniques to find these smaller inconsistent subgraphs with OWLAPI\cite{Horridge:2011} and Openllet\cite{Openllet:2019} which based on work of Pellet\cite{Pellet:2007}.\\
-\section{Algorithmic overview}
+
+\section{Algorithmic overview and proof}
+
+
 \begin{algorithm}[H]
 	\KwData{The knowledge graph that holds contradictions we want to extract}
 	\KwResult{the set of `anti-patterns' found in the knowledge graph}
@@ -391,6 +399,11 @@ With the justifications now devoid of information on the nodes we now group the 
 To find these isomorphisms we have implemented a version of the VF2 algorithm\cite{LCordella:2004}, with the addition to the algorithm that we also match the edges of the two justifications. Checking if two graphs are not isomorphic is NP-intermediate. Therefore we added in additional heuristics that need to match first before we apply the VF2 algorithm. Firstly we check if a graph has the same number of vertices, the same number of edges, the same amount of degrees, and in our case it also needs to have the same amount of edges based on the edge types we have. If all these matches then we apply the VF2 algorithm to the two `anti-patterns'. If the algorithm matches a justification to the found `anti-patterns', it adds this particular justification to this `anti-patterns', but if no pattern can be matched to the justification, a new `anti-patterns' is formed from this justification. This algorithm continues until all patterns have been matched to their correct `anti-pattern' group.\\
 
 \section{Design decisions}
+To speed up the process for finding all `anti-patterns' in large knowledge graphs we made design decisions that do longer guarentee that we can find all `anti-patterns'. We need to take these design decisions as it would else be intractable to go locate all `anti-patterns' as the algorithm would take too long to finish. 
+The first decision is to split the knowledge graph into smaller subgraphs. This makes it possible to for the reasoner to quickly check if the subgraph is consistent and retrieve all `anti-patterns' from the subgraph. To make sure we still find each `anti-pattern' we overlap the subgraphs such that it is improbable that we miss an contradiction, because it was split and put into two different subgraphs.\\
+The second design decision is that we put in a cut off into the amount of justifications the reasoner can find in the subgraph. We put this cut off in there deliberately. The reasoner, Openllet can continue indefinitely to find new justifications in a graph if no cut off is given \cite{}. So this was one of the contraints that we needed to implement due to the chosen reasoner. 
+The final algorithm is shown in image \ref{finalAlgorithm}.
+
 \begin{algorithm}[H]
 	\KwData{The knowledge graph that holds contradictions we want to extract}
 	\KwResult{the set of `anti-patterns' found in the knowledge graph}
@@ -409,10 +422,11 @@ To find these isomorphisms we have implemented a version of the VF2 algorithm\ci
 	}
 	\Return list of `anti-patterns'\\
 	\caption{Algorithmic view of the method}
+	\label{finalAlgorithm}
 \end{algorithm}
 
 \newpage
-\chapter{Experiments}\label{Experiments}
+\chapter{Testing the pipeline}\label{Experiments}
 In the following sections we describe the experimental setup, this subsection explains which experiments we performed, how the system around the experiments is set up. We will then explain each individual experiment per subsection. In total we will show 2 experiments that show the `anti-patterns' we retrieved from the LOD-a-lot, and we will analyze the results from the experiments. 
 
 \section{Experimental Setup}
@@ -461,7 +475,7 @@ The results are summarized in Table \ref{table:GraphStats}. The first column sho
 Each group has several distinct features 
 
 \newpage
-\chapter{Applications}\label{Implementation}
+\chapter{Applications for `anti-patterns'}\label{Implementation}
 As shown in figure \ref{fig:PipelinePart45} we show the two implementations that make use of `anti-patterns' that we can findwith the previous section. The first implementation is the use case of analysing the knowledge graph in its entirety, as well as looking at how the inconsistencies occur within the larger knowledge graph. We use the analytics of the knowledge graph later in the sampling implementation. Secondly, we showcase that the sampling technique, with respect to the found `anti-patterns' in the graph that we used, produces similar albeit smaller knowledge graphs.
 
 \section{Analysing inconsistent knowledge graphs}

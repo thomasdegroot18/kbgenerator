@@ -5,39 +5,40 @@
 \contentsline {section}{\numberline {1.4}Outline}{4}
 \contentsline {chapter}{\numberline {2}Background}{5}
 \contentsline {section}{\numberline {2.1}Knowledge graph elements}{5}
-\contentsline {section}{\numberline {2.2}Example introduction}{6}
+\contentsline {section}{\numberline {2.2}Example introduction}{7}
 \contentsline {section}{\numberline {2.3}Reasoner}{8}
-\contentsline {subsection}{\numberline {2.3.1}Framework}{8}
-\contentsline {subsection}{\numberline {2.3.2}Reasoning types}{9}
+\contentsline {subsection}{\numberline {2.3.1}Reasoning types}{9}
 \contentsline {section}{\numberline {2.4}Data}{9}
-\contentsline {subsection}{\numberline {2.4.1}Pizza-ontology}{9}
-\contentsline {subsection}{\numberline {2.4.2}YAGO}{9}
+\contentsline {subsection}{\numberline {2.4.1}Pizza-ontology}{10}
+\contentsline {subsection}{\numberline {2.4.2}YAGO}{10}
 \contentsline {subsection}{\numberline {2.4.3}DBpedia}{10}
 \contentsline {subsection}{\numberline {2.4.4}LOD-a-lot}{10}
 \contentsline {chapter}{\numberline {3}Related Work}{11}
 \contentsline {section}{\numberline {3.1}Preliminaries}{11}
 \contentsline {section}{\numberline {3.2}Analysis}{11}
 \contentsline {section}{\numberline {3.3}Sampling}{12}
-\contentsline {chapter}{\numberline {4}Problem Definition}{13}
+\contentsline {chapter}{\numberline {4}Defining the problem}{13}
 \contentsline {section}{\numberline {4.1}Problem Description}{13}
+\contentsline {subsection}{\numberline {4.1.1}Research questions}{14}
 \contentsline {section}{\numberline {4.2}Anti-pattern definition}{14}
-\contentsline {section}{\numberline {4.3}StappenPlan}{15}
-\contentsline {section}{\numberline {4.4}Proposed Experiments}{16}
-\contentsline {chapter}{\numberline {5}Finding `Anti-patterns'}{17}
-\contentsline {section}{\numberline {5.1}Algorithmic overview}{18}
-\contentsline {section}{\numberline {5.2}Subgraph retrieval}{18}
-\contentsline {section}{\numberline {5.3}Justification retrieval}{19}
-\contentsline {section}{\numberline {5.4}Justification generalization to `anti-patterns'}{19}
-\contentsline {section}{\numberline {5.5}Design decisions}{21}
-\contentsline {chapter}{\numberline {6}Experiments}{22}
-\contentsline {section}{\numberline {6.1}Experimental Setup}{22}
-\contentsline {section}{\numberline {6.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?[Completeness]}{22}
-\contentsline {section}{\numberline {6.3}Experiment 2: \textbf {RQ1}: Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}{23}
-\contentsline {section}{\numberline {6.4}Experiment 3: Anti-pattern Analysis}{23}
-\contentsline {chapter}{\numberline {7}Applications}{25}
-\contentsline {section}{\numberline {7.1}Analysing inconsistent knowledge graphs}{25}
-\contentsline {section}{\numberline {7.2}Sampling inconsistent graphs}{26}
-\contentsline {chapter}{\numberline {8}Application Experiments}{28}
-\contentsline {section}{\numberline {8.1}Experiment 4: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{28}
-\contentsline {section}{\numberline {8.2}Experiment 5: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{28}
-\contentsline {chapter}{\numberline {9}Conclusion}{32}
+\contentsline {section}{\numberline {4.3}Plan of attack}{15}
+\contentsline {subsection}{\numberline {4.3.1}Proposed Applications}{16}
+\contentsline {subsection}{\numberline {4.3.2}Proposed Experiments}{16}
+\contentsline {chapter}{\numberline {5}Finding `Anti-patterns'}{18}
+\contentsline {section}{\numberline {5.1}Algorithmic overview and proof}{19}
+\contentsline {section}{\numberline {5.2}Subgraph retrieval}{19}
+\contentsline {section}{\numberline {5.3}Justification retrieval}{20}
+\contentsline {section}{\numberline {5.4}Justification generalization to `anti-patterns'}{20}
+\contentsline {section}{\numberline {5.5}Design decisions}{22}
+\contentsline {chapter}{\numberline {6}Testing the pipeline}{23}
+\contentsline {section}{\numberline {6.1}Experimental Setup}{23}
+\contentsline {section}{\numberline {6.2}Experiment 1: \textbf {RQ1}: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?[Completeness]}{23}
+\contentsline {section}{\numberline {6.3}Experiment 2: \textbf {RQ1}: Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}{24}
+\contentsline {section}{\numberline {6.4}Experiment 3: Anti-pattern Analysis}{24}
+\contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{26}
+\contentsline {section}{\numberline {7.1}Analysing inconsistent knowledge graphs}{26}
+\contentsline {section}{\numberline {7.2}Sampling inconsistent graphs}{27}
+\contentsline {chapter}{\numberline {8}Application Experiments}{29}
+\contentsline {section}{\numberline {8.1}Experiment 4: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{29}
+\contentsline {section}{\numberline {8.2}Experiment 5: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{29}
+\contentsline {chapter}{\numberline {9}Conclusion}{33}
