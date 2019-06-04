@@ -36,8 +36,8 @@
 \contentsline {section}{\numberline {6.3}Experiment 2: \textbf {RQ1}: Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}{24}
 \contentsline {section}{\numberline {6.4}Experiment 3: Anti-pattern Analysis}{24}
 \contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{26}
-\contentsline {section}{\numberline {7.1}Analysing inconsistent knowledge graphs}{26}
-\contentsline {section}{\numberline {7.2}Sampling inconsistent graphs}{27}
+\contentsline {section}{\numberline {7.1}Analysis tool kit for inconsistent knowledge graphs}{26}
+\contentsline {section}{\numberline {7.2}Sampling tool kit for inconsistent knowledge graphs}{27}
 \contentsline {chapter}{\numberline {8}Application Experiments}{29}
 \contentsline {section}{\numberline {8.1}Experiment 4: \textbf {RQ3}: Implementation 1, Analysing inconsistent graphs}{29}
 \contentsline {section}{\numberline {8.2}Experiment 5: \textbf {RQ3}: Use case 2, Sampling inconsistent graphs}{29}

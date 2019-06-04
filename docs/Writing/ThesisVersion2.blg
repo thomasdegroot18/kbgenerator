@@ -9,11 +9,8 @@ Warning--entry type for "OWLPrimer:2012" isn't style-file defined
 --line 278 of file ThesisBib.bib
 Warning--entry type for "rdfPrimer:2014" isn't style-file defined
 --line 294 of file ThesisBib.bib
-Warning--I didn't find a database entry for "pizza"
-Warning--I didn't find a database entry for "LCordella:2004"
-Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
-while executing---line 1049 of file plain.bst
+Warning--entry type for "RDFSchema:2014" isn't style-file defined
+--line 302 of file ThesisBib.bib
+Warning--empty journal in pizza
 Warning--empty journal in Jin:2011
-Too many commas in name 4 of ""Rietveld, Laurens and Hoekstra, Rinke and Schlobach, Stefan and Gu{\'e}ret, Christophe", editor="Mika, Peter and Tudorache, Tania and Bernstein, Abraham and Welty, Chris and Knoblock, Craig and Vrande{\v{c}}i{\'{c}}, Denny and Groth, Paul and Noy, Natasha and Janowicz, Krzysztof and Goble, Carole"" for entry Rietveld:2014
-while executing---line 1090 of file plain.bst
-(There were 2 error messages)
+(There were 7 warnings)
