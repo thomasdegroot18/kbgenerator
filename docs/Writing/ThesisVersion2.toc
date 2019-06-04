@@ -14,8 +14,8 @@
 \contentsline {subsection}{\numberline {2.4.3}DBpedia}{10}
 \contentsline {subsection}{\numberline {2.4.4}LOD-a-lot}{10}
 \contentsline {chapter}{\numberline {3}Related Work}{11}
-\contentsline {section}{\numberline {3.1}Preliminaries}{11}
-\contentsline {section}{\numberline {3.2}Analysis}{11}
+\contentsline {section}{\numberline {3.1}Method}{11}
+\contentsline {section}{\numberline {3.2}Analysis}{12}
 \contentsline {section}{\numberline {3.3}Sampling}{12}
 \contentsline {chapter}{\numberline {4}Defining the problem}{13}
 \contentsline {section}{\numberline {4.1}Problem Description}{13}

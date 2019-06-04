@@ -8,16 +8,27 @@ S\"{o}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
   Asian Conference on Asian Semantic Web Conference}, ISWC'07/ASWC'07, pages
   722--735, Berlin, Heidelberg, 2007. Springer-Verlag.
 
-\bibitem{LCordella:2004}
-L.~P. Cordella, P.~Foggia, C.~Sansone, and M.~Vento.
-\newblock A (sub)graph isomorphism algorithm for matching large graphs.
-\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  26(10):1367--1372, Oct 2004.
+\bibitem{BloemP:2018}
+Peter Bloem and Steven de~Rooij.
+\newblock A tutorial on mdl hypothesis testing for graph analysis, 10 2018.
 
 \bibitem{Debattista:2018}
 Jeremy Debattista, Christoph Lange, S\"oren Auer, and Dominic Cortis.
 \newblock Evaluating the quality of the lod cloud: An empirical investigation.
 \newblock {\em Semantic Web}, 9:859--901, 09 2018.
+
+\bibitem{Eiter:2010}
+Thomas Eiter, Michael Fink, Peter Sch\"{u}ller, and Antonius Weinzierl.
+\newblock Finding explanations of inconsistency in multi-context systems.
+\newblock In {\em Proceedings of the Twelfth International Conference on
+  Principles of Knowledge Representation and Reasoning}, KR'10, pages 329--339.
+  AAAI Press, 2010.
+
+\bibitem{MichaelF:2017}
+Michael F\"arber, Frederic Bartscherer, Carsten Menne, and Achim Rettinger.
+\newblock Linked data quality of dbpedia, freebase, opencyc, wikidata, and
+  yago.
+\newblock {\em Semantic Web}, 9:1--53, 03 2017.
 
 \bibitem{JavierD:2017}
 Javier~D. Fern{\'a}ndez, Wouter Beek, Miguel~A. Mart{\'i}nez-Prieto, and Mario
@@ -32,23 +43,25 @@ Javier~D. Fernández, Miguel~A. Martínez-Prieto, Claudio Gutiérrez, Axel
 \newblock {\em Web Semantics: Science, Services and Agents on the World Wide
   Web}, 19:22–41, 2013.
 
-\bibitem{MichaelF:2017}
-Michael Färber, Frederic Bartscherer, Carsten Menne, and Achim Rettinger.
-\newblock Linked data quality of dbpedia, freebase, opencyc, wikidata, and
-  yago.
-\newblock {\em Semantic Web}, 9:1--53, 03 2017.
-
 \bibitem{rdfPrimer:2014}
-Y.~Raimond G.~Schreiber.
-\newblock Rdf primer 1.1.
-\newblock \url{https://www.w3.org/TR/rdf11-primer/}.
+Y.~Raimond" "G.~Schreiber.
+\newblock "rdf primer 1.1".
+\newblock "\url{https://www.w3.org/TR/rdf11-primer/}".
+
+\bibitem{Gabbay:1994}
+Dov~M. Gabbay, C.~J. Hogger, and J.~A. Robinson, editors.
+\newblock {\em Handbook of Logic in Artificial Intelligence and Logic
+  Programming (Vol. 3): Nonmonotonic Reasoning and Uncertain Reasoning}.
+\newblock Oxford University Press, Inc., New York, NY, USA, 1994.
 
 \bibitem{Openllet:2019}
 Galigater.
 \newblock Openllet.
 
 \bibitem{OWLPrimer:2012}
-P.~Hitzler, M.~Krötzsch, B.~Parsia, P.~Patel-Schneider, and S.~Rudolph.
+"P. Hitzler, M.~Kr\"otzsch, B.~Parsia, P.~Patel-Schneider, and S.~Rudolph".
+\newblock "owl 2 web ontology language primer (second edition)".
+\newblock "\url{https://www.w3.org/TR/owl-primer/}".
 
 \bibitem{YAGO2:2013}
 Johannes Hoffart, Fabian M.~Suchanek, Klaus Berberich, and Gerhard Weikum.
@@ -73,6 +86,12 @@ Long Jin, Yang Chen, Pan Hui, Cong Ding, Tianyi Wang, Athanasios Vasilakos,
   social graphs.
 \newblock 07 2011.
 
+\bibitem{Kaminski:2015}
+Tobias Kaminski, Matthias Knorr, and Jo\~{a}o Leite.
+\newblock Efficient paraconsistent reasoning with ontologies and rules.
+\newblock In {\em Proceedings of the 24th International Conference on
+  Artificial Intelligence}, IJCAI'15, pages 3098--3105. AAAI Press, 2015.
+
 \bibitem{Kurant:2011}
 Maciej Kurant, Athina Markopoulou, and Patrick Thiran.
 \newblock Towards unbiased {BFS} sampling.
@@ -90,6 +109,18 @@ Miguel~A. Martínez-Prieto, Mario Arias, and Javier~D. Fernández.
 \newblock Exchange and consumption of huge rdf data.
 \newblock In {\em The Semantic Web: Research and Applications}, pages 437--452.
   Springer, 2012.
+
+\bibitem{McAreavey:2014}
+Kevin McAreavey, Weiru Liu, and Paul Miller.
+\newblock Computational approaches to finding and measuring inconsistency in
+  arbitrary knowledge bases.
+\newblock {\em International Journal of Approximate Reasoning}, 55, 11 2014.
+
+\bibitem{Noori:2015}
+Azad Noori and Farzad Moradi.
+\newblock Simulation and comparison of efficency in pathfinding algorithms in
+  games.
+\newblock {\em Ciência e Natura}, 37:230, 12 2015.
 
 \bibitem{HeikoP:2016}
 Heiko Paulheim.
@@ -123,5 +154,16 @@ Gerald T\"{o}pper, Magnus Knuth, and Harald Sack.
 \newblock Dbpedia ontology enrichment for inconsistency detection.
 \newblock In {\em Proceedings of the 8th International Conference on Semantic
   Systems}, I-SEMANTICS '12, pages 33--40, New York, NY, USA, 2012. ACM.
+
+\bibitem{toulmin:1956}
+Stephen~E. Toulmin.
+\newblock {\em The Uses of Argument}.
+\newblock Cambridge University Press, 2 edition, 2003.
+
+\bibitem{Zhi:2015}
+Hui-lai Zhi.
+\newblock A max-term counting based knowledge inconsistency checking strategy
+  and inconsistency measure calculation of fuzzy knowledge based systems.
+\newblock {\em Mathematical Problems in Engineering}, 2015:1--7, 08 2015.
 
 \end{thebibliography}

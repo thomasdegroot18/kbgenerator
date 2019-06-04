@@ -242,25 +242,61 @@ The second dataset we use is the LOD-a-lot\cite{JavierD:2017} knowledge graph. T
 \chapter{Related Work}\label{RelatedWork}
 In this section an overview of work in various related research areas is provided. More specifically, we show the research on which this work is created on, the types of analyses that already have been implemented for knowledge graphs, and the techniques that show promise for sampling from knowledge graphs. \\
 
-\section{Preliminaries} %  Splitsen in general method and general solution
-Justifications are first introduced by Horridge et al. in their paper explaining inconsistent OWL ontologies \cite{Horridge:2009}. In this paper the writers describe the framework used to retrieve the justifications from inconsistent knowledge graphs as minimal subsets of the graphs preserving the inconsistency. This forms an integral part of our algorithm. In the paper, they also explain why it is often time-consuming to retrieve all justifications for ontologies. In the paper by T\"{o}pper et al. \cite{Topper:2012} they, propose a solution to identify contradictions in DBpedia, with handcrafted `anti-patterns'. With the extraction of `anti-patterns' from the Lod-a-lot we have a generalised approach that works on any knowledge graph. \\
+\section{Method}
+Making a knowledge graph consistent has been an old problem, and solutions have been proposed since 1956 by Toulmin in his book \cite{toulmin:1956}, in which the solution is proposed by revising the base, choosing to reason only over the consistent subbases, expanded upon by Gabbay et al\cite{Gabbay:1994}. The second solution is to change the inference of the reasoner to fit the inconsistency, and can be seen as the first approaches to paraconsistent reasoning for example by Kaminski\cite{Kaminski:2015}.
+
+With reasoning used in most software algorithms, the research done analysing inconsistent knowledge graphs has only been emerging in the last decade with the introduction of justifications by Horridge et al. In their paper the writers describe the framework used to retrieve the justifications from inconsistent knowledge graphs as minimal subsets of the graphs preserving the inconsistency. This forms an integral part of our algorithm. In the paper, they also explain why it is often time-consuming to retrieve all justifications for ontologies. In the paper by T\"{o}pper et al. \cite{Topper:2012} they, propose a solution to identify contradictions in DBpedia, with handcrafted `anti-patterns'. With the extraction of `anti-patterns' from the Lod-a-lot we have a generalised approach that works on any knowledge graph. \\
+
+
+Previous work locating contradictions has been done by \cite{Eiter:2010} 
+McAreavey expanded upon the notion of contradiction by ...
+\cite{McAreavey:2014}
+
+Finally Zhi et al. Did this:
+\cite{Zhi:2015}
+
+But our method is better.
+
+
+Our method re uses part of the method that has been developed by Azad Noori et al\cite{Noori:2015}. In this paper they propose an efficient algorithm for pathfinding that we use in our subgraph generation and in our sampling.
 
 \section{Analysis}
-Paulheim \cite{HeikoP:2016} showcases the need for a standardised evaluation method. In the survey, they show that researchers sometimes choose different knowledge graph(s) according to their needs, this makes it harder to compare different algorithms. Removing this discrepancy would benefit all of us.\\ 
+Paulheim \cite{HeikoP:2016} showcases the need for a standardised evaluation method. In the survey, they show that researchers sometimes choose different knowledge graph(s) according to their needs, this makes it harder to compare different algorithms. Removing this discrepancy would benefit all of us.
 
 F\'arber et al. \cite{MichaelF:2017} give an in-depth comparison of several large knowledge graphs, and demonstrates that knowledge graphs hold different metrics. The paper by F\"arber et al. \cite{MichaelF:2017} is expanded upon by Debattista et al. in \cite{Debattista:2018}, in which they analysed 130 datasets from the Linked Open Data Cloud using 27 Linked Data quality metrics. Both papers show that each graph has a different underlying structure and in theory, this even can result in different behaviour of algorithms.
+
+The paper by Peter Bloem and Steven de Rooij\cite{BloemP:2018} would be a good usecase in which we could implement our anti-patterns for analysis. With an combination of implementations we couldmake statistical inferences about if `anti-patterns' occur with regularity. Which would incredibly useful for making automatic software for contradiction detection.
 
 \section{Sampling}
 In the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} several sampling techniques are proposed and compared, and with it they show that even naive sampling such as random walks and 'forest fire' show accurate results, even sampling to 15\% of the original size. 
 \cite{Jin:2011} Albatross sampling, shows a sampling technique designed for loosely connected or disconnected networks, especially for social networks, while
-This technique could be useful for sampling graph networks, as the algorithm gives an even more accurate sample, but due to an extra constraint we've put on with the justifications, this sampling technique could not be applied.\\
+This technique could be useful for sampling graph networks, as the algorithm gives an even more accurate sample, but due to an extra constraint we've put on with the justifications, this sampling technique could not be applied.
 
-\cite{Kurant:2011} Towards Unbiased BFS Sampling, In this paper the Kurant et al. are explaining the bias that forms when implementing breath first sampling.
-While this paper has no direct effect on the implementation the information described in the paper is useful to explain why our samples have some discrepancies when it comes to the differences in indegree and outdegree. \\
+In the paper by Kurant et al.\cite{Kurant:2011}  are explaining the bias that forms when implementing breath first sampling.
+While this paper has no direct effect on the implementation the information described in the paper is useful to explain why our samples have some discrepancies when it comes to the differences in indegree and outdegree. 
 
 Finally Rietveld et al.\cite{Rietveld:2014} shows that sampling for targeted use, in their case SPARQL coverage is possible, this shows that sampling a knowledge base, for targeted cases can generally be relevant for multiple reasons.
 
 \newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{Defining the problem}\label{ProblemDefintion}
 In the last chapter we introduced the related work we used in this work as a basis for the method we introduce in the method. In this section we introduce a formal approach to the problem we introduced in the introduction. The problem formalization crucial in the aim of this work in order to understand the method we propose in the next section.
 
