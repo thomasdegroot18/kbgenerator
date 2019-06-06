@@ -451,7 +451,7 @@ In the following sections we describe the experimental setup, this subsection ex
 
 \textit{Method and Implementation software}. Both the method and the implementations, which we will explain in section \ref{Implementation} have been written in JAVA. We choose JAVA as the programming language for the amount of libraries that have been made available in JAVA. The the most important libraries we used for the implementation are, jena, rdf2hdt, openllet and OWLapi, all available as open source. It is noted that the retrieval of the `anti-patterns' has been done on the LOD server, due to the time it took to retrieve the `anti-patterns' from the LOD-a-lot. 
 
-\section{Experiment 1: \textbf{RQ1}:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?[Completeness]}
+\section{Experiment 1:  Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
 \textit{Experiment description}. The purpose of this experiment is to show that we can indeed extract inconsistencies from an arbitrary knowledge graph, with the pipeline. 
 To show that the pipeline works we have tested the algorithm on two extreme cases — the first case being the pizza ontology and the second case the LOD-a-lot.
@@ -479,19 +479,25 @@ The results are summarized in Table \ref{table:GraphStats}. The first column sho
 	\label{table:PizzaOntology}
 \end{table}
 
-\section{Experiment 2: \textbf{RQ1}:  Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}
+%\section{Experiment 2: \textbf{RQ1}:  Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}
 % Describe how the creation of the inconsistencies from the lod cloud worked.
+\section{Experiment 2: Anti-pattern Analysis} % Renaming
+% \section{Experiment 3: Anti-pattern Analysis} % Renaming
+\textit{Experiment description}. In this experiment we created a webpage on which we can compare the different `anti-patterns' we have found in the LOD-a-lot. On this webpage we introduce the different types of contradictions we found. We show the `anti-patterns' via a visualization, we also give an formulation of the `anti-pattern'. And finally we generate the SPARQL queries for every `anti-pattern'.  
 
-\section{Experiment 3: Anti-pattern Analysis} % Renaming
-\textit{Experiment description}. 
+\begin{figure}[!t]
+	\subfloat[Circle-type `anti-pattern'.\label{fig:CircleAnti}]{%
+		\includegraphics[width=0.5\textwidth]{images/figure4.png}
+	}
+	\subfloat[Kite-type `anti-pattern'.\label{fig:kiteAnti}]{%
+		\includegraphics[width=0.5\textwidth]{images/figure5.png}
+	}
+\end{figure}
 
-\textit{Retrieval} The second experiment shows the retrieval of the `anti-patterns' from the LOD-a-lot. We posted all the `anti-patterns' found on the website \url{https://thomasdegroot18.github.io/kbgenerator/}. On this website we generate the SPARQL queries for every `anti-pattern' and we show an visualization of the found `anti-patterns'.  
-
-\textit{Analysis} In the images ... and ... We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. The second group is a circle with an attachment. There is only one isntance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. The third group is equal to the first group circle, but with the addition of \textit{owl:equivalentWith}. The fourth group is equal to the second group, but also with one or multiple \textit{owl:equivalentWith}. \\
-
-Each group has several distinct features 
+\textit{Analysis} In the images \ref{fig:CircleAnti} and \ref{fig:kiteAnti} We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. The second group is a circle with an attachment. There is only one isntance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. The third group is equal to the first group circle, but with the addition of \textit{owl:equivalentWith}. The fourth group is equal to the second group, but also with one or multiple \textit{owl:equivalentWith}. \\
 
 \newpage
+
 \chapter{Applications for `anti-patterns'}\label{Implementation}
 As shown in figure \ref{fig:PipelinePart45} we show the two implementations that make use of `anti-patterns' that we can findwith the previous section. The first implementation is the use case of analysing the knowledge graph in its entirety, as well as looking at how the inconsistencies occur within the larger knowledge graph. We use the analytics of the knowledge graph later in the sampling implementation. Secondly, we showcase that the sampling technique, with respect to the found `anti-patterns' in the graph that we used, produces similar albeit smaller knowledge graphs.
 
@@ -532,19 +538,18 @@ The second implementation that makes use of the `anti-patterns' is the implement
 To achieve the goal of sampling while keeping the constraints in mind means that we can not use any techniques that start from a node,, or a set of nodes, such as random walks, or forest fire sampling. Because we then cannot guarantee connectedness or the minimal amount of contradictions.\\ 
 Our algorithm instead uses random constrained deletion; this algorithm randomly deletes triples that can be safely deleted. Triples that are connected to contradictions, or hold the only connection between subgraphs cannot be deleted.
 The first set of triples that can not be deleted are the triples that describe the contradictions. To make sure that contradictions are not deleted, we start by building an HDT\cite{FMPGPA:13}\cite{MPAF:12} that stores all the triples that make up these contradictions. We use a SPARQL query to find the results of each of the `anti-patterns', and retrieve the number of contradictions the user wanted as BTPs. The triples are then combined and converted to an HDT. The algorithm can now check if a triple can be safely deleted. By checking if the triple is not present in the HDT.\\
-The second set of triples that can not be deleted are the triples that break the to sample graph into smaller subgraphs. To negate this problem the algorithm uses local connectedness. A triple may only be safely deleted if there is a second path that connects the object and the subject without having to pass through the severed link. There is one exception to the rule when either the subject or the object does not have any other links, the triple is then is also allowed to be deleted. With this, we can guarantee that the graph does not split into smaller subgraphs. \\%TODO: Can we guarantee local connectedness?
+The second set of triples that can not be deleted are the triples that break the to sample graph into smaller subgraphs. To negate this problem the algorithm uses local connectedness. A triple may only be safely deleted if there is a second path that connects the object and the subject without having to pass through the severed link. There is one exception to the rule when either the subject or the object does not have any other links, the triple is then is also allowed to be deleted. With this, we can guarantee that the graph does not split into smaller subgraphs. 
 The sampling by random deletion now continues to delete triples until the sample reaches the size given by the user, or when it is no longer able to delete triples. This can happen either because the only triples that can be deleted split the graph into subgraphs, or the only triples that can be safely deleted belong to the non-deletable contradictions.
 
 \newpage
 \chapter{Application Experiments}
 Next we will show the results of the two implementations we designed, which we will also analyze. In these experiment we use YAGO, and DBpedia for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
 
+\section{Experiment 3: Implementation 1, Analysing inconsistent graphs}
+%\section{Experiment 4: Implementation 1, Analysing inconsistent graphs}
+\textit{Experiment description}. We retrieved the statistics from several knowledge graphs differing in size. This implementation of knowledge graph analysis a typical showcase. In this experiment we retrieve relevant statistics from YAGO, DBpedia. The two inconsistent knowledge graphs. And we use three smaller consistent knowledge graphs, wordnet31, dblp-2012-11-28b, swdf as control knowledge graphs. The statistics we retrieved we have explained in the chapter \ref{Implementation}.  \\
 
-\section{Experiment 4: \textbf{RQ3}: Implementation 1, Analysing inconsistent graphs}
-\textit{Experiment description}. We retrieved the statistics from several knowledge graphs differing in size. This implementation of knowledge graph analysis a typical showcase. In this experiment we retrieve relevant statistics from YAGO, DBpedia knowledge graphs and ... as we explained in section \ref{Implementation}.   \\
-
-\textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
-differ between the three test cases.\\
+\textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed the results show several distinctions between the three different knowledge graphs. Most important differences are the size and the amount of different namespaces. These statistics are easy to collect. The important statistics are the Largest `anti-pattern', that can be found in the data. And the amount of distinct `anti-patterns' that can be found in the knowledge graph. Here we can see that size does matter in the amount of different `anti-patterns' found. But most noticable with smaller graphs. \\
 
 \begin{table}[!t]
 	\centering
@@ -560,15 +565,49 @@ differ between the three test cases.\\
 	\label{table:GraphStats}
 \end{table}
 
-\section{Experiment 5: \textbf{RQ3}: Use case 2, Sampling inconsistent graphs} 
-\textit{Experiment description}. To test the sampling a sample size of 20\% is taken, as the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} shows that samples
-up to 15\% still hold the characteristics of the original graph well, even with simpler sampling methods. \\
+Figures \ref{fig:indegree},  \ref{fig:outdegree},  \ref{fig:Coeff}, show the distribution of statistics of the knowledge graph. We can visually distinctly see different knowledge graphs. The first thing to notice is the drop in the the graphs in \ref{fig:indegree}. In all but the swdf knowledge graph we can see an visible drop in the amount of ingoing connections, between 10 and a 100 incoming connections. \\
+The Outgoing connections in graph \ref{fig:outdegree} do not have interesting characteristics, but will be useful for comparing the sample method in the next experiment. 
+The final graph about the knowledge graph statistics \ref{fig:Coeff} shows the Clustering Coefficient most important to note is the high amplituded graph for dblp-2012-11-28b. \\
 
-\textit{Analysis}. Table \ref{table:GraphStats} shows the of the analytics about the knowledge graph before the sampling. As noticed the results, shows several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates 
-differ between the three test cases.\\
+\begin{figure}[!t]
+	\subfloat[The distribution of indegree over all nodes.\label{fig:indegree}]{%
+		\includegraphics[width=0.33\textwidth]{images/figure4.png}
+	}
+	\subfloat[The distribution of outdegree over all nodes.\label{fig:outdegree}]{%
+		\includegraphics[width=0.33\textwidth]{images/figure5.png}
+	}
+	\subfloat[The distribution of the Clustering Coefficient over all nodes.\label{fig:Coeff}]{%
+		\includegraphics[width=0.33\textwidth]{images/figure6.png}
+	}
+\end{figure}
+
+The final two graphs show the curves for the two inconsistent knowledge graphs. DBPedia and YAGO. Both have `anti-patterns' meaning that the knowledge graphs are inconsistent. While the size of the knowledge graphs are different. The curve for both YAGO and DBpedia are similar. 
+
+\begin{figure}[ht]
+	\centering
+	\subfloat[Plot showing the Distribution of size.\label{fig:Size}]{%
+		\includegraphics[width=0.33\textwidth]{images/figure1.png}
+	}
+	\subfloat[Plot showing the Distribution of occurrences.\label{fig:SizeSample}]{%
+		\includegraphics[width=0.33\textwidth]{images/figure2.png}
+	}
+	\caption{Figures showing several statistics about the Anti patterns.}
+	\label{fig:AntipatternStats}
+\end{figure}
+
+% \section{Experiment 5: Use case 2, Sampling inconsistent graphs} 
+\section{Experiment 4: Use case 2, Sampling inconsistent graphs} 
+\textit{Experiment description}. To test the sampling a sample size of 20\% is taken, as the paper by Jure Leskovec and Christos Faloutsos \cite{Leskovec:2006} shows that samples
+up to 15\% still hold the characteristics of the original graph well, even with simpler sampling methods. So by choosing 20\% of the original knowledge graph we make sure that the sampling is not having large effects on the characteristics of the sampled graph. And can therefore better compare the sampled knowledge graph with the original knowledge graph. \\
+
+\textit{Analysis}. Table \ref{table:GraphStats} shows the of the analytics about the knowledge graph before the sampling. As noticed the results, shows several distinctions between the three different knowledge graphs. Even though their expressiveness and the size do roughly match their number of namespaces and distinct predicates differ between the three test cases.\\
 Table \ref{table:GraphStatsSample} shows the analytics of the knowledge graphs after the sampling has been applied. Even though the sample size has been reduced to one-fifth of the original size. The statistics of the sampled knowledge graph still match the original knowledge graph, within the same ballpark scores.
-Figures \ref{fig:indegree},  \ref{fig:outdegree},  \ref{fig:Coeff}, show the distribution of statistics of the knowledge graph. %TODO: Expand this.\\
-Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSample} show the distribution of the statistics sampled knowledge graph. As noted, the distribution of the statistics match the original knowledge graph. \\
+Figures \ref{fig:indegree},  \ref{fig:outdegree},  \ref{fig:Coeff}, show the distribution of statistics of the knowledge graph. All graphs show different curves for The most noticable is the dip in the dblp-2012-11-28b line for the indegrees. 
+Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSample} show the distribution of the statistics sampled knowledge graph. As noted, we can see that the distribution of the statistics do match the original knowledge graph. We can distinguish the graphs and match them to the original graphs. 
+In figure \ref{fig:indegreeSample} the sign of this is the obvious dip in the dblp-2012-11-28b line for the indegrees. Which while smoothed is still characteristic of the dblp-2012-11-28b dataset. The same dips are also seen in the dbpedia sample and the YAGO sample.\\
+In figure \ref{fig:outdegreeSample} We see the same effects. While the dblp-2012-11-28b has been smoothed out, which can be the effect of the sampling. All three lines follow the same angle as their original graphs.\\
+In figure \ref{fig:CoeffSample}. It is visible that all three sampled knowledge graphs have the same shape in the clustering coefficient as their original knowledge graphs. While respective sizes of the knowledge graphs make the plot harder to it can still be seen that the plots match the shapes.
+
 
 \begin{table}[!t]
 	\centering
@@ -587,7 +626,7 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 \begin{table}[ht]
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		& Amount of 'Anti-patterns' & sum of 'Anti-patterns' &  Largest Inconsistency  \\ \hline \hline
+		& Amount of Distinct 'Anti-patterns' & sum of all 'Anti-patterns' &  Largest Inconsistency  \\ \hline \hline
 		DBpedia & 13 & 101349 & 19\\ \hline
 		Yago & 135 & 1808977348 & 19\\ \hline
 		wordnet & 0 & 0 & 19\\ \hline
@@ -604,7 +643,7 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 		DBpedia & 1040358853 & EL+ & 20 & 18\\ \hline
 		Yago & 158991568 & EL+ & 11 & 5\\ \hline
 		wordnet & 5558748 & EL & 5 & 5\\ \hline
-		dblp-2012-11-28b & 55586971 & EL & 4 & 7\\ \hline
+		dblp-2012-11-28b & 55586971 & EL & 4 & 7 \\ \hline
 		swdf & 242256 & EL & 60 & 22\\ \hline
 	\end{tabular}
 \end{table}
@@ -633,16 +672,6 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 \end{table}
 
 \begin{figure}[!t]
-	\subfloat[The distribution of indegree over all nodes.\label{fig:indegree}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure4.png}
-	}
-	\subfloat[The distribution of outdegree over all nodes.\label{fig:outdegree}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure5.png}
-	}
-	\subfloat[The distribution of the Clustering Coefficient over all nodes.\label{fig:Coeff}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure6.png}
-	}
-	\vspace{\floatsep}
 	\subfloat[The distribution of indegree over all nodes of the sample.\label{fig:indegreeSample}]{%
 		\includegraphics[width=0.33\textwidth]{images/Samplefigure4.png}
 	}
@@ -656,21 +685,6 @@ Figures \ref{fig:indegreeSample},  \ref{fig:outdegreeSample},  \ref{fig:CoeffSam
 	\label{fig:GraphStats}
 \end{figure}
 
-
-\begin{figure}[ht]
-	\centering
-	\subfloat[Plot showing the Distribution of size.\label{fig:Size}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure1.png}
-	}
-	\subfloat[Plot showing the Distribution of occurrences.\label{fig:SizeSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure2.png}
-	}
-	\subfloat[Plot showing the Distribution of occurrences.\label{fig:SizeSample2}]{%
-		\includegraphics[width=0.33\textwidth]{images/figure3.png}
-	}
-	\caption{Figures showing several statistics about the Anti patterns.}
-	\label{fig:AntipatternStats}
-\end{figure}
 
 \newpage
 
