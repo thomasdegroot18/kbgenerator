@@ -1,8 +1,10 @@
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.interpolate import spline
 
-Colors = ['#e6194b', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6','#ffe119', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+
+Colors = ['#3cb44b','#e6194b', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6','#ffe119', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
 
 def plotting(FileListInconsistency, FileListKB, Sample):
     counter = 0
@@ -10,55 +12,56 @@ def plotting(FileListInconsistency, FileListKB, Sample):
     labels1 = []
     labels2 = []
     width = (1-0.1)/len(FileListInconsistency)
-    for file in FileListInconsistency:
-        print(file)
-        datasetName = file.split("/")[-2]
-        ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
-        labels1.append(datasetName)
-        json_file = open(file, 'r')
-        data = json.load(json_file)
-        IDCoor = []
-        Size = [i for i in range(0,25)]
-        SizeCount = [0 for i in range(0,25)]
-        SizeCoor = []
-        SizeSum = [0 for i in range(0,25)]
-        CountCoor = []
-        for elem in data:
-            CountCoor.append(elem["Count"])
-            SizeCoor.append(elem["Size"])
-            IDCoor.append(elem["id"])
-            if(elem["Count"] > 0):
-                SizeCount[elem["Size"]] += 1
+    # for file in FileListInconsistency:
+    #     print(file)
+    #     datasetName = file.split("/")[-2]
+    #     ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
+    #     print(ColorScheme[datasetName])
+    #     labels1.append(datasetName)
+    #     json_file = open(file, 'r')
+    #     data = json.load(json_file)
+    #     IDCoor = []
+    #     Size = [i for i in range(0,25)]
+    #     SizeCount = [0 for i in range(0,25)]
+    #     SizeCoor = []
+    #     SizeSum = [0 for i in range(0,25)]
+    #     CountCoor = []
+    #     for elem in data:
+    #         CountCoor.append(elem["Count"])
+    #         SizeCoor.append(elem["Size"])
+    #         IDCoor.append(elem["id"])
+    #         if(elem["Count"] > 0):
+    #             SizeCount[elem["Size"]] += 1
 
-            SizeSum[elem["Size"]] += elem["Count"]
-        plt.figure(1)
-        plt.title('Plot showing the Distribution of Size')
-        plt.plot(Size, SizeCount, color=ColorScheme[datasetName])
-        plt.ylabel('Count of different "Anti-pattern" types with the same size')
-        plt.xlabel('Size of the "Anti-pattern"')
+    #         SizeSum[elem["Size"]] += elem["Count"]
+    #     plt.figure(1)
+    #     plt.title('Plot showing the Distribution of Size')
+    #     plt.plot(Size, SizeCount, color=ColorScheme[datasetName])
+    #     plt.ylabel('Count of different "Anti-pattern" types with the same size')
+    #     plt.xlabel('Size of the "Anti-pattern"')
 
-        plt.figure(2)
+    #     plt.figure(2)
 
-        SizeSum[:] = [x / float(sum(SizeSum)+0.0000001) for x in SizeSum]
-        plt.title('Plot showing the normalised Distribution of Occurences')
-        Size = np.arange(0,25)
-        try:
-            plt.bar(Size+width*counter, SizeSum, width, color=ColorScheme[datasetName])
-        except:
-            pass
-        counter += 1
-        plt.ylabel('Occurrences of the "Anti-pattern"')
-        plt.xlabel('Size of the "Anti-pattern"')
+    #     SizeSum[:] = [x / float(sum(SizeSum)+0.0000001) for x in SizeSum]
+    #     plt.title('Plot showing the normalised Distribution of Occurences')
+    #     Size = np.arange(0,25)
+    #     try:
+    #         plt.bar(Size+width*counter, SizeSum, width, color=ColorScheme[datasetName])
+    #     except:
+    #         pass
+    #     counter += 1
+    #     plt.ylabel('Occurrences of the "Anti-pattern"')
+    #     plt.xlabel('Size of the "Anti-pattern"')
 
-        CountCoor.sort(reverse = True)
-        CountCoor[:] = [x / float(sum(CountCoor)+0.0000001) for x in CountCoor]
-        plt.figure(3)
-        plt.title('Plot showing the normalised Distribution of Occurences')
-        plt.plot( CountCoor, color=ColorScheme[datasetName])
-        plt.ylabel('Occurrences of the "Anti-pattern"')
-        plt.xlabel('"Anti-pattern" type')
+    #     CountCoor.sort(reverse = True)
+    #     CountCoor[:] = [x / float(sum(CountCoor)+0.0000001) for x in CountCoor]
+    #     plt.figure(3)
+    #     plt.title('Plot showing the normalised Distribution of Occurences')
+    #     plt.plot( CountCoor, color=ColorScheme[datasetName])
+    #     plt.ylabel('Occurrences of the "Anti-pattern"')
+    #     plt.xlabel('"Anti-pattern" type')
 
-
+    ColorScheme = {'dbpedia2016-04en': '#4363d8', 'yago2s': '#f58231', 'dblp-2012-11-28b': '#e6194b'} 
     for file in FileListKB:
         json_file = open(file, 'r')
         data = json.load(json_file)
@@ -67,7 +70,6 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         labels2.append(datasetName)
         if not(datasetName in ColorScheme):
             ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
-
         XcoorIn = []
         YcoorIn = []
         for key in sorted(data["InDegree"].keys(), key=int):
@@ -76,7 +78,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         plt.figure(4)
         plt.title('Plot showing the Distribution of the nodes with inlinks')
-        plt.plot(XcoorIn, YcoorIn)
+        plt.plot(XcoorIn, YcoorIn, color=ColorScheme[datasetName])
         plt.ylabel('Occurences of the nodes with inlinks')
         plt.xlabel('Amount of inlinks towards the node')
 
@@ -89,7 +91,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         plt.figure(5)
         plt.title('Plot showing the Distribution of the nodes with outlinks')
-        plt.plot(XcoorOut, YcoorOut)
+        plt.plot(XcoorOut, YcoorOut, color=ColorScheme[datasetName])
         plt.ylabel('Occurences of the nodes with equal outlinks')
         plt.xlabel('Amount of outlinks outwards the node')
 
@@ -99,10 +101,13 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         for key in sorted(data["ClusteringCoefficient"].keys(), key=float):
             XcoorCluster.append(float(key))
             YcoorCluster.append(int(data["ClusteringCoefficient"][key]))
+        # xnew = np.linspace(min(XcoorCluster),max(XcoorCluster),300) #300 represents number of points to make between T.min and T.max
 
+        # power_smooth = spline(XcoorCluster,YcoorCluster,xnew)
         plt.figure(6)
         plt.title('Plot showing the Distribution of the nodes with equal ClusteringCoefficient')
-        plt.plot(XcoorCluster, YcoorCluster)
+        #plt.plot(xnew,power_smooth, color=ColorScheme[datasetName])
+        plt.plot(XcoorCluster, YcoorCluster, color=ColorScheme[datasetName])
         plt.ylabel('Occurences of the nodes with equal ClusteringCoefficient')
         plt.xlabel('ClusteringCoefficient of the node')
 
