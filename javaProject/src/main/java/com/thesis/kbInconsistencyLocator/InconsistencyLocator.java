@@ -501,7 +501,6 @@ public class InconsistencyLocator
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
-
         try{
             exp = expGen.getInconsistencyExplanations(MaxExplanations);
         } catch (Exception e){
@@ -573,6 +572,23 @@ public class InconsistencyLocator
     }
 
 
+    private static Set<Set<OWLAxiom>>  WriteInconsistencyGraph(HDT hdt) throws Exception{
+        // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
+        // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
+        GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
+
+        Set<String> Graph = null;
+        try{
+            Graph = GraphExtract.extractAll(hdt);
+        } catch (StackOverflowError e){
+            // Can print the error if overflow happens.
+            e.printStackTrace();
+        }
+
+        // Go to next step. Find (if any) Inconsistencies.
+        return WriteInconsistencyModel(Graph);
+
+    }
 
 
 
@@ -586,11 +602,9 @@ public class InconsistencyLocator
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
 
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
-
+            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
             //TODO: SPEED UP BOTH WAYS
-            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
-
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -619,8 +633,8 @@ public class InconsistencyLocator
         int numberThreads = 1;
         ExecutorService executor = Executors.newFixedThreadPool(numberThreads);
         // Skipping part of the hdt search as this has already been parsed: TODO: SKIP A SET
-        long valueLoop = 400000000;
-
+        //long valueLoop = 400000000;
+        long valueLoop = 0;
 
         System.out.println("Skipping part of the loop to: " + valueLoop);
         while(it.hasNext() && counterTriples < valueLoop){
@@ -642,7 +656,7 @@ public class InconsistencyLocator
             while (it.hasNext() && triples.size() < numberThreads) {
                 TripleString item = it.next();
                 counterTriples++;
-                if( counterTriples % 100000 == 0){
+                if( counterTriples % 100 == 0){
                     long estimatedTime = System.currentTimeMillis() - startTime;
                     System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
                 }
@@ -700,7 +714,27 @@ public class InconsistencyLocator
         }
     }
 
+    private static void LocateInconsistenciesAll(HDT hdt, FileOutputStream fileWriter) throws Exception {
+        // Locates the inconsistencies by looping through the graph over a large selection of triples.
 
+        // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
+
+        Set<Set<OWLAxiom>> exp = new HashSet<>();
+        long startTime = System.currentTimeMillis();
+        System.out.println(" Time passed: "+ startTime);
+        exp.addAll(WriteInconsistencyGraph(hdt));
+
+        // Process all the Inconsistencies.
+        // Loop through the set of explanations and standardize the Inconsistencies.
+        for(Set<OWLAxiom> InconsistencyExplanation: exp){
+            InconsistenciesHit ++;
+            // Loop through the set of explanations and standardize the Inconsistencies.
+            // Standardize the inconsistency and write to file.
+            InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
+        }
+        long estimatedTime = System.currentTimeMillis() - startTime;
+        System.out.println(" Time passed: "+ estimatedTime);
+    }
 
 
     private static void ClassLabelGenerator() // Generated Labels for the classes and the instances that can be used to map them.
@@ -820,7 +854,7 @@ public class InconsistencyLocator
 
         // Test Inconsistencies
         LocateInconsistencies(hdt, fileWriter);
-
+        LocateInconsistenciesAll(hdt, fileWriter);
         // Print to the user that the system finished finding inconsistencies.
         System.out.println("Finished locating inconsistencies");
 

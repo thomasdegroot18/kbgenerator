@@ -61,6 +61,9 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
     { return extractIntoExtend(new HashSet<>() , node, graph ); }
 
     @SuppressWarnings("unused")
+    Set<String> extractAll( HDT graph ) throws Exception
+    { return extractAllFunct(new HashSet<>() , graph ); }
+    @SuppressWarnings("unused")
     Set<String> extractExtendBothClean( String node, HDT graph ) throws Exception
     { return extractIntoExtendClean(new HashSet<>() , node, graph ); }
 
@@ -102,6 +105,10 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 
     private Set<Triple> extractIntoExtendBoth(Set<Triple> toUpdate, RDFNode root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
     { new ExtractionExtend( toUpdate, MaxValue ).extractIntoExtendBothWays( root , 0, extractFrom, modelRemovedTriples);
+        return toUpdate; }
+
+    private Set<String> extractAllFunct(Set<String> toUpdate, HDT extractFrom )
+    { new ExtractionExtend( toUpdate, extractFrom, 5000 ).extractAllFunc();
         return toUpdate; }
 
     private Set<Triple> extractIntoExtendSingle(Set<Triple> toUpdate, RDFNode root, Model extractFrom, int MaxValue, Model modelRemovedTriples )
@@ -164,7 +171,25 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             return counter;
         }
 
+        private void extractAllFunc()
+        {
+            IteratorTripleString itForward;
+            try{
+                itForward = extractFrom.search("", "", "");
 
+                while ( itForward.hasNext())
+                {
+                    TripleString t;
+                    t = itForward.next();
+
+                    toUpdate.add( t.asNtriple().toString() );
+                }
+            } catch (Exception e){
+                return;
+            }
+
+
+        }
         // TODO: SPEED IT UP
 
         private int extractIntoExtendCleanBoth( CharSequence root , int counter) throws Exception

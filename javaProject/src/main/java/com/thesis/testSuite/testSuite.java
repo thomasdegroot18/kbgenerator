@@ -91,26 +91,28 @@ public class testSuite {
             System.out.println("inconsistencyJSON: "+inconsistencyJSON);
             System.out.println("temp: "+temp);
 
-//        // Inconsistency Locator
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        System.out.println("Starting Locating Inconsistencies");
-//        String[] argsInconsistency =  {hdt,
-//                                       rdf,
-//                                       "10",
-//                                       "true"};
-//        if (CheckingInconsistency ){
-//            InconsistencyLocator.main(argsInconsistency);
-//        }
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        // Statistics
-//        System.out.println("Starting Statistics");
-//        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
-//        Statistics.main(argsStatistics);
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        System.out.println("Making inconsistency.json");
-//        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
-//        InconsistencyCreator.main(argsInconsistencyCreator);
-//        //promptEnterKey();
+        // Inconsistency Locator
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Starting Locating Inconsistencies");
+        String[] argsInconsistency =  {hdt,
+                                       rdf,
+                                       "500",
+                                       "true",
+                                        "false",
+                                        "0"};
+        if (CheckingInconsistency ){
+            InconsistencyLocator.main(argsInconsistency);
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+        // Statistics
+        System.out.println("Starting Statistics");
+        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
+        Statistics.main(argsStatistics);
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Making inconsistency.json");
+        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
+        InconsistencyCreator.main(argsInconsistencyCreator);
+        //promptEnterKey();
 
 //        System.out.println("------------------------------------------------------------------------------------------");
 //        // Generator
@@ -123,13 +125,13 @@ public class testSuite {
 //        System.out.println("Starting Generation");
 //        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
 //        Generator.main(argsGenerator);
-
-        System.out.println("------------------------------------------------------------------------------------------");
-        // Statistics Sampled
-        System.out.println("Starting Statistics");
-        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
-        Statistics.main(argsStatisticsSampled);
-        System.out.println("------------------------------------------------------------------------------------------");
+//
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        // Statistics Sampled
+//        System.out.println("Starting Statistics");
+//        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
+//        Statistics.main(argsStatisticsSampled);
+//        System.out.println("------------------------------------------------------------------------------------------");
 
 
 
