@@ -16,28 +16,28 @@
 \contentsline {chapter}{\numberline {3}Related Work}{11}
 \contentsline {section}{\numberline {3.1}Method}{11}
 \contentsline {section}{\numberline {3.2}Analysis}{12}
-\contentsline {section}{\numberline {3.3}Sampling}{12}
-\contentsline {chapter}{\numberline {4}Defining the problem}{13}
-\contentsline {section}{\numberline {4.1}Problem Description}{13}
-\contentsline {subsection}{\numberline {4.1.1}Research questions}{14}
-\contentsline {section}{\numberline {4.2}Anti-pattern definition}{14}
-\contentsline {section}{\numberline {4.3}Plan of attack}{15}
-\contentsline {subsection}{\numberline {4.3.1}Proposed Applications}{16}
-\contentsline {subsection}{\numberline {4.3.2}Proposed Experiments}{16}
-\contentsline {chapter}{\numberline {5}Finding `Anti-patterns'}{18}
-\contentsline {section}{\numberline {5.1}Algorithmic overview and proof}{19}
-\contentsline {section}{\numberline {5.2}Subgraph retrieval}{19}
-\contentsline {section}{\numberline {5.3}Justification retrieval}{20}
-\contentsline {section}{\numberline {5.4}Justification generalization to `anti-patterns'}{20}
-\contentsline {section}{\numberline {5.5}Design decisions}{22}
-\contentsline {chapter}{\numberline {6}Testing the pipeline}{23}
-\contentsline {section}{\numberline {6.1}Experimental Setup}{23}
-\contentsline {section}{\numberline {6.2}Experiment 1: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{23}
-\contentsline {section}{\numberline {6.3}Experiment 2: Anti-pattern Analysis}{24}
-\contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{26}
-\contentsline {section}{\numberline {7.1}Analysis tool kit for inconsistent knowledge graphs}{26}
-\contentsline {section}{\numberline {7.2}Sampling tool kit for inconsistent knowledge graphs}{27}
-\contentsline {chapter}{\numberline {8}Application Experiments}{29}
-\contentsline {section}{\numberline {8.1}Experiment 3: Implementation 1, Analysing inconsistent graphs}{29}
-\contentsline {section}{\numberline {8.2}Experiment 4: Use case 2, Sampling inconsistent graphs}{30}
-\contentsline {chapter}{\numberline {9}Conclusion}{33}
+\contentsline {section}{\numberline {3.3}Sampling}{13}
+\contentsline {chapter}{\numberline {4}Defining the problem}{14}
+\contentsline {section}{\numberline {4.1}Problem Description}{14}
+\contentsline {subsection}{\numberline {4.1.1}Research questions}{15}
+\contentsline {section}{\numberline {4.2}Anti-pattern definition}{15}
+\contentsline {section}{\numberline {4.3}Plan of attack}{16}
+\contentsline {subsection}{\numberline {4.3.1}Proposed Applications}{17}
+\contentsline {subsection}{\numberline {4.3.2}Proposed Experiments}{17}
+\contentsline {chapter}{\numberline {5}Finding `Anti-patterns'}{19}
+\contentsline {section}{\numberline {5.1}Algorithmic overview and proof}{20}
+\contentsline {section}{\numberline {5.2}Subgraph retrieval}{20}
+\contentsline {section}{\numberline {5.3}Justification retrieval}{21}
+\contentsline {section}{\numberline {5.4}Justification generalization to `anti-patterns'}{21}
+\contentsline {section}{\numberline {5.5}Design decisions}{23}
+\contentsline {chapter}{\numberline {6}Testing the pipeline}{24}
+\contentsline {section}{\numberline {6.1}Experimental Setup}{24}
+\contentsline {section}{\numberline {6.2}Experiment 1: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{24}
+\contentsline {section}{\numberline {6.3}Experiment 2: Anti-pattern Analysis}{25}
+\contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{27}
+\contentsline {section}{\numberline {7.1}Analysis tool kit for inconsistent knowledge graphs}{27}
+\contentsline {section}{\numberline {7.2}Sampling tool kit for inconsistent knowledge graphs}{28}
+\contentsline {chapter}{\numberline {8}Application Experiments}{30}
+\contentsline {section}{\numberline {8.1}Experiment 3: Implementation 1, Analysing inconsistent graphs}{30}
+\contentsline {section}{\numberline {8.2}Experiment 4: Use case 2, Sampling inconsistent graphs}{31}
+\contentsline {chapter}{\numberline {9}Conclusion}{34}
