@@ -69,7 +69,6 @@ public class testSuite {
             case "7":
                 hdt = AbsoluteName+"HDTs/dblp-2012-11-28b.hdt";
                 hdtName = "dblp-2012-11-28b.hdt";
-                CheckingInconsistency = false;
                 break;
             default:
                 // Default here:
