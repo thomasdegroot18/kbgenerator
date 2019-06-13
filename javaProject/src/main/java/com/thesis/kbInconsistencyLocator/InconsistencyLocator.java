@@ -618,7 +618,9 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
+        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeepingSmall.txt"));
 
+        fileWriter2.write(("Starting Split File \n").getBytes());
 
         // Get the Iterator tripleString to loop through.
         String subject = "";
@@ -712,16 +714,24 @@ public class InconsistencyLocator
             }
 
         }
+        long estimatedTime = System.currentTimeMillis() - startTime;
+        fileWriter2.write((" Time passed: "+ estimatedTime + "\n").getBytes());
     }
 
     private static void LocateInconsistenciesAll(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
+        // Set output Writer
 
+        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeeping.txt"));
+
+        fileWriter2.write(("Starting Complete File\n").getBytes());
         Set<Set<OWLAxiom>> exp = new HashSet<>();
         long startTime = System.currentTimeMillis();
+        fileWriter2.write((" Time passed: "+ startTime + "\n").getBytes());
         System.out.println(" Time passed: "+ startTime);
+        MaxExplanations = 1000;
         exp.addAll(WriteInconsistencyGraph(hdt));
 
         // Process all the Inconsistencies.
@@ -734,6 +744,8 @@ public class InconsistencyLocator
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
         System.out.println(" Time passed: "+ estimatedTime);
+        fileWriter2.write((" Time passed: "+ estimatedTime + "\n").getBytes());
+        fileWriter2.write((" Found Contradictions: "+ exp.size() + "\n").getBytes());
     }
 
 
