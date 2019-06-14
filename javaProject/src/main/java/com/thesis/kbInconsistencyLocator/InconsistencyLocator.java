@@ -55,7 +55,7 @@ public class InconsistencyLocator
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
     private static int GeneralGraphNumber = 0;
     private static int GeneralSubGraphFound = 0;
-
+    private static String NameFile;
 
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
@@ -448,6 +448,7 @@ public class InconsistencyLocator
                 //When Error happens catch it and print stacktrace.
                 catch (IOException io) {
                     io.printStackTrace();
+                    return;
                 }
             };
 
@@ -604,7 +605,7 @@ public class InconsistencyLocator
 
             //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 500);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 300);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -618,7 +619,7 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
-        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeepingSmall.txt"));
+        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Split File \n").getBytes());
 
@@ -724,7 +725,7 @@ public class InconsistencyLocator
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         // Set output Writer
 
-        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeeping.txt"));
+        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeeping"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Complete File\n").getBytes());
         Set<Set<OWLAxiom>> exp = new HashSet<>();
@@ -796,7 +797,7 @@ public class InconsistencyLocator
         }
         args[1] = args[1]+"INCONSISTENCIES" +"-"+ args[0].split("/")[args[0].split("/").length-1].replace(".hdt","")+".ttl";
 
-
+        NameFile = args[0].split("/")[args[0].split("/").length-1].replace(".hdt","");
 
         // Set output Writer
         FileOutputStream fileWriter = new FileOutputStream(new File(args[1]));
