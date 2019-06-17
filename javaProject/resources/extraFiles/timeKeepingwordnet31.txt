@@ -1,0 +1,4 @@
+Starting Complete File
+ Time passed: 1560584872509
+ Time passed: 268808
+ Found Contradictions: 0
