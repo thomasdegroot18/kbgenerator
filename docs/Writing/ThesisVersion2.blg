@@ -1,16 +1,12 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: ThesisVersion2.aux
 The style file: plain.bst
 Database file #1: ThesisBib.bib
-Warning--entry type for "BloemP:2018" isn't style-file defined
---line 2 of file ThesisBib.bib
 Warning--entry type for "Openllet:2019" isn't style-file defined
---line 271 of file ThesisBib.bib
+--line 300 of file ThesisBib.bib
 Warning--entry type for "OWLPrimer:2012" isn't style-file defined
---line 278 of file ThesisBib.bib
+--line 309 of file ThesisBib.bib
 Warning--entry type for "rdfPrimer:2014" isn't style-file defined
---line 294 of file ThesisBib.bib
+--line 327 of file ThesisBib.bib
 Warning--entry type for "RDFSchema:2014" isn't style-file defined
---line 302 of file ThesisBib.bib
-Warning--empty journal in pizza
-Warning--empty journal in Jin:2011
-(There were 7 warnings)
+--line 336 of file ThesisBib.bib
+(There were 4 warnings)

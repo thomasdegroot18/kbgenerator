@@ -1,9 +1,11 @@
 
-@unknown{BloemP:2018,
+@misc{BloemP:2018,
 	author = {Bloem, Peter and de Rooij, Steven},
 	year = {2018},
 	month = {10},
-	pages = {},
+	journal={},
+	volume={},
+	pages={},
 	title = {A tutorial on MDL hypothesis testing for graph analysis}
 }
 
@@ -43,20 +45,20 @@
 	doi = {10.3233/SW-180306}
 }
 
-@inproceedings{Eiter:2010,
-	author = {Eiter, Thomas and Fink, Michael and Sch\"{u}ller, Peter and Weinzierl, Antonius},
-	title = {Finding Explanations of Inconsistency in Multi-context Systems},
-	booktitle = {Proceedings of the Twelfth International Conference on Principles of Knowledge Representation and Reasoning},
-	series = {KR'10},
-	year = {2010},
-	isbn = {1-57735-451-6, 978-1-5773-545-12},
-	location = {Toronto, Ontario, Canada},
-	pages = {329--339},
-	numpages = {11},
-	url = {http://dl.acm.org/citation.cfm?id=3031748.3031791},
-	acmid = {3031791},
-	publisher = {AAAI Press},
-} 
+@article{Eiter:2010,
+	title = "Finding explanations of inconsistency in multi-context systems",
+	journal = "Artificial Intelligence",
+	volume = "216",
+	pages = "233 - 274",
+	year = "2014",
+	issn = "0004-3702",
+	doi = "https://doi.org/10.1016/j.artint.2014.07.008",
+	url = "http://www.sciencedirect.com/science/article/pii/S0004370214000915",
+	author = "Thomas Eiter and Michael Fink and Peter Schüller and Antonius Weinzierl",
+	keywords = "Multi-context systems, Inconsistency management, Interlinked knowledge, Knowledge representation formalisms, Nonmonotonic reasoning, Computational logic",
+	abstract = "Interlinking knowledge sources to enable information exchange is basic means to build enriched knowledge-based systems, which gains importance with the spread of the Internet. Inconsistency, however, arises easily in such systems, which is not least due to their heterogeneity, but also due to their independent design. This makes developing methods for consistency management of such systems a pressing issue. An important aspect is that in many relevant cases, the information at individual sources may not be amenable to change in order to resolve inconsistency, like in case of autonomous management of the sources. We thus aim at analyzing inconsistency of a system by means of the interlinking of sources and changes thereof. More concretely, we consider the powerful framework of Multi-Context Systems, in which decentralized and heterogeneous system parts interact via (possibly nonmonotonic) bridge rules for information exchange. Nonmonotonicity and potential cyclic dependencies pose additional challenges that call for suitable methods of inconsistency analysis. We thus provide two approaches for explaining inconsistency, which both characterize inconsistency in terms of bridge rules, but in different ways: by pointing out rules which need to be altered for restoring consistency, and by finding combinations of rules which cause inconsistency. We show duality and modularity properties of these notions, give precise complexity characterizations, and provide algorithms for their computation, which have been implemented in a prototype, by means of so-called hex-programs. Our results provide a basis for inconsistency management in heterogeneous knowledge systems which, different from and orthogonal to other works, explicitly addresses the knowledge interlinks in order to restore consistency."
+}
+
 @inproceedings{Freebase,
 	author = {Bollacker, Kurt and Evans, Colin and Paritosh, Praveen and Sturge, Tim and Taylor, Jamie},
 	title = {Freebase: A Collaboratively Created Graph Database for Structuring Human Knowledge},
@@ -102,12 +104,24 @@
 	journal = {Semantic Web},
 	doi = {10.3233/SW-160218}
 }
+
 @inproceedings{Horridge:2009,
-	title={Explaining Inconsistencies in OWL Ontologies},
-	author={Matthew Horridge and Bijan Parsia and Ulrike Sattler},
-	booktitle={SUM},
-	year={2009}
-}
+	author = {Horridge, Matthew and Parsia, Bijan and Sattler, Ulrike},
+	title = {Explaining Inconsistencies in OWL Ontologies},
+	booktitle = {Proceedings of the 3rd International Conference on Scalable Uncertainty Management},
+	series = {SUM '09},
+	year = {2009},
+	isbn = {978-3-642-04387-1},
+	location = {Washington, DC},
+	pages = {124--137},
+	numpages = {14},
+	url = {http://dx.doi.org/10.1007/978-3-642-04388-8_11},
+	doi = {10.1007/978-3-642-04388-8_11},
+	acmid = {1618222},
+	publisher = {Springer-Verlag},
+	address = {Berlin, Heidelberg},
+} 
+
 @article{Horridge:2011,
 	author = {Horridge, Matthew and Bechhofer, Sean},
 	title = {The OWL API: A Java API for OWL Ontologies},
@@ -144,17 +158,29 @@
 @inproceedings{JavierD:2017,
 	title={LOD-a-lot - A Queryable Dump of the LOD Cloud},
 	author={Javier D. Fern{\'a}ndez and Wouter Beek and Miguel A. Mart{\'i}nez-Prieto and Mario Arias},
+	pages = {75-83},
+	publisher = {Springer/Verlag},
+	address = {Amsterdam, The Netherlands, The Netherlands},
 	booktitle={International Semantic Web Conference},
 	year={2017}
 }
-@article{Jin:2011,
-	author = {Jin, Long and Chen, Yang and Hui, Pan and Ding, Cong and Wang, Tianyi and Vasilakos, Athanasios and Deng, Beixing and Li, Xing},
+@inproceedings{Jin:2011,
+	author = {Jin, Long and Chen, Yang and Hui, Pan and Ding, Cong and Wang, Tianyi and Vasilakos, Athanasios V. and Deng, Beixing and Li, Xing},
+	title = {Albatross Sampling: Robust and Effective Hybrid Vertex Sampling for Social Graphs},
+	booktitle = {Proceedings of the 3rd ACM International Workshop on MobiArch},
+	series = {HotPlanet '11},
 	year = {2011},
-	month = {07},
-	pages = {},
-	title = {Albatross sampling: robust and effective hybrid vertex sampling for social graphs},
-	doi = {10.1145/2000172.2000178}
-}
+	isbn = {978-1-4503-0742-0},
+	location = {Bethesda, Maryland, USA},
+	pages = {11--16},
+	numpages = {6},
+	url = {http://doi.acm.org/10.1145/2000172.2000178},
+	doi = {10.1145/2000172.2000178},
+	acmid = {2000178},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {convergence time, degree distribution, graph sampling, jump strategy, metropolis-hasting algorithm, online social networks, random walk},
+} 
 @inproceedings{Kaminski:2015,
 	author = {Kaminski, Tobias and Knorr, Matthias and Leite, Jo\~{a}o},
 	title = {Efficient Paraconsistent Reasoning with Ontologies and Rules},
@@ -165,6 +191,7 @@
 	location = {Buenos Aires, Argentina},
 	pages = {3098--3105},
 	numpages = {8},
+	address = {Universidade NOVA de Lisboa, Caparica, Portugal},
 	url = {http://dl.acm.org/citation.cfm?id=2832581.2832681},
 	acmid = {2832681},
 	publisher = {AAAI Press},
@@ -177,6 +204,7 @@
 	journal   = {CoRR},
 	volume    = {abs/1102.4599},
 	year      = {2011},
+	pages={1799-1809}, 
 	url       = {http://arxiv.org/abs/1102.4599},
 	archivePrefix = {arXiv},
 	eprint    = {1102.4599},
@@ -254,6 +282,7 @@
 	author = {Miguel A. Martínez-Prieto and Mario Arias and Javier D. Fernández},
 	title = {Exchange and Consumption of Huge RDF Data},
 	year = {2012},
+	address={"Berlin, Heidelberg"},
 	booktitle={The Semantic Web: Research and Applications},
 	pages = {437-452},
 	publisher={Springer}
@@ -272,6 +301,8 @@
 	author = {Galigater},
 	title = {Openllet},
 	date = {10 march 2019},
+	organization={Openllet},
+	year={2019},
 	url = {https://github.com/Galigator/openllet},
 }
 
@@ -279,6 +310,7 @@
 	author={"P. Hitzler and M. Kr\"otzsch and B. Parsia and P. Patel-Schneider and S. Rudolph"},
 	title={"OWL 2 Web Ontology Language Primer (Second Edition)"},
 	date={"11-12-2012"},
+	year={2012},
 	note= {"\url{https://www.w3.org/TR/owl-primer/}"},
 	organization={"W3C Working Group"}
 }
@@ -287,6 +319,7 @@
 	year = {2007},
 	month = {01},
 	pages = {},
+	volume = {5},
 	title = {Pellet: A Practical OWL-DL Reasoner},
 	journal = {SSRN Electronic Journal},
 	doi = {10.2139/ssrn.3199351}
@@ -296,6 +329,7 @@
 	title = {"RDF primer 1.1"},
 	date = {"24-06-2014"},
 	organization = {"W3C Working Group"},
+	year={2014},
 	note = {"\url{https://www.w3.org/TR/rdf11-primer/}"}
 }
 
@@ -304,6 +338,7 @@
 	title = {"RDF primer 1.1"},
 	date = {"25-02-2014"},
 	organization = {"W3C Working Group"},
+	year={2014},
 	note = {"\url{https://www.w3.org/TR/rdf-schema/}"}
 }
 
@@ -341,7 +376,7 @@
 	note = "\url{https://www.w3.org/TR/sparql11-query/}",
 }
 
-@book{toulmin:1956, place={Cambridge}, edition={2}, title={The Uses of Argument}, DOI={10.1017/CBO9780511840005}, publisher={Cambridge University Press}, author={Toulmin, Stephen E.}, year={2003}}
+@book{toulmin:1956, place={Cambridge}, address = {Trinity Lane,Cambridge, United Kingdom}, edition={2}, title={The Uses of Argument}, DOI={10.1017/CBO9780511840005}, publisher={Cambridge University Press}, author={Toulmin, Stephen E.}, year={2003}}
 
 @inproceedings{Topper:2012,
 	author = {T\"{o}pper, Gerald and Knuth, Magnus and Sack, Harald},
@@ -430,7 +465,7 @@
 	doi = {10.1155/2015/134950}
 }
 
-@article{pizza,
+@misc{pizza,
 	author = {Horridge, Matthew},
 	year = {2011},
 	month = {03},
@@ -448,7 +483,7 @@
 
 
 
- 
+
 
 
 
