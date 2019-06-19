@@ -28,23 +28,35 @@ kbStaaa = "/kbStatistics.json"
 # 								SString+'dblp-2012-11-28b'+kbStaaa,
 # 								SString+'swdf'+kbStaaa]
 
+
 FileListInconsistency = 	   [sString+'DBpedia'+incon,
 								sString+'Yago'+incon,
-								sString+'dblp-2012-11-28b'+incon]
+								sString+'LOD'+incon]
 FileListInconsistencySample =  [SString+'dbpedia2016-04en'+incon,
-								SString+'yago2s'+incon,
-								SString+'dblp-2012-11-28b'+incon]
+								SString+'yago2s'+incon]
 FileListKB =            	   [sString+'DBpedia'+kbStaaa,
 								sString+'Yago'+kbStaaa,
 								sString+'dblp-2012-11-28b'+kbStaaa]
 FileListKBSample =  			[SString+'dbpedia2016-04en'+kbStaaa,
 								SString+'yago2s'+kbStaaa,
 								SString+'dblp-2012-11-28b'+kbStaaa]
+# FileListInconsistency = 	   [sString+'DBpedia'+incon,
+# 								sString+'Yago'+incon,
+# 								sString+'dblp-2012-11-28b'+incon]
+# FileListInconsistencySample =  [SString+'dbpedia2016-04en'+incon,
+# 								SString+'yago2s'+incon,
+# 								SString+'dblp-2012-11-28b'+incon]
+# FileListKB =            	   [sString+'DBpedia'+kbStaaa,
+# 								sString+'Yago'+kbStaaa,
+# 								sString+'dblp-2012-11-28b'+kbStaaa]
+# FileListKBSample =  			[SString+'dbpedia2016-04en'+kbStaaa,
+# 								SString+'yago2s'+kbStaaa,
+# 								SString+'dblp-2012-11-28b'+kbStaaa]
+# plots.plotting(FileListInconsistency, FileListKB, "")
 plots.plotting(FileListInconsistencySample, FileListKBSample, "Sample")
-#plots.plotting(FileListInconsistency, FileListKB, "")
 
-# # tables stats not sampled
+# # # tables stats not sampled
 # tables.tabling(FileListInconsistency, FileListKB)
 
-# # tables stats sampled
+# # # tables stats sampled
 # tables.tabling(FileListInconsistencySample, FileListKBSample)

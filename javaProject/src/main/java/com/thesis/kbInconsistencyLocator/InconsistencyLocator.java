@@ -45,7 +45,7 @@ public class InconsistencyLocator
     private static boolean verbose;                                                 // Verbosity storage
     private static List<GeneralisedSubGraph> GeneralGraphs = new ArrayList<>();     // Generalised SubGraph Storage
     private static Map<GeneralisedSubGraph, Integer> SortingListMap = new HashMap<>(); // Generalised SubGraph Storage
-
+    private static int maxValueExperiment = 500;
     // Setting the new Array: 500. TODO: get it better fixed.
     private static int[] TempStorageGenGraph = new int[500];
     private static int InconsistenciesHit = 11;                                      // Counter of inconsistencies
@@ -54,7 +54,8 @@ public class InconsistencyLocator
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
     private static int GeneralGraphNumber = 0;
-    private static int GeneralSubGraphFound = 0;
+    public static int GeneralSubGraphFound = 0;
+    public static long timePassed = 0;
     private static String NameFile;
 
 
@@ -605,7 +606,7 @@ public class InconsistencyLocator
 
             //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, 300);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -619,7 +620,10 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
-        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeepingSmall"+NameFile+".txt"));
+        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Split File \n").getBytes());
 
@@ -647,6 +651,7 @@ public class InconsistencyLocator
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
+        fileWriter2.write(("StartTime: "+ startTime + "\n").getBytes());
 
         while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)) {
 
@@ -715,8 +720,8 @@ public class InconsistencyLocator
             }
 
         }
-        long estimatedTime = System.currentTimeMillis() - startTime;
-        fileWriter2.write((" Time passed: "+ estimatedTime + "\n").getBytes());
+        timePassed = System.currentTimeMillis() - startTime;
+        fileWriter2.write((" TimeEnd: "+ timePassed + "\n").getBytes());
     }
 
     private static void LocateInconsistenciesAll(HDT hdt, FileOutputStream fileWriter) throws Exception {
@@ -724,14 +729,15 @@ public class InconsistencyLocator
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         // Set output Writer
-
-        FileOutputStream fileWriter2 = new FileOutputStream(new File("/home/thomasdegroot/local/kbgenerator/javaProject/resources/extraFiles/timeKeeping"+NameFile+".txt"));
+        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeeping"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Complete File\n").getBytes());
         Set<Set<OWLAxiom>> exp = new HashSet<>();
         long startTime = System.currentTimeMillis();
-        fileWriter2.write((" Time passed: "+ startTime + "\n").getBytes());
-        System.out.println(" Time passed: "+ startTime);
+        fileWriter2.write(("StartTime: "+ startTime + "\n").getBytes());
         MaxExplanations = 1000;
         exp.addAll(WriteInconsistencyGraph(hdt));
 
@@ -744,9 +750,7 @@ public class InconsistencyLocator
             InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println(" Time passed: "+ estimatedTime);
-        fileWriter2.write((" Time passed: "+ estimatedTime + "\n").getBytes());
-        fileWriter2.write((" Found Contradictions: "+ exp.size() + "\n").getBytes());
+        fileWriter2.write((" TimeEnd: "+ estimatedTime + "\n").getBytes());
     }
 
 
@@ -781,7 +785,7 @@ public class InconsistencyLocator
          * @returns void
          *
          */
-
+        maxValueExperiment = Integer.parseInt(args[6]);
 
         // Check if HDT Exists
         boolean InputFileExists = new File(args[0]).isFile();
@@ -867,7 +871,7 @@ public class InconsistencyLocator
 
         // Test Inconsistencies
         LocateInconsistencies(hdt, fileWriter);
-        LocateInconsistenciesAll(hdt, fileWriter);
+        //LocateInconsistenciesAll(hdt, fileWriter);
         // Print to the user that the system finished finding inconsistencies.
         System.out.println("Finished locating inconsistencies");
 
