@@ -3,6 +3,7 @@ package com.thesis.kbInconsistencyLocator;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
+import openllet.shared.tools.Log;
 import org.apache.jena.graph.*;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
@@ -16,6 +17,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
@@ -486,6 +488,7 @@ public class InconsistencyLocator
 //        model.read(PipeModel(subModel), "","N3");
 
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
+
         Set<Set<OWLAxiom>> exp = Collections.emptySet();
 
         OWLOntology ontology;
@@ -495,19 +498,16 @@ public class InconsistencyLocator
             return exp;
         }
 
-        // Starting up the Pellet Explanation module.
-        PelletExplanation.setup();
-        // Create the reasoner and load the ontology with the open pellet reasoner.
-        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
-
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-        PelletExplanation expGen = new PelletExplanation(reasoner);
+        PelletExplanation expGen = new PelletExplanation(ontology, true);
 
         try{
             exp = expGen.getInconsistencyExplanations(MaxExplanations);
+
         } catch (Exception e){
             return exp;
         }
+
 //        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
 //        while (e.hasNext()){
 //            OWLClass elem = e.next();
@@ -651,74 +651,80 @@ public class InconsistencyLocator
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
-        fileWriter2.write(("StartTime: "+ startTime + "\n").getBytes());
+        fileWriter2.write(("StartTime: "+ 0 + "\n").getBytes());
+        int i = 0;
+        while (i < 100) {
+            GeneralGraphs = new ArrayList<>();     // Generalised SubGraph Storage
+            SortingListMap = new HashMap<>(); // Generalised SubGraph Storage
+            // Setting the new Array: 500. TODO: get it better fixed.
+            TempStorageGenGraph = new int[500];
+            while (it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)) {
 
-        while(it.hasNext() && (InconsistenciesHit < TotalInconsistenciesBeforeBreak || UnBreakable)) {
+                triples = new ArrayList<>();
+                // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
+                // that triples are connected to each other, not every triple needs to be evaluated.
+                // A selection of triples is chosen at random.
+                // Can be changed later to a selection of triples that meet a certain criteria.
 
-            triples = new ArrayList<>();
-            // As it would not be scalable to use all the triples as starting point, as well as that the expectation is
-            // that triples are connected to each other, not every triple needs to be evaluated.
-            // A selection of triples is chosen at random.
-            // Can be changed later to a selection of triples that meet a certain criteria.
+                while (it.hasNext() && triples.size() < numberThreads) {
+                    TripleString item = it.next();
+                    counterTriples++;
+                    if (counterTriples % 100 == 0) {
+                        long estimatedTime = System.currentTimeMillis() - startTime;
+                        System.out.println("Amount of triples: " + counterTriples + " with max of: " + size + " Time passed: " + estimatedTime);
+                    }
+                    // at the moment every 1 out of 2000 triples is taken.
+                    // If the loop is not triggered the next element from the tripleString is taken.
+                    if (rand.nextDouble() > 1.0 / TripleGap || subject.equals(item.getSubject().toString())) {
+                        continue;
+                    }
+                    subject = item.getSubject().toString();
+                    triples.add(subject);
 
-            while (it.hasNext() && triples.size() < numberThreads) {
-                TripleString item = it.next();
-                counterTriples++;
-                if( counterTriples % 100 == 0){
-                    long estimatedTime = System.currentTimeMillis() - startTime;
-                    System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size+ " Time passed: "+ estimatedTime);
+
                 }
-                // at the moment every 1 out of 2000 triples is taken.
-                // If the loop is not triggered the next element from the tripleString is taken.
-                if (rand.nextDouble() > 1.0 / TripleGap || subject.equals(item.getSubject().toString()))
-                {
-                    continue;
+
+                // both the subject and the object are taken to build the subgraph. With the expectation that the subject
+                // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
+                // some of the depth the object graph does take into account.
+
+
+                // Find all the inconsistencies in the second subgraph(Subject)
+
+
+                // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
+                Set<Set<OWLAxiom>> exp = new HashSet<>();
+
+
+                for (String subjectString : triples) {
+                    exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
                 }
-                subject = item.getSubject().toString();
-                triples.add(subject);
 
 
-            }
-
-            // both the subject and the object are taken to build the subgraph. With the expectation that the subject
-            // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
-            // some of the depth the object graph does take into account.
-
-
-            // Find all the inconsistencies in the second subgraph(Subject)
-
-
-            // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
-            Set<Set<OWLAxiom>> exp = new HashSet<>();
-
-
-            for (String subjectString: triples){
-                exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
-            }
-
-
-            // Process all the Inconsistencies.
-            // Loop through the set of explanations and standardize the Inconsistencies.
-            for(Set<OWLAxiom> InconsistencyExplanation: exp){
-                InconsistenciesHit ++;
+                // Process all the Inconsistencies.
                 // Loop through the set of explanations and standardize the Inconsistencies.
-                // Standardize the inconsistency and write to file.
-                InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
+                for (Set<OWLAxiom> InconsistencyExplanation : exp) {
+                    InconsistenciesHit++;
+                    // Loop through the set of explanations and standardize the Inconsistencies.
+                    // Standardize the inconsistency and write to file.
+                    InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
+
+                }
+
+
+                if (InconsistenciesHit % 5000 <= 10) {
+                    System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
+                    System.out.println("Amount of triples: " + counterTriples + " with max of: " + size);
+
+                    SortGeneralList();
+                }
+
+                if (GeneralSubGraphFound < 0) {
+                    UnBreakable = false;
+                }
 
             }
-
-
-            if (InconsistenciesHit % 5000 <= 10){
-                System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
-                System.out.println("Amount of triples: "+ counterTriples + " with max of: " + size);
-
-                SortGeneralList();
-            }
-
-            if (GeneralSubGraphFound < 0){
-                UnBreakable = false;
-            }
-
+            i ++;
         }
         timePassed = System.currentTimeMillis() - startTime;
         fileWriter2.write((" TimeEnd: "+ timePassed + "\n").getBytes());
