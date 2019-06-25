@@ -1,9 +1,35 @@
 New general inconsistency: 
 General graph number: 1
-SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C2 <http://www.w3.org/2000/01/rdf-schema#domain> ?C1. ?a1?C2?a0. }
-ClassAssertion C0 a0
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. }
+ClassAssertion C8 a0
 DisjointClasses C0 C1
-ObjectPropertyAssertion C2 a0 a1
-ObjectPropertyDomain C2 C1
+DisjointClasses C0 C2
+DisjointClasses C0 C3
+DisjointClasses C0 C4
+DisjointClasses C0 C5
+DisjointClasses C0 C6
+DisjointClasses C0 C7
+DisjointClasses C1 C2
+DisjointClasses C1 C3
+DisjointClasses C1 C4
+DisjointClasses C1 C5
+DisjointClasses C1 C6
+DisjointClasses C1 C7
+DisjointClasses C2 C3
+DisjointClasses C2 C4
+DisjointClasses C2 C5
+DisjointClasses C2 C6
+DisjointClasses C2 C7
+DisjointClasses C3 C4
+DisjointClasses C3 C5
+DisjointClasses C3 C6
+DisjointClasses C3 C7
+DisjointClasses C4 C5
+DisjointClasses C4 C6
+DisjointClasses C4 C7
+DisjointClasses C5 C6
+DisjointClasses C5 C7
+DisjointClasses C6 C7
+SubClassOf C8 C0
+SubClassOf C8 C7
 
-Stopped

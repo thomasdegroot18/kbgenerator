@@ -20,8 +20,8 @@ import java.util.List;
 public class Experiment1 {
 
     public static void main(String[] args) throws Exception {
-        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt;

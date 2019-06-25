@@ -1,15 +1,23 @@
 package com.thesis.kbInconsistencyLocator;
 
+import com.clarkparsia.owlapi.explanation.HSTExplanationGenerator;
+import com.clarkparsia.owlapi.explanation.TransactionAwareSingleExpGen;
+import openllet.core.KnowledgeBase;
+import openllet.jena.PelletInfGraph;
+import openllet.owlapi.OWL;
+import openllet.owlapi.explanation.GlassBoxExplanation;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
 import openllet.owlapi.OpenlletReasonerFactory;
 import openllet.shared.tools.Log;
 import org.apache.jena.graph.*;
+import org.apache.jena.ontology.OntModel;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.reasoner.rulesys.builtins.Max;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,7 +59,7 @@ public class InconsistencyLocator
     // Setting the new Array: 500. TODO: get it better fixed.
     private static int[] TempStorageGenGraph = new int[500];
     private static int InconsistenciesHit = 11;                                      // Counter of inconsistencies
-    private static int TripleGap = 500;
+    private static int TripleGap = 0;
     private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
@@ -274,7 +282,6 @@ public class InconsistencyLocator
         // Due being declared in this scope the changes made to the HashMap are also stored in this scoped, and are
         // inherited in deeper layered functions(AxiomConverter and StreamParser).
         Map<Object, String> variableMap = new HashMap<>();
-
         //Stores the lines of the explanations in a list.
         List<String> ExplanationStringList = new ArrayList<>();
 
@@ -528,10 +535,15 @@ public class InconsistencyLocator
 
     private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
-//
+        Set<Set<OWLAxiom>> exp = Collections.emptySet();
+
 //        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//        try{
+//            model.read(PipeModel(subModel), "","N3");
+//        } catch (Exception e){
+//            return exp;
+//        }
 //
-//        model.read(PipeModel(subModel), "","N3");
 //
 //        model.prepare();
 //
@@ -541,15 +553,13 @@ public class InconsistencyLocator
 //        // perform initial consistency check
 //        long s = System.currentTimeMillis();
 //        boolean consistent = kb.isConsistent();
-//        long e = System.currentTimeMillis();
-//        System.out.println("Consistent? " + consistent + " (" + (e - s) + "ms) Expressivity: "+kb.getExpressivity());
+//        long etime = System.currentTimeMillis();
+//        System.out.println("Consistent? " + consistent + " (" + (etime - s) + "ms) Expressivity: "+kb.getExpressivity());
 
 //        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
 //        model.read(PipeModel(subModel), "","N3");
 
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
-
-        Set<Set<OWLAxiom>> exp = Collections.emptySet();
 
         OWLOntology ontology;
         try{
@@ -558,21 +568,15 @@ public class InconsistencyLocator
             return exp;
         }
 
-//        // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-//        PelletExplanation expGen = new PelletExplanation(ontology, false);
-//
-//        try{
-//            exp = expGen.getInconsistencyExplanations(MaxExplanations);
-//
-//        } catch (Exception e){
-//            return exp;
-//        }
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-        PelletExplanation expGen2 = new PelletExplanation(ontology);
+        PelletExplanation expGen = new PelletExplanation(ontology);
 
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+        TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
+        HSTExplanationGenerator _expGen = new HSTExplanationGenerator(singleExpGen);
         try{
-            exp = expGen2.getInconsistencyExplanations(MaxExplanations);
-
+            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations);
+//            exp = expGen.getInconsistencyExplanations(MaxExplanations);
         } catch (Exception e){
             return exp;
         }
@@ -671,10 +675,10 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-
             //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
             //TODO: SPEED UP BOTH WAYS
             subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
+
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -688,8 +692,8 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
-        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        // AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
@@ -746,7 +750,7 @@ public class InconsistencyLocator
                     }
                     // at the moment every 1 out of 2000 triples is taken.
                     // If the loop is not triggered the next element from the tripleString is taken.
-                    if (rand.nextDouble() > 1.0 / TripleGap || subject.equals(item.getSubject().toString())) {
+                    if (subject.equals(item.getSubject().toString())) {
                         continue;
                     }
                     subject = item.getSubject().toString();
@@ -806,8 +810,8 @@ public class InconsistencyLocator
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         // Set output Writer
-        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        // String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeeping"+NameFile+".txt"));
 

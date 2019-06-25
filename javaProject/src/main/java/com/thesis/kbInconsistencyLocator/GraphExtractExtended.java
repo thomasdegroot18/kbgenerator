@@ -92,11 +92,11 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         return toUpdate; }
 
     private Set<String> extractIntoExtendClean( Set<String> toUpdate, String root, HDT extractFrom ) throws Exception
-    { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtendCleanBoth( root , 0);
+    { new ExtractionExtend( toUpdate, extractFrom ).extractIntoExtendCleanBoth(root, 0 );
         return toUpdate; }
 
     private Set<String> extractIntoExtendClean( Set<String> toUpdate, String root, HDT extractFrom , int MaxValue) throws Exception
-    { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtendCleanBoth( root , 0);
+    { new ExtractionExtend( toUpdate, extractFrom, MaxValue ).extractIntoExtendCleanBoth(root, 0 );
         return toUpdate; }
 
     private Set<String> extractIntoExtend( Set<String> toUpdate, String root, HDT extractFrom, int MaxValue ) throws Exception
@@ -190,39 +190,41 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
 
 
         }
-        // TODO: SPEED IT UP
 
         private int extractIntoExtendCleanBoth( CharSequence root , int counter) throws Exception
         {
-
             active.add( root );
             IteratorTripleString itForward = extractFrom.search(root, "", "");
             IteratorTripleString itBackward = extractFrom.search("", "", root);
-
-
             while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)
             {
+
                 TripleString t;
                 String subRoot;
-
-                if( !itBackward.hasNext() ){
+                String subPred;
+                 if( !itBackward.hasNext() ){
                     t = itForward.next();
                     subRoot = t.getObject().toString();
+                    subPred = t.getPredicate().toString();
                 } else if(!itForward.hasNext() ){
                     t = itBackward.next();
                     subRoot = t.getSubject().toString();
-                } else if(rand.nextDouble() < 0.90){
+                    subPred = t.getPredicate().toString();
+                } else if(rand.nextDouble() < 0.80){
                     t = itForward.next();
                     subRoot = t.getObject().toString();
-                } else{
+                    subPred = t.getPredicate().toString();
+                }  else{
                     t = itBackward.next();
                     subRoot = t.getSubject().toString();
+                    subPred = t.getPredicate().toString();
                 }
 
                 toUpdate.add( t.asNtriple().toString() );
-                counter ++;
                 if (! (active.contains( subRoot )  ) && counter < maxValue ) {  //
+                    counter = toUpdate.size();
                     counter = extractIntoExtendCleanBoth( subRoot, counter);
+                    counter = extractIntoExtendCleanBoth( subPred, counter);
                 }
             }
             return counter;
