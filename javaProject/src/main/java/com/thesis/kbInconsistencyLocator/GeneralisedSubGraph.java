@@ -526,9 +526,9 @@ public class GeneralisedSubGraph {
                 }
                 case "ObjectPropertyDomain": {
                     SPARQLStringB.append("?");
-                    SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#domain> ?");
                     SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#domain> ?");
+                    SPARQLStringB.append(elem1);
                     SPARQLStringB.append(". ");
                     break;
                 }
@@ -536,20 +536,20 @@ public class GeneralisedSubGraph {
                     String elem3 = line[3].split(">")[0];
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
-                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(" ?");
                     SPARQLStringB.append(elem2);
-                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(" ?");
                     SPARQLStringB.append(elem3);
-                    SPARQLStringB.append(". ");
+                    SPARQLStringB.append(" . ");
 
                     break;
                 }
                 case "ObjectPropertyRange": {
 
                     SPARQLStringB.append("?");
-                    SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#range> ?");
                     SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#range> ?");
+                    SPARQLStringB.append(elem1);
                     SPARQLStringB.append(". ");
                     break;
                 }

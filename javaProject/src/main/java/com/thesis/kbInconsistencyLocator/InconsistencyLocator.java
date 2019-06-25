@@ -568,7 +568,7 @@ public class InconsistencyLocator
 //            return exp;
 //        }
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-        PelletExplanation expGen2 = new PelletExplanation(ontology, true);
+        PelletExplanation expGen2 = new PelletExplanation(ontology);
 
         try{
             exp = expGen2.getInconsistencyExplanations(MaxExplanations);
