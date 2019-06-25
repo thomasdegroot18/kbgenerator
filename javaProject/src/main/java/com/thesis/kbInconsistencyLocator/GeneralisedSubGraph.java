@@ -92,7 +92,7 @@ public class GeneralisedSubGraph {
 
                 // If a mistake is made in the creation of the subgraph this thing checks if there are any problems.
                 // This could have happened with incorrect class assertion or other things.
-                } else if (OWLAXIOMString[1].contains("a") && OWLAXIOMString[2].contains("a")) {
+                } else if (OWLAXIOMString[1].contains("a") && OWLAXIOMString[2].contains("a") && OWLAXIOMString[0].contains("DifferentIndividuals")) {
                     // Print out the possibly incorrect string.
                     // Instantiate Instance and update instance count.
                     OWLIndividual Individual1 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
@@ -118,11 +118,10 @@ public class GeneralisedSubGraph {
 
                     EquivalenceType = true;
 
-                } else if (OWLAXIOMString[1].contains("a") || OWLAXIOMString[2].contains("a")){
-                        throw new ClassCastException(OWLAXIOMString[0]);
-                        // All instances where two classes are found.
-                    } else {
-
+                }  else {
+                        OWLIndividual Individual1 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
+                        OWLIndividual Individual2 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[2]);
+                        OWLObjectProperty property = dataFactory.getOWLObjectProperty(OWLAXIOMString[1]);
                         // Add the two classes for the relationship cases.
                         OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
                         OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
@@ -148,6 +147,44 @@ public class GeneralisedSubGraph {
                             case "DisjointClasses": {
                                 // Build Subclass Axiom
                                 OWLDisjointClassesAxiom Assertion = dataFactory.getOWLDisjointClassesAxiom(classC1, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "ObjectPropertyAssertion": {
+                                // Build Subclass Axiom
+                                property = dataFactory.getOWLObjectProperty(OWLAXIOMString[3]);
+                                OWLObjectPropertyAssertionAxiom Assertion = dataFactory.getOWLObjectPropertyAssertionAxiom(property,Individual1, Individual2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "ObjectPropertyDomain": {
+                                // Build Subclass Axiom
+                                OWLObjectPropertyDomainAxiom Assertion = dataFactory.getOWLObjectPropertyDomainAxiom(property, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "ObjectPropertyRange": {
+                                // Build Subclass Axiom
+
+                                OWLObjectPropertyRangeAxiom Assertion = dataFactory.getOWLObjectPropertyRangeAxiom(property, classC2);
                                 // Add Subclass Axiom
                                 owlOntologyGraph.add(Assertion);
                                 // Add Triple To hashMap
@@ -460,7 +497,6 @@ public class GeneralisedSubGraph {
             String elem1 = line[1].split(">")[0];
             String elem2 = line[2].split(">")[0];
             // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
-
             switch (line[0].substring(0,line[0].length()-1)) {
                 case "ClassAssertion": {
                     if(elem1.contains("a")){
@@ -484,6 +520,35 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
                     SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "ObjectPropertyDomain": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#domain> ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "ObjectPropertyAssertion": {
+                    String elem3 = line[3].split(">")[0];
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem3);
+                    SPARQLStringB.append(". ");
+
+                    break;
+                }
+                case "ObjectPropertyRange": {
+
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#range> ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;

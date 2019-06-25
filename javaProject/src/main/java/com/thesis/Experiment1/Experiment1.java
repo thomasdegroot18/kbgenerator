@@ -20,8 +20,8 @@ import java.util.List;
 public class Experiment1 {
 
     public static void main(String[] args) throws Exception {
-        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt;
@@ -58,10 +58,10 @@ public class Experiment1 {
 //        InconsistencyLocator.main(argsInconsistency);
 //        int size500 = InconsistencyLocator.GeneralSubGraphFound;
 //        long time500 = InconsistencyLocator.timePassed;
-        argsInconsistency = new String[]{hdt, rdf, "500", "true", "false", "0", "1000"};
-        InconsistencyLocator.main(argsInconsistency);
-        int size1000 = InconsistencyLocator.GeneralSubGraphFound;
-        long time1000 = InconsistencyLocator.timePassed;
+//        argsInconsistency = new String[]{hdt, rdf, "500", "true", "false", "0", "1000"};
+//        InconsistencyLocator.main(argsInconsistency);
+//        int size1000 = InconsistencyLocator.GeneralSubGraphFound;
+//        long time1000 = InconsistencyLocator.timePassed;
         argsInconsistency = new String[]{hdt, rdf, "500", "true", "false", "0", "2000"};
         InconsistencyLocator.main(argsInconsistency);
         int size2000 = InconsistencyLocator.GeneralSubGraphFound;
@@ -70,7 +70,7 @@ public class Experiment1 {
 //        System.out.println("size 100 Subgraph: "+size100 + " Time Needed: "+ time100);
 //        System.out.println("size 250 Subgraph: "+size250 + " Time Needed: "+ time250);
 //        System.out.println("size 500 Subgraph: "+size500 + " Time Needed: "+ time500);
-        System.out.println("size 1000 Subgraph: "+size1000 + " Time Needed: "+ time1000);
+//        System.out.println("size 1000 Subgraph: "+size1000 + " Time Needed: "+ time1000);
         System.out.println("size 2000 Subgraph: "+size2000 + " Time Needed: "+ time2000);
     }
 

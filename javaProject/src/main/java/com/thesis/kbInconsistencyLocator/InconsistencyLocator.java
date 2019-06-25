@@ -71,6 +71,9 @@ public class InconsistencyLocator
         // Retrieve the classes as a array of objects.
         Object[] ListClasses = InconsistencyExplanationLine.classesInSignature().toArray();
 
+        // Retrieve the classes as a array of objects.
+        Object[] ListProperties = InconsistencyExplanationLine.objectPropertiesInSignature().toArray();
+
         // Instantiate the value.
         int value;
         int prevValue = 0;
@@ -106,6 +109,35 @@ public class InconsistencyLocator
             }
         }
 
+        for (Object ListItem: ListProperties ) {
+            // generate the value where the object is found in the line.
+            value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            // If not found throw error.
+            if (value < 0) {
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString());
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString());
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString());
+            }
+
+        }
 
         for (Object ListItem: ListClasses ) {
             // generate the value where the object is found in the line.
@@ -141,7 +173,6 @@ public class InconsistencyLocator
 
 
     private static String AxiomConverter(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator){
-
         // Get the list of variables in the correct order.
         List SetOfVariables = StreamParser(InconsistencyExplanationLine);
 
@@ -171,7 +202,11 @@ public class InconsistencyLocator
         }
 
         // return the string line with a generalised variable, Takes RelationType + first element + second element.
-        return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
+        if (SetOfVariables.size() == 2){
+            return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
+        } else {
+            return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1))+" "+variableMap.get(SetOfVariables.get(2));
+        }
     }
 
     private static List<String>  AxiomConverterMultiline(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator) {
@@ -243,7 +278,6 @@ public class InconsistencyLocator
         //Stores the lines of the explanations in a list.
         List<String> ExplanationStringList = new ArrayList<>();
 
-
         int[] iterator = new int[2]; // The first element is the Class iterator, the second element is the Individual Iterator.
 
         // Loop through the Inconsistency line per line to replace the Classes and the instances with the correct values.
@@ -254,7 +288,6 @@ public class InconsistencyLocator
 
             // Get the axiom type.
             AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
-
 
             boolean MoreInformation = (StreamParser(InconsistencyExplanationLine).size() > 2);
 
@@ -308,7 +341,35 @@ public class InconsistencyLocator
                 }
 
                 // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
-            } else {
+            } else if (RelationType == AxiomType.OBJECT_PROPERTY_ASSERTION){
+                // Gets the new clean relation graph with generalised names.
+                MoreInformation = (StreamParser(InconsistencyExplanationLine).size() > 3);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            } else if (RelationType == AxiomType.OBJECT_PROPERTY_DOMAIN){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            } else if (RelationType == AxiomType.OBJECT_PROPERTY_RANGE){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            }else {
                 System.out.println(RelationType.toString());
             }
 
@@ -320,7 +381,6 @@ public class InconsistencyLocator
             }
 
         }
-
         // SORT the ExplanationStringList to make sure the list handy to have it sorted.
         Collections.sort(ExplanationStringList);
 
@@ -498,16 +558,24 @@ public class InconsistencyLocator
             return exp;
         }
 
+//        // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+//        PelletExplanation expGen = new PelletExplanation(ontology, false);
+//
+//        try{
+//            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+//
+//        } catch (Exception e){
+//            return exp;
+//        }
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-        PelletExplanation expGen = new PelletExplanation(ontology, true);
+        PelletExplanation expGen2 = new PelletExplanation(ontology, true);
 
         try{
-            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+            exp = expGen2.getInconsistencyExplanations(MaxExplanations);
 
         } catch (Exception e){
             return exp;
         }
-
 //        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
 //        while (e.hasNext()){
 //            OWLClass elem = e.next();
@@ -620,8 +688,8 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
-        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
@@ -652,8 +720,11 @@ public class InconsistencyLocator
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
         fileWriter2.write(("StartTime: "+ 0 + "\n").getBytes());
-        int i = 0;
-        while (i < 100) {
+        int counterI = 0;
+        while (counterI < 1) {
+            System.out.println("Loop number: "+counterI);
+            GeneralGraphNumber = 0;
+            GeneralSubGraphFound = 0;
             GeneralGraphs = new ArrayList<>();     // Generalised SubGraph Storage
             SortingListMap = new HashMap<>(); // Generalised SubGraph Storage
             // Setting the new Array: 500. TODO: get it better fixed.
@@ -724,7 +795,7 @@ public class InconsistencyLocator
                 }
 
             }
-            i ++;
+            counterI ++;
         }
         timePassed = System.currentTimeMillis() - startTime;
         fileWriter2.write((" TimeEnd: "+ timePassed + "\n").getBytes());
@@ -735,8 +806,8 @@ public class InconsistencyLocator
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         // Set output Writer
-        //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeeping"+NameFile+".txt"));
 
