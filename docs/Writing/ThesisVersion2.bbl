@@ -123,6 +123,14 @@ Jure Leskovec and Christos Faloutsos.
   on Knowledge Discovery and Data Mining}, KDD '06, pages 631--636, New York,
   NY, USA, 2006. ACM.
 
+\bibitem{DBLP}
+Michael Ley.
+\newblock The dblp computer science bibliography: Evolution, research issues,
+  perspectives.
+\newblock In {\em Proceedings of the 9th International Symposium on String
+  Processing and Information Retrieval}, SPIRE 2002, pages 1--10, London, UK,
+  UK, 2002. Springer-Verlag.
+
 \bibitem{MPAF:12}
 Miguel~A. Martínez-Prieto, Mario Arias, and Javier~D. Fernández.
 \newblock Exchange and consumption of huge rdf data.
