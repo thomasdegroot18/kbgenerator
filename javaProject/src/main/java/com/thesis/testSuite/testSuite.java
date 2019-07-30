@@ -21,8 +21,8 @@ public class testSuite {
 
     public static void main(String[] args) throws Exception{
         //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt;
         String hdtName;
@@ -90,47 +90,48 @@ public class testSuite {
             System.out.println("inconsistencyJSON: "+inconsistencyJSON);
             System.out.println("temp: "+temp);
 
-        // Inconsistency Locator
-        System.out.println("------------------------------------------------------------------------------------------");
-        System.out.println("Starting Locating Inconsistencies");
-        String[] argsInconsistency =  {hdt,
-                                       rdf,
-                                       "500",
-                                       "true",
-                                        "false",
-                                        "0"};
-        if (CheckingInconsistency ){
-            InconsistencyLocator.main(argsInconsistency);
-        }
-        System.out.println("------------------------------------------------------------------------------------------");
-        // Statistics
-        System.out.println("Starting Statistics");
-        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
-        Statistics.main(argsStatistics);
-        System.out.println("------------------------------------------------------------------------------------------");
-        System.out.println("Making inconsistency.json");
-        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json"};
-        InconsistencyCreator.main(argsInconsistencyCreator);
+//        // Inconsistency Locator
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        System.out.println("Starting Locating Inconsistencies");
+//        String[] argsInconsistency =  {hdt,
+//                                       rdf,
+//                                       "500",
+//                                       "true",
+//                                        "false",
+//                                        "0"};
+//        if (CheckingInconsistency ){
+//            InconsistencyLocator.main(argsInconsistency);
+//        }
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        // Statistics
+//        System.out.println("Starting Statistics");
+//        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
+//        Statistics.main(argsStatistics);
+//        System.out.println("------------------------------------------------------------------------------------------");
+////        System.out.println("Making inconsistency.json");
+//        String FileInput = rdf+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
+//        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json", FileInput, inconsistencyJSON+"InconsistencyStatistics.json"};
+//        InconsistencyCreator.main(argsInconsistencyCreator);
         //promptEnterKey();
 
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        // Generator
-//
+        System.out.println("------------------------------------------------------------------------------------------");
+        // Generator
+
 //        File newFolder = new File(temp);
 //        boolean created = newFolder.mkdir();
 //        if (!created){
 //            System.out.println("No temp DIR CREATED");
 //        }
 //        System.out.println("Starting Generation");
-//        String[] argsGenerator =   {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
+//        String[] argsGenerator = {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
 //        Generator.main(argsGenerator);
-//
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        // Statistics Sampled
-//        System.out.println("Starting Statistics");
-//        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
-//        Statistics.main(argsStatisticsSampled);
-//        System.out.println("------------------------------------------------------------------------------------------");
+
+        System.out.println("------------------------------------------------------------------------------------------");
+        // Statistics Sampled
+        System.out.println("Starting Statistics");
+        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
+        Statistics.main(argsStatisticsSampled);
+        System.out.println("------------------------------------------------------------------------------------------");
 
 
 

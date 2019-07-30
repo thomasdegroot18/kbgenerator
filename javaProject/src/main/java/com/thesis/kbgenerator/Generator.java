@@ -311,15 +311,15 @@ public class Generator {
     static boolean WriteHDT(Model model,String outputDirectory,String tempDirectory) throws Exception {
         long startTime = System.currentTimeMillis();
         String TempDirectory = tempDirectory+startTime+"temp.hdt";
-        try{
-            WriteRDF(model, TempDirectory);
-        } catch (Exception e){
-            System.out.println("Could not write to rdfFile");
-            return false;
-        }
+//        try{
+//            WriteRDF(model, TempDirectory);
+//        } catch (Exception e){
+//            System.out.println("Could not write to rdfFile");
+//            return false;
+//        }
 
         String baseURI = "a";
-        String rdfInput = TempDirectory.replace(".hdt",".nt");
+        String rdfInput = outputDirectory.replace(".hdt",".nt");
         String inputType = "ntriples";
 
         // Create HDT from RDF file
@@ -346,8 +346,11 @@ public class Generator {
             List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
             for (String line: allLines){
                 String[] lineSplit = line.split(", \"Amount\" : ");
-                Inconsistencies.put(lineSplit[0].replace("{\"Inconsistency\" : ","").replace("\"", "") , Integer.parseInt(lineSplit[1].replace("\"","").replace("}","").trim()));
-
+                String key = lineSplit[0].replace("{\"Inconsistency\" : ","").replace("\"", "");
+                int value = Integer.parseInt(lineSplit[1].replace("\"","").replace("}","").trim());
+                key = key.replace("{SPARQLQuery: ","");
+                System.out.println(key);
+                Inconsistencies.put( key, value );
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -446,29 +449,29 @@ public class Generator {
         // Setting Env Variables
         InChecker = new InconsistencyStatementChecker(Inconsistencies, hdt, args[3]);
 
-        // Sampling by Removing Statements
-        Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
-
-        // Set output Writer
-        System.out.println("Finished Working Sampled Model");
-        boolean emitSuccess = false;
-        if (args[4].equals("HDT")){
-            emitSuccess = WriteHDT(FinalSampledModel, args[1], args[3]);
-        }else if (args[4].equals("N-TRIPLES")){
-            emitSuccess = WriteRDF(FinalSampledModel, args[1]);
-        } else {
-            System.out.println("Could not understand the type specification, writing the file as N-Triples");
-        }
-
-
-        if(emitSuccess){
-            System.out.println("Successfully finished writing the model to file.");
-        } else{
-            System.out.println("Unsuccessfully written the model.");
-        }
-
-
-        deleteFolder(new File(args[3]));
+//        // Sampling by Removing Statements
+//        Model FinalSampledModel = RemoveStatements(hdt, SampleSize);
+//
+//        // Set output Writer
+//        System.out.println("Finished Working Sampled Model");
+//        boolean emitSuccess = false;
+//        if (args[4].equals("HDT")){
+//            emitSuccess = WriteHDT(FinalSampledModel, args[1], args[3]);
+//        }else if (args[4].equals("N-TRIPLES")){
+//            emitSuccess = WriteRDF(FinalSampledModel, args[1]);
+//        } else {
+//            System.out.println("Could not understand the type specification, writing the file as N-Triples");
+//        }
+//
+//
+//        if(emitSuccess){
+//            System.out.println("Successfully finished writing the model to file.");
+//        } else{
+//            System.out.println("Unsuccessfully written the model.");
+//        }
+//
+//
+//        deleteFolder(new File(args[3]));
 
 
 

@@ -175,13 +175,13 @@ public class Statistics {
 
 
         // Get all the KB statistics
-        if(testing_Bool){
-            System.out.println("knowledge base statistics calculation");
-            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
-
-            System.out.println("Finished knowledge base statistics calculation");
-
-        }
+//        if(testing_Bool){
+//            System.out.println("knowledge base statistics calculation");
+//            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
+//
+//            System.out.println("Finished knowledge base statistics calculation");
+//
+//        }
         String[] Datasets= new String [1];
 //        Datasets = GetDataSets(hdt);
 //        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);

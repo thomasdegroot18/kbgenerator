@@ -8,6 +8,8 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdtjena.HDTGraph;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -146,7 +148,7 @@ class InconsistencyStatistics {
         String Type = InconsistencyType(SPARQLQuery, GeneralGraph);
         String ClassType = InconsistencyClassType(SPARQLQuery);
         System.out.println(Type);
-        double TailEffect = TailEffect(GeneralGraph);
+        double TailEffect = 0; //TailEffect(GeneralGraph);
 
 
 
@@ -183,6 +185,8 @@ class InconsistencyStatistics {
 
         List<String> StringLines = new ArrayList<>();
         StringLines.add(LineToWrite);
+        try {
+            FileOutputStream fileWriter232 = new FileOutputStream(new File(OutputLocation.replace("InconsistencyStatistics", "inconsistencies")));
 
         int IndexNumber = 1;
         for (String SPARQLQueryKey : this.CollectedStatistics.keySet()){
@@ -194,12 +198,24 @@ class InconsistencyStatistics {
             String ClassType = InconsistencyStats.getClassType();
             double TailEffect = InconsistencyStats.getTailEffect();
             int[] CountArray = InconsistencyStats.getCountDataSet();
-            if(IndexNumber == 1){
-                LineToWrite = "{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
-            } else{
-                LineToWrite = ",{\"id\":"+ IndexNumber +", \"Count\": "+Count+", \"Size\": " + Size + ", \"Type\": \""+ Type +"\", " +
-                        "\"ClassType\": \""+ ClassType +"\", \"TailEffect\": "+ TailEffect +", \"PerDatasetCount\": "+ Arrays.toString(CountArray )+ "}";
+            try {
+                if (IndexNumber == 1) {
+                    if (Count > 0){
+                        String text = "{\"SPARQLQuery\": \"" + SPARQLQueryKey + "\", \"Amount\" : " + Math.round(Count*0.2) + " }\n";
+                        fileWriter232.write((text).getBytes());
+                    }
+                    LineToWrite = "{\"id\":" + IndexNumber + ", \"SPARQLQuery\": \"" + SPARQLQueryKey + "\", \"Count\": " + Count + ", \"Size\": " + Size + ", \"Type\": \"" + Type + "\", " +
+                            "\"ClassType\": \"" + ClassType + "\", \"TailEffect\": " + TailEffect + ", \"PerDatasetCount\": " + Arrays.toString(CountArray) + "}";
+                } else {
+                    if (Count > 0){
+                        String text2 = "{\"SPARQLQuery\": \"" + SPARQLQueryKey + "\", \"Amount\" : " + Math.round(Count*0.2) + " }\n";
+                        fileWriter232.write((text2).getBytes());
+                    }
+                    LineToWrite = ",{\"id\":" + IndexNumber + ", \"SPARQLQuery\": \"" + SPARQLQueryKey + "\", \"Count\": " + Count + ", \"Size\": " + Size + ", \"Type\": \"" + Type + "\", " +
+                            "\"ClassType\": \"" + ClassType + "\", \"TailEffect\": " + TailEffect + ", \"PerDatasetCount\": " + Arrays.toString(CountArray) + "}";
+                }
+            } catch (Exception e){
+
             }
 
 
@@ -213,6 +229,8 @@ class InconsistencyStatistics {
         StringLines.add(LineToWrite);
         // Writes file to JSON location.
         Statistics.writeJSON(OutputLocation, StringLines);
+        } catch (Exception e){
 
+        }
     }
 }

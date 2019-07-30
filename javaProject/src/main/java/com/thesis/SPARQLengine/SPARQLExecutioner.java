@@ -17,7 +17,7 @@ public class SPARQLExecutioner {
             // Executing the query.
             QueryExecution qe = QueryExecutionFactory.create(query, model);
 
-            long TimeOut = 20000; //fetch starting time & to make sure it does not get stuck after 10 sec.
+            long TimeOut = 10000; //fetch starting time & to make sure it does not get stuck after 10 sec.
             //Get the selection of the executed query.
             qe.setTimeout(TimeOut);
 

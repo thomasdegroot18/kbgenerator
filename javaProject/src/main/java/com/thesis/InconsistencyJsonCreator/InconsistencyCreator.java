@@ -1,5 +1,7 @@
 package com.thesis.InconsistencyJsonCreator;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,12 +14,24 @@ public class InconsistencyCreator {
 
     private static HashMap<String, Integer> WriteInconsistency(String OutputLocation, String InputLocationGraphs, String InputLocationAnalytics){
         HashMap<String, Integer> Inconsistencies = new HashMap<>();
-        Path path = Paths.get(OutputLocation);
+        Path path2 = Paths.get(InputLocationGraphs);
+        Path path3 = Paths.get(InputLocationAnalytics);
+        System.out.println(InputLocationGraphs);
+        System.out.println(InputLocationAnalytics);
         try{
-            List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            for (String line: allLines){
-                String[] lineSplit = line.split(", \"Amount\" : ");
-                Inconsistencies.put(lineSplit[0].replace("{\"Inconsistency\" : ","").replace("\"", "") , Integer.parseInt(lineSplit[1].replace("\"","").replace("}","").trim()));
+            FileOutputStream fileWriter = new FileOutputStream(new File(OutputLocation));
+            List<String> allLines2 = Files.readAllLines(path2, StandardCharsets.UTF_8);
+            List<String> allLines3 = Files.readAllLines(path3, StandardCharsets.UTF_8);
+            boolean x = false;
+            for (String line: allLines2){
+                if (x) {
+                    String elem = "{\"Inconsistency\" : \"" + line + "\", \"Amount\" : 14000 } \n";
+                    fileWriter.write((elem).getBytes());
+                    x = false;
+                }
+                if (line.startsWith("General graph number:")){
+                    x = true;
+                }
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -33,8 +47,8 @@ public class InconsistencyCreator {
          * @params {@code args[0] } Location of the amount and types of inconsistencies.
          * @returns void
          */
-        System.out.println("Skipping");
-        //WriteInconsistency(args[0], InputLocationGraphs, InputLocationAnalytics);
+        //System.out.println("Skipping");
+        WriteInconsistency(args[0], args[1], args[2]);
 
 
 

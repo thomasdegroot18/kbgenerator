@@ -1,9 +1,11 @@
 package com.thesis.kbgenerator;
 
 import com.thesis.SPARQLengine.SPARQLExecutioner;
+import org.apache.jena.base.Sys;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.reasoner.rulesys.builtins.Min;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
@@ -20,55 +22,55 @@ class InconsistencyStatementChecker {
     InconsistencyStatementChecker(HashMap<String, Integer> Inconsistencies, HDT hdt, String tempDir){
         Model model = ModelFactory.createModelForGraph(new HDTGraph(hdt));
         Model modelResultSet = ModelFactory.createDefaultModel();
-        long oldSize = 0;
-        for (String Inconsistency: Inconsistencies.keySet()){
-            // Convert SPARQL TO USEFUL OTHER ITEM
-            ArrayList<String[]> InconsistencyToList = InconsistencyToList(Inconsistency);
-
-            int MinAmount = Inconsistencies.get(Inconsistency );
-            int offsetVal = 0;
-            long TimeOutDelay = 0;
-            while (modelResultSet.size() < MinAmount){
-                ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*5 + " OFFSET "+MinAmount*5*offsetVal, 20000+TimeOutDelay);
-                int LIMITc = 0;
-                try{
-                    while(results.hasNext() && modelResultSet.size() < MinAmount){
-                        QuerySolution result = results.next();
-                        if(rand.nextDouble() < 0.42 ){
-                            for (String[] elem :InconsistencyToList){
-                                modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
-
-                            }
-
-                        }
-                        LIMITc ++;
-                    }
-                    if(oldSize == modelResultSet.size()) {
-                        break;
-                    }
-                } catch (Exception e){
-                    offsetVal = 0;
-                    TimeOutDelay += 20000;
-                    if (TimeOutDelay > 60000){
-                        System.out.println("Could not find the minimal amount of Inconsistencies for this type:" + Inconsistency);
-                        break;
-                    }
-                }
-                oldSize = modelResultSet.size();
-                //Making sure we always get results from the next query.
-                if(LIMITc >= (MinAmount * 5 - 1)){
-                    offsetVal ++;
-                } else if(LIMITc <= MinAmount){
-                    offsetVal = 0;
-                }
-            }
-
-
-        }
-        model.close();
+//        long oldSize = 0;
+//        for (String Inconsistency: Inconsistencies.keySet()){
+//            // Convert SPARQL TO USEFUL OTHER ITEM
+//            ArrayList<String[]> InconsistencyToList = InconsistencyToList(Inconsistency);
+//            long MinAmount = Math.round(Inconsistencies.get(Inconsistency ) * 0.01);
+//            long MinAmountM = MinAmount + modelResultSet.size();
+//            int offsetVal = 0;
+//            long TimeOutDelay = 0;
+//            while (modelResultSet.size() < MinAmountM){
+//                ResultSet results = SPARQLExecutioner.SPARQLQuery(model, Inconsistency+ "LIMIT "+MinAmount*5 + " OFFSET "+MinAmount*6*offsetVal, 20000+TimeOutDelay);
+//                int LIMITc = 0;
+//                try{
+//                    while(results.hasNext() && modelResultSet.size() < MinAmountM){
+//                        QuerySolution result = results.next();
+//                        if(rand.nextDouble() < 0.3){
+//                            for (String[] elem :InconsistencyToList){
+//                                modelResultSet.add(result.get(elem[0]).asResource(), ResourceFactory.createProperty(elem[1]), result.get(elem[2]));
+//
+//                            }
+//
+//                        }
+//                        LIMITc ++;
+//                    }
+//                    if(oldSize == modelResultSet.size()) {
+//                        break;
+//                    }
+//                } catch (Exception e){
+//                    offsetVal = 0;
+//                    TimeOutDelay += 10000;
+//                    if (TimeOutDelay > 30000){
+//                        System.out.println("Could not find the minimal amount of Inconsistencies for this type:" + Inconsistency);
+//                        break;
+//                    }
+//                }
+//                oldSize = modelResultSet.size();
+//                //Making sure we always get results from the next query.
+//                if(LIMITc >= (MinAmount * 3 - 1)){
+//                    offsetVal ++;
+//                } else if(LIMITc <= MinAmount){
+//                    offsetVal = 0;
+//                }
+//            }
+//
+//
+//        }
+//        model.close();
         try{
             long startTime = System.currentTimeMillis();
-            Generator.WriteHDT(modelResultSet, tempDir + startTime+"temporary.hdt", tempDir);
+            Generator.WriteHDT(modelResultSet, tempDir + "1563665612098temp.", tempDir);
             this.hdt = HDTManager.mapIndexedHDT(tempDir +startTime+"temporary.hdt");
         } catch (Exception e){
             e.printStackTrace();
@@ -88,7 +90,6 @@ class InconsistencyStatementChecker {
 
             InconsistencyList.add(CleanString);
         }
-
         return InconsistencyList;
 
     }
