@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2019.5.18)  5 JUL 2019 00:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2019.5.18)  30 JUL 2019 22:03
 entering extended mode
 **./ThesisVersion2.tex
 (ThesisVersion2.tex
@@ -195,21 +195,24 @@ Package: relsize 2003/07/04 ver 3.1
 \algocf@algoframe=\box32
 \algocf@algobox=\box33
 )
+("D:\Program Files\MiKTeX 2.9\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
 (ThesisVersion2.aux)
 \openout1 = `ThesisVersion2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
 
 (C:\Users\thoma\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -307,7 +310,7 @@ Package caption Info: End \AtBeginDocument code.
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
@@ -329,47 +332,47 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [3]
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--104
+Underfull \hbox (badness 10000) in paragraph at lines 102--105
 
  []
 
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 113.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 114.
 
 ("D:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 134--136
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
 
  []
 
 
-Overfull \hbox (21.4347pt too wide) in paragraph at lines 137--142
+Overfull \hbox (21.4347pt too wide) in paragraph at lines 138--143
 \OT1/cmtt/m/n/10.95 https : / / thomasdegroot18 . github . io / kbgenerator / W
 ebpages / statisticsOverview . html$\OT1/cmr/m/n/10.95 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--142
+Underfull \hbox (badness 10000) in paragraph at lines 138--143
 
  []
 
@@ -396,24 +399,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 171--173
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--182
+Underfull \hbox (badness 10000) in paragraph at lines 178--180
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 183--186
+Underfull \hbox (badness 10000) in paragraph at lines 181--184
 
- []
-
-
-Overfull \hbox (0.93927pt too wide) in paragraph at lines 203--204
-[]\OT1/cmr/m/n/10.95 REWRITE: Sat-is-fi-a-bil-ity of a con-cept, de-ter-min-ing
- if a de-scrip-tion of a Class/Concept
  []
 
 [7]
@@ -421,7 +418,7 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ” in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--214
+Underfull \hbox (badness 10000) in paragraph at lines 209--211
 
  []
 
@@ -429,15 +426,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 212--214
 File: images/Example1.png Graphic file (type png)
 
 <use images/Example1.png>
-Package pdftex.def Info: images/Example1.png used on input line 221.
+Package pdftex.def Info: images/Example1.png used on input line 219.
 (pdftex.def)             Requested size: 430.00462pt x 444.87628pt.
  <images/Example2.png, id=49, 504.88625pt x 481.8pt>
 File: images/Example2.png Graphic file (type png)
 
 <use images/Example2.png>
-Package pdftex.def Info: images/Example2.png used on input line 227.
+Package pdftex.def Info: images/Example2.png used on input line 225.
 (pdftex.def)             Requested size: 430.00462pt x 410.34796pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
+
+ []
+
+[8] [9 <./images/Example1.png>] [10 <./images/Example2.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 232--233
 
  []
@@ -447,15 +449,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 234--235
 
  []
 
-[8] [9 <./images/Example1.png>] [10 <./images/Example2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
-
- []
-
 [11]
 Chapter 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--248
+Underfull \hbox (badness 10000) in paragraph at lines 243--244
 
  []
 
@@ -468,85 +465,95 @@ Chapter 4.
 ] [16] [17] [18]
 Chapter 5.
 
+Underfull \hbox (badness 10000) in paragraph at lines 316--317
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--330
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 
  []
 
 [19
 
 ]
-<images/SimplifiedPipelineMissingPart.png, id=90, 3494.05376pt x 1757.56625pt>
+<images/SimplifiedPipelineMissingPart.png, id=91, 3494.05376pt x 1757.56625pt>
 File: images/SimplifiedPipelineMissingPart.png Graphic file (type png)
 
 <use images/SimplifiedPipelineMissingPart.png>
 Package pdftex.def Info: images/SimplifiedPipelineMissingPart.png used on input
- line 341.
+ line 335.
 (pdftex.def)             Requested size: 430.00462pt x 216.28932pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--348
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 367--369
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 [20 <./images/SimplifiedPipelineMissingPart.png>]
-<images/SubgraphRetrieval.png, id=95, 1661.20625pt x 1155.31625pt>
+Underfull \hbox (badness 10000) in paragraph at lines 361--363
+
+ []
+
+<images/SubgraphRetrieval.png, id=96, 1661.20625pt x 1155.31625pt>
 File: images/SubgraphRetrieval.png Graphic file (type png)
 
 <use images/SubgraphRetrieval.png>
-Package pdftex.def Info: images/SubgraphRetrieval.png used on input line 373.
+Package pdftex.def Info: images/SubgraphRetrieval.png used on input line 367.
 (pdftex.def)             Requested size: 430.00462pt x 299.053pt.
 
-<images/JustificationRetrieval.png, id=96, 844.15375pt x 576.1525pt>
+<images/JustificationRetrieval.png, id=97, 844.15375pt x 576.1525pt>
 File: images/JustificationRetrieval.png Graphic file (type png)
 
 <use images/JustificationRetrieval.png>
 Package pdftex.def Info: images/JustificationRetrieval.png used on input line 3
-79.
+73.
 (pdftex.def)             Requested size: 430.00462pt x 293.49101pt.
- [21] [22 <./images/SubgraphRetrieval.png>] [23 <./images/JustificationRetrieva
-l.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 392--396
+
+Underfull \hbox (badness 10000) in paragraph at lines 378--383
 
  []
 
-<images/PatternGeneralizing.png, id=109, 927.465pt x 686.565pt>
+[21] [22 <./images/SubgraphRetrieval.png>] [23 <./images/JustificationRetrieval
+.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 387--391
+
+ []
+
+<images/PatternGeneralizing.png, id=110, 927.465pt x 686.565pt>
 File: images/PatternGeneralizing.png Graphic file (type png)
 
 <use images/PatternGeneralizing.png>
-Package pdftex.def Info: images/PatternGeneralizing.png used on input line 402.
+Package pdftex.def Info: images/PatternGeneralizing.png used on input line 397.
 
 (pdftex.def)             Requested size: 430.00462pt x 318.31705pt.
 
-<images/JustificationtoGeneral.png, id=110, 937.5025pt x 536.0025pt>
+<images/JustificationtoGeneral.png, id=111, 937.5025pt x 536.0025pt>
 File: images/JustificationtoGeneral.png Graphic file (type png)
 
 <use images/JustificationtoGeneral.png>
 Package pdftex.def Info: images/JustificationtoGeneral.png used on input line 4
-08.
+03.
 (pdftex.def)             Requested size: 430.00462pt x 245.8444pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 414--418
+Underfull \hbox (badness 10000) in paragraph at lines 409--413
 
  []
 
-[24] [25 <./images/PatternGeneralizing.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 420--445
+[24] [25 <./images/PatternGeneralizing.png>] [26 <./images/JustificationtoGener
+al.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 415--440
 
  []
 
-[26 <./images/JustificationtoGeneral.png>] [27]
+[27]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--455
+Underfull \hbox (badness 10000) in paragraph at lines 449--450
 
  []
 
@@ -558,174 +565,357 @@ Missing character: There is no ­ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ” in font cmr10!
+ [29] <images/Loop.png, id=134, 603.75563pt x 357.58594pt>
+File: images/Loop.png Graphic file (type png)
 
-Overfull \hbox (18.39302pt too wide) in paragraph at lines 489--491
+<use images/Loop.png>
+Package pdftex.def Info: images/Loop.png used on input line 488.
+(pdftex.def)             Requested size: 215.0023pt x 127.33946pt.
+ <images/Kite.png, id=135, 642.14906pt x 383.18156pt>
+File: images/Kite.png Graphic file (type png)
+
+<use images/Kite.png>
+Package pdftex.def Info: images/Kite.png used on input line 491.
+(pdftex.def)             Requested size: 215.0023pt x 128.29207pt.
+
+Overfull \hbox (7.29997pt too wide) in paragraph at lines 488--492
+[][][][][] 
+ []
+
+
+Overfull \hbox (18.39302pt too wide) in paragraph at lines 494--496
 \OT1/cmtt/m/n/10.95 https : / / thomasdegroot18 . github . io / kbgenerator / W
 ebpages / statisticsOverview . html$
  []
 
-[29] <images/loop.png, id=133, 639.13782pt x 437.38406pt>
-File: images/loop.png Graphic file (type png)
 
-<use images/loop.png>
-Package pdftex.def Info: images/loop.png used on input line 495.
-(pdftex.def)             Requested size: 215.0023pt x 147.13356pt.
- <images/kite.png, id=134, 642.14906pt x 383.18156pt>
-File: images/kite.png Graphic file (type png)
+Underfull \hbox (badness 10000) in paragraph at lines 494--496
 
-<use images/kite.png>
-Package pdftex.def Info: images/kite.png used on input line 498.
-(pdftex.def)             Requested size: 215.0023pt x 128.29207pt.
-
-Overfull \hbox (7.29997pt too wide) in paragraph at lines 495--499
-[][][][][] 
  []
 
-[30 <./images/loop.png> <./images/kite.png>]
+[30 <./images/Loop.png> <./images/Kite.png>]
 Chapter 7.
 [31
 
-] <images/AnalyticsDrawing.png, id=142, 1907.125pt x 788.9475pt>
+] <images/AnalyticsDrawing.png, id=144, 1907.125pt x 788.9475pt>
 File: images/AnalyticsDrawing.png Graphic file (type png)
 
 <use images/AnalyticsDrawing.png>
-Package pdftex.def Info: images/AnalyticsDrawing.png used on input line 533.
+Package pdftex.def Info: images/AnalyticsDrawing.png used on input line 521.
 (pdftex.def)             Requested size: 193.50076pt x 80.04301pt.
 
-<images/SamplingDrawing.png, id=143, 1800.7275pt x 788.9475pt>
+<images/SamplingDrawing.png, id=145, 1800.7275pt x 788.9475pt>
 File: images/SamplingDrawing.png Graphic file (type png)
 
 <use images/SamplingDrawing.png>
-Package pdftex.def Info: images/SamplingDrawing.png used on input line 537.
+Package pdftex.def Info: images/SamplingDrawing.png used on input line 525.
 (pdftex.def)             Requested size: 193.50076pt x 84.77408pt.
  [32 <./images/AnalyticsDrawing.png> <./images/SamplingDrawing.png>] [33]
 Chapter 8.
 
-Underfull \hbox (badness 10000) in paragraph at lines 561--562
+Underfull \hbox (badness 10000) in paragraph at lines 547--548
 
  []
+
+
+LaTeX Warning: Reference `Experiments' on page 34 undefined on input line 550.
 
 [34
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 587--588
+Underfull \hbox (badness 10000) in paragraph at lines 569--570
 
  []
 
-<images/figure4.png, id=156, 414.8298pt x 330.2739pt>
-File: images/figure4.png Graphic file (type png)
- <use images/figure4.png>
-Package pdftex.def Info: images/figure4.png used on input line 618.
-(pdftex.def)             Requested size: 141.9023pt x 112.977pt.
+[35]
+Package epstopdf Info: Source file: <images/figure4.eps>
+(epstopdf)                    date: 2019-07-30 21:51:12
+(epstopdf)                    size: 106870 bytes
+(epstopdf)             Output file: <images/figure4-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:52:15
+(epstopdf)                    size: 32043 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure4-eps-converte
+d-to.pdf images/figure4.eps>
+(epstopdf)             \includegraphics on input line 596.
+Package epstopdf Info: Output file is already uptodate.
+ <images/figure4-eps-converted-to.pdf, id=161, 414.54875pt x 328.22626pt>
+File: images/figure4-eps-converted-to.pdf Graphic file (type pdf)
 
-<images/figure5.png, id=157, 414.8298pt x 330.2739pt>
-File: images/figure5.png Graphic file (type png)
- <use images/figure5.png>
-Package pdftex.def Info: images/figure5.png used on input line 621.
-(pdftex.def)             Requested size: 141.9023pt x 112.977pt.
+<use images/figure4-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure4-eps-converted-to.pdf used on input line
+ 596.
+(pdftex.def)             Requested size: 141.9023pt x 112.3517pt.
+Package epstopdf Info: Source file: <images/figure5.eps>
+(epstopdf)                    date: 2019-07-30 21:51:14
+(epstopdf)                    size: 154751 bytes
+(epstopdf)             Output file: <images/figure5-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:52:16
+(epstopdf)                    size: 41192 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure5-eps-converte
+d-to.pdf images/figure5.eps>
+(epstopdf)             \includegraphics on input line 599.
+Package epstopdf Info: Output file is already uptodate.
 
-<images/figure6.png, id=158, 463.9734pt x 330.2739pt>
-File: images/figure6.png Graphic file (type png)
- <use images/figure6.png>
-Package pdftex.def Info: images/figure6.png used on input line 624.
-(pdftex.def)             Requested size: 141.9023pt x 101.00804pt.
+<images/figure5-eps-converted-to.pdf, id=162, 414.54875pt x 328.22626pt>
+File: images/figure5-eps-converted-to.pdf Graphic file (type pdf)
 
-Overfull \hbox (6.65225pt too wide) in paragraph at lines 618--625
+<use images/figure5-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure5-eps-converted-to.pdf used on input line
+ 599.
+(pdftex.def)             Requested size: 141.9023pt x 112.3517pt.
+Package epstopdf Info: Source file: <images/figure6.eps>
+(epstopdf)                    date: 2019-07-30 21:51:16
+(epstopdf)                    size: 271406 bytes
+(epstopdf)             Output file: <images/figure6-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:52:16
+(epstopdf)                    size: 63585 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure6-eps-converte
+d-to.pdf images/figure6.eps>
+(epstopdf)             \includegraphics on input line 602.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/figure6-eps-converted-to.pdf, id=163, 464.73625pt x 328.22626pt>
+File: images/figure6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/figure6-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure6-eps-converted-to.pdf used on input line
+ 602.
+(pdftex.def)             Requested size: 141.9023pt x 100.21654pt.
+
+Overfull \hbox (6.65225pt too wide) in paragraph at lines 596--603
 [][][][][][][] 
  []
 
-[35] <images/figure1.png, id=162, 410.4936pt x 327.3831pt>
-File: images/figure1.png Graphic file (type png)
+Package epstopdf Info: Source file: <images/figure1.eps>
+(epstopdf)                    date: 2019-07-30 21:23:41
+(epstopdf)                    size: 30410 bytes
+(epstopdf)             Output file: <images/figure1-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:39:04
+(epstopdf)                    size: 19920 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure1-eps-converte
+d-to.pdf images/figure1.eps>
+(epstopdf)             \includegraphics on input line 611.
+Package epstopdf Info: Output file is already uptodate.
+<images/figure1-eps-converted-to.pdf, id=164, 410.53375pt x 326.21875pt>
+File: images/figure1-eps-converted-to.pdf Graphic file (type pdf)
 
-<use images/figure1.png>
-Package pdftex.def Info: images/figure1.png used on input line 633.
-(pdftex.def)             Requested size: 141.9023pt x 113.17207pt.
- <images/figure2.png, id=163, 420.6114pt x 327.3831pt>
-File: images/figure2.png Graphic file (type png)
+<use images/figure1-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure1-eps-converted-to.pdf used on input line
+ 611.
+(pdftex.def)             Requested size: 141.9023pt x 112.75464pt.
+Package epstopdf Info: Source file: <images/figure2.eps>
+(epstopdf)                    date: 2019-07-30 21:23:43
+(epstopdf)                    size: 52634 bytes
+(epstopdf)             Output file: <images/figure2-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:39:05
+(epstopdf)                    size: 22195 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure2-eps-converte
+d-to.pdf images/figure2.eps>
+(epstopdf)             \includegraphics on input line 614.
+Package epstopdf Info: Output file is already uptodate.
 
-<use images/figure2.png>
-Package pdftex.def Info: images/figure2.png used on input line 636.
-(pdftex.def)             Requested size: 141.9023pt x 110.44955pt.
- <images/figure3.png, id=164, 420.6114pt x 330.2739pt>
-File: images/figure3.png Graphic file (type png)
+<images/figure2-eps-converted-to.pdf, id=165, 420.57124pt x 326.21875pt>
+File: images/figure2-eps-converted-to.pdf Graphic file (type pdf)
 
-<use images/figure3.png>
-Package pdftex.def Info: images/figure3.png used on input line 639.
-(pdftex.def)             Requested size: 141.9023pt x 111.42482pt.
+<use images/figure2-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure2-eps-converted-to.pdf used on input line
+ 614.
+(pdftex.def)             Requested size: 141.9023pt x 110.0667pt.
+Package epstopdf Info: Source file: <images/figure3.eps>
+(epstopdf)                    date: 2019-07-30 21:23:44
+(epstopdf)                    size: 57950 bytes
+(epstopdf)             Output file: <images/figure3-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-30 21:39:06
+(epstopdf)                    size: 26681 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/figure3-eps-converte
+d-to.pdf images/figure3.eps>
+(epstopdf)             \includegraphics on input line 617.
+Package epstopdf Info: Output file is already uptodate.
 
-Overfull \hbox (6.65225pt too wide) in paragraph at lines 633--640
+<images/figure3-eps-converted-to.pdf, id=166, 420.57124pt x 328.22626pt>
+File: images/figure3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/figure3-eps-converted-to.pdf>
+Package pdftex.def Info: images/figure3-eps-converted-to.pdf used on input line
+ 617.
+(pdftex.def)             Requested size: 141.9023pt x 110.74403pt.
+
+Overfull \hbox (6.65225pt too wide) in paragraph at lines 611--618
  [][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 646--647
+Underfull \hbox (badness 10000) in paragraph at lines 624--625
 
  []
 
-[36 <./images/figure4.png> <./images/figure5.png> <./images/figure6.png> <./ima
-ges/figure1.png> <./images/figure2.png> <./images/figure3.png>]
-<images/Samplefigure4.png, id=174, 418.4433pt x 330.2739pt>
-File: images/Samplefigure4.png Graphic file (type png)
+[36 <./images/figure4-eps-converted-to.pdf> <./images/figure5-eps-converted-to.
+pdf> <./images/figure6-eps-converted-to.pdf>] [37 <./images/figure1-eps-convert
+ed-to.pdf> <./images/figure2-eps-converted-to.pdf> <./images/figure3-eps-conver
+ted-to.pdf>]
+Package epstopdf Info: Source file: <images/Samplefigure1.eps>
+(epstopdf)                    date: 2019-07-30 21:24:05
+(epstopdf)                    size: 58373 bytes
+(epstopdf)             Output file: <images/Samplefigure1-eps-converted-to.pdf>
 
-<use images/Samplefigure4.png>
-Package pdftex.def Info: images/Samplefigure4.png used on input line 676.
-(pdftex.def)             Requested size: 141.9023pt x 111.99933pt.
+(epstopdf)                    date: 2019-07-30 21:39:06
+(epstopdf)                    size: 27536 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure1-eps-co
+nverted-to.pdf images/Samplefigure1.eps>
+(epstopdf)             \includegraphics on input line 654.
+Package epstopdf Info: Output file is already uptodate.
 
-<images/Samplefigure5.png, id=175, 414.8298pt x 330.2739pt>
-File: images/Samplefigure5.png Graphic file (type png)
+<images/Samplefigure1-eps-converted-to.pdf, id=430, 420.57124pt x 328.22626pt>
+File: images/Samplefigure1-eps-converted-to.pdf Graphic file (type pdf)
 
-<use images/Samplefigure5.png>
-Package pdftex.def Info: images/Samplefigure5.png used on input line 679.
-(pdftex.def)             Requested size: 141.9023pt x 112.977pt.
+<use images/Samplefigure1-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure1-eps-converted-to.pdf used on inpu
+t line 654.
+(pdftex.def)             Requested size: 141.9023pt x 110.74403pt.
+Package epstopdf Info: Source file: <images/Samplefigure2.eps>
+(epstopdf)                    date: 2019-07-30 21:24:07
+(epstopdf)                    size: 61176 bytes
+(epstopdf)             Output file: <images/Samplefigure2-eps-converted-to.pdf>
 
-<images/Samplefigure6.png, id=176, 463.9734pt x 330.2739pt>
-File: images/Samplefigure6.png Graphic file (type png)
+(epstopdf)                    date: 2019-07-30 21:39:07
+(epstopdf)                    size: 25218 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure2-eps-co
+nverted-to.pdf images/Samplefigure2.eps>
+(epstopdf)             \includegraphics on input line 657.
+Package epstopdf Info: Output file is already uptodate.
 
-<use images/Samplefigure6.png>
-Package pdftex.def Info: images/Samplefigure6.png used on input line 682.
-(pdftex.def)             Requested size: 141.9023pt x 101.00804pt.
+<images/Samplefigure2-eps-converted-to.pdf, id=431, 420.57124pt x 326.21875pt>
+File: images/Samplefigure2-eps-converted-to.pdf Graphic file (type pdf)
 
-Overfull \hbox (6.65225pt too wide) in paragraph at lines 676--683
+<use images/Samplefigure2-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure2-eps-converted-to.pdf used on inpu
+t line 657.
+(pdftex.def)             Requested size: 141.9023pt x 110.0667pt.
+Package epstopdf Info: Source file: <images/Samplefigure3.eps>
+(epstopdf)                    date: 2019-07-30 21:24:09
+(epstopdf)                    size: 32257 bytes
+(epstopdf)             Output file: <images/Samplefigure3-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-07-30 21:39:08
+(epstopdf)                    size: 19755 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure3-eps-co
+nverted-to.pdf images/Samplefigure3.eps>
+(epstopdf)             \includegraphics on input line 660.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/Samplefigure3-eps-converted-to.pdf, id=432, 420.57124pt x 326.21875pt>
+File: images/Samplefigure3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/Samplefigure3-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure3-eps-converted-to.pdf used on inpu
+t line 660.
+(pdftex.def)             Requested size: 141.9023pt x 110.0667pt.
+
+Overfull \hbox (6.65225pt too wide) in paragraph at lines 654--661
+ [][][][] 
+ []
+
+Package epstopdf Info: Source file: <images/Samplefigure4.eps>
+(epstopdf)                    date: 2019-07-30 21:24:11
+(epstopdf)                    size: 74557 bytes
+(epstopdf)             Output file: <images/Samplefigure4-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-07-30 21:39:08
+(epstopdf)                    size: 25718 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure4-eps-co
+nverted-to.pdf images/Samplefigure4.eps>
+(epstopdf)             \includegraphics on input line 670.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/Samplefigure4-eps-converted-to.pdf, id=433, 418.56375pt x 328.22626pt>
+File: images/Samplefigure4-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/Samplefigure4-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure4-eps-converted-to.pdf used on inpu
+t line 670.
+(pdftex.def)             Requested size: 141.9023pt x 111.27492pt.
+Package epstopdf Info: Source file: <images/Samplefigure5.eps>
+(epstopdf)                    date: 2019-07-30 21:24:12
+(epstopdf)                    size: 102902 bytes
+(epstopdf)             Output file: <images/Samplefigure5-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-07-30 21:39:09
+(epstopdf)                    size: 31068 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure5-eps-co
+nverted-to.pdf images/Samplefigure5.eps>
+(epstopdf)             \includegraphics on input line 673.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/Samplefigure5-eps-converted-to.pdf, id=434, 414.54875pt x 328.22626pt>
+File: images/Samplefigure5-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/Samplefigure5-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure5-eps-converted-to.pdf used on inpu
+t line 673.
+(pdftex.def)             Requested size: 141.9023pt x 112.3517pt.
+Package epstopdf Info: Source file: <images/Samplefigure6.eps>
+(epstopdf)                    date: 2019-07-30 21:24:16
+(epstopdf)                    size: 161564 bytes
+(epstopdf)             Output file: <images/Samplefigure6-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2019-07-30 21:39:10
+(epstopdf)                    size: 42515 bytes
+(epstopdf)             Command: <epstopdf --outfile=images/Samplefigure6-eps-co
+nverted-to.pdf images/Samplefigure6.eps>
+(epstopdf)             \includegraphics on input line 676.
+Package epstopdf Info: Output file is already uptodate.
+
+<images/Samplefigure6-eps-converted-to.pdf, id=435, 464.73625pt x 328.22626pt>
+File: images/Samplefigure6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/Samplefigure6-eps-converted-to.pdf>
+Package pdftex.def Info: images/Samplefigure6-eps-converted-to.pdf used on inpu
+t line 676.
+(pdftex.def)             Requested size: 141.9023pt x 100.21654pt.
+
+Overfull \hbox (6.65225pt too wide) in paragraph at lines 670--677
 [][][][] 
  []
 
-[37] [38 <./images/Samplefigure4.png> <./images/Samplefigure5.png> <./images/Sa
-mplefigure6.png>]
+[38 <./images/Samplefigure1-eps-converted-to.pdf> <./images/Samplefigure2-eps-c
+onverted-to.pdf> <./images/Samplefigure3-eps-converted-to.pdf>] [39 <./images/S
+amplefigure4-eps-converted-to.pdf> <./images/Samplefigure5-eps-converted-to.pdf
+> <./images/Samplefigure6-eps-converted-to.pdf>]
 Chapter 9.
 
-Underfull \hbox (badness 10000) in paragraph at lines 692--694
+Underfull \hbox (badness 10000) in paragraph at lines 686--688
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 695--696
+Underfull \hbox (badness 10000) in paragraph at lines 689--690
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 697--698
+Underfull \hbox (badness 10000) in paragraph at lines 691--692
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 699--700
+Underfull \hbox (badness 10000) in paragraph at lines 693--694
 
  []
 
-[39
+[40
 
 ]
-Overfull \hbox (21.4347pt too wide) in paragraph at lines 701--704
+Overfull \hbox (21.4347pt too wide) in paragraph at lines 695--698
 \OT1/cmtt/m/n/10.95 https : / / thomasdegroot18 . github . io / kbgenerator / W
 ebpages / statisticsOverview . html$\OT1/cmr/m/n/10.95 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--704
+Underfull \hbox (badness 10000) in paragraph at lines 695--698
 
  []
 
-[40] (ThesisVersion2.bbl
+[41] (ThesisVersion2.bbl
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¼ in font cmr10!
 Missing character: There is no Ã in font cmr10!
@@ -737,45 +927,49 @@ Missing character: There is no © in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- [41
+ [42
 
 ]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
- [42]
+ [43]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ­ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 Missing character: There is no Ã in font cmti10!
 Missing character: There is no ª in font cmti10!
-) [43] (ThesisVersion2.aux) ) 
+) [44] (ThesisVersion2.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4643 strings out of 493323
- 73697 string characters out of 3139066
- 153068 words of memory out of 3000000
- 8104 multiletter control sequences out of 15000+200000
+ 4674 strings out of 493323
+ 75337 string characters out of 3139066
+ 155205 words of memory out of 3000000
+ 8127 multiletter control sequences out of 15000+200000
  11884 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,16n,49p,1191b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti
-10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
-<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><D:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmsl10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmsy10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmti10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmti12.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.p
-fb>
-Output written on ThesisVersion2.pdf (47 pages, 1417975 bytes).
+<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><D:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><D:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmr10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cms
+l10.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<D:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><D:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ThesisVersion2.pdf (48 pages, 1458191 bytes).
 PDF statistics:
- 245 PDF objects out of 1000 (max. 8388607)
+ 777 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 

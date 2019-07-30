@@ -7,6 +7,7 @@
 \newtheorem{definition}{Definition}
 \newcommand{\red}[1]{{\color{red}{#1}}}
 \usepackage[]{algorithm2e}
+\usepackage{indentfirst}
 
 \begin{document}
 	
@@ -124,7 +125,7 @@
 	\textit{Contributions}. 
 	The main contributions in this work, with respect to the research questions, can be described in threefold.
 	\begin{itemize}
-		\item Firstly, we give a formal definition of `anti-patterns' we use to describe common occurring generalised contradictions that we found in the linked datasets. We use these definitions throughout this work to describe the generalized patterns.
+		\item First, we give a formal definition of `anti-patterns' we use to describe common occurring generalised contradictions that we found in the linked datasets. We use these definitions throughout this work to describe the generalized patterns.
 		\item Secondly, we design an extraction pipeline that can extract `anti-patterns' from any arbitrary knowledge graph. We show that this method works by extracting "almost" all contradictions. We made all the `anti-patterns' available to use on the web.
 		\item Thirdly we show that `anti-patterns' can be used to analyse inconsistent knowledge graphs and to sample inconsistent knowledge graph systematically.
 	\end{itemize}
@@ -141,9 +142,8 @@
 	We show how the characteristics change between the dataset. We show that the sampled knowledge graphs match the set characteristics given by the user, and also match the characteristics of the original knowledge graph.\\
 	
 	\section{Outline}
-	REWRITE:
-	The second and third chapter explains the work that this paper is based on and give background information to the reader about the definitions that we use in this work. In the method, we explain more in detail how the method of `anti-pattern' retrieval works. Chapter 6 showcases the possible applications that make extensive use from the `anti-pattern' that we retrieved in the method. In Chapter 7, we show the experiments that test our hypotheses, we set in the introduction, and analyse the results. We conclude with a conclusion, with an extension of future work.
-	END REWRITE
+	In chapter \ref{Background} the different concepts used in this work are introduced. Chapter \ref{RelatedWork} explains the related work, which has been done by others on which this work is based.
+	In Chapter \ref{Method} we explain more in detail how the method of `anti-pattern' retrieval works. Chapter \ref{internalvalidation} explains the experiments we performed to validate the internal proceedings of the algorithm. Chapter \ref{Implementation} showcases the possible applications that make extensive use from the `anti-pattern' that we retrieved in the method. In Chapter \ref{externalvalidation} we show how the applications perform, we set in the introduction, and analyse the results. We conclude with a conclusion, with an extension of future work in chapter \ref{Conclusion}.
 	
 	
 	
@@ -162,7 +162,7 @@
 		“A knowledge graph (i) mainly describes real-world entities, and their interrelations, organized in a graph, (ii) defines possible classes, and relations of entities in a schema, (iii) allows for potentially interrelating arbitrary entities with each other and (iv) covers various topical domains.”
 	\end{definition}
 	
-	\textit{RDF triple}. These facts can be anything. For example, Lisa owns Sam, or Sam is of type Rabbit, Sam is Brown. Each RDF triple consists out three elements.
+	\textit{RDF triple}. These facts can be anything. For example, Lisa owns Sam, or Sam is a of type Rabbit, Sam is Brown. Each RDF triple consists out three elements.
 	The three elements are $<$Subject$>$, $<$Predicate$>$, and $<$Object$>$. Where the subject and the object are two entities and the predicate is the link between them, describing the relation between the two entities. 
 	
 	There are a few problems with writing $<$Lisa$>$ $<$owns$>$ $<$Sam$>$. What if there is more than one Sam? To counter this, we use (Uniform Resource Identifier) or otherwise known as URI to define an entity. A URI is a set of characters that unambiguously identifies an abstract or physical resource. Lisa would become \\$<$https://data.persons.com/world/Europe/Netherlands/122341$>$ $<$https://names.org/hasname$>$ "Lisa". Where this statement links the identifier, to the name Lisa. Now every time Lisa is mentioned the identifier is used. 
@@ -171,11 +171,9 @@
 	\textit{RDF} \cite{rdfPrimer:2014} stands for \textbf{r}esource \textbf{d}escription \textbf{f}ramework and is a method of storing data in triple format. These statements, consisting out of the $<$Subject$>$, $<$Predicate$>$, $<$Object$>$ can hold different types. The subject can be defined as a URI or a blank node. The predicate represents the relation between the Subject and the Object and is always defined as a URI. Finally, the object is the second resource. This can be a URI, blank node or a literal.
 	RDF is designed to exchange information between processes and applications without the intervention of humans. The goal was to build a framework that is designed link resources without having to add expensive parsers to convert the information to the correct format every time a new process is added which wants to use the information.\\
 	
-	REWRITE:
-	\textit{RDFS} \cite{RDFSchema:2014} Extending the RDF language we define RDF schema, with this schema, we can define ontologies within RDF. It can be used to give structure to the RDF ontology. Both RDF(s) and OWL are ontologies from the semantic web community. But they are unique in the sense that these languages can be used to reason with. thus making it possible to infer new facts from the knowledge of other triples.\\
+	\textit{RDFS} \cite{RDFSchema:2014} is the extension of the RDF language with an RDF schema. With this we can extend the knowledge created by RDF and add for example labels to certain concepts and give more structure to the data. With RDFs we can define Classes, resources and literals as well as ranges and domains for predicates. Giving the ontology a more rich description. With this information it is finally possible to do extensive reasoning. Thus making it possible to infer new facts from the knowledge of other triples.\\
 	
-	\textit{OWL}\cite{OWLPrimer:2012}, the Web Ontology Language, designed to represent the language that can describe things and set of things well with regards to relations. But not only that, in OWL it is also possible to reason with that knowledge and make implicit knowledge explicit, for example, reason that a subClassOf(Car, Audi) and subClassOf(Audi, A1 Sportback). This makes it possible to reason that subClassOf(Car, A1 Sportsback) is also a type of relation that exists. 
-	END REWRITE
+	\textit{OWL}\cite{OWLPrimer:2012}, the Web Ontology Language, designed to represent the language that can describe things and set of things well with regards to relations. OWL can also be seen as an extension to RDF, and is used in combination with RDF(s). With OWL we define more implicit relations such as an subClassOf relation. For example a definition of subClassOf(Mammal, Vertibrae) and subClassOf(Rabbit, Mammal). This makes it possible to reason that subClassOf(Rabbit, Vertibrae) is also a type of relation that exists. 
 	
 	\textit{Basic Triple Pattern}. The problem with RDF triples is that each triple is instantiated, meaning that all triples have a value, which can be a URI, or a literal,  a fixed value in the statements. 
 	To have the ability to generalise within a knowledge graph, we use Basic triple patterns(BTP). BTPs can be seen as RDF triples, but where it is possible to change one, two or all three elements from the RDF triple into variables. With an uninstantiated BTP, we can use SPARQL to ask a question to the knowledge graph and retrieve instantiated BTPs back. Alternatively, we can check with an instantiated BTP if it exists in the knowledge graph.\\
@@ -193,16 +191,15 @@
 	An ontology can be seen as a set of triples, with each of the triples a combination of the above, describing the elements of the ontology.
 	
 	\section{Reasoner}
-	REWRITE:
-	Reasoning is a method to find new information in the knowledge graph that was not explicitly written down. Reasoning comes in a multitude of flavours, but the two most common are deductive and inductive reasoning. 
-	END REWRITE:
+	Reasoning is the method in which we use logic and facts to reason to a conclusion. In knowledge graphs we use reasoning to derive new facts from the knowledge graph, facts that were not explicitly written down. Reasoning is also used to verify facts that already exist in the knowledge graph. This could mean that facts are contradictory to each other resulting into an contradiction.
+	
 	
 	\subsection{Reasoning types}
 	Reasoning is deriving facts from the ontology or knowledge base that has not yet been explicitly denoted. We can classify reasoning in several different subcategories, that are not a lot different from each other but can have other optimized algorithms specialized in solving the different subcategories.
 	\begin{itemize}
-		\item REWRITE: Satisfiability of a concept, determining if a description of a Class/Concept is not contradictory, As we have shown in the examples, can we find an individual that satisfies the Class without creating a contradiction in the knowledge graph. 
+		\item Satisfiability of a concept, determining if a description of a class or concept is not contradictory. As we have shown in the examples, the goal of this reasoning type is if  we can find an individual that satisfies the Class without creating a contradiction in the knowledge graph. 
 		\item Subsumption of concepts, can we determine if a Class C is more general than Class D
-		\item REWRITE: Consistency with respect to the ontology - determine whether individuals do not violate descriptions and statements that are described by the ontology.
+		\item Consistency with respect to the ontology. The goal is to check if the concepts we defined in the ontology match with the actual usage of the ontology. Meaning that we want to determine whether individuals do not violate descriptions and statements that are described by the ontology.
 		\item Check an individual - check whether the individual is an instance of a class
 	\end{itemize}
 	In this work, we will focus on satisfiability, but instead of finding the concepts that are satisfiable we will instead look for the opposite, and find the concepts and individuals that are unsatisfiable — thus finding if the knowledge graph is inconsistent. Which means that the graph is holding contradictory statements. So what makes a graph inconsistent?
@@ -211,8 +208,9 @@
 	
 	\textit{Justification}. A justification\cite{Horridge:2009} is a set of axioms that acts as an explanation for an entailment.
 	Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper, we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justifications are instantiated BPGs and are always a minimal set of axioms for a single contradiction. \\
-	
-	REWRITE: ADD DEFINITION
+	\begin{definition} 
+		Let $O$ be an ontology such that $O \models \eta$. $J$ is a justification for $\eta$ in $O$ if $J \subseteq O$, and $J \models \eta$, and for all $J'\subseteq J, J' \not\models \eta$.  \cite{Horridge:2009}
+	\end{definition}
 	
 	\section{Example introduction}
 	Now that the basic notions of a knowledge graph are explained we will show a knowledge graph work in two examples. 
@@ -231,15 +229,13 @@
 	
 	\textit{Example 1}. The first image\ref{fig:Example1} shows a simple contradiction, in this example we see an individual[I1], that is of two classes, for example "Monaco" is of type \textit{city in Europe}[C1] and of type \textit{country in Europe}[C3]. This is still correct; an instance can be of two different types. Now we define that a \textit{city in Europe} is a subclass of a \textit{City} and that a \textit{country in Europe} is a subclass of a \textit{Country}. This is still a correct assumption. We now define that a \textit{City} cannot be a \textit{Country} or the other way around by saying that both classes can never have an individual in common. We now created a contradiction, as \textit{Monaco} is an individual of both, but it can not be.\\
 	
-	Fixing this contradiction is possible, but it means that we need to change some things, we can either remove the disjoint axiom, meaning that now we can have a \textit{City} that is also a \textit{Country}. We could also split \textit{Monaco} into \textit{Monaco(City)} and \textit{Monaco(Country)}, which is also a possible solution. Both solutions have their positives and negatives.\\
+	Fixing this contradiction is possible, but it means that we need to change some things, we can either remove the disjoint axiom, meaning that now we can have a \textit{City} that is also a \textit{Country}. We could also split \textit{Monaco} into \textit{Monaco(City)} and \textit{Monaco(Country)}, which is also a possible solution. Both solutions have their advantages and disadvantages.\\
 	
-	\textit{Example 2}. The second example\ref{fig:Example2}, shows a different type of contradiction. This time we only have one rdf:type relation. This individual belongs to only one class, For example we have a individual \textit{Lisa}[I1] now is of the class \textit{Person}[C1], This class has two subClass relations, with \textit{RationalBeing}[C6] and \textit{Mammal}[C2]. Where \textit{Animal}[C2] is also a sub class relation with \textit{ImpulsiveBeing}[C5]. Which in turn is disjoint with \textit{RationalBeing}[C6]. This makes the circle complete and generates another contradiction, as both \textit{ImpulsiveBeing}[C5] and \textit{RationalBeing}[C6] have an individual[I1] in common. \\
+	\textit{Example 2}. The second example\ref{fig:Example2}, shows a different type of contradiction. This time we only have one rdf:type relation. This individual belongs to only one class, For example we have a individual \textit{Lisa}[I1] now is of the class \textit{Person}[C1], This class has two subClass relations, with \textit{RationalBeing}[C6] and \textit{Animal}[C2]. Where \textit{Animal}[C2] is also a sub class relation with \textit{ImpulsiveBeing}[C5]. Which in turn is disjoint with \textit{RationalBeing}[C6]. This makes the circle complete and generates another contradiction, as both \textit{ImpulsiveBeing}[C5] and \textit{RationalBeing}[C6] have an individual[I1] in common. \\
 	
 	
 	\chapter{Related Work}\label{RelatedWork}
-	REWRITE:
-	In this section, an overview of work in various related research areas is provided. More specifically, we show the research on which this work is created on, the types of analyses that already have been implemented for knowledge graphs, and the techniques that show promise for sampling from knowledge graphs. \\
-	END REWRITE:
+	This section is an review of the work done by other on which we built our work. More specifically, we show the previous work done for our designed method, the analysis application and the sampling application. 
 	
 	\section{Method}
 	Making a knowledge graph consistent has been an old problem, and solutions have been proposed as early as 1956 by Toulmin in his book \cite{toulmin:1956}, in which the solution is proposed by revising the base, choosing to reason only over the consistent subbases, expanded upon by Gabbay et al\cite{Gabbay:1994}. The second solution is to change the inference of the reasoner to fit the inconsistency and can be seen as the first approaches to paraconsistent reasoning, such as done by Kaminski et al.\cite{Kaminski:2015}.
@@ -255,7 +251,7 @@
 	\section{Analysis}
 	Paulheim \cite{HeikoP:2016} showcases the need for a standardised evaluation method. In the survey, they show that researchers sometimes choose different knowledge graph(s) according to their needs, this makes it harder to compare different algorithms. Removing this discrepancy would benefit all of us.
 	
-	F\'arber et al. \cite{MichaelF:2017} give an in-depth comparison of several large knowledge graphs, and demonstrates that knowledge graphs have different characteristics. The paper by F\"arber et al. \cite{MichaelF:2017} is expanded upon by Debattista et al. in \cite{Debattista:2018}, in which they analysed 130 datasets from the Linked Open Data Cloud using 27 Linked Data quality metrics. Both papers show that each graph has a different underlying structure and in theory, this even can result in different behaviour of algorithms.
+	F\"arber et al. \cite{MichaelF:2017} give an in-depth comparison of several large knowledge graphs, and demonstrates that knowledge graphs have different characteristics. The paper by F\"arber et al. \cite{MichaelF:2017} is expanded upon by Debattista et al. in \cite{Debattista:2018}, in which they analysed 130 datasets from the Linked Open Data Cloud using 27 Linked Data quality metrics. Both papers show that each graph has a different underlying structure and in theory, this even can result in different behaviour of algorithms.
 	
 	The paper by Peter Bloem and Steven de Rooij\cite{BloemP:2018} is a good use-case in which we could implement our anti-patterns for analysis. With a combination of implementations, we could make statistical inferences about whether or not `anti-patterns' occur with regularity. Which would incredibly useful for making automatic software.
 	
@@ -295,7 +291,7 @@
 	\end{itemize}
 	
 	\section{Method}
-	The first step before we need to take is to define an `anti-pattern' and retrieve the `anti-patterns' from knowledge graphs. The method we developed is not based on any work that has been previously created. Instead, we opted to develop our own method. The method is designed specifically to retrieve `anti-patterns' from large knowledge graphs. Which are generalised contradictions, and can be seen as common mistakes made in a dataset. We described a formal notion of `anti-patterns' in chapter \ref{AntiPatternDefinition}. Our method for retrieval is a three-stage pipeline. The results of the previous stage flow into the next stage. The input is a natural knowledge graph; in our case, this is the LOD-a-lot\cite{JavierD:2017} a dataset containing 28 billion statements. The output from the final stage will be the found `anti-patterns'. 
+	The first step that we need to take is to define an `anti-pattern' and retrieve the `anti-patterns' from knowledge graphs. The method we developed is not based on any work that has been previously created. Instead, we opted to develop our own method. The method is designed specifically to retrieve `anti-patterns' from large knowledge graphs. Which are generalised contradictions, and can be seen as common mistakes made in a dataset. We described a formal notion of `anti-patterns' in chapter \ref{AntiPatternDefinition}. Our method for retrieval is a three-stage pipeline. The results of the previous stage flow into the next stage. The input is a natural knowledge graph; in our case, this is the LOD-a-lot\cite{JavierD:2017} a dataset containing 28 billion statements. The output from the final stage will be the found `anti-patterns'. 
 	
 	\subsection{Proposed Applications}
 	With the `Anti-patterns' found, we propose two implementations that benefit greatly from `anti-patterns', The first being analysis for inconsistent knowledge graphs and the second a sampling method which uses `anti-pattern' in its sampling. The first implementation, analysis takes any arbitrary knowledge graph, and analyses this graph on the basis on a number of characteristics including the found `anti-patterns'. Which helps us understand what types of `anti-patterns' occur in a knowledge graph, giving us a better overview of inconsistent knowledge graphs in general, answering our second research question.
@@ -307,7 +303,7 @@
 	\subsection{Proposed Experiments}
 	Now that we set up our method, we show how this method performs with different experiments. 
 	Firstly we test if we can retrieve `all' justifications from the knowledge graph, due to the extraction process in the final algorithm we can not guarantee that we can extract every contradiction from the knowledge graph. Which means that it is possible for the method to miss contradictions, and thus it can be possible that we miss the accompanying `anti-patterns' that we could have derived from the contradictions. To test the hypothesis that we still can retrieve most to all `anti-patterns' we developed an experiment by extracting all the contradictions from the pizza-ontology. We choose this ontology as it is a small ontology with concrete statements that can be easily understood. It makes it possible to check by hand if the amount of `anti-patterns we found, matches the amount of `anti-patterns' we found with our extraction method.
-	REWRITE INSERT EXPERIMENT DESCRIPTION:
+	%	REWRITE INSERT EXPERIMENT DESCRIPTION:
 	
 	We test if we can analyze knowledge graphs, we have two inconsistent knowledge graphs, DBpedia, DBLP and YAGO, both with known contradictions. We retrieve the statistics about the knowledge graph. We then retrieve all the `anti-patterns' that have instantiated contradictions in the knowledge graph. 
 	With this experiment, we want to show the use of `anti-patterns' to get a better understanding of how inconsistent knowledge graphs are formed, and what types of `anti-patterns' are more common than others.
@@ -321,9 +317,7 @@
 	
 	As explained in chapter \ref{graphElements}, a justification is a description of a single contradiction. We can see it as proof that an ontology is inconsistent. Each justification is an instantiated BGP, within the knowledge graph. Due to the instantiation, the justification can only describe one contradiction and is thus limited to a single knowledge graph. To use justifications in other knowledge graphs, for instance, to check if this knowledge graph has the same contradiction, without having the same statements, we need to generalize the justification.
 	
-	REWRITE:
-	If for example, we have a knowledge graph describing the contradictions in the knowledge graph of Countries in Europe, wherein we wrongfully declared Monaco a city and a country, without the consideration that they are disjoint. We want to quickly check if the same has happened for our knowledge graph from Asia. Without a generalisation, we first need to check if what relations are in the knowledge graph in Asia, and if there is a city matching the particulars.\\
-	END REWRITE
+	If for example, we have a knowledge graph describing the contradictions in the knowledge graph of Countries in Europe, wherein we wrongfully declared Monaco a city and a country, without the consideration that they are disjoint(see example \ref{fig:Example1}). Now we need to quickly check if this contradiction happens in the knowledge graph for Countries in Asia as well. If we do not know how to generalise the contradiction to an `Anti-pattern' we either have to check the relations for all elements in the graph to check if they can match the pattern, or we need to use a reasoner to find the same mistake again only now in the knowledge graph for Asian Countries.\\
 	
 	For generalization we created `anti-patterns'. `Anti-patterns' are generalisations over justifications. To transform a justification into an `anti-pattern', we remove all information on the subject and object position of the BGP. Removing the information on the predicate position("owl:disjointWith", "rdfs:subclassOf", "rdf:type", etc) would break the contradiction, as if it would be possible to match a "rdfs:subClassOf" on the place where the "owl:disjointWith" belongs. This would make the contradiction no longer a contradiction. Except for the cases such as a predicate defined with "rdf:range" and "rdf:domain" where we do sometimes need to replace the predicate with a variable. 
 	Now that we removed all the information that blocks generalization, we are left with the `anti-pattern'. Now the `anti-pattern' can be used to match various inconsistent justifications in the knowledge graph. We define an \textit{`Anti-pattern'} in the following definition:\\
@@ -333,9 +327,9 @@
 	\end{definition}
 	
 	We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
-	REWRITE:
-	ADD DEFINITION
-	END REWRITE:
+	%	REWRITE:
+	%	ADD DEFINITION
+	%	END REWRITE:
 	
 	\begin{figure}
 		\includegraphics[width=\linewidth]{images/SimplifiedPipelineMissingPart.png}
@@ -382,10 +376,11 @@
 	\end{figure}
 	
 	Due to the large size of most knowledge graphs, running a justification retrieval algorithm over the complete knowledge graph, to retrieve all contradictions, would be impractical. To speed up this process, we decided to split the knowledge graph into smaller subgraphs to reduce the time the justification retrieval algorithm needs. Figure \ref{fig:subgraphRetrieval} shows the process of splitting the knowledge graph into smaller subgraphs.\\
-	Each subgraph is generated by extending the root node. The root node is retrieved by taking a triple from the complete graph and taking the node that is in the subject position as the starting point. The graph is expanded by finding all the triples that have the root node as the subject, and we add these triples to the subgraph. Next, all the nodes that were in the object position are now used as expansion nodes, so now for each object, we now find all the triples that match where the object is put in the subject position. We keep expanding the graph until it can not expand any further or the maximum amount of triples of 5000 triples is reached. The value of 5000 triples is chosen because it is large enough to hold almost all justification patterns but small enough that it does not take long to retrieve all justifications.\\
-	REWRITE: 
-	EXPAND ON CREATION OF SUBGRAPHS
-	END REWRITE:
+	Each subgraph is generated by extending the root node. The root node is retrieved by taking a triple from the complete graph and taking the node that is in the subject position as the starting point. The graph is expanded by finding all the triples that have the root node as the subject, and we add these triples to the subgraph. Next, all the nodes that were in the object position are now used as expansion nodes, so for each object, we find all the triples that match where the object is put in the subject position. We keep expanding the graph until it can not expand any further or the maximum amount of triples of 5000 triples is reached. The value of 5000 triples is chosen because it is large enough to hold almost all justification patterns but small enough that it does not take long to retrieve all justifications.\\
+	%	REWRITE: 
+	%	EXPAND ON CREATION OF SUBGRAPHS
+	%	END REWRITE:
+	
 	This method to pick subgraphs from the knowledge graph does not guarantee completeness in terms of finding all the contradictions that can occur. In the experiments, we show that this method finds the `almost' all occurring contradictions. The reason for this is the redundancy we create by using subgraphs that overlap, without occurring too many time-consuming calculations. 
 	
 	\subsection{Justification retrieval}
@@ -445,7 +440,7 @@
 	
 	\newpage
 	
-	\chapter{Internal validation}\label{Experiments}
+	\chapter{Internal validation}\label{internalvalidation}
 	
 	\section{Data}
 	We introduce the first two datasets that we use in this work, namely the Pizza-ontology and LOD-a-lot.
@@ -482,24 +477,22 @@
 		\label{table:PizzaOntology}
 	\end{table}
 	
-	%\section{Experiment 2: \textbf{RQ1}:  Can we retrieve `Anti-patterns' more efficiently with splitting or not?[Efficiency]}
 	% Describe how the creation of the inconsistencies from the lod cloud worked.
 	\section{Experiment 2: Anti-pattern Analysis} % Renaming
 	% \section{Experiment 3: Anti-pattern Analysis} % Renaming
-	REWRITE:
-	\textit{Experiment description}. In this experiment we created a webpage on\\ \url{https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html} on which we can compare the different `anti-patterns' we have found in the LOD-a-lot. On this webpage, we introduce the different types of contradictions we found. We show the `anti-patterns' via a visualization. We also give a formulation of the `anti-pattern'. And finally, we generate the SPARQL queries for every `anti-pattern'.  
+	\textit{Experiment description}. In experiment 1 we showed that it is possible to retrieve `anti-patterns' from a knowledge graph. In this experiment we analyze the `anti-patterns' we found in the LOD-a-lot. To get an overview for the `anti-patterns' that we found in the LOD-a-lot we designed a webpage. On this webpage we want to give several overviews over the `anti-patterns' found in the LOD-a-lot.
 	
 	\begin{figure}[!t]
 		\subfloat[Circle-type `anti-pattern'.\label{fig:CircleAnti}]{%
-			\includegraphics[width=0.5\textwidth]{images/loop.png}
+			\includegraphics[width=0.5\textwidth]{images/Loop.png}
 		}
 		\subfloat[Kite-type `anti-pattern'.\label{fig:kiteAnti}]{%
-			\includegraphics[width=0.5\textwidth]{images/kite.png}
+			\includegraphics[width=0.5\textwidth]{images/Kite.png}
 		}
 	\end{figure}
 	
-	\textit{Analysis} In the images \ref{fig:CircleAnti} and \ref{fig:kiteAnti} We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. The second group is a circle with an attachment. There is only one isntance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. The third group is equal to the first group circle, but with the addition of \textit{owl:equivalentWith}. The fourth group is equal to the second group, but also with one or multiple \textit{owl:equivalentWith}. \\
-	END REWRITE
+	\textit{Analysis} In this experiment we created a webpage on\\ \url{https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html} on which we compare the different `anti-patterns' we have found in the LOD-a-lot. On this webpage, we introduce the different types of contradictions we found. We show the `anti-patterns' via a visualization. We also give a formulation of the `anti-pattern'. And finally, we generate the SPARQL queries for every `anti-pattern'.  \\
+	In the images \ref{fig:CircleAnti} and \ref{fig:kiteAnti} We show examples of the `anti-patterns' we found. We found that we can split the `anti-patterns' into four groups. The first group is are simple circles with with only two \textit{rdf:type}, \textit{rdfs:subClassOf} and \textit{owl:disjointWith}. These `anti-patterns' are the most common in a knowledge graph. The second group is a circle with an attachment. There is only one instance with \textit{rdf:type}. Then there are several \textit{rdfs:subClassOf} and one \textit{owl:disjointWith} relations. These groups are the second most common.  The third group is equal to the first group circle, but with the addition of different connections between the nodes that still make a contradiction but are less common, such as \textit{owl:equivalentWith} or \textit{rdfs:domain}. The fourth group is equal to the second group, but also with one or multiple other links such as \textit{owl:equivalentWith}. \\
 	\newpage
 	
 	\chapter{Applications for `anti-patterns'}\label{Implementation}
@@ -507,26 +500,21 @@
 	
 	\section{Analysis tool kit for inconsistent knowledge graphs}
 	In this paper, we show the implementation of analysing knowledge graphs on a set of characteristics. Our analysis of the knowledge graphs is split into two aspects. The first part is the retrieval of general statistics about the knowledge graph:
-	REWRITE:
 	\begin{itemize}
-		\item The number of triples of the knowledge graph.
-		\item The Expressivity of the logic language that is used in KB.
-		\item The number of distinct namespaces in the knowledge graph.
-		\item The number of distinct predicates used in the knowledge graph.
-		\item The distribution of indegree over all the nodes.
-		\item The distribution of outdegree over all the nodes.
-		\item The distribution of the Clustering Coefficient over all the nodes in the graph.
+		\item The number of triples of the knowledge graph. An easy metric to calculate. This metric can be used as a basis for other more advanced metrics, such as ratio of size of the contradictions versus the size of the knowledge graph. This then can be used to compare the knowledge graphs.
+		\item The number of distinct namespaces in the knowledge graph. This metric gives information about the amount of different `languages' e.g (OWL, RDFS, RDF, SKOS) that are used. 
+		\item The distribution of indegree over all the nodes. Which are the counts of all the ingoing links. This can be seen as the amount of predicate-object links counted per object.
+		\item The distribution of outdegree over all the nodes. Which are the counts of all the outgoing links. This can be seen as the amount of subject-predicate links counted per subject.
+		\item The distribution of the Clustering Coefficient over all the nodes in the graph. This is the degree in which nodes cluster together. Which could be an indication of contradictions.  
 	\end{itemize}
-	END REWRITE:
 	The second part of the analysis is specifically aimed at inconsistency statistics. We locate all contradictions that match the `anti-patterns' that have been found by retrieving `almost' all `anti-patterns' from the LOD-a-lot. With the `anti-patterns' we can retrieve the needed statistics that characterise the knowledge graph. The metrics that are used in our analysis are:
-	REWRITE:
+	
 	\begin{itemize}
-		\item Amount of `anti-patterns' in the knowledge graph.
-		\item Largest `anti-patterns' by a number of basic triple patterns found in the knowledge graph.
-		\item Distribution of the occurrences of contradictions found in the knowledge graph.
-		\item Distribution of the sizes of `anti-patterns' found in the knowledge graph.
+		\item Amount of `anti-patterns' in the knowledge graph. This a count of the amount of different anti-patterns found in the knowledge graph. With more `anti-patterns' found meaning that there are more distinct contradictions been made in the data.
+		\item Largest `anti-patterns' by a number of basic triple patterns found in the knowledge graph. Larger `anti-patterns' could indicate mistakes made by computers instead of humans.
+		\item Distribution of the occurrences of contradictions found in the knowledge graph. The distribution of the `anti-patterns' is an ranked list. 
+		\item Distribution of the sizes of `anti-patterns' found in the knowledge graph. The distribution is according to the size of the `anti-pattern'. Giving an overview if size of the `anti-pattern' can be related to the amount of occurences.
 	\end{itemize} 
-	END REWRITE:
 	\begin{figure}[!t]
 		\subfloat[This diagram shows one of the usecases for the `anti-patterns', namely Analytics.\label{fig:AnalyticsDrawing}]{%
 			\includegraphics[width=0.45\textwidth]{images/AnalyticsDrawing.png}
@@ -539,25 +527,23 @@
 		\label{fig:PipelinePart45}
 	\end{figure}
 	
-	\section{Sampling tool kit for inconsistent knowledge graphs}
+	\section{Sampling toolkit for inconsistent knowledge graphs}
 	The second implementation that makes use of the `anti-patterns' is the implementation of sampling a knowledge graph. In this paper, the goal of sampling is to sample a knowledge graph into a smaller partition with two constraints. The first constraint is that the knowledge graph stays connected. Secondly, we give the user the possibility to choose a set of `anti-patterns' and the minimal amount of contradictions that can be in the sample.
-	REWRITE:
-	To achieve the goal of sampling while keeping the constraints in mind means that we can not use any techniques that start from a node, or a set of nodes, such as random walks, or forest fire sampling. Because we then cannot guarantee connectedness or the minimal amount of contradictions.\\ 
-	END REWRITE:
+	Sampling inconsistent knowledge graphs is tricky, with the contraints we set for us. Most sampling techniques pick a random node as their starting point for sampling. For example the random walks, start on a random node and walk around and chain the links and other nodes to the starting node to generate a sample. This would make the graph always connected, but we can not add random contradictions into the graph without guaranteeing connections between the contradictions via the random walks. Due to this, we need to design our own sampling technique which can solve the problem we set with our constraints.
 	Our algorithm instead uses random constrained deletion; this algorithm randomly deletes triples that can be safely deleted. There are triples that can not be deleted.\\
 	The first set of triples that can not be deleted are the triples that describe the contradictions. To make sure that contradictions are not deleted, we start by building an HDT\cite{FMPGPA:13}\cite{MPAF:12} that stores all the triples that make up these contradictions. We use a SPARQL query to find the results of each of the `anti-patterns', and retrieve the number of contradictions the user wanted as BTPs. The triples are then combined and converted to an HDT. The algorithm can now check if a triple can be safely deleted. By checking if the triple is not present in the HDT.\\
 	The second set of triples that can not be deleted are the triples that break the to sample graph into smaller subgraphs. To negate this problem the algorithm uses local connectedness. A triple may only be safely deleted if there is a second path that connects the object and the subject without having to pass through the severed link.
-	REWRITE:
-	INSERT IMAGE
-	END REWRITE:
+	%	REWRITE:
+	%	INSERT IMAGE
+	%	END REWRITE:
 	There is one exception to the rule when either the subject or the object does not have any other links, the triple is then is also allowed to be deleted. With this, we can guarantee that the graph does not split into smaller subgraphs. 
 	The sampling by random deletion now continues to delete triples until the sample reaches the size given by the user, or when it is no longer able to delete triples. This can happen either because the only triples that can be deleted split the graph into subgraphs, and/or the only triples that can be safely deleted belong to the non-deletable contradictions.
-	REWRITE:
-	INSERT ALGORITHM
-	END REWRITE:
+	%	REWRITE:
+	%	INSERT ALGORITHM
+	%	END REWRITE:
 	
 	\newpage
-	\chapter{External validation}\label{ExternalExperiments}
+	\chapter{External validation}\label{externalvalidation}
 	Next, we will show the results of the two implementations we designed, which we will also analyze. In these experiments, we use YAGO, and DBpedia, DBLP for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
 	
 	\section{Data}
@@ -570,26 +556,22 @@
 	DBpedia\cite{DBpedia} is a crowdsourced project that extracts structural information from the Wikimedia, the foundation on which Wikipedia, but also others, such as Wikibooks, Wiktionary, and wiki data is based. DBpedia is an ongoing project, and at this moment their knowledge graph consists out of 1 billion statements about 4.58 million objects in the English version, and in total 9.5 billion statements if we combine all other languages as well. In this work, we focus on only the English version, as this has already been transformed into the correct file format for us. 
 	
 	\subsection{DBLP}
-	dblp\cite{DBLP} The dblp knowledge graph is a large knowledge graph that stores bibliographic information on major computer science publications. It has grown from a small experimental knowledge graph to a popularly used knowledge graph that is used for testing and benchmarking.
-	REWRITE:ADD SIZE AND USE CASE
-	END REWRITE:
+	dblp\cite{DBLP} The dblp knowledge graph is a large knowledge graph that stores bibliographic information on major computer science publications. It has grown from a small experimental knowledge graph to a popularly used knowledge graph that is used for testing and benchmarking. The knowledge graph contains 55 million triples.
 	
-	REWRITE:
-	INSERT WORDNET
-	END REWRITE:
+	\subsection{Wordnet}
+	Wordnet is a smaller knowledge graph containing a larger number of English nouns, verbs, adjectives and adverbs all grouped. The words have been linked, and can be used as thesaurus. The dataset consists out of 5.5 million triples for 118.000 words.
 	
-	REWRITE:
-	INSERT swdf
-	END REWRITE:
+	\subsection{swdf}
+	A small dataset comprising out of 242.000 triples. The dataset is small test case dataset that is mostly used by researchers to use as a testcase for algorithms. In this case we use the dataset as testcase for our analysis algorithm.
 	
 	\section{Experiment 3: Implementation 1, Analysing inconsistent graphs}
 	%\section{Experiment 4: Implementation 1, Analysing inconsistent graphs}
 	\textit{Experiment description}. We are retrieving the statistics from several knowledge graphs differing in size. In this experiment, we retrieve relevant statistics from YAGO, DBpedia. The two inconsistent knowledge graphs. And we use three smaller consistent knowledge graphs, wordnet31, dblp-2012-11-28b, swdf as control knowledge graphs. The statistics we retrieve are explained in chapter \ref{Implementation}.  \\
 	
-	REWRITE:
-	\textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graph. As noticed, the results show several distinctions between the three different knowledge graphs. Most important differences are the size and the number of different namespaces. These statistics are easy to collect. The important statistics are the Largest `anti-pattern', that can be found in the data. And the amount of distinct `anti-patterns' that can be found in the knowledge graph. Here we can see that size does matter in the amount of different `anti-patterns' found. But most noticeable with smaller graphs. \\
-	END REWRITE:
-	
+	\textit{Analysis}. Table \ref{table:GraphStats} shows the analytics about the knowledge graphs we retrieved from our analytics toolkit. As noticed, the results show several distinctions between the three different knowledge graphs. Most important differences are the size and the number of different namespaces. The important statistics are the largest `anti-pattern', that can be found in the data. Finally the amount of distinct `anti-patterns' that can be found in the knowledge graph. Here we can see that size does matter in the amount of different `anti-patterns' found, but is most noticeable with smaller graphs. \\
+	Figures \ref{fig:indegree},  \ref{fig:outdegree},  \ref{fig:Coeff}, show the different distribution of statistics of the knowledge graphs. We can distinctly see different knowledge graphs in the data. The first thing to notice is the drop in the graphs in \ref{fig:indegree}. In all but the swdf knowledge graph, we can see a visible drop in the number of ingoing connections, between 10 and 100 incoming connections. \\
+	The outgoing connections in graph \ref{fig:outdegree} do not have interesting characteristics but will be useful for comparing the sampling method in the next experiment. 
+	The final graph about the knowledge graph statistics \ref{fig:Coeff} shows the clustering coefficient most important to note is the high amplitude graph for dblp-2012-11-28b. \\
 	\begin{table}[!t]
 		\centering
 		\resizebox{\textwidth}{!}{
@@ -597,9 +579,9 @@
 				\hline
 				& Size          & Namespaces  & Amount of `Anti-patterns' &  Largest Inconsistency \\ \hline \hline
 				LOD & 28,362,198,927 & - & 222 & 19\\
-				DBpedia & 1,040,358,853            & 20                            & 13                         & 19                        \\   
-				YAGO     & 158,991,568             & 11                            & 135                        & 19                        \\ 
-				dblp-2012-11-28b & 55,586,971        & 7  & 0 & 0\\
+				DBpedia & 1,040,358,853            & 20                            & 13                         & 12                        \\
+				YAGO     & 158,991,568             & 11                            & 135                        & 16                        \\
+				DBLP & 55,586,971 	   & 7  & 0 & 0\\
 				wordnet  & 5,558,748                & 5                                 & 0 & 0\\
 				swdf         & 242,256                & 22 & 0 & 0\\
 				
@@ -607,20 +589,16 @@
 		\caption{table showing several statistics about graphs.}
 		\label{table:GraphStats}
 	\end{table}
-	REWRITE:
-	Figures \ref{fig:indegree},  \ref{fig:outdegree},  \ref{fig:Coeff}, show the different distribution of statistics of the knowledge graphs. We can distinctly see different knowledge graphs. The first thing to notice is the drop in the graphs in \ref{fig:indegree}. In all but the swdf knowledge graph, we can see a visible drop in the number of ingoing connections, between 10 and 100 incoming connections. \\
-	The Outgoing connections in graph \ref{fig:outdegree} do not have interesting characteristics but will be useful for comparing the sampling method in the next experiment. 
-	The final graph about the knowledge graph statistics \ref{fig:Coeff} shows the Clustering Coefficient most important to note is the high amplitude graph for dblp-2012-11-28b. \\
-	END REWRITE:
+	
 	\begin{figure}[!t]
 		\subfloat[The distribution of indegree over all nodes.\label{fig:indegree}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure4.png}
+			\includegraphics[width=0.33\textwidth]{images/figure4.eps}
 		}
 		\subfloat[The distribution of outdegree over all nodes.\label{fig:outdegree}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure5.png}
+			\includegraphics[width=0.33\textwidth]{images/figure5.eps}
 		}
 		\subfloat[The distribution of the Clustering Coefficient over all nodes.\label{fig:Coeff}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure6.png}
+			\includegraphics[width=0.33\textwidth]{images/figure6.eps}
 		}
 	\end{figure}
 	
@@ -629,13 +607,13 @@
 	\begin{figure}[ht]
 		\centering
 		\subfloat[Plot showing the Distribution of size.\label{fig:DistributionSize}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure1.png}
+			\includegraphics[width=0.33\textwidth]{images/figure1.eps}
 		}
 		\subfloat[Plot showing the Distribution of Distinct `anti-patterns'.\label{fig:SizeDistinct}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure2.png}
+			\includegraphics[width=0.33\textwidth]{images/figure2.eps}
 		}
 		\subfloat[Plot showing the Distribution of occurrences.\label{fig:Distributionoccurrences}]{%
-			\includegraphics[width=0.33\textwidth]{images/figure3.png}
+			\includegraphics[width=0.33\textwidth]{images/figure3.eps}
 		}
 		\caption{Figures showing several statistics about the Anti patterns.}
 		\label{fig:AntipatternStats}
@@ -651,9 +629,9 @@
 			\begin{tabular}{l|llllll}
 				\hline
 				& Size          & Namespaces  & Amount of `Anti-patterns' &  Largest Inconsistency \\ \hline \hline
-				DBpedia & 83,464,390            & 14                            & 2                         & 14                        \\   
-				YAGO     & 62,562,330           & 7                             & 38                        & 19                        \\ 
-				dblp-2012-11-28b  & 16,812,580     & 3                             & 0 & 0
+			DBpedia-20\% & 83,464,390            & 2                            & 11                         & 12                        \\
+YAGO-20\%     & 62,562,330           & 7                             & 123                        & 16                        \\
+dblp-20\%  & 16,812,580 	& 3 							& 0 & 0
 		\end{tabular}}
 		\caption{table showing several statistics about graphs.}
 		\label{table:GraphStatsSample}
@@ -668,17 +646,33 @@
 	In figure \ref{fig:CoeffSample} it is visible that all three sampled knowledge graphs have the same shape in the clustering coefficient as their original knowledge graphs. While the respective sizes of the knowledge graphs make the plot harder to read, it can still be seen that the plots match the shapes of the original dataset.
 	
 	
+		
+	\begin{figure}[ht]
+		\centering
+		\subfloat[Plot showing the Distribution of `anti-pattern' size, for the sampled and original graph.\label{fig:DistributionSizeSample}]{%
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure1.eps}
+		}
+		\subfloat[Shows the distribution of distinct `anti-patterns', for the sampled and original graphs.\label{fig:SizeDistinctSample}]{%
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure2.eps}
+		}
+		\subfloat[Shows the distribution of occurrences, for the sampled and original graphs.\label{fig:DistributionoccurrencesSample}]{%
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure3.eps}
+		}
+		\caption{Figures showing several statistics about the Anti patterns within the samples.}
+		\label{fig:AntipatternStatsSample}
+	\end{figure}
+	
 	
 	
 	\begin{figure}[!t]
 		\subfloat[The distribution of indegree over all nodes of the sample.\label{fig:indegreeSample}]{%
-			\includegraphics[width=0.33\textwidth]{images/Samplefigure4.png}
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure4.eps}
 		}
 		\subfloat[The distribution of outdegree over all nodes of the sample.\label{fig:outdegreeSample}]{%
-			\includegraphics[width=0.33\textwidth]{images/Samplefigure5.png}
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure5.eps}
 		}
 		\subfloat[The distribution of the Clustering Coefficient over all nodes of the sample.\label{fig:CoeffSample}]{%
-			\includegraphics[width=0.33\textwidth]{images/Samplefigure6.png}
+			\includegraphics[width=0.33\textwidth]{images/Samplefigure6.eps}
 		}
 		\caption{Figures showing several statistics about graphs.}
 		\label{fig:GraphStats}
@@ -690,7 +684,7 @@
 	
 	\chapter{Conclusion}\label{Conclusion}
 	In this work, we describe an anti-pattern as a minimal set of uninstantiated basic triple patterns that match an inconsistent subgraph in a knowledge graph. The advantage of converting justifications of contradictions in `anti-patterns' is that now we can use `anti-patterns' to locate contradictions in other knowledge graphs, which is a good method with the generalization to `anti-patterns'. Transferring knowledge about contradictions from one graph to the next was not easy with only justifications, but the `anti-patterns' solve this problem. 
-	Secondly, the generalisation saves the information space, as several justifications can be mapped onto a single `anti-pattern', and retrieving the justification from the knowledge graph can now be done using a simple query. Now using the `anti-patterns' finding how inconsistent a knowledge graph is can be asked by using just SPARQL. Although we can not prove that being devoid of `anti-patterns' will mean that the knowledge graph is consistent. We can say for sure that if there is an `anti-pattern' match, the knowledge graph is inconsistent, and how.  \\
+	Secondly, the generalisation saves the information space, as several justifications can be mapped onto a single `anti-pattern', and retrieving the justification from the knowledge graph can now be done using a simple query. Now using the `anti-patterns' finding how inconsistent a knowledge graph is can be asked by using just SPARQL. Although we can not prove that being devoid of `anti-patterns' will mean that the knowledge graph is consistent, at least we can say for sure that if there is an `anti-pattern' match, the knowledge graph is inconsistent, and how.  \\
 	
 	The second contribution we introduce in this work is the extraction pipeline. The pipeline has been designed to extract `anti-patterns' from any natural knowledge graph. In this work, we show that we can extract all `anti-patterns' from the knowledge graphs in our experiments. However, we can not prove that our implemented method will extract all `anti-patterns', due to the design decisions made in chapter \ref{Method}.\\ 
 	

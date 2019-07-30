@@ -4,7 +4,7 @@ import numpy as np
 from scipy.interpolate import spline
 
 
-Colors = ['#3cb44b','#e6194b', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6','#ffe119', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
+Colors = [ '#4363d8', '#f58231', '#911eb4', '#46f0f0',  '#46f0f0', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
 
 def plotting(FileListInconsistency, FileListKB, Sample):
     x = 0
@@ -119,54 +119,54 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         plt.xlabel('"Anti-pattern" type')
 
 
-    # for file in FileListKB:
-    #     json_file = open(file, 'r')
-    #     data = json.load(json_file)
+    for file in FileListKB:
+        json_file = open(file, 'r')
+        data = json.load(json_file)
 
-    #     datasetName = file.split("/")[-2]
-    #     labels2.append(datasetName)
-    #     if not(datasetName in ColorScheme):
-    #         ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
-    #     XcoorIn = []
-    #     YcoorIn = []
-    #     for key in sorted(data["InDegree"].keys(), key=int):
-    #         XcoorIn.append(int(key))
-    #         YcoorIn.append(int(data["InDegree"][key]))
+        datasetName = file.split("/")[-2]
+        labels2.append(datasetName)
+        if not(datasetName in ColorScheme):
+            ColorScheme[datasetName] = Colors[len(ColorScheme.keys())]
+        XcoorIn = []
+        YcoorIn = []
+        for key in sorted(data["InDegree"].keys(), key=int):
+            XcoorIn.append(int(key))
+            YcoorIn.append(int(data["InDegree"][key]))
 
-    #     plt.figure(4+x)
-    #     plt.title('Plot showing the Distribution of the nodes with inlinks')
-    #     plt.plot(XcoorIn, YcoorIn, color=ColorScheme[datasetName])
-    #     plt.ylabel('Occurences of the nodes with inlinks')
-    #     plt.xlabel('Amount of inlinks towards the node')
+        plt.figure(4+x)
+        plt.title('Plot showing the Distribution of the nodes with inlinks')
+        plt.plot(XcoorIn, YcoorIn, color=ColorScheme[datasetName])
+        plt.ylabel('Occurences of the nodes with inlinks')
+        plt.xlabel('Amount of inlinks towards the node')
 
 
-    #     XcoorOut = []
-    #     YcoorOut = []
-    #     for key in sorted(data["OutDegree"].keys(), key=int):
-    #         XcoorOut.append(int(key))
-    #         YcoorOut.append(int(data["OutDegree"][key]))
+        XcoorOut = []
+        YcoorOut = []
+        for key in sorted(data["OutDegree"].keys(), key=int):
+            XcoorOut.append(int(key))
+            YcoorOut.append(int(data["OutDegree"][key]))
 
-    #     plt.figure(5+x)
-    #     plt.title('Plot showing the Distribution of the nodes with outlinks')
-    #     plt.plot(XcoorOut, YcoorOut, color=ColorScheme[datasetName])
-    #     plt.ylabel('Occurences of the nodes with equal outlinks')
-    #     plt.xlabel('Amount of outlinks outwards the node')
+        plt.figure(5+x)
+        plt.title('Plot showing the Distribution of the nodes with outlinks')
+        plt.plot(XcoorOut, YcoorOut, color=ColorScheme[datasetName])
+        plt.ylabel('Occurences of the nodes with equal outlinks')
+        plt.xlabel('Amount of outlinks outwards the node')
 
-    #     XcoorCluster = []
-    #     YcoorCluster = []
+        XcoorCluster = []
+        YcoorCluster = []
 
-    #     for key in sorted(data["ClusteringCoefficient"].keys(), key=float):
-    #         XcoorCluster.append(float(key))
-    #         YcoorCluster.append(int(data["ClusteringCoefficient"][key]))
-    #     # xnew = np.linspace(min(XcoorCluster),max(XcoorCluster),300) #300 represents number of points to make between T.min and T.max
+        for key in sorted(data["ClusteringCoefficient"].keys(), key=float):
+            XcoorCluster.append(float(key))
+            YcoorCluster.append(int(data["ClusteringCoefficient"][key]))
+        # xnew = np.linspace(min(XcoorCluster),max(XcoorCluster),300) #300 represents number of points to make between T.min and T.max
 
-    #     # power_smooth = spline(XcoorCluster,YcoorCluster,xnew)
-    #     plt.figure(6+x)
-    #     plt.title('Plot showing the Distribution of the nodes with equal ClusteringCoefficient')
-    #     #plt.plot(xnew,power_smooth, color=ColorScheme[datasetName])
-    #     plt.plot(XcoorCluster, YcoorCluster, color=ColorScheme[datasetName])
-    #     plt.ylabel('Occurences of the nodes with equal ClusteringCoefficient')
-    #     plt.xlabel('ClusteringCoefficient of the node')
+        # power_smooth = spline(XcoorCluster,YcoorCluster,xnew)
+        plt.figure(6+x)
+        plt.title('Plot showing the Distribution of the nodes with equal ClusteringCoefficient')
+        #plt.plot(xnew,power_smooth, color=ColorScheme[datasetName])
+        plt.plot(XcoorCluster, YcoorCluster, color=ColorScheme[datasetName])
+        plt.ylabel('Occurences of the nodes with equal ClusteringCoefficient')
+        plt.xlabel('ClusteringCoefficient of the node')
 
 
 
@@ -185,7 +185,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
 
         if current == 2:
             ax.set_yscale("log", nonposy='clip')
-        if current == 3:
+        if current >= 3:
             ax.set_yscale("log", nonposy='clip')
             ax.set_xscale("log", nonposy='clip')
         # # Ensure that the axis ticks only show up on the bottom and left of the plot.
@@ -195,5 +195,5 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         ax.legend(loc='upper right')
         elemPLT = int(current)
         print(elemPLT)
-        plt.savefig("plots/figure-%d.eps" % elemPLT, bbox_inches="tight", format='eps', dpi=500)
-        plt.savefig("plots/figure-%d.png" % elemPLT, bbox_inches="tight", format='png', dpi=500)
+        plt.savefig("plots/figure%d.eps" % elemPLT, bbox_inches="tight", format='eps', dpi=500)
+        plt.savefig("plots/figure%d.png" % elemPLT, bbox_inches="tight", format='png', dpi=500)
