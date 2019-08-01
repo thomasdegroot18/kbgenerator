@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ThesisVersion3.aux
+The style file: plain.bst
+Database file #1: ThesisBib.bib
+Warning--entry type for "Openllet:2019" isn't style-file defined
+--line 314 of file ThesisBib.bib
+Warning--entry type for "OWLPrimer:2012" isn't style-file defined
+--line 323 of file ThesisBib.bib
+Warning--entry type for "rdfPrimer:2014" isn't style-file defined
+--line 341 of file ThesisBib.bib
+Warning--entry type for "RDFSchema:2014" isn't style-file defined
+--line 350 of file ThesisBib.bib
+You've used 32 entries,
+            2118 wiz_defined-function locations,
+            732 strings with 10421 characters,
+and the built_in function-call counts, 12060 in all, are:
+= -- 1191
+> -- 624
+< -- 10
++ -- 253
+- -- 214
+* -- 859
+:= -- 1972
+add.period$ -- 103
+call.type$ -- 32
+change.case$ -- 202
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 441
+empty$ -- 897
+format.name$ -- 214
+if$ -- 2569
+int.to.chr$ -- 0
+int.to.str$ -- 32
+missing$ -- 27
+newline$ -- 160
+num.names$ -- 65
+pop$ -- 215
+preamble$ -- 1
+purify$ -- 171
+quote$ -- 0
+skip$ -- 335
+stack$ -- 0
+substring$ -- 683
+swap$ -- 114
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 124
+warning$ -- 0
+while$ -- 106
+width$ -- 34
+write$ -- 370
+(There were 4 warnings)
