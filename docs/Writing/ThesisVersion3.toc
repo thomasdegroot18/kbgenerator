@@ -45,4 +45,4 @@
 \contentsline {subsection}{\numberline {8.1.5}swdf}{35}
 \contentsline {section}{\numberline {8.2}Experiment 3: Implementation 1, Analysing inconsistent graphs}{35}
 \contentsline {section}{\numberline {8.3}Experiment 4: Use case 2, Sampling inconsistent graphs}{36}
-\contentsline {chapter}{\numberline {9}Conclusion}{39}
+\contentsline {chapter}{\numberline {9}Conclusion}{40}
