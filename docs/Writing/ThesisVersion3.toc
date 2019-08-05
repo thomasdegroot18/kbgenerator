@@ -8,41 +8,41 @@
 \contentsline {section}{\numberline {2.2}Reasoner}{7}
 \contentsline {subsection}{\numberline {2.2.1}Reasoning types}{7}
 \contentsline {section}{\numberline {2.3}Example introduction}{8}
-\contentsline {chapter}{\numberline {3}Related Work}{12}
-\contentsline {section}{\numberline {3.1}Method}{12}
-\contentsline {section}{\numberline {3.2}Analysis}{13}
-\contentsline {section}{\numberline {3.3}Sampling}{14}
-\contentsline {chapter}{\numberline {4}Approach}{15}
-\contentsline {section}{\numberline {4.1}Problem Description}{15}
-\contentsline {subsection}{\numberline {4.1.1}Research questions}{16}
-\contentsline {section}{\numberline {4.2}Method}{16}
-\contentsline {subsection}{\numberline {4.2.1}Proposed Applications}{16}
-\contentsline {subsection}{\numberline {4.2.2}Proposed Experiments}{17}
-\contentsline {chapter}{\numberline {5}Defining and Finding `Anti-patterns'}{19}
-\contentsline {section}{\numberline {5.1}Anti-pattern definition}{19}
-\contentsline {section}{\numberline {5.2}Algorithmic overview and proof}{20}
-\contentsline {section}{\numberline {5.3}Implementation of the Algorithm}{21}
-\contentsline {subsection}{\numberline {5.3.1}Subgraph retrieval}{21}
-\contentsline {subsection}{\numberline {5.3.2}Justification retrieval}{24}
-\contentsline {subsection}{\numberline {5.3.3}Justification generalization to `anti-patterns'}{24}
-\contentsline {section}{\numberline {5.4}Design decisions}{27}
-\contentsline {chapter}{\numberline {6}Internal validation}{28}
-\contentsline {section}{\numberline {6.1}Data}{28}
-\contentsline {subsection}{\numberline {6.1.1}Pizza-ontology}{28}
-\contentsline {subsection}{\numberline {6.1.2}LOD-a-lot}{28}
-\contentsline {section}{\numberline {6.2}Experimental Setup}{28}
-\contentsline {section}{\numberline {6.3}Experiment 1: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{29}
-\contentsline {section}{\numberline {6.4}Experiment 2: Anti-pattern Analysis}{30}
-\contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{31}
-\contentsline {section}{\numberline {7.1}Analysis tool kit for inconsistent knowledge graphs}{31}
-\contentsline {section}{\numberline {7.2}Sampling toolkit for inconsistent knowledge graphs}{32}
-\contentsline {chapter}{\numberline {8}External validation}{35}
-\contentsline {section}{\numberline {8.1}Data}{35}
-\contentsline {subsection}{\numberline {8.1.1}YAGO}{35}
-\contentsline {subsection}{\numberline {8.1.2}DBpedia}{35}
-\contentsline {subsection}{\numberline {8.1.3}DBLP}{36}
-\contentsline {subsection}{\numberline {8.1.4}Wordnet}{36}
-\contentsline {subsection}{\numberline {8.1.5}swdf}{36}
-\contentsline {section}{\numberline {8.2}Experiment 3: Implementation 1, Analysing inconsistent graphs}{36}
-\contentsline {section}{\numberline {8.3}Experiment 4: Use case 2, Sampling inconsistent graphs}{37}
-\contentsline {chapter}{\numberline {9}Conclusion}{40}
+\contentsline {chapter}{\numberline {3}Related Work}{10}
+\contentsline {section}{\numberline {3.1}Method}{10}
+\contentsline {section}{\numberline {3.2}Analysis}{11}
+\contentsline {section}{\numberline {3.3}Sampling}{12}
+\contentsline {chapter}{\numberline {4}Approach}{13}
+\contentsline {section}{\numberline {4.1}Problem Description}{13}
+\contentsline {subsection}{\numberline {4.1.1}Research questions}{14}
+\contentsline {section}{\numberline {4.2}Method}{14}
+\contentsline {subsection}{\numberline {4.2.1}Proposed Applications}{14}
+\contentsline {subsection}{\numberline {4.2.2}Proposed Experiments}{15}
+\contentsline {chapter}{\numberline {5}Defining and Finding `Anti-patterns'}{17}
+\contentsline {section}{\numberline {5.1}Anti-pattern definition}{17}
+\contentsline {section}{\numberline {5.2}Algorithmic overview and proof}{18}
+\contentsline {section}{\numberline {5.3}Implementation of the Algorithm}{19}
+\contentsline {subsection}{\numberline {5.3.1}Subgraph retrieval}{19}
+\contentsline {subsection}{\numberline {5.3.2}Justification retrieval}{20}
+\contentsline {subsection}{\numberline {5.3.3}Justification generalization to `anti-patterns'}{21}
+\contentsline {section}{\numberline {5.4}Design decisions}{22}
+\contentsline {chapter}{\numberline {6}Internal validation}{24}
+\contentsline {section}{\numberline {6.1}Data}{24}
+\contentsline {subsection}{\numberline {6.1.1}Pizza-ontology}{24}
+\contentsline {subsection}{\numberline {6.1.2}LOD-a-lot}{24}
+\contentsline {section}{\numberline {6.2}Experimental Setup}{24}
+\contentsline {section}{\numberline {6.3}Experiment 1: Can we design a pipeline that can retrieve a (sub-)set inconsistencies and translate the inconsistencies to `anti-patterns'?}{25}
+\contentsline {section}{\numberline {6.4}Experiment 2: Anti-pattern Analysis}{26}
+\contentsline {chapter}{\numberline {7}Applications for `anti-patterns'}{27}
+\contentsline {section}{\numberline {7.1}Analysis tool kit for inconsistent knowledge graphs}{27}
+\contentsline {section}{\numberline {7.2}Sampling toolkit for inconsistent knowledge graphs}{28}
+\contentsline {chapter}{\numberline {8}External validation}{31}
+\contentsline {section}{\numberline {8.1}Data}{31}
+\contentsline {subsection}{\numberline {8.1.1}YAGO}{31}
+\contentsline {subsection}{\numberline {8.1.2}DBpedia}{32}
+\contentsline {subsection}{\numberline {8.1.3}DBLP}{32}
+\contentsline {subsection}{\numberline {8.1.4}Wordnet}{32}
+\contentsline {subsection}{\numberline {8.1.5}swdf}{33}
+\contentsline {section}{\numberline {8.2}Experiment 3: Implementation 1, Analysing inconsistent graphs}{33}
+\contentsline {section}{\numberline {8.3}Experiment 4: Use case 2, Sampling inconsistent graphs}{35}
+\contentsline {chapter}{\numberline {9}Conclusion}{38}
