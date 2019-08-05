@@ -80,14 +80,13 @@
 		
 	\end{titlepage}
 	\pagenumbering{roman}
-	% Writing of the report
 	
 	
 	\newpage
 	\chapter*{Abstract}
-	Based on formal semantics, most of the knowledge graphs on the Web of Data can be put to practical use. Unfortunately, a significant number of those graphs is logically inconsistent. This makes reasoning impossible and the knowledge formally useless. While methods exist to deal with contradictions, no systematic way exists to evaluate algorithms for repair or reasoning with inconsistency on large realistic knowledge graphs. Even worse, there is not even a methodology for analysing inconsistency in graphs in the first place. \\
+	Based on formal semantics, most of the knowledge graphs on the Web of Data can be put to practical use. Unfortunately, a significant number of those graphs are logically inconsistent. This makes reasoning impossible and the knowledge formally useless. While methods exist to deal with contradictions, no systematic way exists to evaluate these algorithms on large realistic knowledge graphs. Even worse, there is not even a methodology for analysing inconsistency in graphs in the first place. \\
 	
-	While large inconsistent knowledge graphs are available, their size often prohibits their usage for benchmarking. Thus, current research often resorts to synthesised knowledge graphs. In this paper, we present a formal notion of `anti-patterns', generalised basic graph patterns, describing contradictions in knowledge graphs. We present an extraction pipeline that retrieves explanations for contradictions in the LOD-a-lot collection of knowledge graphs and generalise them into what we call `anti-patterns'. We enlist an (almost) complete set of `anti-patterns' found in the LOD-a-lot. Next, we evaluate the set `anti-patterns` on their intrinsic characteristics. Finally, we introduce two usages of those `anti-patterns': first, for knowledge graph analysis and, secondly, for generating systematic samples from knowledge graphs. We showcase the two implementations by analysing a set of knowledge graphs and generating configurable inconsistent subontologies of those of variable size. 
+	While large inconsistent knowledge graphs are available, their size often prohibits their usage for benchmarking. Thus, current research often resorts to synthesised knowledge graphs. In this paper, we present a formal notion of `anti-patterns'; generalised basic graph patterns that describe contradictions in knowledge graphs. We present an extraction pipeline that retrieves explanations for contradictions in the LOD-a-lot collection of knowledge graphs and generalise them into what we call `anti-patterns'. We enlist an (almost) complete set of `anti-patterns' found in the LOD-a-lot. Next, we evaluate the set `anti-patterns` on their intrinsic characteristics. Finally, we introduce two usages of those `anti-patterns': first, for knowledge graph analysis, and secondly, for generating systematic samples from knowledge graphs. We showcase the two implementations by analysing a set of knowledge graphs and from these we generate configurable inconsistent subontologies of variable size. 
 	
 	\newpage
 	\tableofcontents
@@ -96,7 +95,7 @@
 	
 	\chapter{Introduction}\label{Introduction}
 	\section{Motivation}
-	\textit{Background}. Blaise Pascal once said, "A contradiction is not a sign of falsity, nor the lack of a contradiction a sign of truth." Large amounts of data has been made available for everyone to use and Multi-billion facts, also called statements or triples, for a linked-data dataset being the standard instead of the exception. We are sitting on a large amount of open data. The problem is that we do not know if all the facts in the dataset can be considered as the truth. We know that data is inherently dirty. It is also known that finding new facts from the data is impossible if the data holds facts that are contradicting. While there is active development in solving the problem of contradictions in datasets. For example, ignoring the parts that hold contradictory statements and still use the rest of the dataset. Only this method would still miss facts that could have been found if we removed only the contradictory facts and used a dataset that is devoid of contradictions. So while a contradiction is no sign of a false dataset, a lack of contradictions would certainly be a step in the right direction to the truth.\\
+	\textit{Background}. Blaise Pascal once said, "A contradiction is not a sign of falsity, nor the lack of a contradiction a sign of truth." Large amounts of data have been made available for everyone. Multi-billion facts – also called statements, or tiples – are now the standard for a linked-data dataset instead of the exception. Due to that, we are sitting on a large amount of open data. The problem is that we do not know if all the facts in the dataset can be considered the truth. We know that data is inherently dirty. It is also known that finding new facts from the data is impossible if the data holds facts that are contradictory. While there is active development in solving the problem of contradictions in datasets. For example, ignoring the parts that hold contradictory statements and still use the rest of the dataset. Only this method would still miss facts that could have been found if we removed only the contradictory facts and used a dataset that is devoid of contradictions. So while a contradiction is no sign of a false dataset, a lack of contradictions would certainly be a step in the right direction to the truth.\\
 	
 	\textit{Motivation}. Finding and removing contradictions from datasets in a simple and systematic way has a number of benefits. Firstly we could study the types of mistakes that have been made in the datasets. How these mistakes are made, by automatic algorithms, or by people in the process. This helps to find problems at the source, the generation of the data, instead of later in the process. \\
 	Secondly, we can generalize the contradictions and design blueprints that can be used to describe groups of contradictions, standardized to apply to other datasets as well. Thirdly, we could use the found contradictions to analyze existing datasets. We can use the blueprints to find if there are contradictions found in other datasets. 
@@ -207,7 +206,9 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 	\textit{Justification}. A justification\cite{Horridge:2009} is a set of axioms that acts as an explanation for an entailment.
 	Formally, a justification is a minimal subset of the original axioms which are sufficient to prove the entailed formula. In this paper, we interpret a justification as an explanation of contradiction. Given that our knowledge graphs are sets of triples, our justifications are instantiated BPGs and are always a minimal set of axioms for a single contradiction. \\
 	
-	%REWRITE: ADD DEFINITION
+\begin{definition} 
+	Let $G$ be an knowledge graph such that $G \models \eta$. $J$ is a justification for $\eta$ in $G$ if $J \subseteq G$, and $J \models \eta$, and for all $J'\subseteq J, J' \not\models \eta$.  \cite{Horridge:2009}
+\end{definition}
 	
 	\section{Example introduction}
 	Now that the basic notions of a knowledge graph are explained we will show a knowledge graph work in two examples. 
@@ -320,13 +321,11 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 	Now that we removed all the information that blocks generalization, we are left with the `anti-pattern'. Now the `anti-pattern' can be used to match various inconsistent justifications in the knowledge graph. We define an \textit{`Anti-pattern'} in the following definition:\\
 	
 	\begin{definition} 
-		An \textit{`Anti-pattern'} of a knowledge graph G is a minimal set of uninstantiated Basic Triple Patterns that match an inconsistent subgraph of G.
+		An \textit{`Anti-pattern'} of a knowledge graph $G$ is a minimal set of uninstantiated Basic Triple Patterns that match an inconsistent subgraph of $G$.
 	\end{definition}
 	
 	We show the conversion of a justification(instantiated BPG) to an `Anti pattern' (uninstantiated BPG) in figure \ref{fig:JustificationtoGeneral}.
-%	REWRITE:
-%	ADD DEFINITION
-%	END REWRITE:
+	
 	
 	\begin{figure}
 		\includegraphics[width=\linewidth]{images/SimplifiedPipelineMissingPart.png}
@@ -373,10 +372,7 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 	\end{figure}
 	
 	Due to the large size of most knowledge graphs, running a justification retrieval algorithm over the complete knowledge graph, to retrieve all contradictions, would be impractical. To speed up this process, we decided to split the knowledge graph into smaller subgraphs to reduce the time the justification retrieval algorithm needs. Figure \ref{fig:subgraphRetrieval} shows the process of splitting the knowledge graph into smaller subgraphs.\\
-	Each subgraph is generated by extending the root node. The root node is retrieved by taking a triple from the complete graph and taking the node that is in the subject position as the starting point. The graph is expanded by finding all the triples that have the root node as the subject, and we add these triples to the subgraph. Next, all the nodes that were in the object position are now used as expansion nodes, so for each object, we find all the triples that match where the object is put in the subject position. We keep expanding the graph until it can not expand any further or the maximum amount of triples of 5000 triples is reached. The value of 5000 triples is chosen because it is large enough to hold almost all justification patterns but small enough that it does not take long to retrieve all justifications.\\
-%	REWRITE: 
-%	EXPAND ON CREATION OF SUBGRAPHS
-%	END REWRITE:
+	Each subgraph is generated by extending the root node. The root node is retrieved by taking a triple from the complete graph and taking the node that is in the subject position as the starting point. The graph is expanded by finding all the triples that have the root node as the subject, and we add these triples to the subgraph. If the amount of triples we added does not exceed the amount of triples we set as graph, we need to expand the graph further. To expand, all the nodes that were in the object position are now used as expansion nodes, so for each object, we find all the triples that match where the object is put in the subject position. We keep expanding the graph until it can not expand any further or the maximum amount of triples of 5000 triples is reached. The value of 5000 triples is chosen because it is large enough to hold almost all justification patterns but small enough that it does not take long to retrieve all justifications.\\
 	This method to pick subgraphs from the knowledge graph does not guarantee completeness in terms of finding all the contradictions that can occur. In the experiments, we show that this method finds the `almost' all occurring contradictions. The reason for this is the redundancy we create by using subgraphs that overlap, without occurring too many time-consuming calculations. 
 	
 	\subsection{Justification retrieval}
@@ -512,38 +508,58 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 		\item Distribution of the sizes of `anti-patterns' found in the knowledge graph. The distribution is according to the size of the `anti-pattern'. Giving an overview if size of the `anti-pattern' can be related to the amount of occurences.
 	\end{itemize} 
 	\begin{figure}[!t]
-		\subfloat[This diagram shows one of the usecases for the `anti-patterns', namely Analytics.\label{fig:AnalyticsDrawing}]{%
-			\includegraphics[width=0.45\textwidth]{images/AnalyticsDrawing.png}
-		}
-		\hfill
+	\subfloat[This diagram shows one of the usecases for the `anti-patterns', namely Analytics.\label{fig:AnalyticsDrawing}]{%
+		\includegraphics[width=0.45\textwidth]{images/AnalyticsDrawing.png}
+	}
 		\subfloat[This diagram shows the second usecase for the `anti-patterns', Sampling.\label{fig:SamplingDrawing}]{%
-			\includegraphics[width=0.45\textwidth]{images/SamplingDrawing.png}
-		}
-		\caption{zoomed in diagram of the final parts of the pipelines.}
-		\label{fig:PipelinePart45}
-	\end{figure}
+	\includegraphics[width=0.45\textwidth]{images/SamplingDrawing.png}
+}
+	\caption{zoomed in diagram of the final parts of the pipelines.}
+	\label{fig:PipelinePart45}
+\end{figure}
 	
 	\section{Sampling toolkit for inconsistent knowledge graphs}
 	The second implementation that makes use of the `anti-patterns' is the implementation of sampling a knowledge graph. In this paper, the goal of sampling is to sample a knowledge graph into a smaller partition with two constraints. The first constraint is that the knowledge graph stays connected. Secondly, we give the user the possibility to choose a set of `anti-patterns' and the minimal amount of contradictions that can be in the sample.
 	Sampling inconsistent knowledge graphs is tricky, with the contraints we set for us. Most sampling techniques pick a random node as their starting point for sampling. For example the random walks, start on a random node and walk around and chain the links and other nodes to the starting node to generate a sample. This would make the graph always connected, but we can not add random contradictions into the graph without guaranteeing connections between the contradictions via the random walks. Due to this, we need to design our own sampling technique which can solve the problem we set with our constraints.
 	Our algorithm instead uses random constrained deletion; this algorithm randomly deletes triples that can be safely deleted. There are triples that can not be deleted.\\
-	The first set of triples that can not be deleted are the triples that describe the contradictions. To make sure that contradictions are not deleted, we start by building an HDT\cite{FMPGPA:13}\cite{MPAF:12} that stores all the triples that make up these contradictions. We use a SPARQL query to find the results of each of the `anti-patterns', and retrieve the number of contradictions the user wanted as BTPs. The triples are then combined and converted to an HDT. The algorithm can now check if a triple can be safely deleted. By checking if the triple is not present in the HDT.\\
-	The second set of triples that can not be deleted are the triples that break the to sample graph into smaller subgraphs. To negate this problem the algorithm uses local connectedness. A triple may only be safely deleted if there is a second path that connects the object and the subject without having to pass through the severed link.
-%	REWRITE:
-%	INSERT IMAGE
-%	END REWRITE:
+	The first set of triples that can not be deleted are the triples that describe the contradictions, see number 1 in figure \ref{fig:sampling}. To make sure that contradictions are not deleted, we start by building an HDT\cite{FMPGPA:13}\cite{MPAF:12} that stores all the triples that make up these contradictions. We use a SPARQL query to find the results of each of the `anti-patterns', and retrieve the number of contradictions the user wanted as BTPs. The triples are then combined and converted to an HDT. The algorithm can now check if a triple can be safely deleted. By checking if the triple is not present in the HDT.\\
+	The second set of triples that can not be deleted are the triples that break the to sample graph into smaller subgraphs, see number 2 in figure \ref{fig:sampling}. To negate this problem the algorithm uses local connectedness. A triple may only be safely deleted if there is a second path that connects the object and the subject without having to pass through the severed link.
+	\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{images/Sampling.png}
+	\caption{figure shows types of undeletable triples, shown in red.}
+	\label{fig:sampling}
+\end{figure}
 	There is one exception to the rule when either the subject or the object does not have any other links, the triple is then is also allowed to be deleted. With this, we can guarantee that the graph does not split into smaller subgraphs. 
 	The sampling by random deletion now continues to delete triples until the sample reaches the size given by the user, or when it is no longer able to delete triples. This can happen either because the only triples that can be deleted split the graph into subgraphs, and/or the only triples that can be safely deleted belong to the non-deletable contradictions.
-%	REWRITE:
-%	INSERT ALGORITHM
-%	END REWRITE:
+	
+	\begin{algorithm}
+	\KwData{knowledge graph we need to sample.}
+	\KwResult{Sampled knowledge graph}
+	retrieve all protected inconsistencies(KnowledgeGraph) \\
+	\ForEach{triple \textbf{in} KnowledgeGraph }{
+		\eIf{triple not belongs to protected inconsistency}{
+			\eIf{triple has local connectedness}{
+				remove triple
+			}{
+				skip triple.
+			}
+		}{
+			skip triple.
+		}
+		
+	}
+	\Return Sampled knowledge graph\\
+	\caption{Algorithmic view of the sampling method}
+	\label{High top view}
+\end{algorithm}
 	
 	\newpage
 	\chapter{External validation}\label{externalvalidation}
 	Next, we will show the results of the two implementations we designed, which we will also analyze. In these experiments, we use YAGO, and DBpedia, DBLP for analysis and sampling, as well as the `anti-patterns' from the LOD-a-lot as the `anti-pattern' input. With the expectation that the `anti-patterns' from the LOD-a-lot will encompass all the `anti-patterns' from the to sample datasets.\\
 	
 	\section{Data}
-	In chapter \ref{Experiments} we introduced pizza and LOD-a-lot knowledge graphs. In this chapter, we introduce the final three datasets, namely DBpedia, DBLP and YAGO.
+	In chapter \ref{internalvalidation} we introduced pizza and LOD-a-lot knowledge graphs. In this chapter, we introduce the final three datasets, namely DBpedia, DBLP and YAGO.
 	
 	\subsection{YAGO}
 	The first dataset we will use for experimentation is YAGO\cite{YAGO2:2013}, this dataset has derived 160 million statements about 10 million entities, from Wikipedia, WordNet and GeoNames. This dataset is made open source and is a joint project of the Max Planck Institute for Informatics and the Telecom ParisTech University. The dataset has a temporal and spatial dimension, making it prone to contradictions. The dataset is also manually evaluated and is according to Hoffart et al\cite{YAGO2:2013} not a mistake-free dataset.
@@ -644,11 +660,23 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 	In figure \ref{fig:outdegreeSample} the same effects are visible. While the dblp has been smoothed out, which can be the effect of the sampling. All three lines follow the same angle as their original graphs.\\
 	In figure \ref{fig:CoeffSample} it is visible that all three sampled knowledge graphs have the same shape in the clustering coefficient as their original knowledge graphs. While the respective sizes of the knowledge graphs make the plot harder to read, it can still be seen that the plots match the shapes of the original dataset.
 	
+\begin{figure}[!t]
+	\subfloat[The distribution of indegree over all nodes of the sample.\label{fig:indegreeSample}]{%
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure4.eps}
+	}
+	\subfloat[The distribution of outdegree over all nodes of the sample.\label{fig:outdegreeSample}]{%
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure5.eps}
+	}
+	\subfloat[The distribution of the Clustering Coefficient over all nodes of the sample.\label{fig:CoeffSample}]{%
+		\includegraphics[width=0.33\textwidth]{images/Samplefigure6.eps}
+	}
+	\caption{Figures showing several statistics about graphs.}
+	\label{fig:GraphStats}
+\end{figure}
 	
 	
+	Figure \ref{fig:SizeDistinctSample},\ref{fig:DistributionoccurrencesSample} and \ref{fig:DistributionSizeSample} show the distinct occurrences, distribution of occurrences and distinct `anti-patterns' per amount of triples for both the sample and original Knowledge Graph for Yago and DBpedia. They show very nicely that the sample have very similar properties w.r.t. inconsistencies to their larger originals, which was the main goal set of sampling. 
 	
-
-
 \begin{figure}[ht]
 	\centering
 	\subfloat[Plot showing the Distribution of `anti-pattern' size, for the sampled and original graph.\label{fig:DistributionSizeSample}]{%
@@ -663,26 +691,8 @@ In Chapter \ref{Method} we explain more in detail how the method of `anti-patter
 	\caption{Figures showing several statistics about the Anti patterns within the samples.}
 	\label{fig:AntipatternStatsSample}
 \end{figure}
-
-
-
-\begin{figure}[!t]
-	\subfloat[The distribution of indegree over all nodes of the sample.\label{fig:indegreeSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure4.eps}
-	}
-	\subfloat[The distribution of outdegree over all nodes of the sample.\label{fig:outdegreeSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure5.eps}
-	}
-	\subfloat[The distribution of the Clustering Coefficient over all nodes of the sample.\label{fig:CoeffSample}]{%
-		\includegraphics[width=0.33\textwidth]{images/Samplefigure6.eps}
-	}
-	\caption{Figures showing several statistics about graphs.}
-	\label{fig:GraphStats}
-\end{figure}
-
 	
 	\newpage
-	
 	
 	\chapter{Conclusion}\label{Conclusion}
 	In this work, we describe an anti-pattern as a minimal set of uninstantiated basic triple patterns that match an inconsistent subgraph in a knowledge graph. The advantage of converting justifications of contradictions in `anti-patterns' is that now we can use `anti-patterns' to locate contradictions in other knowledge graphs, which is a good method with the generalization to `anti-patterns'. Transferring knowledge about contradictions from one graph to the next was not easy with only justifications, but the `anti-patterns' solve this problem. 
