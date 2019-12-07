@@ -1,6 +1,5 @@
 package com.thesis.kbInconsistencyLocator;
 
-import com.clarkparsia.owlapi.explanation.HSTExplanationGenerator;
 import com.clarkparsia.owlapi.explanation.TransactionAwareSingleExpGen;
 import openllet.core.KnowledgeBase;
 import openllet.jena.PelletInfGraph;
@@ -18,6 +17,8 @@ import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
+
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +32,9 @@ import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.util.OWLAPIPreconditions;
 
+import javax.annotation.Nonnegative;
 
 
 /**
@@ -660,27 +663,20 @@ public class InconsistencyLocator
         }
 
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+
         PelletExplanation expGen = new PelletExplanation(ontology );
 
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
-
         TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
-        HSTExplanationGenerator _expGen = new HSTExplanationGenerator(singleExpGen);
+        HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
         try{
-            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations);
-//            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+            // Also Setting TimeOut
+            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, MaxExplanations*5);
+
         } catch (Exception e){
             return exp;
         }
-//        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
-//        while (e.hasNext()){
-//            OWLClass elem = e.next();
-//            Set<OWLAxiom> explanation = expGen.getUnsatisfiableExplanation(elem );
-//
-//            for(OWLAxiom InconsistencyExp: explanation ){
-//                System.out.println(InconsistencyExp);
-//            }
-//        }
+
 
 
         return exp;
@@ -698,9 +694,8 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
-
-            // subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
+//            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
 
 
 
@@ -767,7 +762,7 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
+            // subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
             subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
 
@@ -858,16 +853,12 @@ public class InconsistencyLocator
 
                 // Find all the inconsistencies in the second subgraph(Subject)
 
-
                 // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
                 Set<Set<OWLAxiom>> exp = new HashSet<>();
-
 
                 for (String subjectString : triples) {
                     exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
                 }
-
-
                 // Process all the Inconsistencies.
                 // Loop through the set of explanations and standardize the Inconsistencies.
                 for (Set<OWLAxiom> InconsistencyExplanation : exp) {
@@ -877,7 +868,6 @@ public class InconsistencyLocator
                     InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
                 }
-
 
                 if (InconsistenciesHit % 5000 <= 10) {
                     System.out.println("Inconsistencies Hit: " + InconsistenciesHit);

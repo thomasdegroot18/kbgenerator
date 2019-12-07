@@ -225,6 +225,9 @@ class KbStatistics {
         ArrayList<HashSet<String>> Namespace = new ArrayList<>();
         Namespace.add(NameSpaceSet);
         Namespace.add(Elements);
+
+        System.out.println("NameSpaces: "+ Namespace.size());
+
         return Namespace;
     }
 
@@ -380,7 +383,8 @@ class KbStatistics {
         int Size = KbSize(hdt);
 
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
-        List<HashMap> arrayList = GetLocalizedScores(hdt);
+        List<HashMap> arrayList = new ArrayList<>();
+//        arrayList = GetLocalizedScores(hdt);
 
         System.out.println("Start Writing");
         uploadTo(UploadLocation, Expressivity, Size, NameSpaceSet, arrayList);

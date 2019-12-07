@@ -24,7 +24,7 @@ public class LODalot {
         String samples = AbsoluteName+"Samples/";
         String inconsistencyJSON = AbsoluteName+"StatResults/";
         String temp = AbsoluteName+"extraFiles/temp/";
-        String args3 = "1";
+        String args3 = "0";
         System.out.println("AbsoluteName: "+AbsoluteName);
         System.out.println("rdf: "+rdf);
         System.out.println("hdt: "+hdt);
@@ -38,17 +38,17 @@ public class LODalot {
         String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
         Statistics.main(argsStatistics);
         // Inconsistency Locator
-        System.out.println("------------------------------------------------------------------------------------------");
-        System.out.println("Starting Locating Inconsistencies");
-        String[] argsInconsistency =  {hdt,
-                rdf,
-                "20",
-                "true",
-                "false",
-                "2000"
-        };
-
-        InconsistencyLocator.main(argsInconsistency);
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        System.out.println("Starting Locating Inconsistencies");
+//        String[] argsInconsistency =  {hdt,
+//                rdf,
+//                "20",
+//                "true",
+//                "false",
+//                "2000"
+//        };
+//
+//        InconsistencyLocator.main(argsInconsistency);
         System.out.println("------------------------------------------------------------------------------------------");
 
 

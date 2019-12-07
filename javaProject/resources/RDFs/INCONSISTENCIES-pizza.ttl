@@ -1,6 +1,65 @@
 New general inconsistency: 
 General graph number: 1
-SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. }
+SELECT * WHERE {?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a3 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a3. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a2. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a4. }
+ClassAssertion C0 a0
+DifferentIndividuals a0 a1
+DifferentIndividuals a0 a2
+DifferentIndividuals a0 a3
+DifferentIndividuals a0 a4
+DifferentIndividuals a1 a2
+DifferentIndividuals a1 a3
+DifferentIndividuals a1 a4
+DifferentIndividuals a2 a3
+DifferentIndividuals a2 a4
+DifferentIndividuals a3 a4
+EquivalentClasses C0 a1
+EquivalentClasses C0 a2
+EquivalentClasses C0 a3
+EquivalentClasses C0 a4
+
+New general inconsistency: 
+General graph number: 2
+SELECT * WHERE {?a2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a0. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. }
+ClassAssertion C0 a2
+ClassAssertion C2 a2
+DifferentIndividuals a0 a1
+DifferentIndividuals a0 a2
+DifferentIndividuals a1 a2
+EquivalentClasses C0 a0
+EquivalentClasses C0 a1
+
+New general inconsistency: 
+General graph number: 3
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. }
+ClassAssertion C0 a0
+EquivalentClasses C0 a1
+
+New general inconsistency: 
+General graph number: 4
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C1. }
+ClassAssertion C0 a0
+ClassAssertion C1 a0
+EquivalentClasses C0 a1
+
+New general inconsistency: 
+General graph number: 5
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a3 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. }
+ClassAssertion C0 a0
+DifferentIndividuals a0 a2
+DifferentIndividuals a0 a3
+DifferentIndividuals a0 a4
+DifferentIndividuals a1 a0
+DifferentIndividuals a1 a2
+DifferentIndividuals a1 a3
+DifferentIndividuals a1 a4
+DifferentIndividuals a2 a3
+DifferentIndividuals a2 a4
+DifferentIndividuals a3 a4
+EquivalentClasses C0 a1
+
+New general inconsistency: 
+General graph number: 6
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. }
 ClassAssertion C8 a0
 DisjointClasses C0 C1
 DisjointClasses C0 C2
@@ -32,4 +91,40 @@ DisjointClasses C5 C7
 DisjointClasses C6 C7
 SubClassOf C8 C0
 SubClassOf C8 C7
+
+New general inconsistency: 
+General graph number: 7
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a2. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a2 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a3 <http://www.w3.org/2002/07/owl#differentFrom> ?a4. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a3. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. }
+ClassAssertion C0 a0
+DifferentIndividuals a0 a3
+DifferentIndividuals a0 a4
+DifferentIndividuals a1 a0
+DifferentIndividuals a1 a2
+DifferentIndividuals a1 a3
+DifferentIndividuals a1 a4
+DifferentIndividuals a2 a0
+DifferentIndividuals a2 a3
+DifferentIndividuals a2 a4
+DifferentIndividuals a3 a4
+EquivalentClasses C0 a1
+EquivalentClasses C0 a2
+
+New general inconsistency: 
+General graph number: 8
+SELECT * WHERE {?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a0. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a1. }
+ClassAssertion C0 a2
+DifferentIndividuals a0 a1
+DifferentIndividuals a0 a2
+DifferentIndividuals a1 a2
+EquivalentClasses C0 a0
+EquivalentClasses C0 a1
+
+New general inconsistency: 
+General graph number: 9
+SELECT * WHERE {?a1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a1. ?a0 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?a1 <http://www.w3.org/2002/07/owl#differentFrom> ?a2. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?a0. }
+ClassAssertion C0 a1
+DifferentIndividuals a0 a1
+DifferentIndividuals a0 a2
+DifferentIndividuals a1 a2
+EquivalentClasses C0 a0
 
