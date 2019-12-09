@@ -379,14 +379,14 @@ class KbStatistics {
 //        } catch (Exception e){
 //            e.printStackTrace();
 //        }
-        long Size = KbSize(hdt);
+//        long Size = KbSize(hdt);
 
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = new ArrayList<>();
 //        arrayList = GetLocalizedScores(hdt);
 
         System.out.println("Start Writing");
-        uploadTo(UploadLocation, Expressivity, Size, NameSpaceSet, arrayList);
+        uploadTo(UploadLocation, Expressivity, 0, NameSpaceSet, arrayList);
 
     }
     @SuppressWarnings("unchecked")
