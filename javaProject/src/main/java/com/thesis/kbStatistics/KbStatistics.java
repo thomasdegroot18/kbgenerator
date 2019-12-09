@@ -199,6 +199,9 @@ class KbStatistics {
                 if (NameSpaceCleaned.contains("http://dbpedia.org/ontology/")){
                     NameSpaceCleaned = "http://dbpedia.org/ontology/";
                 }
+                if (NameSpaceCleaned.contains("http://www.w3.org/1999/02/22-rdf-syntax-ns#")){
+                    NameSpaceCleaned = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+                }
             } else{
                 NameSpaceCleaned = NameSpaceNotCleaned.substring(0, SlashNumber + 1);
                 if(NameSpaceCleaned.contains("www.w3.org")){
