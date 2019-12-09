@@ -1,6 +1,0 @@
-New general inconsistency: 
-General graph number: 1
-SELECT * WHERE {?C2 <http://www.w3.org/2000/01/rdf-schema#range> ?C0. ?C1 ?C0 ?a0 . }
-DataPropertyAssertion C0 a0 C1
-DataPropertyRange C0 C2
-

@@ -70,7 +70,13 @@ public class InconsistencyLocator
     public static int GeneralSubGraphFound = 0;
     public static long timePassed = 0;
     private static String NameFile;
-
+    private static long ProcessTimeFindContradictionsStart;
+    private static long ProcessTimeCreateSubgraph = 0;
+    private static long ProcessTimeFindContradictions = 0;
+    private static long ProcessTimeCreateAntiPatterns = 0;
+    public static long ProcessTimeCreateSubgraphTotal = 0;
+    public static long ProcessTimeFindContradictionsTotal = 0;
+    public static long ProcessTimeCreateAntiPatternsTotal = 0;
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
         // Instantiate a new Array List.
@@ -671,7 +677,7 @@ public class InconsistencyLocator
         HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
         try{
             // Also Setting TimeOut
-            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, MaxExplanations*5);
+            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, MaxExplanations*20);
 
         } catch (Exception e){
             return exp;
@@ -756,21 +762,24 @@ public class InconsistencyLocator
     private static Set<Set<OWLAxiom>>  WriteInconsistencySubGraph(HDT hdt, String tripleItem) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
+        long ProcessTimeCreateSubgraphStart = System.currentTimeMillis();
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
 
         // The subgraph is a set of strings. That stores up to 5000 triples.
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-            // subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
+            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
 
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
         }
-
+        ProcessTimeCreateSubgraph += System.currentTimeMillis() - ProcessTimeCreateSubgraphStart ;
+        ProcessTimeFindContradictionsStart = System.currentTimeMillis();
+        ProcessTimeCreateSubgraphTotal +=ProcessTimeCreateSubgraph;
         // Go to next step. Find (if any) Inconsistencies.
         return WriteInconsistencyModel(subGraph);
 
@@ -810,6 +819,8 @@ public class InconsistencyLocator
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
+        long Triple10000 = System.currentTimeMillis();
+
         fileWriter2.write(("StartTime: "+ 0 + "\n").getBytes());
         int counterI = 0;
         while (counterI < 1) {
@@ -833,7 +844,16 @@ public class InconsistencyLocator
                     counterTriples++;
                     if (counterTriples % 10000 == 0) {
                         long estimatedTime = System.currentTimeMillis() - startTime;
+                        long Triple10000Time = System.currentTimeMillis() - Triple10000;
                         System.out.println("Amount of triples: " + counterTriples + " with max of: " + size + " Time passed: " + estimatedTime);
+                        System.out.println("Time total: " + Triple10000Time);
+                        System.out.println("Time passed create Subgraphs: " + ProcessTimeCreateSubgraph);
+                        System.out.println("Time passed Find Contradictions: " + ProcessTimeFindContradictions);
+                        System.out.println("Time passed Create AntiPatterns: " + ProcessTimeCreateAntiPatterns);
+                        Triple10000 = System.currentTimeMillis();
+                        ProcessTimeCreateSubgraph = 0;
+                        ProcessTimeFindContradictions = 0;
+                        ProcessTimeCreateAntiPatterns = 0;
                     }
                     // at the moment every 1 out of 2000 triples is taken.
                     // If the loop is not triggered the next element from the tripleString is taken.
@@ -859,8 +879,11 @@ public class InconsistencyLocator
                 for (String subjectString : triples) {
                     exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
                 }
+                ProcessTimeFindContradictions += System.currentTimeMillis() - ProcessTimeFindContradictionsStart;
+                ProcessTimeFindContradictionsTotal +=ProcessTimeFindContradictions;
                 // Process all the Inconsistencies.
                 // Loop through the set of explanations and standardize the Inconsistencies.
+                long ProcessTimeCreateAntiPatternsStart = System.currentTimeMillis();
                 for (Set<OWLAxiom> InconsistencyExplanation : exp) {
                     InconsistenciesHit++;
                     // Loop through the set of explanations and standardize the Inconsistencies.
@@ -868,7 +891,8 @@ public class InconsistencyLocator
                     InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
                 }
-
+                ProcessTimeCreateAntiPatterns += System.currentTimeMillis()- ProcessTimeCreateAntiPatternsStart;
+                ProcessTimeCreateAntiPatternsTotal +=ProcessTimeCreateAntiPatterns;
                 if (InconsistenciesHit % 5000 <= 10) {
                     System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
                     System.out.println("Amount of triples: " + counterTriples + " with max of: " + size);
@@ -876,7 +900,7 @@ public class InconsistencyLocator
                     SortGeneralList();
                 }
 
-                if (counterTriples > 5000000) {
+                if (counterTriples > 500000) {
                     UnBreakable = false;
                 }
 

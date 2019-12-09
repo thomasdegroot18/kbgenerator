@@ -175,7 +175,7 @@ public class Statistics {
 
 
         // Get all the KB statistics
-        if(testing_Bool){
+        if(true){// testing_Bool
             System.out.println("knowledge base statistics calculation");
             KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
