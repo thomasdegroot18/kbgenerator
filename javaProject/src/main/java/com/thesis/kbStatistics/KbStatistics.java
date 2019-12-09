@@ -221,7 +221,7 @@ class KbStatistics {
             }
             NameSpaceSet.add(NameSpaceCleaned);
         }
-        System.out.println(Elements);
+        System.out.println(NameSpaceSet);
         ArrayList<HashSet<String>> Namespace = new ArrayList<>();
         Namespace.add(NameSpaceSet);
         Namespace.add(Elements);
@@ -380,7 +380,7 @@ class KbStatistics {
 //        } catch (Exception e){
 //            e.printStackTrace();
 //        }
-        int Size = KbSize(hdt);
+        long Size = KbSize(hdt);
 
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = new ArrayList<>();
@@ -391,7 +391,7 @@ class KbStatistics {
 
     }
     @SuppressWarnings("unchecked")
-    private static void uploadTo(String uploadLocation, String Expressivity, int Size, ArrayList<HashSet<String>> NameSpaceSet, List<HashMap> arrayList  ){
+    private static void uploadTo(String uploadLocation, String Expressivity, long Size, ArrayList<HashSet<String>> NameSpaceSet, List<HashMap> arrayList  ){
         List<String> StringArray = new ArrayList<>();
 
         StringArray.add("{\"Expressivity\" : \"" + Expressivity +"\",");
