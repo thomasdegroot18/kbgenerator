@@ -221,7 +221,6 @@ class KbStatistics {
             }
             NameSpaceSet.add(NameSpaceCleaned);
         }
-        System.out.println(NameSpaceSet);
         ArrayList<HashSet<String>> Namespace = new ArrayList<>();
         Namespace.add(NameSpaceSet);
         Namespace.add(Elements);
