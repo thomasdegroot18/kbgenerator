@@ -14,11 +14,11 @@ public class LODalot {
     public static void main(String[] args) throws Exception{
         String AbsoluteName = "/home/thomas/thesis/kbgenerator/javaProject/resources/";
         AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
-        //AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
 
         String hdt = "/home/wbeek/data/LOD-a-lot/LOD-a-lot.hdt";
 
-        hdt = AbsoluteName+"HDTs/yago2s.hdt";
+        //hdt = AbsoluteName+"HDTs/yago2s.hdt";
 
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";
