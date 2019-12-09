@@ -199,7 +199,7 @@ class KbStatistics {
                 if (NameSpaceCleaned.contains("http://dbpedia.org/ontology/")){
                     NameSpaceCleaned = "http://dbpedia.org/ontology/";
                 }
-                if (NameSpaceCleaned.contains("http://www.w3.org/1999/02/22-rdf-syntax-ns#")){
+                if (NameSpaceCleaned.startsWith("http://www.w3.org/1999/02/22-rdf-")){
                     NameSpaceCleaned = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
                 }
             } else{
@@ -218,6 +218,9 @@ class KbStatistics {
                 }
                 if (NameSpaceCleaned.contains("http://wikidata.dbpedia.org/ontology/")){
                     NameSpaceCleaned = "http://wikidata.dbpedia.org/ontology/";
+                }
+                if (NameSpaceCleaned.startsWith("http://www.w3.org/1999/02/22-rdf-")){
+                    NameSpaceCleaned = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
                 }
 
 
