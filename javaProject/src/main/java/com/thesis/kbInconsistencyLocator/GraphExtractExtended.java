@@ -162,11 +162,14 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
             {
                 TripleString t = it.next();
                 String subRoot = t.getObject().toString();
+
+
                 toUpdate.add( t.asNtriple().toString() );
                 counter ++;
                 if (! (active.contains( subRoot )  ) ) {  //
                     counter = extractIntoExtend( subRoot, counter);
                 }
+
             }
             return counter;
         }
@@ -195,14 +198,19 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
         {
             active.add( root );
             IteratorTripleString itForward = extractFrom.search(root, "", "");
-            IteratorTripleString itBackward = extractFrom.search("", "", root);
-            while ((itBackward.hasNext() || itForward.hasNext()) && counter < maxValue)
+            IteratorTripleString itBackward = null;
+            if(counter < 5000){
+                itBackward= extractFrom.search("", "", root);
+            }
+
+            while (((itBackward != null && itBackward.hasNext()) || itForward.hasNext()) && counter < maxValue)
             {
 
                 TripleString t;
                 String subRoot;
                 String subPred;
-                 if( !itBackward.hasNext() ){
+
+                 if( itBackward == null || !itBackward.hasNext() ){
                     t = itForward.next();
                     subRoot = t.getObject().toString();
                     subPred = t.getPredicate().toString();
@@ -219,12 +227,13 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
                     subRoot = t.getSubject().toString();
                     subPred = t.getPredicate().toString();
                 }
-
-                toUpdate.add( t.asNtriple().toString() );
-                if (! (active.contains( subRoot )  ) && counter < maxValue ) {  //
-                    counter = toUpdate.size();
-                    counter = extractIntoExtendCleanBoth( subRoot, counter);
-                    counter = extractIntoExtendCleanBoth( subPred, counter);
+                if (t.asNtriple().toString().contains("owl") || t.asNtriple().toString().contains("OWL") ||t.asNtriple().toString().contains("rdf")) {
+                    toUpdate.add(t.asNtriple().toString());
+                    if (!(active.contains(subRoot)) && counter < maxValue) {  //
+                        counter = toUpdate.size();
+                        counter = extractIntoExtendCleanBoth(subRoot, counter);
+                        counter = extractIntoExtendCleanBoth(subPred, counter);
+                    }
                 }
             }
             return counter;

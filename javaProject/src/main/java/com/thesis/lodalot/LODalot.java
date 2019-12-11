@@ -34,21 +34,21 @@ public class LODalot {
 
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
+//        Inconsistency Locator
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Starting Locating Inconsistencies");
+        String[] argsInconsistency =  {hdt,
+                rdf,
+                "20",
+                "true",
+                "false",
+                "5000"
+        };
+
+        InconsistencyLocator.main(argsInconsistency);
         System.out.println("Starting Statistics");
         String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
         Statistics.main(argsStatistics);
-        // Inconsistency Locator
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        System.out.println("Starting Locating Inconsistencies");
-//        String[] argsInconsistency =  {hdt,
-//                rdf,
-//                "20",
-//                "true",
-//                "false",
-//                "2000"
-//        };
-//
-//        InconsistencyLocator.main(argsInconsistency);
         System.out.println("------------------------------------------------------------------------------------------");
 
 

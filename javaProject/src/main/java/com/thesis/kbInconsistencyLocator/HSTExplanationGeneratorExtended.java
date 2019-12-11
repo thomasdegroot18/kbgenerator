@@ -244,7 +244,8 @@ public class HSTExplanationGeneratorExtended implements MultipleExplanationGener
                 }
                 OWLAxiom axiom = orderedMups.get(0);
                 orderedMups.remove(0);
-                if (allMups.size() == maxExplanations || ( System.currentTimeMillis()-timeOut )> 0) {
+                if (allMups.size() == maxExplanations || (( System.currentTimeMillis()-timeOut )> 0)) {
+                    System.out.println("Hit TimeOut");
                     LOGGER.info("Computed {} explanations", Integer.valueOf(maxExplanations));
                     return;
                 }
