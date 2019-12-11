@@ -175,58 +175,58 @@ public class Statistics {
 
 
         // Get all the KB statistics
-//        if(testing_Bool){
-//            System.out.println("knowledge base statistics calculation");
-//            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
-//
-//            System.out.println("Finished knowledge base statistics calculation");
-//
-//        }
-        String[] Datasets= new String [1];
-//        Datasets = GetDataSets(hdt);
-//        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
-        // Create object for Inconsistencies.
-//        for (String Dataset: Datasets){
-//            RetrieveDataSet(hdt, Dataset);
-//        }
-        InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
+        if(true){// testing_Bool
+            System.out.println("knowledge base statistics calculation");
+            KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
-        // Create HashMap for StoredGraphs
-        HashMap<String, String> StoredGraphs = new HashMap<>();
-        boolean firstLoop = true;
-        while(firstLoop ||ConstantLoopBoolean){
-            firstLoop = false;
-            // Load all Inconsistency graphs.
-            GraphsLoader(fileLocation, StoredGraphs);
-            // RunAll Inconsistency Statistics:
-
-            System.out.println("Running Inconsistency Statistics");
-            for (String Key : StoredGraphs.keySet()){
-                if (Datasets.length > 1){
-                    System.out.println("datasets Check");
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
-                } else{
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
-                }
-
-            }
-
-            System.out.println("Finished Inconsistency Statistics");
-            // Write the Inconsistencies until now collected.
-            InconsistencyStats.WriteToFile(OutputLocation+"InconsistencyStatistics.json");
-
-            try{
-                if(ConstantLoopBoolean){
-                    System.out.println("Waiting 60 seconds");
-                    Thread.sleep(60000);
-                    System.out.println("Resending Requests");
-                }
-
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+            System.out.println("Finished knowledge base statistics calculation");
 
         }
+//        String[] Datasets= new String [1];
+////        Datasets = GetDataSets(hdt);
+////        writeJSON(fileLocation.split("RDFs/")[0]+ "extraFiles/DataSets.txt",Datasets);
+//        // Create object for Inconsistencies.
+////        for (String Dataset: Datasets){
+////            RetrieveDataSet(hdt, Dataset);
+////        }
+//        InconsistencyStatistics InconsistencyStats = new InconsistencyStatistics(hdt);
+//
+//        // Create HashMap for StoredGraphs
+//        HashMap<String, String> StoredGraphs = new HashMap<>();
+//        boolean firstLoop = true;
+//        while(firstLoop ||ConstantLoopBoolean){
+//            firstLoop = false;
+//            // Load all Inconsistency graphs.
+//            GraphsLoader(fileLocation, StoredGraphs);
+//            // RunAll Inconsistency Statistics:
+//
+//            System.out.println("Running Inconsistency Statistics");
+//            for (String Key : StoredGraphs.keySet()){
+//                if (Datasets.length > 1){
+//                    System.out.println("datasets Check");
+//                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
+//                } else{
+//                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+//                }
+//
+//            }
+//
+//            System.out.println("Finished Inconsistency Statistics");
+//            // Write the Inconsistencies until now collected.
+//            InconsistencyStats.WriteToFile(OutputLocation+"InconsistencyStatistics.json");
+//
+//            try{
+//                if(ConstantLoopBoolean){
+//                    System.out.println("Waiting 60 seconds");
+//                    Thread.sleep(60000);
+//                    System.out.println("Resending Requests");
+//                }
+//
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//
+//        }
     }
 
     public static void main(String[] args) throws Exception {

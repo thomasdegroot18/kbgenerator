@@ -1,6 +1,5 @@
 package com.thesis.kbInconsistencyLocator;
 
-import com.clarkparsia.owlapi.explanation.HSTExplanationGenerator;
 import com.clarkparsia.owlapi.explanation.TransactionAwareSingleExpGen;
 import openllet.core.KnowledgeBase;
 import openllet.jena.PelletInfGraph;
@@ -18,6 +17,8 @@ import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
+
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +32,9 @@ import java.util.stream.Collectors;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.util.OWLAPIPreconditions;
 
+import javax.annotation.Nonnegative;
 
 
 /**
@@ -67,7 +70,13 @@ public class InconsistencyLocator
     public static int GeneralSubGraphFound = 0;
     public static long timePassed = 0;
     private static String NameFile;
-
+    private static long ProcessTimeFindContradictionsStart;
+    private static long ProcessTimeCreateSubgraph = 0;
+    private static long ProcessTimeFindContradictions = 0;
+    private static long ProcessTimeCreateAntiPatterns = 0;
+    public static long ProcessTimeCreateSubgraphTotal = 0;
+    public static long ProcessTimeFindContradictionsTotal = 0;
+    public static long ProcessTimeCreateAntiPatternsTotal = 0;
 
     private static List StreamParser(OWLAxiom InconsistencyExplanationLine){
         // Instantiate a new Array List.
@@ -81,7 +90,9 @@ public class InconsistencyLocator
 
         // Retrieve the classes as a array of objects.
         Object[] ListProperties = InconsistencyExplanationLine.objectPropertiesInSignature().toArray();
+        Object[] ListDProperties = InconsistencyExplanationLine.dataPropertiesInSignature().toArray();
 
+        Object[] ListDtypes = InconsistencyExplanationLine.datatypesInSignature().toArray();
         // Instantiate the value.
         int value;
         int prevValue = 0;
@@ -115,6 +126,70 @@ public class InconsistencyLocator
                 System.out.println("Item occurred twice Check if it problem. "+ InconsistencyExplanationLine.toString());
                 NewList.add(ListItem.toString()+"IndividualCheck82910283");
             }
+        }
+        for (Object ListItem: ListDProperties ) {
+            // generate the value where the object is found in the line.
+            value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            // If not found throw error.
+            if (value < 0) {
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString());
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString());
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString());
+            }
+
+        }
+
+        for (Object ListItem: ListDtypes ) {
+            // generate the value where the object is found in the line.
+            if(ListItem.toString().equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")){
+                value = 9999999;
+            }
+            else {
+                value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            }
+            // If not found throw error.
+            if (value < 0) {
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString());
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString());
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString());
+            }
+
         }
 
         for (Object ListItem: ListProperties ) {
@@ -183,9 +258,6 @@ public class InconsistencyLocator
     private static String AxiomConverter(OWLAxiom InconsistencyExplanationLine, Map<Object, String>  variableMap, int[] iterator){
         // Get the list of variables in the correct order.
         List SetOfVariables = StreamParser(InconsistencyExplanationLine);
-
-
-
         // Gets the axiom type of the line.
         AxiomType RelationType = InconsistencyExplanationLine.getAxiomType();
         // For both elements of the class/instance list.
@@ -211,7 +283,7 @@ public class InconsistencyLocator
 
         // return the string line with a generalised variable, Takes RelationType + first element + second element.
         if (SetOfVariables.size() == 2){
-            return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
+            return RelationType.toString() +" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1));
         } else {
             return RelationType.toString()+" "+variableMap.get(SetOfVariables.get(0))+" "+variableMap.get(SetOfVariables.get(1))+" "+variableMap.get(SetOfVariables.get(2));
         }
@@ -286,7 +358,6 @@ public class InconsistencyLocator
         List<String> ExplanationStringList = new ArrayList<>();
 
         int[] iterator = new int[2]; // The first element is the Class iterator, the second element is the Individual Iterator.
-
         // Loop through the Inconsistency line per line to replace the Classes and the instances with the correct values.
         for (OWLAxiom InconsistencyExplanationLine : InconsistencyExplanation){
             // Instantiate the StringLine in correct scope.
@@ -358,7 +429,26 @@ public class InconsistencyLocator
                 }
 
                 // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
-            } else if (RelationType == AxiomType.OBJECT_PROPERTY_DOMAIN){
+            } else if (RelationType == AxiomType.DATA_PROPERTY_ASSERTION){
+                // Gets the new clean relation graph with generalised names.
+                MoreInformation = (StreamParser(InconsistencyExplanationLine).size() > 3);
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            }else if (RelationType == AxiomType.OBJECT_PROPERTY_DOMAIN){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            }else if (RelationType == AxiomType.DATA_PROPERTY_DOMAIN){
                 // Gets the new clean relation graph with generalised names.
                 if(MoreInformation){
                     StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
@@ -368,6 +458,15 @@ public class InconsistencyLocator
 
                 // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
             } else if (RelationType == AxiomType.OBJECT_PROPERTY_RANGE){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
+            }else if (RelationType == AxiomType.DATA_PROPERTY_RANGE){
                 // Gets the new clean relation graph with generalised names.
                 if(MoreInformation){
                     StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
@@ -397,6 +496,7 @@ public class InconsistencyLocator
 
             // Takes the Generalised Explanation and makes a generalised subgraph.
             // Adds to the list if the subgraph is not yet recognized.
+
             GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(ExplanationStringList);
             // Checks if accepted to generalised subgraphs. If the subgraph is not found in the list
             // the subgraph is added to the list.
@@ -569,26 +669,20 @@ public class InconsistencyLocator
         }
 
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-        PelletExplanation expGen = new PelletExplanation(ontology);
 
-        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+        PelletExplanation expGen = new PelletExplanation(ontology );
+
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
         TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
-        HSTExplanationGenerator _expGen = new HSTExplanationGenerator(singleExpGen);
+        HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
         try{
-            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations);
-//            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+            // Also Setting TimeOut
+            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, MaxExplanations*20);
+
         } catch (Exception e){
             return exp;
         }
-//        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
-//        while (e.hasNext()){
-//            OWLClass elem = e.next();
-//            Set<OWLAxiom> explanation = expGen.getUnsatisfiableExplanation(elem );
-//
-//            for(OWLAxiom InconsistencyExp: explanation ){
-//                System.out.println(InconsistencyExp);
-//            }
-//        }
+
 
 
         return exp;
@@ -606,9 +700,8 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Try to extract a the subgraph from the HDT.
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
-
-            // subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
+//            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
 
 
 
@@ -669,21 +762,24 @@ public class InconsistencyLocator
     private static Set<Set<OWLAxiom>>  WriteInconsistencySubGraph(HDT hdt, String tripleItem) throws Exception{
         // Calls the GraphExtract which is Extended by Thomas de Groot to use the HDT instead of the JENA graph.
         // The TripleBoundary is set to stopNowhere Such that the model keeps going until my own stop criteria.
+        long ProcessTimeCreateSubgraphStart = System.currentTimeMillis();
         GraphExtractExtended GraphExtract = new GraphExtractExtended(TripleBoundary.stopNowhere);
 
         // The subgraph is a set of strings. That stores up to 5000 triples.
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, 1000);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
+            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
 
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
         }
-
+        ProcessTimeCreateSubgraph += System.currentTimeMillis() - ProcessTimeCreateSubgraphStart ;
+        ProcessTimeFindContradictionsStart = System.currentTimeMillis();
+        ProcessTimeCreateSubgraphTotal +=ProcessTimeCreateSubgraph;
         // Go to next step. Find (if any) Inconsistencies.
         return WriteInconsistencyModel(subGraph);
 
@@ -723,6 +819,8 @@ public class InconsistencyLocator
         // While there is a triple the loop continues.
         System.out.println("Start the loop");
         long startTime = System.currentTimeMillis();
+        long Triple10000 = System.currentTimeMillis();
+
         fileWriter2.write(("StartTime: "+ 0 + "\n").getBytes());
         int counterI = 0;
         while (counterI < 1) {
@@ -744,9 +842,18 @@ public class InconsistencyLocator
                 while (it.hasNext() && triples.size() < numberThreads) {
                     TripleString item = it.next();
                     counterTriples++;
-                    if (counterTriples % 100 == 0) {
+                    if (counterTriples % 10000 == 0) {
                         long estimatedTime = System.currentTimeMillis() - startTime;
+                        long Triple10000Time = System.currentTimeMillis() - Triple10000;
                         System.out.println("Amount of triples: " + counterTriples + " with max of: " + size + " Time passed: " + estimatedTime);
+                        System.out.println("Time total: " + Triple10000Time);
+                        System.out.println("Time passed create Subgraphs: " + ProcessTimeCreateSubgraph);
+                        System.out.println("Time passed Find Contradictions: " + ProcessTimeFindContradictions);
+                        System.out.println("Time passed Create AntiPatterns: " + ProcessTimeCreateAntiPatterns);
+                        Triple10000 = System.currentTimeMillis();
+                        ProcessTimeCreateSubgraph = 0;
+                        ProcessTimeFindContradictions = 0;
+                        ProcessTimeCreateAntiPatterns = 0;
                     }
                     // at the moment every 1 out of 2000 triples is taken.
                     // If the loop is not triggered the next element from the tripleString is taken.
@@ -766,18 +873,17 @@ public class InconsistencyLocator
 
                 // Find all the inconsistencies in the second subgraph(Subject)
 
-
                 // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
                 Set<Set<OWLAxiom>> exp = new HashSet<>();
-
 
                 for (String subjectString : triples) {
                     exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
                 }
-
-
+                ProcessTimeFindContradictions += System.currentTimeMillis() - ProcessTimeFindContradictionsStart;
+                ProcessTimeFindContradictionsTotal +=ProcessTimeFindContradictions;
                 // Process all the Inconsistencies.
                 // Loop through the set of explanations and standardize the Inconsistencies.
+                long ProcessTimeCreateAntiPatternsStart = System.currentTimeMillis();
                 for (Set<OWLAxiom> InconsistencyExplanation : exp) {
                     InconsistenciesHit++;
                     // Loop through the set of explanations and standardize the Inconsistencies.
@@ -785,8 +891,8 @@ public class InconsistencyLocator
                     InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
                 }
-
-
+                ProcessTimeCreateAntiPatterns += System.currentTimeMillis()- ProcessTimeCreateAntiPatternsStart;
+                ProcessTimeCreateAntiPatternsTotal +=ProcessTimeCreateAntiPatterns;
                 if (InconsistenciesHit % 5000 <= 10) {
                     System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
                     System.out.println("Amount of triples: " + counterTriples + " with max of: " + size);
@@ -794,7 +900,7 @@ public class InconsistencyLocator
                     SortGeneralList();
                 }
 
-                if (GeneralSubGraphFound < 0) {
+                if (counterTriples > 500000) {
                     UnBreakable = false;
                 }
 

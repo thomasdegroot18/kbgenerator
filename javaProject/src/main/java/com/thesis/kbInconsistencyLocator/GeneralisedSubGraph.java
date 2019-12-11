@@ -45,6 +45,7 @@ public class GeneralisedSubGraph {
             dataFactory = owlOntologyGraph.getOWLOntologyManager().getOWLDataFactory();
 
             // Loop through lines of the subgraph.
+
             for (String line : Subgraph){
 
                 // Split string into 3 parts. 0. Relation, 1. First class/type , 2. Second class/type
@@ -122,6 +123,9 @@ public class GeneralisedSubGraph {
                         OWLIndividual Individual1 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[1]);
                         OWLIndividual Individual2 = dataFactory.getOWLNamedIndividual(OWLAXIOMString[2]);
                         OWLObjectProperty property = dataFactory.getOWLObjectProperty(OWLAXIOMString[1]);
+                        OWLDataProperty propertyD = dataFactory.getOWLDataProperty(OWLAXIOMString[1]);
+                        OWLLiteral Literal = dataFactory.getOWLLiteral(OWLAXIOMString[2]);
+                        OWLDatatype dataType = dataFactory.getOWLDatatype(OWLAXIOMString[2]);
                         // Add the two classes for the relationship cases.
                         OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
                         OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
@@ -185,6 +189,43 @@ public class GeneralisedSubGraph {
                                 // Build Subclass Axiom
 
                                 OWLObjectPropertyRangeAxiom Assertion = dataFactory.getOWLObjectPropertyRangeAxiom(property, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "DataPropertyAssertion": {
+                                // Build Subclass Axiom
+                                propertyD = dataFactory.getOWLDataProperty(OWLAXIOMString[3]);
+                                OWLDataPropertyAssertionAxiom Assertion = dataFactory.getOWLDataPropertyAssertionAxiom(propertyD,Individual1, Literal);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "DataPropertyDomain": {
+                                // Build Subclass Axiom
+                                OWLDataPropertyDomainAxiom Assertion = dataFactory.getOWLDataPropertyDomainAxiom(propertyD, classC2);
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+                                disjoints ++;
+                                break;
+                            }
+                            case "DataPropertyRange": {
+                                // Build Subclass Axiom
+                                OWLDataPropertyRangeAxiom Assertion = dataFactory.getOWLDataPropertyRangeAxiom(propertyD, dataType);
                                 // Add Subclass Axiom
                                 owlOntologyGraph.add(Assertion);
                                 // Add Triple To hashMap
@@ -524,6 +565,7 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append(". ");
                     break;
                 }
+                case "DataPropertyDomain":
                 case "ObjectPropertyDomain": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem2);
@@ -532,6 +574,17 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append(". ");
                     break;
                 }
+                case "DataPropertyAssertion":
+                    String elem4 = line[2].split("\"")[1];
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem4);
+                    SPARQLStringB.append(" . ");
+
+                    break;
                 case "ObjectPropertyAssertion": {
                     String elem3 = line[3].split(">")[0];
                     SPARQLStringB.append("?");
@@ -544,6 +597,7 @@ public class GeneralisedSubGraph {
 
                     break;
                 }
+                case "DataPropertyRange":
                 case "ObjectPropertyRange": {
 
                     SPARQLStringB.append("?");
@@ -553,6 +607,7 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append(". ");
                     break;
                 }
+
                 case "DisjointClasses": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
@@ -578,6 +633,7 @@ public class GeneralisedSubGraph {
                     break;
                 }
                 default:
+                    System.out.println(line[0].substring(0,line[0].length()-1));
                     throw new ClassCastException();
             }
         }
