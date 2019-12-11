@@ -41,7 +41,7 @@ public class LODalot {
                 rdf,
                 "20",
                 "true",
-                "false",
+                "false", "0",
                 "5000"
         };
 
