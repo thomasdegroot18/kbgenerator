@@ -957,8 +957,8 @@ public class InconsistencyLocator
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         // Set output Writer
         // String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeeping"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Complete File\n").getBytes());
