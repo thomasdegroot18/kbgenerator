@@ -70,6 +70,11 @@ public class testSuite {
                 hdt = AbsoluteName+"HDTs/dblp-2012-11-28b.hdt";
                 hdtName = "dblp-2012-11-28b.hdt";
                 break;
+            case "8":
+                //Setting Yago2s here:
+                hdt = AbsoluteName+"HDTs/lov.hdt";
+                hdtName = "lov.hdt";
+                break;
             default:
                 // Default here:
                 System.out.println("Not found value.");
@@ -102,14 +107,14 @@ public class testSuite {
 //        if (CheckingInconsistency ){
 //            InconsistencyLocator.main(argsInconsistency);
 //        }
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        // Statistics
-//        System.out.println("Starting Statistics");
-//        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
-//        Statistics.main(argsStatistics);
+        System.out.println("------------------------------------------------------------------------------------------");
+        // Statistics
+        System.out.println("Starting Statistics");
+        String FileInput = rdf+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
+        String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
+        Statistics.main(argsStatistics);
 //        System.out.println("------------------------------------------------------------------------------------------");
 ////        System.out.println("Making inconsistency.json");
-//        String FileInput = rdf+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
 //        String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json", FileInput, inconsistencyJSON+"InconsistencyStatistics.json"};
 //        InconsistencyCreator.main(argsInconsistencyCreator);
         //promptEnterKey();
@@ -126,12 +131,12 @@ public class testSuite {
 //        String[] argsGenerator = {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
 //        Generator.main(argsGenerator);
 
-        System.out.println("------------------------------------------------------------------------------------------");
-        // Statistics Sampled
-        System.out.println("Starting Statistics");
-        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
-        Statistics.main(argsStatisticsSampled);
-        System.out.println("------------------------------------------------------------------------------------------");
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        // Statistics Sampled
+//        System.out.println("Starting Statistics");
+//        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
+//        Statistics.main(argsStatisticsSampled);
+//        System.out.println("------------------------------------------------------------------------------------------");
 
 
 

@@ -11,12 +11,16 @@ import openllet.owlapi.OpenlletReasonerFactory;
 import openllet.shared.tools.Log;
 import org.apache.jena.graph.*;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.reasoner.rulesys.builtins.Max;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
+import openllet.owlapi.parser.OWLFunctionalSyntaxParser;
+import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
+import org.semanticweb.owlapi.io.StringDocumentSource;
 
 import java.awt.*;
 import java.io.*;
@@ -31,6 +35,7 @@ import java.util.stream.Collectors;
 
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLAPIPreconditions;
 
@@ -66,8 +71,9 @@ public class InconsistencyLocator
     private static int TotalInconsistenciesBeforeBreak;                             // Break terminator for inconsistencies hit
     private static boolean UnBreakable;                                             // Stores boolean for breaking after amount of Inconsistencies
     private static IsomorphismManager IsoChecker = new IsomorphismManager();        // Start IsomorphismManager
-    private static int GeneralGraphNumber = 0;
+    public static int GeneralGraphNumber = 0;
     public static int GeneralSubGraphFound = 0;
+    public static int subgraphs = 0;
     public static long timePassed = 0;
     private static String NameFile;
     private static long ProcessTimeFindContradictionsStart;
@@ -84,7 +90,7 @@ public class InconsistencyLocator
 
         // Retrieve the individuals as a array of objects.
         Object[] ListIndividuals = InconsistencyExplanationLine.individualsInSignature().toArray();
-
+        Object[] ListIndividualsAnon = InconsistencyExplanationLine.anonymousIndividuals().toArray();
         // Retrieve the classes as a array of objects.
         Object[] ListClasses = InconsistencyExplanationLine.classesInSignature().toArray();
 
@@ -99,6 +105,36 @@ public class InconsistencyLocator
 
         // Loop through the list of individuals.
         for (Object ListItem: ListIndividuals ) {
+            // generate the value where the object is found in the line.
+            value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
+            // If not found throw error.
+            if (value < 0){
+                throw new StackOverflowError("Nothing found in Inconsistency Explanation, This is not possible. check" +
+                        " input. " + ListItem.toString() + "  " + InconsistencyExplanationLine.toString());
+            }
+
+            // Check if the value is larger or smaller than the previous value. This is needed to know as to which side the item needs to be added.
+
+            // If the value is larger than the previous value it needs to be appended to back.
+            if (value > prevValue){
+                // add to newList
+                NewList.add(ListItem.toString()+"IndividualCheck82910283");
+                // Set the next value
+                prevValue = value;
+            } else if (value < prevValue) {
+                // If the value is smaller than the prevValue it has to be added to the front.
+                NewList.add(0, ListItem.toString()+"IndividualCheck82910283");
+                // Set the next value
+                prevValue = value;
+                // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
+            } else {
+                // Shout warning just in case.
+                System.out.println("Item occurred twice Check if it problem. "+ InconsistencyExplanationLine.toString());
+                NewList.add(ListItem.toString()+"IndividualCheck82910283");
+            }
+        }
+        // Loop through the list of individuals.
+        for (Object ListItem: ListIndividualsAnon ) {
             // generate the value where the object is found in the line.
             value = InconsistencyExplanationLine.toString().indexOf(ListItem.toString());
             // If not found throw error.
@@ -633,56 +669,56 @@ public class InconsistencyLocator
     }
 
 
-    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
+    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel) throws OWLOntologyCreationException {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
         Set<Set<OWLAxiom>> exp = Collections.emptySet();
 
-//        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-//        try{
-//            model.read(PipeModel(subModel), "","N3");
-//        } catch (Exception e){
-//            return exp;
-//        }
-//
-//
-//        model.prepare();
-//
-//        // Get the KnowledgeBase object
-//        final KnowledgeBase kb = ((PelletInfGraph) model.getGraph()).getKB();
-//
-//        // perform initial consistency check
-//        long s = System.currentTimeMillis();
-//        boolean consistent = kb.isConsistent();
-//        long etime = System.currentTimeMillis();
-//        System.out.println("Consistent? " + consistent + " (" + (etime - s) + "ms) Expressivity: "+kb.getExpressivity());
-
-//        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-//        model.read(PipeModel(subModel), "","N3");
-
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
+        OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
+        OWLOntology ontology = owlManager.createOntology();
+        StringBuilder SPARQLStringB = new StringBuilder();
+        for (String elem : subModel) {
+            if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
+            if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
+            if (elem.contains("http://purl.org/twc/vocab/conversion/BooleanPromotionEnhancement")) continue;
+            if (elem.lastIndexOf("^") > -1) continue;
+            if (elem.lastIndexOf('"') > -1) continue;
+            if( elem.lastIndexOf("dcterms:creator") > -1)  continue;
+            if (elem.lastIndexOf("^") > -1) {
+                if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
+                    elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
+                }
+            }
 
-        OWLOntology ontology;
-        try{
-            ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
-        } catch (Exception e){
-            return exp;
+            SPARQLStringB.append(elem);
         }
 
-        // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-
-        PelletExplanation expGen = new PelletExplanation(ontology );
-
-        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
-        TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
-        HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
         try{
+            OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+            config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+            owlManager.setOntologyLoaderConfiguration(config);
+
+            StringDocumentSource ontologyStrning = new StringDocumentSource(SPARQLStringB.toString());
+            ontology = owlManager.loadOntologyFromOntologyDocument(ontologyStrning);
+        } catch (Exception IllegalStateException){
+            System.out.println("IllegalStateException");
+            return exp;
+
+        }
+
+        try{
+            // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+            OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
+            TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
+            HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
             // Also Setting TimeOut
-            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, MaxExplanations*20);
-
+            long timeOut = maxValueExperiment*2 < 2000 ? 2000 : maxValueExperiment *4;
+            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, timeOut+System.currentTimeMillis());
         } catch (Exception e){
+            System.out.println("FailedReasoning");
             return exp;
         }
-
+        owlManager.removeOntology(ontology);
 
 
         return exp;
@@ -702,7 +738,6 @@ public class InconsistencyLocator
             // Try to extract a the subgraph from the HDT.
 //            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValue);
             subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValue);
-
 
 
 
@@ -772,14 +807,12 @@ public class InconsistencyLocator
             subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
             //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
-
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
         }
         ProcessTimeCreateSubgraph += System.currentTimeMillis() - ProcessTimeCreateSubgraphStart ;
         ProcessTimeFindContradictionsStart = System.currentTimeMillis();
-        ProcessTimeCreateSubgraphTotal +=ProcessTimeCreateSubgraph;
         // Go to next step. Find (if any) Inconsistencies.
         return WriteInconsistencyModel(subGraph);
 
@@ -790,7 +823,7 @@ public class InconsistencyLocator
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
         // AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
         String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
-        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Split File \n").getBytes());
@@ -802,7 +835,10 @@ public class InconsistencyLocator
         System.out.println("HDT size : "+ size);
         long counterTriples = 0;
         List<String> triples;
-
+        ProcessTimeCreateSubgraphTotal =0;
+        ProcessTimeFindContradictionsTotal =0;
+        ProcessTimeCreateAntiPatternsTotal = 0;
+        subgraphs = 0;
 
         // Setting the AMOUNT OF THREADS: TODO: DO THE CONCURRENCY
         int numberThreads = 1;
@@ -847,17 +883,14 @@ public class InconsistencyLocator
                         long Triple10000Time = System.currentTimeMillis() - Triple10000;
                         System.out.println("Amount of triples: " + counterTriples + " with max of: " + size + " Time passed: " + estimatedTime);
                         System.out.println("Time total: " + Triple10000Time);
-                        System.out.println("Time passed create Subgraphs: " + ProcessTimeCreateSubgraph);
-                        System.out.println("Time passed Find Contradictions: " + ProcessTimeFindContradictions);
-                        System.out.println("Time passed Create AntiPatterns: " + ProcessTimeCreateAntiPatterns);
+                        System.out.println("Time passed create Subgraphs: " + ProcessTimeCreateSubgraphTotal);
+                        System.out.println("Time passed Find Contradictions: " + ProcessTimeFindContradictionsTotal);
+                        System.out.println("Time passed Create AntiPatterns: " + ProcessTimeCreateAntiPatternsTotal);
                         Triple10000 = System.currentTimeMillis();
-                        ProcessTimeCreateSubgraph = 0;
-                        ProcessTimeFindContradictions = 0;
-                        ProcessTimeCreateAntiPatterns = 0;
                     }
                     // at the moment every 1 out of 2000 triples is taken.
                     // If the loop is not triggered the next element from the tripleString is taken.
-                    if (subject.equals(item.getSubject().toString())) {
+                    if (subject.equals(item.getSubject().toString()) || counterTriples % (maxValueExperiment/5) != 0) {
                         continue;
                     }
                     subject = item.getSubject().toString();
@@ -865,6 +898,13 @@ public class InconsistencyLocator
 
 
                 }
+
+                ProcessTimeCreateSubgraphTotal +=ProcessTimeCreateSubgraph;
+                ProcessTimeFindContradictionsTotal +=ProcessTimeFindContradictions;
+                ProcessTimeCreateAntiPatternsTotal +=ProcessTimeCreateAntiPatterns;
+                ProcessTimeCreateSubgraph = 0;
+                ProcessTimeFindContradictions = 0;
+                ProcessTimeCreateAntiPatterns = 0;
 
                 // both the subject and the object are taken to build the subgraph. With the expectation that the subject
                 // graph encompasses the object graph. With the exception when the subject graph gets to large and misses
@@ -877,10 +917,11 @@ public class InconsistencyLocator
                 Set<Set<OWLAxiom>> exp = new HashSet<>();
 
                 for (String subjectString : triples) {
+                    subgraphs += 1;
                     exp.addAll(WriteInconsistencySubGraph(hdt, subjectString));
                 }
-                ProcessTimeFindContradictions += System.currentTimeMillis() - ProcessTimeFindContradictionsStart;
-                ProcessTimeFindContradictionsTotal +=ProcessTimeFindContradictions;
+
+                ProcessTimeFindContradictions += (System.currentTimeMillis() - ProcessTimeFindContradictionsStart);
                 // Process all the Inconsistencies.
                 // Loop through the set of explanations and standardize the Inconsistencies.
                 long ProcessTimeCreateAntiPatternsStart = System.currentTimeMillis();
@@ -891,8 +932,7 @@ public class InconsistencyLocator
                     InconsistencyStandardizer(InconsistencyExplanation, fileWriter);
 
                 }
-                ProcessTimeCreateAntiPatterns += System.currentTimeMillis()- ProcessTimeCreateAntiPatternsStart;
-                ProcessTimeCreateAntiPatternsTotal +=ProcessTimeCreateAntiPatterns;
+                ProcessTimeCreateAntiPatterns += (System.currentTimeMillis()- ProcessTimeCreateAntiPatternsStart);
                 if (InconsistenciesHit % 5000 <= 10) {
                     System.out.println("Inconsistencies Hit: " + InconsistenciesHit);
                     System.out.println("Amount of triples: " + counterTriples + " with max of: " + size);
@@ -900,7 +940,7 @@ public class InconsistencyLocator
                     SortGeneralList();
                 }
 
-                if (counterTriples > 500000) {
+                if (counterTriples > 50000000) {
                     UnBreakable = false;
                 }
 

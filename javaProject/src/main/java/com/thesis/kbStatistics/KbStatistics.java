@@ -385,7 +385,7 @@ class KbStatistics {
 //        } catch (Exception e){
 //            e.printStackTrace();
 //        }
-//        long Size = KbSize(hdt);
+        long Size = KbSize(hdt);
 
         ArrayList<HashSet<String>> NameSpaceSet = NameSpaces(hdt);
         List<HashMap> arrayList = new ArrayList<>();
