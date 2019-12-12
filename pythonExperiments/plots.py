@@ -1,7 +1,6 @@
 import json
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.interpolate import spline
 
 
 Colors = [ '#4363d8', '#f58231', '#911eb4', '#46f0f0',  '#46f0f0', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000']
@@ -14,7 +13,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
     kbStaaa = "/kbStatistics.json"
     labels1 = []
 
-    ColorScheme = {'DBpedia': '#f5a3b8', 'Yago': '#94dc9b', 'DBLP': '#f58231', "LOD" : "#4363d8"} 
+    ColorScheme = {'DBpedia': '#f5a3b8', 'Yago': '#94dc9b', 'DBLP': '#f58231', "LOD" : "#4363d8"}
     FileListInconsistencySample =  ["StatResults/Sampled/"+'DBpedia'+incon, "StatResults/Sampled/"+'Yago'+incon]
     labels2 = []
     counter = 0
@@ -66,7 +65,7 @@ def plotting(FileListInconsistency, FileListKB, Sample):
         plt.xlabel('"Anti-pattern" type')
 
     x = 0
-    ColorScheme = {'DBpedia': '#e6194b', 'Yago': '#3cb44b', 'DBLP': '#f58231', "LOD" : "#4363d8"} 
+    ColorScheme = {'DBpedia': '#e6194b', 'Yago': '#3cb44b', 'DBLP': '#f58231', "LOD" : "#4363d8"}
     counter = 0
 
     labels2 = []
