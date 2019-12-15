@@ -3,7 +3,9 @@ package com.thesis.kbInconsistencyLocator;
 import com.clarkparsia.owlapi.explanation.TransactionAwareSingleExpGen;
 import openllet.core.KnowledgeBase;
 import openllet.jena.PelletInfGraph;
+import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.OWL;
+import openllet.owlapi.PelletReasoner;
 import openllet.owlapi.explanation.GlassBoxExplanation;
 import openllet.owlapi.explanation.PelletExplanation;
 import openllet.owlapi.OpenlletReasoner;
@@ -12,13 +14,17 @@ import openllet.shared.tools.Log;
 import org.apache.jena.graph.*;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.Ontology;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.rulesys.builtins.Max;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.hdt.HDTManager;
 import org.rdfhdt.hdt.triples.IteratorTripleString;
 import org.rdfhdt.hdt.triples.TripleString;
 import openllet.owlapi.parser.OWLFunctionalSyntaxParser;
+import org.semanticweb.owlapi.debugging.BlackBoxOWLDebugger;
+import org.semanticweb.owlapi.debugging.OWLDebugger;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.io.StringDocumentSource;
 
@@ -38,6 +44,9 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLAPIPreconditions;
+import ru.avicomp.ontapi.OntManagers;
+import ru.avicomp.ontapi.OntologyManager;
+import ru.avicomp.ontapi.OntologyModel;
 
 import javax.annotation.Nonnegative;
 
@@ -642,6 +651,13 @@ public class InconsistencyLocator
                 try {
                     for (String elem : subModel) {
                         // Write to outputStream as bytes.
+                        if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
+                        if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
+                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
+                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
+                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
+                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
+                        if (elem.lastIndexOf('"') > -1) continue;
                         if (elem.lastIndexOf("^") > -1) {
                             if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
                                 elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
@@ -668,7 +684,77 @@ public class InconsistencyLocator
         return in;
     }
 
-
+//    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
+//        // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
+//        Set<Set<OWLAxiom>> exp = Collections.emptySet();
+//
+//        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//        try{
+//            model.read(PipeModel(subModel), "","N3");
+//        } catch (Exception e){
+//            return exp;
+//        }
+//
+//        try{
+//
+//            model.prepare();
+//        } catch (Exception e){
+//            return exp;
+//        }
+//
+//        // Get the KnowledgeBase object
+//        PelletInfGraph pellet = ((PelletInfGraph) model.getGraph());
+//        // create an inferencing model using Pellet reasoner
+//        if( !pellet.isConsistent() ) {
+//            // create an inferencing model using Pellet reasoner
+//            Model explanation = pellet.explainInconsistency();
+//            // print the explanation
+//            explanation.write(System.out);
+//            StmtIterator statements =  explanation.listStatements();
+//            while (statements.hasNext()){
+//                System.out.println(statements.next());
+//
+//            }
+//
+//        }
+////
+////        // perform initial consistency check
+////        long s = System.currentTimeMillis();
+////        boolean consistent = kb.isConsistent();
+////        long etime = System.currentTimeMillis();
+////        System.out.println("Consistent? " + consistent + " (" + (etime - s) + "ms) Expressivity: "+kb.getExpressivity());
+//
+////        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+////        model.read(PipeModel(subModel), "","N3");
+//
+//        // Find the Set of the Explanations that show that the SubGraph is inconsistent.
+//
+////        OWLOntology ontology;
+////        try{
+////            ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
+////        } catch (Exception e){
+////            return exp;
+////        }
+//        // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+//
+////        try{
+////            OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
+////            TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
+////            HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
+////            // Also Setting TimeOut
+////            long timeOut = maxValueExperiment*2 < 2000 ? 2000 : maxValueExperiment *4;
+////            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, timeOut+System.currentTimeMillis());
+////
+////        } catch (Exception e){
+////            System.out.println("FailedReasoning");
+////            return exp;
+////        }
+//
+//
+//
+//        return exp;
+//
+//    }
     private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel) throws OWLOntologyCreationException {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
         Set<Set<OWLAxiom>> exp = Collections.emptySet();
@@ -680,10 +766,8 @@ public class InconsistencyLocator
         for (String elem : subModel) {
             if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
             if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
-            if (elem.contains("http://purl.org/twc/vocab/conversion/BooleanPromotionEnhancement")) continue;
             if (elem.lastIndexOf("^") > -1) continue;
             if (elem.lastIndexOf('"') > -1) continue;
-            if( elem.lastIndexOf("dcterms:creator") > -1)  continue;
             if (elem.lastIndexOf("^") > -1) {
                 if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
                     elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
@@ -804,9 +888,9 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
+            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
-            //subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
+            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
@@ -823,7 +907,7 @@ public class InconsistencyLocator
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
         // AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/javaProject/resources/";
         String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/javaProject/resources/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
+        // String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/javaProject/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Split File \n").getBytes());

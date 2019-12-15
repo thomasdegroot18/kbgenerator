@@ -95,18 +95,19 @@ public class testSuite {
             System.out.println("inconsistencyJSON: "+inconsistencyJSON);
             System.out.println("temp: "+temp);
 
-//        // Inconsistency Locator
-//        System.out.println("------------------------------------------------------------------------------------------");
-//        System.out.println("Starting Locating Inconsistencies");
-//        String[] argsInconsistency =  {hdt,
-//                                       rdf,
-//                                       "500",
-//                                       "true",
-//                                        "false",
-//                                        "0"};
-//        if (CheckingInconsistency ){
-//            InconsistencyLocator.main(argsInconsistency);
-//        }
+        // Inconsistency Locator
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Starting Locating Inconsistencies");
+        String[] argsInconsistency =  {hdt,
+                                       rdf,
+                                       "20",
+                                       "true",
+                                        "false",
+                                        "0",
+                                        "5000"};
+        if (CheckingInconsistency ){
+            InconsistencyLocator.main(argsInconsistency);
+        }
         System.out.println("------------------------------------------------------------------------------------------");
         // Statistics
         System.out.println("Starting Statistics");

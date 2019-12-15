@@ -169,7 +169,6 @@ public class GraphExtractExtended extends org.apache.jena.graph.GraphExtract
                 if (! (active.contains( subRoot )  ) ) {  //
                     counter = extractIntoExtend( subRoot, counter);
                 }
-
             }
             return counter;
         }
