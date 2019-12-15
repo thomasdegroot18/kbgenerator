@@ -269,29 +269,9 @@ readTextFile("data/Inconsistencies.json", function(text1){
   var group1 = 0;
   var group2 = 0;
   var group3 = 0;
-    var graphNumberItems = JSON.parse(text2);
     var sample = JSON.parse(text1);
     for (elem in sample){
-      var inconsistencyInfo = graphNumberItems[elem]
-      if(inconsistencyInfo.Type == "KiteWithoutEquivalence" && group1 < 5){ //
-        group1 ++;
-        var graph = sample[elem].Graph
-        var nodeLinks = graph.split(", ");
-        var nodesEdges = RetrieveNodes(nodeLinks)
-        nodes = nodesEdges[0]
-        links = nodesEdges[1]
-        var bodySection = d3.select(".group1").append("div");
-        build(nodes, links, bodySection)
-      } else if(inconsistencyInfo.Type == "KiteWithEquivalence" && group2 < 5){ //
-        group2 ++;
-        var graph = sample[elem].Graph
-        var nodeLinks = graph.split(", ");
-        var nodesEdges = RetrieveNodes(nodeLinks)
-        nodes = nodesEdges[0]
-        links = nodesEdges[1]
-        var bodySection = d3.select(".group2").append("div");
-        build(nodes, links, bodySection)
-      } else if(inconsistencyInfo.Type == "LoopWithoutEquivalence" && group3 < 5){ //
+      if((sample[elem].Graph.indexOf("range") > -1 || sample[elem].Graph.indexOf("domain") > -1 )  && group3 < 5){ //
         group3 ++;
         var graph = sample[elem].Graph
         var nodeLinks = graph.split(", ");
@@ -300,8 +280,25 @@ readTextFile("data/Inconsistencies.json", function(text1){
         links = nodesEdges[1]
         var bodySection = d3.select(".group3").append("div");
         build(nodes, links, bodySection)
+      } else if((sample[elem].Graph.match(/ClassAssertion/g) || []).length == 1 && group1 < 5){ //
+        group1 ++;
+        var graph = sample[elem].Graph
+        var nodeLinks = graph.split(", ");
+        var nodesEdges = RetrieveNodes(nodeLinks)
+        nodes = nodesEdges[0]
+        links = nodesEdges[1]
+        var bodySection = d3.select(".group1").append("div");
+        build(nodes, links, bodySection)
+      } else if((sample[elem].Graph.match(/ClassAssertion/g) || []).length == 2 && group2 < 5){ //
+        group2 ++;
+        var graph = sample[elem].Graph
+        var nodeLinks = graph.split(", ");
+        var nodesEdges = RetrieveNodes(nodeLinks)
+        nodes = nodesEdges[0]
+        links = nodesEdges[1]
+        var bodySection = d3.select(".group2").append("div");
+        build(nodes, links, bodySection)
       }
-
 
   }
 })

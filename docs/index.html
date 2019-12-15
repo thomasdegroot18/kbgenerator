@@ -1,18 +1,77 @@
-<HTML>
-<HEAD>
-<TITLE>KBgenerator</TITLE>
+<html>
 
-</HEAD>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti-pattern Extractor and KBgenerator</title>
+  <meta name="description" content="Extra and interactive information about the Anti-pattern Extractor and KBgenerator.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div id="logo"><img src="images/logo.png">Anti-pattern Extractor and KBgenerator</div>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a>
+        <li><a href="Writing/Analysing_Large_Inconsistent_KGs.pdf">Paper</a>
+        <li><a href="Webpages/statisticsOverview.html">Statistics</a>
+        <li><a href="/Webpages/data/INCONSISTENCIES-LOD-a-lot.ttl">Anti-patterns</a>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <h1><strong>Anti-pattern Extractor and KBgenerator</strong></h1>
+  </section>
+  <section id="pageContent">
+    <main role="main">
+      <article>
+        <h2>Summary</h2>
+        <p>
+          Based on formal semantics, most of the Knowledge Graphs (KGs) on the Web of Data can be put to practical use.
+          Unfortunately, a significant number of those KGs contain contradicting statements, and hence are logically inconsistent.</br>
+          This makes reasoning limited and the knowledge formally useless. Understanding how these contradictions are formed,
+          how often they occur, and how they vary between different KGs, is essential for fixing and avoiding such contradictions in the future,
+          or are at least for developing better tools that handle inconsistent KGs. Methods exist to explain a single contradiction,
+          by finding the minimal set of axioms sufficient to produce it, a process known as justification retrieval.</br>
+          In large KGs, these justifications can be frequent and might redundantly refer to the same type of modelling mistake.
+          Furthermore, these justifications are --by definition-- domain dependent, and hence difficult to interpret or compare.</br>
+          This paper introduces the notion of anti-pattern for generalising these justifications, and presents an approach for
+          detecting almost all anti-patterns from any inconsistent KG. Experiments on KGs of over 28 billion triples
+          show the scalability of this approach, and the importance of anti-patterns to analyse and compare contradictions between KGs.
+        </p>
+      </article>
+      <article>
+        <h2>Paper</h2>
+        <p>
+<a href="Writing/Analysing_Large_Inconsistent_KGs.pdf">Click here</a> for the most Recent version of the paper.
+        </p>
+      </article>
+      <article>
+        <h2>inconsistency statistics</h2>
+        <p>
+<a href="Webpages/statisticsOverview.html">Click here</a> for the inconsistency statistics.
+        </p>
+      </article>
+      <article>
+        <h2>Download </h2>
+        <p>
+<a href="Webpages/statisticsOverview.html">Click here</a> for the turtle file of the Anti-patterns.
+        </p>
+      </article>
+    </main>
+    <!-- <aside>
+  <div>Sidebar 1</div>
+</aside> -->
+  </section>
+  <footer>
+    <address>
+      Contact: <a href="mailto:t.j.a.de.groot@vu.nl">t.j.a.de.groot@vu.nl</a>
+    </address>
+  </footer>
 
 
-<H1>This is the main page about the new KB generator</H1>
+</body>
 
-<p> Here comes all information about the new page </p>
-
-<p> <a href="Writing/ThesisPreliminaryVersion.pdf">Click here</a> for the most Recent version of the paper. </p>
-
-<p> <a href="Webpages/statisticsOverview.html"> Click here</a> for the inconsistency statistics. </p>
-
-</BODY>
-
-</HTML>
+</html>

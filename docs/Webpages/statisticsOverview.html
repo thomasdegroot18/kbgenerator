@@ -1,40 +1,61 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Statistics overview</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/statisticsOver.css">
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://unpkg.com/d3-3d/build/d3-3d.min.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Statistics overview</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" type="text/css" href="css/statisticsOver.css">
 
-  <body>
-    <h3>Plots</h3>
-      <div class="slider-wrapper">
-        <div class="slider">
-          <div class="portfolio-overlay">
-            <div id="portfolio_0" class="portfolio-active portfolio-single"><img src="images/figure1.png"></div>
-            <div id="portfolio_1" class="portfolio-inactive portfolio-single"><img src="images/figure2.png"></div>
-            <div id="portfolio_2" class="portfolio-inactive portfolio-single"><img src="images/figure3.png"></div>
-            <div id="portfolio_3" class="portfolio-inactive portfolio-single"><img src="images/figure4.png"></div>
-            <div id="portfolio_4" class="portfolio-inactive portfolio-single"><img src="images/figure5.png"></div>
-            <div id="portfolio_5" class="portfolio-inactive portfolio-single"><img src="images/figure6.png"></div>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://unpkg.com/d3-3d/build/d3-3d.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div id="logo"><img src="../images/logo.png">Anti-pattern Extractor and KBgenerator</div>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a>
+        <li><a href="../Writing/Analysing_Large_Inconsistent_KGs.pdf">Paper</a>
+        <li><a href="../Webpages/statisticsOverview.html">Statistics</a>
+        <li><a href="../Webpages/data/INCONSISTENCIES-LOD-a-lot.ttl">Anti-patterns</a>
+      </ul>
+    </nav>
+  </header>
+  <section id="pageContent">
+    <main role="main">
+      <a href="graph-1.html">
+      <article>
+        <h3>Kite graphs</h3>
+        <p>
+          <div class="group1">
           </div>
-        </div>
-      </div>
-      <div class="group1">
-        <h3><a href="graph-1.html">Kite Without Equivalence</a></h3>
-      </div>
-      <div class="group2">
-        <h3><a href="graph-2.html">Kite With Equivalence</a></h3>
-      </div>
-      <div class="group3">
-        <h3><a href="graph-3.html">Loop Without Equivalence</a></h3>
-      </div>
+        </p>
+        </a>
+      </article>
+      <a href="graph-2.html">
+      <article>
+        <h3>Cycle graphs</h3>
+        <p>
+          <div class="group2">
+          </div>
+        </p>
+      </article>
+    </a>
+      <a href="graph-3.html">
+      <article>
+        <h3>domain or range-based graphs</h3>
+        <p>
+          <div class="group3">
+          </div>
+        </p>
+      </article></a>
+    </main>
     <script type="text/javascript" src="js/graphsGroup.js"></script>
-  </body>
+</body>
+
 </html>

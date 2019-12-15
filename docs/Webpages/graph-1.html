@@ -29,7 +29,7 @@
               var yago2s = JSON.parse(text5);
               for (elemSample in sample){
                 var inconsistencyInfo = graphNumberItems[elemSample]
-                if (inconsistencyInfo.Type == "KiteWithoutEquivalence" && lOD[elemSample].Count > 0){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
+                if ((sample[elemSample].Graph.match(/ClassAssertion/g) || []).length == 1 && sample[elemSample].Graph.indexOf("EquivalentClasses") == -1 && lOD[elemSample].Count > 0){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
                   var graph = sample[elemSample].Graph
                   var nodeLinks = graph.split(", ");
                   var nodesEdges = RetrieveNodes(nodeLinks)
@@ -59,7 +59,7 @@
 
                   values = []
                   values.push(inconsistencyInfo);
-                  tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
+                  // tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
 
                 }
               }

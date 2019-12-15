@@ -2,7 +2,7 @@
 json_file = open("Inconsistencies.json", 'w')
 json_file.write('[')
 number = ""
-ttl_file = open("INCONSISTENCIES-LOD-a-lotUSED.ttl", 'r')
+ttl_file = open("INCONSISTENCIES-LOD-a-lot.ttl", 'r')
 for line in ttl_file.read().split("New general inconsistency: "):
     Graph = line.split("New general inconsistency:")
     for elem in Graph:
