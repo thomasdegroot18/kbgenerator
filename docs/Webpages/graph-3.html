@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>LoopWithoutEquivalence</title>
+    <title>Domain or range-based graphs</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/graphs.css">
 
@@ -29,7 +29,8 @@
               var yago2s = JSON.parse(text5);
               for (elemSample in sample){
                 var inconsistencyInfo = graphNumberItems[elemSample]
-                if ((sample[elemSample].Graph.indexOf("range") > -1 || sample[elemSample].Graph.indexOf("domain") > -1) && lOD[elemSample].Count > 0){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
+
+                if ((sample[elemSample].Graph.indexOf("Range") > -1 || sample[elemSample].Graph.indexOf("Domain") > -1)){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
                   var graph = sample[elemSample].Graph
                   var nodeLinks = graph.split(", ");
                   var nodesEdges = RetrieveNodes(nodeLinks)
@@ -40,26 +41,11 @@
                   bodySection.append("p").attr("width", "600px").html(sparqlRequest);
                   build(nodes, links, bodySection)
 
-                  inconsistencyInfo.LODaLot = lOD[elemSample].Count
-                  if(yago2s[elemSample] == undefined){
-                    inconsistencyInfo.YAGO = 0;
-                  } else{
-                    inconsistencyInfo.YAGO = yago2s[elemSample].Count
-                  }
-                  if(dbpedia[elemSample] == undefined){
-                    inconsistencyInfo.dbpedia = 0;
-                  } else{
-                    inconsistencyInfo.dbpedia = dbpedia[elemSample].Count
-                  }
-                  delete inconsistencyInfo.PerDatasetCount
-                  delete inconsistencyInfo.ClassType
-                  delete inconsistencyInfo.TailEffect
-                  delete inconsistencyInfo.Count
 
 
                   values = []
                   values.push(inconsistencyInfo);
-                  tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
+                  // tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
 
                 }
               }

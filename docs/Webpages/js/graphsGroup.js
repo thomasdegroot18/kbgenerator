@@ -28,124 +28,240 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 
-function RetrieveNodes(nodeLinks){
+function RetrieveNodes(nodeLinks) {
 
-   var nodes = []
+  var nodes = []
 
-   var links = []
+  var links = []
 
-   xLoc = 100
-   yLoc = 100
+  xLoc = 100
+  yLoc = 100
 
-    for (linksetelem of nodeLinks) {
-        nodesElemIn = {x: 0, y: 0, name: "", color: "blue"}
-        nodesElemOut = {x: 0, y: 0, name: "", color: "blue"}
-          vertexIn = linksetelem.split(" ")[1]
-          vertexOut = linksetelem.split(" ")[2];
-          if (vertexIn.includes("C")){
-            vertexType = "Class";
-            reuse = undefined;
-            for (elem in nodes){
-              if (nodes[elem].name == vertexIn){
-                reuse = elem
-              }
-            }
-            if (reuse == undefined){
-              nodesElemIn.color = "green";
-              nodesElemIn.name = vertexIn;
-              nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 20;
-              nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 20;
-              nodes.push(nodesElemIn);
-            } else{
-              nodes[reuse].color = "green";
-            }
-
-          }
-          if (vertexOut.includes("C")){
-            vertexType = "Class";
-            reuse = undefined;
-            for (elem in nodes){
-              if (nodes[elem].name == vertexOut){
-                reuse = elem
-              }
-            }
-            if (reuse == undefined){
-              nodesElemOut.color = "green";
-              nodesElemOut.name = vertexOut;
-              nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 20;
-              nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 20;
-              nodes.push(nodesElemOut);
-            } else{
-              nodes[reuse].color = "green";
-            }
-
-          }
-          if (vertexOut.includes("a")){
-            reuse = undefined;
-            for (elem in nodes){
-              if (nodes[elem].name == vertexOut){
-                reuse = elem
-              }
-            }
-            if (reuse == undefined){
-              nodesElemOut.name = vertexOut;
-              nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 50;
-              nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 50;
-              nodesElemOut.color = "blue"
-
-              nodes.push(nodesElemOut);
-            }
-
-          }
-          if (vertexIn.includes("a")){
-            reuse = undefined;
-            for (elem in nodes){
-              if (nodes[elem].name == vertexIn){
-                reuse = elem
-              }
-            }
-            if (reuse == undefined){
-              nodesElemIn.name = vertexIn;
-              nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 50;
-              nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 50;
-              nodesElemIn.color = "blue"
-
-              nodes.push(nodesElemIn);
-            }
-
-          }
+  for (linksetelem of nodeLinks) {
+    nodesElemIn = {
+      x: 0,
+      y: 0,
+      name: "",
+      color: "blue",
+      radius:  "5px"
+    }
+    nodesElemOut = {
+      x: 0,
+      y: 0,
+      name: "",
+      color: "blue",
+      radius:  "5px"
+    }
+    vertexPred = linksetelem.split(" ")[0]
+    vertexIn = linksetelem.split(" ")[1]
+    vertexOut = linksetelem.split(" ")[2];
+    if (vertexIn[0] == "C") {
+      vertexType = "Class";
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexIn) {
+          reuse = elem
+        }
       }
-        names = []
-        nodesC = []
-        for (node of nodes){
-          if (!names.includes(node.name)){
-            nodesC.push(node)
-            names.push(node.name)
-          }
+      if (reuse == undefined) {
+        nodesElemIn.color = "green";
+        nodesElemIn.name = vertexIn;
+        nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 20;
+        nodes.push(nodesElemIn);
+      } else {
+        nodes[reuse].color = "green";
+      }
+
+    }
+    if (vertexOut[0] == "C") {
+      vertexType = "Class";
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexOut) {
+          reuse = elem
         }
+      }
+      if (reuse == undefined) {
+        nodesElemOut.color = "green";
+        nodesElemOut.name = vertexOut;
+        nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 20;
+        nodes.push(nodesElemOut);
+      } else {
+        nodes[reuse].color = "green";
+      }
 
-        for (elem of nodeLinks) {
-          edge = elem.split(" ")[0]
-          vertexIn = elem.split(" ")[1]
-          vertexOut = elem.split(" ")[2];
-          linksElem = {source: nodesC[vertexOut], target: nodesC[vertexIn], type: edge}
-          for (counter of nodesC){
-                if (counter.name == vertexOut){
-                  linksElem.source = counter
-                }
-                if (counter.name == vertexIn){
-                  linksElem.target = counter
-                }
-            }
-            linksElem.type = edge;
-            links.push(linksElem);
-
+    }
+    if (vertexOut[0] == "a") {
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexOut) {
+          reuse = elem
         }
+      }
+      if (reuse == undefined) {
+        nodesElemOut.name = vertexOut;
+        nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 50;
+        nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 50;
+        nodesElemOut.color = "blue"
 
-        return [nodesC, links]
+        nodes.push(nodesElemOut);
+      }
+
+    }
+    if (vertexIn[0] == "a") {
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexIn) {
+          reuse = elem
+        }
+      }
+      if (reuse == undefined) {
+        nodesElemIn.name = vertexIn;
+        nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 50;
+        nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 50;
+        nodesElemIn.color = "blue"
+
+        nodes.push(nodesElemIn);
+      }
     }
 
 
+
+    if (vertexPred[0] == "p") {
+      vertexType = "predicate";
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexPred) {
+          reuse = elem
+        }
+      }
+      if (reuse == undefined) {
+        nodesElemIn.color = "orange";
+        nodesElemIn.name = vertexPred;
+        nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemIn.radius =  "3px"
+        // nodes.push(nodesElemIn);
+      } else {
+        nodes[reuse].color = "orange";
+      }
+      nodes.push(nodesElemIn);
+
+    }
+
+
+
+
+
+    if (vertexOut[0] == "p") {
+      vertexType = "predicate";
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexOut) {
+          reuse = elem
+        }
+      }
+      if (reuse == undefined) {
+        nodesElemOut.color = "orange";
+        nodesElemOut.name = vertexOut;
+        nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 20;
+        // nodes.push(nodesElemOut);
+                nodesElemOut.radius =  "3px"
+      } else {
+        nodes[reuse].color = "orange";
+      }
+      nodes.push(nodesElemOut);
+    }
+    if (vertexIn[0] == "p") {
+      vertexType = "predicate";
+      reuse = undefined;
+      for (elem in nodes) {
+        if (nodes[elem].name == vertexOut) {
+          reuse = elem
+        }
+      }
+      if (reuse == undefined) {
+        nodesElemOut.color = "red";
+        nodesElemOut.name = vertexOut;
+        nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 20;
+        nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 20;
+                nodesElemOut.radius =  "3px"
+        // nodes.push(nodesElemOut);
+      } else {
+        nodes[reuse].color = "red";
+      }
+      nodes.push(nodesElemOut);
+
+    }
+  }
+  names = []
+  nodesC = []
+  for (node of nodes) {
+    if (!names.includes(node.name)) {
+      nodesC.push(node)
+      names.push(node.name)
+    }
+  }
+
+  for (elem of nodeLinks) {
+    edge = elem.split(" ")[0]
+    vertexIn = elem.split(" ")[1]
+    vertexOut = elem.split(" ")[2];
+      if (edge[0] == "p") {
+        linksElem1 = {
+          source: nodesC[vertexOut],
+          target: nodesC[vertexIn],
+          type: edge
+        }
+        linksElem2 = {
+          source: nodesC[vertexOut],
+          target: nodesC[vertexIn],
+          type: edge
+        }
+        for (counter of nodesC) {
+          if (counter.name == vertexOut) {
+            linksElem1.source = counter
+          }
+          if (counter.name == edge) {
+            linksElem1.target = counter
+          }
+        }
+        for (counter of nodesC) {
+          if (counter.name == edge) {
+            linksElem2.source = counter
+          }
+          if (counter.name == vertexIn) {
+            linksElem2.target = counter
+          }
+        }
+        linksElem1.type = edge;
+        linksElem2.type = edge;
+        links.push(linksElem1);
+        links.push(linksElem2);
+
+      } else {
+        linksElem = {
+          source: nodesC[vertexOut],
+          target: nodesC[vertexIn],
+          type: edge
+        }
+        for (counter of nodesC) {
+          if (counter.name == vertexOut) {
+            linksElem.source = counter
+          }
+          if (counter.name == vertexIn) {
+            linksElem.target = counter
+          }
+        }
+        linksElem.type = edge;
+        links.push(linksElem);
+      }
+  }
+  return [nodesC, links]
+}
 
 function build(nodes, links, divSection) {
     const svg = divSection.append('svg').attr("width","200px").attr("height","200px");
@@ -170,7 +286,9 @@ var node = svg.append("g")
        .attr("cx", function(d) { return d.x; })
        .attr("cy", function(d) { return d.y; })
        .attr("text", function(d) {return d.name})
-       .attr("r", "5px")
+       .attr("r", function(d) {
+         return d.radius
+       })
        .attr("fill", function(d) {return d.color})
 
 
@@ -271,7 +389,7 @@ readTextFile("data/Inconsistencies.json", function(text1){
   var group3 = 0;
     var sample = JSON.parse(text1);
     for (elem in sample){
-      if((sample[elem].Graph.indexOf("range") > -1 || sample[elem].Graph.indexOf("domain") > -1 )  && group3 < 5){ //
+      if((sample[elem].Graph.indexOf("Range") > -1 || sample[elem].Graph.indexOf("Domain") > -1 )  && group3 < 5){ //
         group3 ++;
         var graph = sample[elem].Graph
         var nodeLinks = graph.split(", ");
