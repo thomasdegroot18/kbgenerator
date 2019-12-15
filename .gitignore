@@ -5,7 +5,8 @@ pythonExperiments/
 Samples/
 Samples-2/
 extraFiles/temp/
-javaProject/.idea/workspace.xml
-javaProject/.idea/usage.statistics.xml
-javaProject/.idea/tasks.xml
+code/.idea/workspace.xml
+code/.idea/usage.statistics.xml
+code/.idea/tasks.xml
 .jar
+thesisPaper/
