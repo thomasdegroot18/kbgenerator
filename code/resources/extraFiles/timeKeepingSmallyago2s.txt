@@ -1,2 +1,0 @@
-Starting Split File 
-StartTime: 0

@@ -639,50 +639,50 @@ public class InconsistencyLocator
     }
 
 
-    public static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
-        // Start an Input stream that uses a pipe to stream the input to an output stream, this gives the possibility
-        // to convert a set of strings easy to an a OWL Ontology.
-        PipedInputStream in = new PipedInputStream();
-        // Start an PipedOutputStream with input the PipedInputStream.
-        PipedOutputStream out = new PipedOutputStream(in);
-        try {
-            // Lambda Runnable task to convert the set of strings to an output stream.
-            Runnable task = () -> {
-                try {
-                    for (String elem : subModel) {
-                        // Write to outputStream as bytes.
-                        if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
-                        if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
-                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
-                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
-                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
-                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
-                        if (elem.lastIndexOf('"') > -1) continue;
-                        if (elem.lastIndexOf("^") > -1) {
-                            if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
-                                elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
-                            }
-                        }
-                        out.write(elem.getBytes());
-                    }
-                    out.close();
-                }
-                //When Error happens catch it and print stacktrace.
-                catch (IOException io) {
-                    io.printStackTrace();
-                    return;
-                }
-            };
-
-            // Starts the new tread. to push the strings to the OWLOntology.
-            new Thread(task).start();
-        } catch (Exception e){
-            return in;
-        }
-
-        // Create a new OWLOntology and return the filled OWL ontology with the in stream.
-        return in;
-    }
+//    public static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
+//        // Start an Input stream that uses a pipe to stream the input to an output stream, this gives the possibility
+//        // to convert a set of strings easy to an a OWL Ontology.
+//        PipedInputStream in = new PipedInputStream();
+//        // Start an PipedOutputStream with input the PipedInputStream.
+//        PipedOutputStream out = new PipedOutputStream(in);
+//        try {
+//            // Lambda Runnable task to convert the set of strings to an output stream.
+//            Runnable task = () -> {
+//                try {
+//                    for (String elem : subModel) {
+//                        // Write to outputStream as bytes.
+//                        if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
+//                        if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
+//                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
+//                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#domain")) continue;
+//                        if (elem.split(">")[0].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
+//                        if (elem.split(">")[2].contains("http://www.w3.org/2000/01/rdf-schema#range")) continue;
+//                        if (elem.lastIndexOf('"') > -1) continue;
+//                        if (elem.lastIndexOf("^") > -1) {
+//                            if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
+//                                elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
+//                            }
+//                        }
+//                        out.write(elem.getBytes());
+//                    }
+//                    out.close();
+//                }
+//                //When Error happens catch it and print stacktrace.
+//                catch (IOException io) {
+//                    io.printStackTrace();
+//                    return;
+//                }
+//            };
+//
+//            // Starts the new tread. to push the strings to the OWLOntology.
+//            new Thread(task).start();
+//        } catch (Exception e){
+//            return in;
+//        }
+//
+//        // Create a new OWLOntology and return the filled OWL ontology with the in stream.
+//        return in;
+//    }
 
 //    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
 //        // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
@@ -755,54 +755,152 @@ public class InconsistencyLocator
 //        return exp;
 //
 //    }
-    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel) throws OWLOntologyCreationException {
+//    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel) throws OWLOntologyCreationException {
+//        // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
+//        Set<Set<OWLAxiom>> exp = Collections.emptySet();
+//
+//        // Find the Set of the Explanations that show that the SubGraph is inconsistent.
+//        OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
+//        OWLOntology ontology = owlManager.createOntology();
+//        StringBuilder SPARQLStringB = new StringBuilder();
+//        for (String elem : subModel) {
+//            if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
+//            if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
+//            if (elem.lastIndexOf("^") > -1) continue;
+//            if (elem.lastIndexOf('"') > -1) continue;
+//            if (elem.lastIndexOf("^") > -1) {
+//                if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
+//                    elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
+//                }
+//            }
+//
+//            SPARQLStringB.append(elem);
+//        }
+//
+//        try{
+//            OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+//            config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+//            owlManager.setOntologyLoaderConfiguration(config);
+//
+//            StringDocumentSource ontologyStrning = new StringDocumentSource(SPARQLStringB.toString());
+//            ontology = owlManager.loadOntologyFromOntologyDocument(ontologyStrning);
+//        } catch (Exception IllegalStateException){
+//            System.out.println("IllegalStateException");
+//            return exp;
+//
+//        }
+//
+//        try{
+//            // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+//            OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
+//            TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
+//            HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
+//            // Also Setting TimeOut
+//            long timeOut = maxValueExperiment*2 < 2000 ? 2000 : maxValueExperiment *4;
+//            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, timeOut+System.currentTimeMillis());
+//        } catch (Exception e){
+//            System.out.println("FailedReasoning");
+//            return exp;
+//        }
+//        owlManager.removeOntology(ontology);
+//
+//
+//        return exp;
+//
+//    }
+
+    public static PipedInputStream PipeModel(Set<String> subModel) throws Exception{
+        // Start an Input stream that uses a pipe to stream the input to an output stream, this gives the possibility
+        // to convert a set of strings easy to an a OWL Ontology.
+        PipedInputStream in = new PipedInputStream();
+        // Start an PipedOutputStream with input the PipedInputStream.
+        PipedOutputStream out = new PipedOutputStream(in);
+        try {
+            // Lambda Runnable task to convert the set of strings to an output stream.
+            Runnable task = () -> {
+                try {
+                    for (String elem : subModel) {
+                        // Write to outputStream as bytes.
+                        if (elem.lastIndexOf("^") > -1) {
+                            if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
+                                elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
+                            }
+                        }
+                        out.write(elem.getBytes());
+                    }
+                    out.close();
+                }
+                //When Error happens catch it and print stacktrace.
+                catch (IOException io) {
+                    io.printStackTrace();
+                    return;
+                }
+            };
+
+            // Starts the new tread. to push the strings to the OWLOntology.
+            new Thread(task).start();
+        } catch (Exception e){
+            return in;
+        }
+
+        // Create a new OWLOntology and return the filled OWL ontology with the in stream.
+        return in;
+    }
+
+
+    private static Set<Set<OWLAxiom>> WriteInconsistencyModel(Set<String> subModel)  {
         // Retrieve OWL ontology with a PipeModel. The model pipes the set of Strings from the subModel to the OWL Ontology.
-        Set<Set<OWLAxiom>> exp = Collections.emptySet();
+//
+//        final OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//
+//        model.read(PipeModel(subModel), "","N3");
+//
+//        model.prepare();
+//
+//        // Get the KnowledgeBase object
+//        final KnowledgeBase kb = ((PelletInfGraph) model.getGraph()).getKB();
+//
+//        // perform initial consistency check
+//        long s = System.currentTimeMillis();
+//        boolean consistent = kb.isConsistent();
+//        long e = System.currentTimeMillis();
+//        System.out.println("Consistent? " + consistent + " (" + (e - s) + "ms) Expressivity: "+kb.getExpressivity());
+
+//        OntModel model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+//        model.read(PipeModel(subModel), "","N3");
 
         // Find the Set of the Explanations that show that the SubGraph is inconsistent.
-        OWLOntologyManager owlManager = OWLManager.createOWLOntologyManager();
-        OWLOntology ontology = owlManager.createOntology();
-        StringBuilder SPARQLStringB = new StringBuilder();
-        for (String elem : subModel) {
-            if (elem.contains("http://www.w3.org/2002/07/owl#Axiom")) continue;
-            if (elem.contains("http://www.w3.org/2002/07/owl#imports")) continue;
-            if (elem.lastIndexOf("^") > -1) continue;
-            if (elem.lastIndexOf('"') > -1) continue;
-            if (elem.lastIndexOf("^") > -1) {
-                if (elem.lastIndexOf("^") > elem.lastIndexOf("<")) {
-                    elem = elem.substring(0, elem.lastIndexOf("^")) + '-' + elem.substring(elem.lastIndexOf("^") + 1);
-                }
-            }
+        Set<Set<OWLAxiom>> exp = Collections.emptySet();
 
-            SPARQLStringB.append(elem);
-        }
-
+        OWLOntology ontology;
         try{
-            OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
-            config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
-            owlManager.setOntologyLoaderConfiguration(config);
-
-            StringDocumentSource ontologyStrning = new StringDocumentSource(SPARQLStringB.toString());
-            ontology = owlManager.loadOntologyFromOntologyDocument(ontologyStrning);
-        } catch (Exception IllegalStateException){
-            System.out.println("IllegalStateException");
-            return exp;
-
-        }
-
-        try{
-            // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
-            OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology );
-            TransactionAwareSingleExpGen singleExpGen = new GlassBoxExplanation(reasoner);
-            HSTExplanationGeneratorExtended _expGen = new HSTExplanationGeneratorExtended(singleExpGen);
-            // Also Setting TimeOut
-            long timeOut = maxValueExperiment*2 < 2000 ? 2000 : maxValueExperiment *4;
-            exp = _expGen.getExplanations(OWL.Thing, MaxExplanations, timeOut+System.currentTimeMillis());
+            ontology = OWLManager.createOWLOntologyManager().loadOntologyFromOntologyDocument(PipeModel(subModel));
         } catch (Exception e){
-            System.out.println("FailedReasoning");
             return exp;
         }
-        owlManager.removeOntology(ontology);
+
+        // Starting up the Pellet Explanation module.
+        PelletExplanation.setup();
+        // Create the reasoner and load the ontology with the open pellet reasoner.
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+
+        // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
+        PelletExplanation expGen = new PelletExplanation(reasoner);
+
+        try{
+            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+        } catch (Exception e){
+            return exp;
+        }
+//        Iterator<OWLClass> e = ontology.classesInSignature().iterator();
+//        while (e.hasNext()){
+//            OWLClass elem = e.next();
+//            Set<OWLAxiom> explanation = expGen.getUnsatisfiableExplanation(elem );
+//
+//            for(OWLAxiom InconsistencyExp: explanation ){
+//                System.out.println(InconsistencyExp);
+//            }
+//        }
 
 
         return exp;
@@ -888,9 +986,9 @@ public class InconsistencyLocator
         Set<String> subGraph = null;
         try{
             // Retrieve subgraph from HDT single way 5000 triples takes as long as 250 both ways.
-            //subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
+            subGraph = GraphExtract.extractExtend(tripleItem, hdt, maxValueExperiment);
             //TODO: SPEED UP BOTH WAYS
-            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
+//            subGraph = GraphExtract.extractExtendBothClean(tripleItem , hdt, maxValueExperiment);
         } catch (StackOverflowError e){
             // Can print the error if overflow happens.
             e.printStackTrace();
