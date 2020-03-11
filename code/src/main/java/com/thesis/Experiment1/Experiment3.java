@@ -14,8 +14,8 @@ public class Experiment3 {
 
     public static void main(String[] args) throws Exception {
         //String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/code/resources/";
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
-        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
+//        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
+        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
 
         String hdt;
         String hdtName;
