@@ -591,6 +591,7 @@ public class InconsistencyLocator
                 }
 
 
+
                 GeneralGraphNumber ++;
 
                 System.out.println("Found A new General Graph, number " + GeneralGraphNumber);
@@ -940,7 +941,14 @@ public class InconsistencyLocator
             if(foundAlready == 0){
                 SortingListMap.put(AcceptedGraph, 0);
             }
-            foundAlready += TempStorageGenGraph[counter];
+
+            try{
+                foundAlready += TempStorageGenGraph[counter];
+
+            } catch (Exception e){
+                foundAlready += 1;
+
+            }
             SortingListMap.replace(AcceptedGraph, foundAlready);
             counter ++;
         }
@@ -950,8 +958,8 @@ public class InconsistencyLocator
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,LinkedHashMap::new));
 
 
-        // Setting the new Array. Max value plus 50. TODO: get it better fixed.
-        TempStorageGenGraph = new int[GeneralGraphNumber+50];
+        // Setting the new Array. Max value plus 500. TODO: get it better fixed.
+        TempStorageGenGraph = new int[GeneralGraphNumber+500];
 
     }
 
