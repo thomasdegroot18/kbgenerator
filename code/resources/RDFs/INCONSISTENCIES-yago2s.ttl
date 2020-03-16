@@ -1,0 +1,863 @@
+New general inconsistency: 
+General graph number: 1
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C1. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C0 a0
+ClassAssertion C1 a0
+DisjointClasses C0 C1
+
+New general inconsistency: 
+General graph number: 2
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C2 <http://www.w3.org/2002/07/owl#disjointWith> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C4 C2
+SubClassOf C0 C1
+SubClassOf C1 C3
+SubClassOf C3 C4
+
+New general inconsistency: 
+General graph number: 3
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C1 C2
+SubClassOf C0 C1
+
+New general inconsistency: 
+General graph number: 4
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+SubClassOf C0 C3
+SubClassOf C2 C0
+SubClassOf C3 C1
+
+New general inconsistency: 
+General graph number: 5
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. }
+ClassAssertion C2 a0
+DisjointClasses C2 C1
+SubClassOf C0 C1
+SubClassOf C2 C0
+
+New general inconsistency: 
+General graph number: 6
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C3 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. }
+ClassAssertion C0 a0
+ClassAssertion C3 a0
+DisjointClasses C5 C3
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C4
+SubClassOf C4 C5
+
+New general inconsistency: 
+General graph number: 7
+SELECT * WHERE {?C5 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. }
+ClassAssertion C6 a0
+DisjointClasses C7 C5
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C3
+SubClassOf C3 C7
+SubClassOf C4 C0
+SubClassOf C4 C5
+SubClassOf C6 C4
+
+New general inconsistency: 
+General graph number: 8
+SELECT * WHERE {?C6 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. }
+ClassAssertion C0 a0
+ClassAssertion C3 a0
+DisjointClasses C6 C7
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C4
+SubClassOf C3 C7
+SubClassOf C4 C8
+SubClassOf C5 C6
+SubClassOf C8 C5
+
+New general inconsistency: 
+General graph number: 9
+SELECT * WHERE {?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+SubClassOf C2 C1
+SubClassOf C2 C3
+SubClassOf C3 C0
+
+New general inconsistency: 
+General graph number: 10
+SELECT * WHERE {?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. ?C5 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. }
+ClassAssertion C0 a0
+ClassAssertion C3 a0
+DisjointClasses C5 C6
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C4
+SubClassOf C3 C6
+SubClassOf C4 C5
+
+New general inconsistency: 
+General graph number: 11
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C3. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C3 C1
+SubClassOf C0 C1
+SubClassOf C2 C3
+
+New general inconsistency: 
+General graph number: 12
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C2 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. }
+ClassAssertion C0 a0
+DisjointClasses C2 C6
+SubClassOf C0 C3
+SubClassOf C0 C6
+SubClassOf C1 C2
+SubClassOf C3 C4
+SubClassOf C4 C5
+SubClassOf C5 C1
+
+New general inconsistency: 
+General graph number: 13
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. }
+ClassAssertion C0 a0
+DisjointClasses C1 C2
+SubClassOf C0 C2
+SubClassOf C0 C5
+SubClassOf C3 C1
+SubClassOf C4 C3
+SubClassOf C5 C4
+
+New general inconsistency: 
+General graph number: 14
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. }
+ClassAssertion C4 a0
+DisjointClasses C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C0
+SubClassOf C4 C1
+SubClassOf C4 C2
+
+New general inconsistency: 
+General graph number: 15
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. }
+ClassAssertion C4 a0
+DisjointClasses C2 C1
+SubClassOf C0 C1
+SubClassOf C1 C3
+SubClassOf C3 C2
+SubClassOf C4 C0
+
+New general inconsistency: 
+General graph number: 16
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. }
+ClassAssertion C3 a0
+DisjointClasses C0 C1
+SubClassOf C2 C0
+SubClassOf C2 C1
+SubClassOf C3 C4
+SubClassOf C4 C2
+
+New general inconsistency: 
+General graph number: 17
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C1. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. }
+ClassAssertion C0 a0
+ClassAssertion C1 a0
+DisjointClasses C1 C2
+SubClassOf C0 C3
+SubClassOf C3 C2
+
+New general inconsistency: 
+General graph number: 18
+SELECT * WHERE {?C4 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C4 C5
+SubClassOf C0 C1
+SubClassOf C1 C3
+SubClassOf C2 C5
+SubClassOf C3 C4
+
+New general inconsistency: 
+General graph number: 19
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. }
+ClassAssertion C5 a0
+ClassAssertion C7 a0
+DisjointClasses C1 C2
+SubClassOf C0 C1
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C5 C2
+SubClassOf C6 C3
+SubClassOf C7 C6
+
+New general inconsistency: 
+General graph number: 20
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C2 a0
+ClassAssertion C3 a0
+DisjointClasses C0 C1
+SubClassOf C2 C4
+SubClassOf C3 C1
+SubClassOf C4 C0
+
+New general inconsistency: 
+General graph number: 21
+SELECT * WHERE {?C3 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. }
+ClassAssertion C6 a0
+DisjointClasses C3 C5
+SubClassOf C0 C1
+SubClassOf C1 C7
+SubClassOf C2 C3
+SubClassOf C4 C2
+SubClassOf C6 C0
+SubClassOf C6 C5
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 22
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C4 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C4 C6
+SubClassOf C0 C1
+SubClassOf C1 C3
+SubClassOf C2 C5
+SubClassOf C3 C4
+SubClassOf C5 C6
+
+New general inconsistency: 
+General graph number: 23
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C1. }
+ClassAssertion C0 a0
+ClassAssertion C1 a0
+DisjointClasses C2 C0
+SubClassOf C1 C3
+SubClassOf C3 C7
+SubClassOf C4 C5
+SubClassOf C5 C2
+SubClassOf C6 C4
+SubClassOf C7 C6
+
+New general inconsistency: 
+General graph number: 24
+SELECT * WHERE {?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. }
+ClassAssertion C2 a0
+DisjointClasses C1 C5
+SubClassOf C0 C1
+SubClassOf C2 C3
+SubClassOf C2 C5
+SubClassOf C3 C4
+SubClassOf C4 C8
+SubClassOf C6 C7
+SubClassOf C7 C0
+SubClassOf C8 C6
+
+New general inconsistency: 
+General graph number: 25
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C0 a0
+DisjointClasses C1 C3
+SubClassOf C0 C1
+SubClassOf C1 C4
+SubClassOf C2 C3
+SubClassOf C4 C2
+
+New general inconsistency: 
+General graph number: 26
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. }
+ClassAssertion C4 a0
+DisjointClasses C1 C5
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C3
+SubClassOf C3 C5
+SubClassOf C4 C0
+
+New general inconsistency: 
+General graph number: 27
+SELECT * WHERE {?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2002/07/owl#disjointWith> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. }
+ClassAssertion C0 a0
+ClassAssertion C2 a0
+DisjointClasses C2 C3
+SubClassOf C0 C1
+SubClassOf C1 C6
+SubClassOf C4 C5
+SubClassOf C5 C3
+SubClassOf C6 C4
+
+New general inconsistency: 
+General graph number: 28
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. }
+ClassAssertion C9 a0
+DisjointClasses C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C0
+SubClassOf C6 C1
+SubClassOf C6 C4
+SubClassOf C7 C6
+SubClassOf C8 C7
+SubClassOf C9 C2
+
+New general inconsistency: 
+General graph number: 29
+SELECT * WHERE {?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C0
+SubClassOf C6 C1
+SubClassOf C6 C4
+SubClassOf C7 C6
+SubClassOf C8 C7
+
+New general inconsistency: 
+General graph number: 30
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+SubClassOf C2 C5
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C5 C1
+SubClassOf C5 C3
+
+New general inconsistency: 
+General graph number: 31
+SELECT * WHERE {?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C4 a0
+DisjointClasses C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C0
+SubClassOf C4 C6
+SubClassOf C5 C1
+SubClassOf C5 C2
+SubClassOf C6 C5
+
+New general inconsistency: 
+General graph number: 32
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2002/07/owl#equivalentClass> ?C3. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?C4. ?C5 <http://www.w3.org/2002/07/owl#equivalentClass> ?C6. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+EquivalentClasses C3 C1
+EquivalentClasses C4 C0
+EquivalentClasses C5 C6
+SubClassOf C0 C6
+SubClassOf C2 C0
+SubClassOf C6 C1
+
+New general inconsistency: 
+General graph number: 33
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. }
+ClassAssertion C0 a0
+ClassAssertion C9 a0
+DisjointClasses C6 C1
+SubClassOf C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C4
+SubClassOf C4 C7
+SubClassOf C5 C6
+SubClassOf C7 C5
+SubClassOf C8 C2
+SubClassOf C9 C8
+
+New general inconsistency: 
+General graph number: 34
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. ?C4 <http://www.w3.org/2002/07/owl#equivalentClass> ?C5. ?C3 <http://www.w3.org/2002/07/owl#equivalentClass> ?C7. ?C6 <http://www.w3.org/2002/07/owl#equivalentClass> ?C8. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. }
+ClassAssertion C6 a0
+DisjointClasses C1 C5
+EquivalentClasses C4 C5
+EquivalentClasses C7 C3
+EquivalentClasses C8 C6
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C3
+SubClassOf C3 C5
+SubClassOf C6 C0
+
+New general inconsistency: 
+General graph number: 35
+SELECT * WHERE {?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C3. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C3 <http://www.w3.org/2002/07/owl#equivalentClass> ?C5. ?C2 <http://www.w3.org/2002/07/owl#equivalentClass> ?C6. ?C0 <http://www.w3.org/2002/07/owl#equivalentClass> ?C7. }
+ClassAssertion C0 a0
+DisjointClasses C1 C3
+EquivalentClasses C5 C3
+EquivalentClasses C6 C2
+EquivalentClasses C7 C0
+SubClassOf C0 C1
+SubClassOf C1 C4
+SubClassOf C2 C3
+SubClassOf C4 C2
+
+New general inconsistency: 
+General graph number: 36
+SELECT * WHERE {?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. }
+ClassAssertion C7 a0
+DisjointClasses C5 C1
+SubClassOf C0 C1
+SubClassOf C0 C3
+SubClassOf C2 C0
+SubClassOf C3 C6
+SubClassOf C4 C5
+SubClassOf C6 C4
+SubClassOf C7 C8
+SubClassOf C8 C2
+
+New general inconsistency: 
+General graph number: 37
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C4 a0
+DisjointClasses C7 C1
+SubClassOf C0 C1
+SubClassOf C0 C6
+SubClassOf C2 C3
+SubClassOf C3 C5
+SubClassOf C4 C2
+SubClassOf C5 C0
+SubClassOf C6 C7
+
+New general inconsistency: 
+General graph number: 38
+SELECT * WHERE {?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. ?C4 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. }
+ClassAssertion C8 a0
+DisjointClasses C6 C4
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C7
+SubClassOf C3 C0
+SubClassOf C3 C4
+SubClassOf C5 C6
+SubClassOf C7 C5
+SubClassOf C8 C3
+
+New general inconsistency: 
+General graph number: 39
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. }
+ClassAssertion C7 a0
+DisjointClasses C6 C1
+SubClassOf C0 C1
+SubClassOf C0 C5
+SubClassOf C2 C3
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C5 C6
+SubClassOf C7 C8
+SubClassOf C8 C2
+
+New general inconsistency: 
+General graph number: 40
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C3. }
+ClassAssertion C3 a0
+DisjointClasses C6 C1
+SubClassOf C0 C1
+SubClassOf C0 C4
+SubClassOf C2 C0
+SubClassOf C3 C2
+SubClassOf C4 C7
+SubClassOf C5 C6
+SubClassOf C7 C5
+
+New general inconsistency: 
+General graph number: 41
+SELECT * WHERE {?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C10. ?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C9. }
+ClassAssertion C0 a0
+ClassAssertion C10 a0
+DisjointClasses C10 C9
+SubClassOf C0 C1
+SubClassOf C1 C7
+SubClassOf C2 C3
+SubClassOf C3 C4
+SubClassOf C4 C5
+SubClassOf C5 C6
+SubClassOf C6 C9
+SubClassOf C7 C8
+SubClassOf C8 C2
+
+New general inconsistency: 
+General graph number: 42
+SELECT * WHERE {?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. }
+ClassAssertion C9 a0
+DisjointClasses C1 C5
+SubClassOf C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C6 C2
+SubClassOf C7 C8
+SubClassOf C8 C6
+SubClassOf C9 C5
+SubClassOf C9 C7
+
+New general inconsistency: 
+General graph number: 43
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C2. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. }
+ClassAssertion C2 a0
+DisjointClasses C0 C1
+SubClassOf C2 C6
+SubClassOf C3 C0
+SubClassOf C4 C3
+SubClassOf C5 C4
+SubClassOf C6 C1
+SubClassOf C6 C5
+
+New general inconsistency: 
+General graph number: 44
+SELECT * WHERE {?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. }
+ClassAssertion C4 a0
+DisjointClasses C1 C7
+SubClassOf C0 C1
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C7
+SubClassOf C5 C9
+SubClassOf C6 C0
+SubClassOf C8 C6
+SubClassOf C9 C2
+
+New general inconsistency: 
+General graph number: 45
+SELECT * WHERE {?C11 <http://www.w3.org/2002/07/owl#disjointWith> ?C8. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C10 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C11. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. }
+ClassAssertion C4 a0
+ClassAssertion C9 a0
+DisjointClasses C11 C8
+SubClassOf C0 C1
+SubClassOf C1 C6
+SubClassOf C10 C11
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C2
+SubClassOf C9 C0
+
+New general inconsistency: 
+General graph number: 46
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C2 <http://www.w3.org/2002/07/owl#disjointWith> ?C7. }
+ClassAssertion C8 a0
+DisjointClasses C2 C7
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C1 C5
+SubClassOf C3 C4
+SubClassOf C4 C7
+SubClassOf C5 C6
+SubClassOf C6 C3
+SubClassOf C8 C0
+
+New general inconsistency: 
+General graph number: 47
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C4. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. ?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C4 a0
+ClassAssertion C9 a0
+DisjointClasses C10 C8
+SubClassOf C0 C1
+SubClassOf C1 C6
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C2
+SubClassOf C9 C0
+
+New general inconsistency: 
+General graph number: 48
+SELECT * WHERE {?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C8 <http://www.w3.org/2002/07/owl#disjointWith> ?C9. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. }
+ClassAssertion C0 a0
+DisjointClasses C9 C8
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C1 C9
+SubClassOf C2 C6
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C5 C8
+SubClassOf C6 C7
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 49
+SELECT * WHERE {?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C11. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C11. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. }
+ClassAssertion C0 a0
+DisjointClasses C11 C10
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C2 C8
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C4 C6
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C11
+SubClassOf C8 C9
+SubClassOf C9 C4
+
+New general inconsistency: 
+General graph number: 50
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C8 <http://www.w3.org/2002/07/owl#disjointWith> ?C9. }
+ClassAssertion C0 a0
+DisjointClasses C9 C8
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C2 C6
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C5 C8
+SubClassOf C6 C7
+SubClassOf C6 C9
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 51
+SELECT * WHERE {?C3 <http://www.w3.org/2002/07/owl#disjointWith> ?C9. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C0 a0
+DisjointClasses C3 C9
+SubClassOf C0 C4
+SubClassOf C1 C2
+SubClassOf C2 C3
+SubClassOf C2 C7
+SubClassOf C4 C1
+SubClassOf C5 C6
+SubClassOf C6 C9
+SubClassOf C7 C8
+SubClassOf C8 C5
+
+New general inconsistency: 
+General graph number: 52
+SELECT * WHERE {?C8 <http://www.w3.org/2002/07/owl#disjointWith> ?C9. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. }
+ClassAssertion C0 a0
+DisjointClasses C8 C9
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C2 C6
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C4 C8
+SubClassOf C5 C9
+SubClassOf C6 C7
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 53
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C11. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C11. }
+ClassAssertion C0 a0
+ClassAssertion C6 a0
+DisjointClasses C11 C10
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C2 C8
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C11
+SubClassOf C8 C9
+SubClassOf C9 C4
+
+New general inconsistency: 
+General graph number: 54
+SELECT * WHERE {?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C11 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C12. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C11. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. ?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C12. }
+ClassAssertion C0 a0
+ClassAssertion C6 a0
+DisjointClasses C12 C10
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C11 C12
+SubClassOf C2 C8
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C11
+SubClassOf C8 C9
+SubClassOf C9 C4
+
+New general inconsistency: 
+General graph number: 55
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C8. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. }
+ClassAssertion C0 a0
+DisjointClasses C10 C8
+SubClassOf C0 C3
+SubClassOf C1 C2
+SubClassOf C2 C6
+SubClassOf C3 C1
+SubClassOf C4 C5
+SubClassOf C4 C9
+SubClassOf C5 C8
+SubClassOf C6 C7
+SubClassOf C7 C4
+SubClassOf C9 C10
+
+New general inconsistency: 
+General graph number: 56
+SELECT * WHERE {?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C3 <http://www.w3.org/2002/07/owl#disjointWith> ?C6. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. }
+ClassAssertion C7 a0
+ClassAssertion C8 a0
+DisjointClasses C3 C6
+SubClassOf C0 C1
+SubClassOf C1 C9
+SubClassOf C2 C3
+SubClassOf C4 C2
+SubClassOf C5 C6
+SubClassOf C7 C0
+SubClassOf C8 C5
+SubClassOf C9 C4
+
+New general inconsistency: 
+General graph number: 57
+SELECT * WHERE {?C10 <http://www.w3.org/2002/07/owl#disjointWith> ?C8. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. }
+ClassAssertion C9 a0
+DisjointClasses C10 C8
+SubClassOf C0 C1
+SubClassOf C1 C6
+SubClassOf C2 C3
+SubClassOf C2 C4
+SubClassOf C3 C8
+SubClassOf C4 C5
+SubClassOf C5 C10
+SubClassOf C6 C7
+SubClassOf C7 C2
+SubClassOf C9 C0
+
+New general inconsistency: 
+General graph number: 58
+SELECT * WHERE {?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C4 <http://www.w3.org/2002/07/owl#disjointWith> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C9. }
+ClassAssertion C9 a0
+DisjointClasses C4 C5
+SubClassOf C0 C1
+SubClassOf C1 C6
+SubClassOf C1 C8
+SubClassOf C2 C3
+SubClassOf C3 C7
+SubClassOf C6 C5
+SubClassOf C7 C0
+SubClassOf C8 C4
+SubClassOf C9 C2
+
+New general inconsistency: 
+General graph number: 59
+SELECT * WHERE {?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. }
+ClassAssertion C7 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C3
+SubClassOf C3 C6
+SubClassOf C4 C0
+SubClassOf C5 C1
+SubClassOf C6 C5
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 60
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C7 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C3
+SubClassOf C3 C6
+SubClassOf C4 C0
+SubClassOf C5 C1
+SubClassOf C6 C5
+SubClassOf C7 C8
+SubClassOf C8 C4
+
+New general inconsistency: 
+General graph number: 61
+SELECT * WHERE {?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C5. }
+ClassAssertion C5 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C1
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C5 C3
+
+New general inconsistency: 
+General graph number: 62
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C6. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. }
+ClassAssertion C6 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C1
+SubClassOf C3 C0
+SubClassOf C4 C5
+SubClassOf C5 C3
+SubClassOf C6 C7
+SubClassOf C7 C4
+
+New general inconsistency: 
+General graph number: 63
+SELECT * WHERE {?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C5. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C5 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C1
+SubClassOf C3 C4
+SubClassOf C4 C0
+SubClassOf C5 C6
+SubClassOf C6 C3
+
+New general inconsistency: 
+General graph number: 64
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C1 <http://www.w3.org/2002/07/owl#disjointWith> ?C2. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. }
+ClassAssertion C0 a0
+DisjointClasses C1 C2
+SubClassOf C0 C1
+SubClassOf C1 C3
+SubClassOf C3 C4
+SubClassOf C4 C6
+SubClassOf C5 C2
+SubClassOf C6 C5
+
+New general inconsistency: 
+General graph number: 65
+SELECT * WHERE {?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C7. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C8. ?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. }
+ClassAssertion C8 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C2 C3
+SubClassOf C3 C5
+SubClassOf C4 C1
+SubClassOf C5 C4
+SubClassOf C6 C7
+SubClassOf C7 C0
+SubClassOf C8 C9
+SubClassOf C9 C6
+
+New general inconsistency: 
+General graph number: 66
+SELECT * WHERE {?C0 <http://www.w3.org/2002/07/owl#disjointWith> ?C1. ?C9 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C4 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C10. ?C10 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C8 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C9. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C0. ?C7 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C8. ?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C7. }
+ClassAssertion C7 a0
+DisjointClasses C0 C1
+SubClassOf C0 C2
+SubClassOf C10 C3
+SubClassOf C2 C10
+SubClassOf C3 C4
+SubClassOf C4 C1
+SubClassOf C5 C0
+SubClassOf C6 C5
+SubClassOf C7 C8
+SubClassOf C8 C9
+SubClassOf C9 C6
+
+New general inconsistency: 
+General graph number: 67
+SELECT * WHERE {?a0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?C0. ?C6 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C4. ?C2 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C3. ?C5 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C6. ?C3 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C5. ?C0 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C1. ?C1 <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?C2. ?C3 <http://www.w3.org/2002/07/owl#disjointWith> ?C4. }
+ClassAssertion C0 a0
+DisjointClasses C4 C3
+SubClassOf C0 C1
+SubClassOf C1 C2
+SubClassOf C2 C3
+SubClassOf C3 C5
+SubClassOf C5 C6
+SubClassOf C6 C4
+
+Stopped
