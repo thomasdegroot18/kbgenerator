@@ -4,7 +4,7 @@ Anti-pattern Extractor and KBgenerator
 ======
 This github repository hosts the code for extracting anti-patterns from inconsistent knowledge graphs.
 
-The knowledge base generator is an all encompassing piece of software designed for extracting anti-patterns from inconsistent knowledge graphs. It is the underlying software for the paper on [Analysing Large Inconsistent Knowledge Graphs](docs/Writing/ThesisPreliminaryVersion.pdf).
+The knowledge base generator is an all encompassing piece of software designed for extracting anti-patterns from inconsistent knowledge graphs. It is the underlying software for the paper on [Analysing Large Inconsistent Knowledge Graphs](https://thomasdegroot18.github.io/kbgenerator/Writing/Analysing_Large_Inconsistent_KGs.pdf). The anti-patterns can be found here: <https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html>
 
 The code has been made available for reproducing the results we show in our papers. To make sure that it is possible we would refer to the [branch](https://github.com/thomasdegroot18/kbgenerator/commit/d342f82e6ce1795a141fe8ae84fa2cbef2bd20f8) . Though the code is still in active development, it is possible that the software will improve over time.
 
