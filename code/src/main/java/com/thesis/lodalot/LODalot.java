@@ -18,7 +18,6 @@ public class LODalot {
 
         String hdt = "/home/wbeek/data/LOD-a-lot/LOD-a-lot.hdt";
 
-        //hdt = AbsoluteName+"HDTs/yago2s.hdt";
 
         String rdf = AbsoluteName+"RDFs/";
         String samples = AbsoluteName+"Samples/";

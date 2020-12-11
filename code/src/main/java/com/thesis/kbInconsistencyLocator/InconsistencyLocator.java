@@ -885,9 +885,11 @@ public class InconsistencyLocator
         // Create the reasoner and load the ontology with the open pellet reasoner.
         OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
 
+        reasoner.flush();
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
+        System.out.println(reasoner.getKB().getExpressivity());
         try{
             exp = expGen.getInconsistencyExplanations(MaxExplanations);
         } catch (Exception e){
@@ -1011,9 +1013,9 @@ public class InconsistencyLocator
 
     private static void LocateInconsistencies(HDT hdt, FileOutputStream fileWriter) throws Exception {
         // Locates the inconsistencies by looping through the graph over a large selection of triples.
-        // AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/code/resources/";
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/code/resources/";
         //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
-        String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
+        //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
         FileOutputStream fileWriter2 = new FileOutputStream(new File(AbsoluteName+"extraFiles/timeKeepingSmall"+NameFile+".txt"));
 
         fileWriter2.write(("Starting Split File \n").getBytes());
