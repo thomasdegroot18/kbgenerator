@@ -65,9 +65,9 @@ function RetrieveNodes(nodeLinks) {
       }
       if (reuse == undefined) {
         nodesElemIn.color = "green";
+        nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 20;
         nodesElemIn.name = vertexIn;
         nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 20;
-        nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 20;
         nodes.push(nodesElemIn);
       } else {
         nodes[reuse].color = "green";
@@ -104,7 +104,7 @@ function RetrieveNodes(nodeLinks) {
         nodesElemOut.name = vertexOut;
         nodesElemOut.x = xLoc + Math.floor(Math.random() * 50) - 50;
         nodesElemOut.y = yLoc + Math.floor(Math.random() * 50) - 50;
-        nodesElemOut.color = "blue"
+        nodesElemOut.color = "aqua"
 
         nodes.push(nodesElemOut);
       }
@@ -121,7 +121,7 @@ function RetrieveNodes(nodeLinks) {
         nodesElemIn.name = vertexIn;
         nodesElemIn.x = xLoc + Math.floor(Math.random() * 50) - 50;
         nodesElemIn.y = yLoc + Math.floor(Math.random() * 50) - 50;
-        nodesElemIn.color = "blue"
+        nodesElemIn.color = "aqua"
 
         nodes.push(nodesElemIn);
       }
@@ -266,7 +266,7 @@ function RetrieveNodes(nodeLinks) {
 
 
 function build(nodes, links, divSection) {
-  const svg = divSection.append('svg').attr("width", "300px").attr("height", "300px");
+  const svg = divSection.append('svg').attr("width", "600px").attr("height", "300px");
   var width = 200,
     height = 200;
 
@@ -290,15 +290,35 @@ function build(nodes, links, divSection) {
     .attr("cy", function(d) {
       return d.y;
     })
-    .attr("text", function(d) {
+    .text( function(d) {
       return d.name
     })
     .attr("r", function(d) {
       return d.radius
-    }) 
+    })
     .attr("fill", function(d) {
       return d.color
     })
+
+
+var text = svg.append("g")
+  .attr("class", "texts")
+  .selectAll("text")
+  .data(nodes)
+  .enter()
+  .append("text")
+  .attr("x", function(d) {
+    return d.x;
+  })
+  .attr("y", function(d) {
+    return d.y;
+  })
+  .text( function(d) {
+    return d.name
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-weight","bold")
+  .attr("font-size", "10px")
 
 
 
@@ -335,7 +355,8 @@ function build(nodes, links, divSection) {
     .attr("y2", function(d) {
       return d.target.y
     })
-    .attr("stroke-width", "1px")
+    .attr("stroke-width", "2px")
+    .attr("data-legend",function(d) { return d.type})
     .style("stroke", function(d) {
       if (d.type == "SubClassOf") {
         return "black"
@@ -352,9 +373,25 @@ function build(nodes, links, divSection) {
       if (d.type == "Range") {
         return "orange"
       } else {
-        return "black"
+        return "purple"
       }
     });
+
+var ordinal = d3.scaleOrdinal()
+  .domain(["SubClassOf", "DisjointClasses", "ClassAssertion", "Domain", "Range", "Class", "Instance", "Property"])
+  .range([ "black", "red", "blue", "orange", "orange","green","aqua","purple"]);
+
+    svg.append("g")
+      .attr("class", "legendOrdinal")
+      .attr("transform", "translate(450,20)")
+      .attr("overflow","visible")
+
+    var legendOrdinal = d3.legendColor()
+    	.scale(ordinal);
+
+    svg.select(".legendOrdinal")
+	  	.call(legendOrdinal);
+
 
   function tickActions() {
     //update circle positions each tick of the simulation
@@ -364,6 +401,14 @@ function build(nodes, links, divSection) {
       })
       .attr("cy", function(d) {
         return d.y;
+      });
+
+    text
+      .attr("x", function(d) {
+        return d.x+4;
+      })
+      .attr("y", function(d) {
+        return d.y-4;
       });
 
     //update link positions
