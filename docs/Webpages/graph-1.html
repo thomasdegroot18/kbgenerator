@@ -35,7 +35,7 @@
                   var nodesEdges = RetrieveNodes(nodeLinks)
                   nodes = nodesEdges[0]
                   links = nodesEdges[1]
-                  var sparqlRequest = sample[elemSample].SparqlRequest.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
+                  var sparqlRequest = ("prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>@@@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> @@@ prefix owl: <http://www.w3.org/2002/07/owl#> @@@"+sample[elemSample].SparqlRequest).replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("@@@","</br>").replaceAll(".?",". ?").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
                   var bodySection = d3.select("body").append("div");
                   bodySection.append("p").attr("width", "600px").html(sparqlRequest);
                   build(nodes, links, bodySection)
