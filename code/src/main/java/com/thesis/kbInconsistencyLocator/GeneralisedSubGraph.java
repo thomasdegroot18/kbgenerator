@@ -313,7 +313,7 @@ public class GeneralisedSubGraph {
 
 
         CheckConsistency();
-        RebuildSPARQL();
+        RebuildSPARQL(true);
 
 
     }
@@ -544,6 +544,168 @@ public class GeneralisedSubGraph {
     }
 
     // As the singlesRemoval is now needed to regenerate the SPARQL result again.
+    public void RebuildSPARQL (boolean simple){
+
+        // Set up sparql builder.
+        SPARQLStringB = new StringBuilder();
+
+        // Loop through the axioms and start rebuilding.
+        // TODO: Use this in stead of in the constructor.
+
+        Object[] array = owlOntologyGraph.axioms().toArray();
+        int size = array.length;
+        String [] arr = new String [size];
+        for(int i=0; i<size; i++) {
+            arr[i] = array[i].toString();
+        }
+        Arrays.sort(arr);
+
+        String [] classes = new String [2];
+        for (Object elem: arr){
+            String[] line = elem.toString().split(("<"));
+            if (line.length < 3){
+                continue;
+            }
+            String elem1 = line[1].split(">")[0];
+            String elem2 = line[2].split(">")[0];
+            // Different Class relations OWLAXIOMString[0] SubClassOf, DisjointClasses, EquivalentClasses
+            switch (line[0].substring(0,line[0].length()-1)) {
+                case "ClassAssertion": {
+                    if(elem1.contains("a")){
+                        SPARQLStringB.append("?");
+                        SPARQLStringB.append(elem1);
+                        SPARQLStringB.append(" rdf:type ?");
+                        SPARQLStringB.append(elem2);
+                        SPARQLStringB.append(". ");
+                        if(classes[0]==null){
+                            classes[0] = elem2;
+                        } else {
+                            classes[1] = elem2;
+                        }
+                    } else{
+                        SPARQLStringB.append("?");
+                        SPARQLStringB.append(elem2);
+                        SPARQLStringB.append(" rdf:type ?");
+                        SPARQLStringB.append(elem1);
+                        SPARQLStringB.append(". ");
+                        if(classes[0]==null){
+                            classes[0] = elem1;
+                        } else {
+                            classes[1] = elem1;
+                        }
+                    }
+                    break;
+                }
+
+                case "DataPropertyDomain":
+                case "ObjectPropertyDomain": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" rdfs:domain ?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "DataPropertyAssertion":
+                    String elem4 = line[2].split("\"")[1];
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem4);
+                    SPARQLStringB.append(" . ");
+
+                    break;
+                case "ObjectPropertyAssertion": {
+                    String elem3 = line[3].split(">")[0];
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" ?");
+                    SPARQLStringB.append(elem3);
+                    SPARQLStringB.append(" . ");
+
+                    break;
+                }
+                case "DataPropertyRange":
+                case "ObjectPropertyRange": {
+
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(" rdfs:range ?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "DisjointObjectProperties":
+                case "DisjointClasses": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" owl:disjointWith ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    if(!classes[0].equals(elem1) && (classes[1]!=null && !classes[1].equals(elem1)) ){
+                        OWLClass classC1 = dataFactory.getOWLClass(elem1);
+                        Object[] listClass = owlOntologyGraph.subClassAxiomsForSuperClass(classC1).toArray();
+                        SPARQLStringB.append("?");
+                        if (Arrays.asList(listClass).contains(classes[0])) {
+                            SPARQLStringB.append(classes[0]);
+                        } else if (classes[1]!=null) {
+                            SPARQLStringB.append(classes[1]);
+                        } else {
+                            SPARQLStringB.append(classes[0]);
+                        }
+                        SPARQLStringB.append(" rdfs:subClassOf+ ?");
+                        SPARQLStringB.append(elem1);
+                        SPARQLStringB.append(". ");
+                    }
+                    if(!classes[0].equals(elem2) && (classes[1]!=null && !classes[1].equals(elem2)) ){
+                        OWLClass classC2 = dataFactory.getOWLClass(elem2);
+                        Object[] listClass = owlOntologyGraph.subClassAxiomsForSuperClass(classC2).toArray();
+                        SPARQLStringB.append("?");
+                        if (Arrays.asList(listClass).contains(classes[0])) {
+                            SPARQLStringB.append(classes[0]);
+                        } else if (classes[1]!=null) {
+                            SPARQLStringB.append(classes[1]);
+                        } else {
+                            SPARQLStringB.append(classes[0]);
+                        }
+                        SPARQLStringB.append(" rdfs:subClassOf+ ?");
+                        SPARQLStringB.append(elem2);
+                        SPARQLStringB.append(". ");
+                    }
+                    break;
+                }
+                case "DifferentIndividuals": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" owl:differentFrom ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "EquivalentClasses": {
+                    SPARQLStringB.append("?");
+                    SPARQLStringB.append(elem1);
+                    SPARQLStringB.append(" owl:equivalentClass ?");
+                    SPARQLStringB.append(elem2);
+                    SPARQLStringB.append(". ");
+                    break;
+                }
+                case "SubClassOf": {
+                    break;
+                }
+                default:
+                    System.out.println(line[0].substring(0,line[0].length()-1));
+                    throw new ClassCastException();
+            }
+        }
+    }
+
+
+    // As the singlesRemoval is now needed to regenerate the SPARQL result again.
     public void RebuildSPARQL (){
 
         // Set up sparql builder.
@@ -551,7 +713,10 @@ public class GeneralisedSubGraph {
 
         // Loop through the axioms and start rebuilding.
         // TODO: Use this in stead of in the constructor.
+
+
         for (Object elem: owlOntologyGraph.axioms().toArray()){
+
             String[] line = elem.toString().split(("<"));
             if (line.length < 3){
                 continue;
@@ -659,6 +824,7 @@ public class GeneralisedSubGraph {
             }
         }
     }
+
 
     // Function to remove a single edge in the from the Vertices.
     private void RemoveVertex(String vertex, String vertexIn){
