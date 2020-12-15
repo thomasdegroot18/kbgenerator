@@ -2,6 +2,7 @@ package com.thesis.kbInconsistencyLocator;
 
 import com.clarkparsia.owlapi.explanation.TransactionAwareSingleExpGen;
 import openllet.core.KnowledgeBase;
+import openllet.core.OpenlletOptions;
 import openllet.jena.PelletInfGraph;
 import openllet.jena.PelletReasonerFactory;
 import openllet.owlapi.OWL;
@@ -43,6 +44,7 @@ import java.util.stream.Collectors;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.util.OWLAPIPreconditions;
 import ru.avicomp.ontapi.OntManagers;
 import ru.avicomp.ontapi.OntologyManager;
@@ -261,7 +263,7 @@ public class InconsistencyLocator
                 // If it ever hits this check it means that the item occurs twice. It means that the value is equal.
             } else {
                 // Shout warning just in case.
-                System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
+                //System.out.println("Item occurred twice Check if it problem. " + InconsistencyExplanationLine.toString());
                 NewList.add(ListItem.toString());
             }
 
@@ -427,6 +429,15 @@ public class InconsistencyLocator
                 }
 
             // Disjoint class: <C1> <owl:disjointWith> <C2>
+            } else if (RelationType == AxiomType.DISJOINT_OBJECT_PROPERTIES){
+                // Gets the new clean relation graph with generalised names.
+                if(MoreInformation){
+                    StringLines = AxiomConverterMultiline(InconsistencyExplanationLine, variableMap, iterator);
+                } else {
+                    StringLine = AxiomConverter(InconsistencyExplanationLine, variableMap, iterator);
+                }
+
+                // Subclass of: <C1> <rdf:disjointWith> <C2>
             } else if (RelationType == AxiomType.DISJOINT_CLASSES){
                 // Gets the new clean relation graph with generalised names.
                 if(MoreInformation){
@@ -520,7 +531,7 @@ public class InconsistencyLocator
                 }
 
                 // If any other classes are hit Class cast exception is thrown. Throwing the relationType to add.
-            }else {
+            } else {
                 System.out.println(RelationType.toString());
             }
 
@@ -880,18 +891,20 @@ public class InconsistencyLocator
             return exp;
         }
 
+
         // Starting up the Pellet Explanation module.
         PelletExplanation.setup();
         // Create the reasoner and load the ontology with the open pellet reasoner.
-        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+        OpenlletReasoner reasoner = OpenlletReasonerFactory.getInstance().createNonBufferingReasoner(ontology);
+        reasoner.prepareReasoner();
 
-        reasoner.flush();
+//        System.out.println(reasoner.getKB().getExpressivity());
         // Create an Explanation reasoner with the Pellet Explanation and the Openllet Reasoner modules.
         PelletExplanation expGen = new PelletExplanation(reasoner);
 
-        System.out.println(reasoner.getKB().getExpressivity());
+
         try{
-            exp = expGen.getInconsistencyExplanations(MaxExplanations);
+            exp = expGen.getInconsistencyExplanations(10);
         } catch (Exception e){
             return exp;
         }

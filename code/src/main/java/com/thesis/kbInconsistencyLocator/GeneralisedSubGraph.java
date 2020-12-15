@@ -45,13 +45,14 @@ public class GeneralisedSubGraph {
             dataFactory = owlOntologyGraph.getOWLOntologyManager().getOWLDataFactory();
 
             // Loop through lines of the subgraph.
-
             for (String line : Subgraph){
 
                 // Split string into 3 parts. 0. Relation, 1. First class/type , 2. Second class/type
                 String[] OWLAXIOMString = line.split(" ");
+
                 Edges.put(OWLAXIOMString[1]+ OWLAXIOMString[2], OWLAXIOMString[0]);
                 Edges.put(OWLAXIOMString[2]+ OWLAXIOMString[1], OWLAXIOMString[0]);
+
                 // Different types of possibilities.
                 // Relation, class, instance.
                 if (OWLAXIOMString[2].contains("a") && OWLAXIOMString[0].contains("ClassAssertion")){
@@ -129,6 +130,8 @@ public class GeneralisedSubGraph {
                         // Add the two classes for the relationship cases.
                         OWLClass classC1 = AddDeclarationClass(OWLAXIOMString[1]); // Subclass
                         OWLClass classC2 = AddDeclarationClass(OWLAXIOMString[2]); // Superclass
+                        OWLObjectProperty classP1 = dataFactory.getOWLObjectProperty(OWLAXIOMString[1]); // Subclass
+                        OWLObjectProperty classP2 = dataFactory.getOWLObjectProperty(OWLAXIOMString[2]); // Superclass
 
                         // Instantiate Assertion in scope.
 
@@ -160,10 +163,9 @@ public class GeneralisedSubGraph {
                                 disjoints ++;
                                 break;
                             }
-                            case "ObjectPropertyAssertion": {
+                            case "DisjointObjectProperties": {
                                 // Build Subclass Axiom
-                                property = dataFactory.getOWLObjectProperty(OWLAXIOMString[3]);
-                                OWLObjectPropertyAssertionAxiom Assertion = dataFactory.getOWLObjectPropertyAssertionAxiom(property,Individual1, Individual2);
+                                OWLDisjointObjectPropertiesAxiom Assertion = dataFactory.getOWLDisjointObjectPropertiesAxiom(classP1, classP2);
                                 // Add Subclass Axiom
                                 owlOntologyGraph.add(Assertion);
                                 // Add Triple To hashMap
@@ -171,6 +173,25 @@ public class GeneralisedSubGraph {
                                 addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
                                 // Disjoint Counter:
                                 disjoints ++;
+                                break;
+                            }
+                            case "ObjectPropertyAssertion": {
+                                // Build Subclass Axiom
+                                OWLObjectPropertyAssertionAxiom Assertion;
+                                if (OWLAXIOMString.length == 4){
+                                    property = dataFactory.getOWLObjectProperty(OWLAXIOMString[3]);
+                                    Assertion = dataFactory.getOWLObjectPropertyAssertionAxiom(property,Individual1, Individual2);
+                                } else {
+                                    property = dataFactory.getOWLObjectProperty(OWLAXIOMString[2]);
+                                    Assertion = dataFactory.getOWLObjectPropertyAssertionAxiom(property,Individual1, Individual1);
+                                }
+                                // Add Subclass Axiom
+                                owlOntologyGraph.add(Assertion);
+                                // Add Triple To hashMap
+                                addToList(OWLAXIOMString[1], OWLAXIOMString[2]);
+                                addToList(OWLAXIOMString[2], OWLAXIOMString[1]);
+                                // Disjoint Counter:
+
                                 break;
                             }
                             case "ObjectPropertyDomain": {
@@ -543,13 +564,13 @@ public class GeneralisedSubGraph {
                     if(elem1.contains("a")){
                         SPARQLStringB.append("?");
                         SPARQLStringB.append(elem1);
-                        SPARQLStringB.append(" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?");
+                        SPARQLStringB.append(" rdf:type ?");
                         SPARQLStringB.append(elem2);
                         SPARQLStringB.append(". ");
                     } else{
                         SPARQLStringB.append("?");
                         SPARQLStringB.append(elem2);
-                        SPARQLStringB.append(" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?");
+                        SPARQLStringB.append(" rdf:type ?");
                         SPARQLStringB.append(elem1);
                         SPARQLStringB.append(". ");
                     }
@@ -560,7 +581,7 @@ public class GeneralisedSubGraph {
 
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?");
+                    SPARQLStringB.append(" rdfs:subClassOf ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;
@@ -569,7 +590,7 @@ public class GeneralisedSubGraph {
                 case "ObjectPropertyDomain": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem2);
-                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#domain> ?");
+                    SPARQLStringB.append(" rdfs:domain ?");
                     SPARQLStringB.append(elem1);
                     SPARQLStringB.append(". ");
                     break;
@@ -602,16 +623,16 @@ public class GeneralisedSubGraph {
 
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem2);
-                    SPARQLStringB.append(" <http://www.w3.org/2000/01/rdf-schema#range> ?");
+                    SPARQLStringB.append(" rdfs:range ?");
                     SPARQLStringB.append(elem1);
                     SPARQLStringB.append(". ");
                     break;
                 }
-
+                case "DisjointObjectProperties":
                 case "DisjointClasses": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#disjointWith> ?");
+                    SPARQLStringB.append(" owl:disjointWith ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;
@@ -619,7 +640,7 @@ public class GeneralisedSubGraph {
                 case "DifferentIndividuals": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#differentFrom> ?");
+                    SPARQLStringB.append(" owl:differentFrom ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;
@@ -627,7 +648,7 @@ public class GeneralisedSubGraph {
                 case "EquivalentClasses": {
                     SPARQLStringB.append("?");
                     SPARQLStringB.append(elem1);
-                    SPARQLStringB.append(" <http://www.w3.org/2002/07/owl#equivalentClass> ?");
+                    SPARQLStringB.append(" owl:equivalentClass ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
                     break;
@@ -785,7 +806,10 @@ public class GeneralisedSubGraph {
     public String convertSPARQL(){
         // Converts a generalised subgraph to a set of SPARQL lines.
 
-        return "SELECT * WHERE {" + SPARQLStringB.toString() + "}";
+        return "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+               "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
+               "prefix owl: <http://www.w3.org/2002/07/owl#>" +
+               "SELECT * WHERE {" + SPARQLStringB.toString() + "}";
 
     }
 
