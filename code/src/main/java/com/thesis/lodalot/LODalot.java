@@ -44,7 +44,7 @@ public class LODalot {
                 "5000"
         };
 
-        InconsistencyLocator.main(argsInconsistency);
+//        InconsistencyLocator.main(argsInconsistency);
         System.out.println("Starting Statistics");
         String[] argsStatistics =  {hdt, rdf, inconsistencyJSON, args3};
         Statistics.main(argsStatistics);

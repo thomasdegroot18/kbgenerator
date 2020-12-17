@@ -561,6 +561,17 @@ public class GeneralisedSubGraph {
         Arrays.sort(arr);
 
         String [] classes = new String [2];
+        classes[0] = "";
+        classes[1] = "";
+        String [] Subclasses = new String [2];
+        Subclasses[0] = "";
+        Subclasses[1] = "";
+        List<String>  Chain1 = new ArrayList<>();
+        List<String>  Chain2 = new ArrayList<>();
+        HashMap<String, String> Missing = new HashMap<>();
+        StringBuilder SPARQLStringSub1 = new StringBuilder();
+        StringBuilder SPARQLStringSub2 = new StringBuilder();
+
         for (Object elem: arr){
             String[] line = elem.toString().split(("<"));
             if (line.length < 3){
@@ -577,7 +588,7 @@ public class GeneralisedSubGraph {
                         SPARQLStringB.append(" rdf:type ?");
                         SPARQLStringB.append(elem2);
                         SPARQLStringB.append(". ");
-                        if(classes[0]==null){
+                        if(classes[0].equals("")){
                             classes[0] = elem2;
                         } else {
                             classes[1] = elem2;
@@ -588,7 +599,7 @@ public class GeneralisedSubGraph {
                         SPARQLStringB.append(" rdf:type ?");
                         SPARQLStringB.append(elem1);
                         SPARQLStringB.append(". ");
-                        if(classes[0]==null){
+                        if(classes[0].equals("")){
                             classes[0] = elem1;
                         } else {
                             classes[1] = elem1;
@@ -646,37 +657,10 @@ public class GeneralisedSubGraph {
                     SPARQLStringB.append(" owl:disjointWith ?");
                     SPARQLStringB.append(elem2);
                     SPARQLStringB.append(". ");
-                    if(!classes[0].equals(elem1) && (classes[1]!=null && !classes[1].equals(elem1)) ){
-                        OWLClass classC1 = dataFactory.getOWLClass(elem1);
-                        Object[] listClass = owlOntologyGraph.subClassAxiomsForSuperClass(classC1).toArray();
-                        SPARQLStringB.append("?");
-                        if (Arrays.asList(listClass).contains(classes[0])) {
-                            SPARQLStringB.append(classes[0]);
-                        } else if (classes[1]!=null) {
-                            SPARQLStringB.append(classes[1]);
-                        } else {
-                            SPARQLStringB.append(classes[0]);
-                        }
-                        SPARQLStringB.append(" rdfs:subClassOf+ ?");
-                        SPARQLStringB.append(elem1);
-                        SPARQLStringB.append(". ");
-                    }
-                    if(!classes[0].equals(elem2) && (classes[1]!=null && !classes[1].equals(elem2)) ){
-                        OWLClass classC2 = dataFactory.getOWLClass(elem2);
-                        Object[] listClass = owlOntologyGraph.subClassAxiomsForSuperClass(classC2).toArray();
-                        SPARQLStringB.append("?");
-                        if (Arrays.asList(listClass).contains(classes[0])) {
-                            SPARQLStringB.append(classes[0]);
-                        } else if (classes[1]!=null) {
-                            SPARQLStringB.append(classes[1]);
-                        } else {
-                            SPARQLStringB.append(classes[0]);
-                        }
-                        SPARQLStringB.append(" rdfs:subClassOf+ ?");
-                        SPARQLStringB.append(elem2);
-                        SPARQLStringB.append(". ");
-                    }
+                    Subclasses[0] = elem1;
+                    Subclasses[1] = elem2;
                     break;
+
                 }
                 case "DifferentIndividuals": {
                     SPARQLStringB.append("?");
@@ -695,6 +679,33 @@ public class GeneralisedSubGraph {
                     break;
                 }
                 case "SubClassOf": {
+                    if(Chain1.isEmpty()){
+                        Chain1.add(classes[0]);
+                    }
+                    if (Chain2.isEmpty() && !classes[1].equals("")){
+                        Chain2.add(classes[1]);
+                    }
+                    if (Chain2.isEmpty()){
+                        Chain2.add(classes[0]);
+                    }
+
+                    Missing.put(elem1, elem2);
+                    boolean looping = true;
+                    while(looping){
+                        looping = false;
+                        for (String val: Missing.keySet()){
+                            if(Chain1.contains(val) && !Chain1.contains(Missing.get(val))) {
+                                Chain1.add(Missing.get(val));
+                                looping = true;
+                            }
+                            if(Chain2.contains(val) && !Chain2.contains(Missing.get(val))) {
+                                Chain2.add(Missing.get(val));
+                                looping = true;
+                            }
+                        }
+                    }
+
+
                     break;
                 }
                 default:
@@ -702,6 +713,39 @@ public class GeneralisedSubGraph {
                     throw new ClassCastException();
             }
         }
+
+        if(!Chain1.isEmpty()) {
+            SPARQLStringSub1.append("?");
+            SPARQLStringSub1.append(Chain1.get(0));
+            if(Chain1.size() == 2){
+                SPARQLStringSub1.append(" rdfs:subClassOf ?");
+            } else {
+                SPARQLStringSub1.append(" rdfs:subClassOf+ ?");
+            }
+            if(Chain1.contains(Subclasses[0])){
+                SPARQLStringSub1.append(Subclasses[0]);
+            } else if(Chain1.contains(Subclasses[1])){
+                SPARQLStringSub1.append(Subclasses[1]);
+            }
+            SPARQLStringSub1.append(". ");
+        }
+        if(!Chain2.isEmpty()){
+            SPARQLStringSub2.append("?");
+            SPARQLStringSub2.append(Chain2.get(0));
+            if(Chain2.size() == 2){
+                SPARQLStringSub2.append(" rdfs:subClassOf ?");
+            } else {
+                SPARQLStringSub2.append(" rdfs:subClassOf+ ?");
+            }
+            if(Chain2.contains(Subclasses[0])){
+                SPARQLStringSub2.append(Subclasses[0]);
+            } else if(Chain2.contains(Subclasses[1])){
+                SPARQLStringSub2.append(Subclasses[1]);
+            }
+            SPARQLStringSub2.append(". ");
+        }
+
+        SPARQLStringB.append(SPARQLStringSub1).append(SPARQLStringSub2);
     }
 
 

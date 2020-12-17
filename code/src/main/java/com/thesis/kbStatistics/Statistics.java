@@ -175,7 +175,7 @@ public class Statistics {
 
 
         // Get all the KB statistics
-        if(true){// testing_Bool
+        if(false){// testing_Bool
             System.out.println("knowledge base statistics calculation");
             KbStatistics.RunAll(hdt, OutputLocation+"kbStatistics.json");
 
@@ -272,7 +272,7 @@ public class Statistics {
                     FileInput = file.toString();
                 }
                 // TODO: DELETE LINK
-                FileInput = args[1]+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
+                FileInput = args[1]+"INCONSISTENCIES-LOD-a-lotUSEDGrouped.ttl";
             }
         }
 
