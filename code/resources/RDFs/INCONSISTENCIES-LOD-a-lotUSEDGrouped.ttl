@@ -1,6 +1,6 @@
 New general inconsistency:
 General graph number: 186
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 ClassAssertion C5 a0
 DisjointClasses C13 C12
@@ -19,7 +19,7 @@ SubClassOf C9 C1
 
 New general inconsistency:
 General graph number: 264
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 ClassAssertion C14 a0
 DisjointClasses C12 C9
@@ -42,7 +42,7 @@ SubClassOf C8 C17
 
 New general inconsistency:
 General graph number: 184
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C9 C10
 SubClassOf C0 C1
@@ -59,7 +59,7 @@ SubClassOf C8 C0
 
 New general inconsistency:
 General graph number: 241
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C2 a0
 ClassAssertion C6 a0
 DisjointClasses C14 C13
@@ -80,7 +80,7 @@ SubClassOf C9 C13
 
 New general inconsistency:
 General graph number: 238
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C3 . }
 ClassAssertion C2 a0
 ClassAssertion C6 a0
 DisjointClasses C7 C13
@@ -100,7 +100,7 @@ SubClassOf C9 C13
 
 New general inconsistency:
 General graph number: 78
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf ?C0 . }
 ClassAssertion C10 a0
 ClassAssertion C6 a0
 DisjointClasses C9 C7
@@ -117,7 +117,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 10
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C4 a0
 ClassAssertion C6 a0
 DisjointClasses C8 C5
@@ -133,7 +133,7 @@ SubClassOf C9 C7
 
 New general inconsistency:
 General graph number: 219
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C7 a0
 DisjointClasses C8 C9
 SubClassOf C0 C1
@@ -151,7 +151,7 @@ SubClassOf C7 C8
 
 New general inconsistency:
 General graph number: 240
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C6 C12
 SubClassOf C0 C1
@@ -170,7 +170,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 15
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . }
 ClassAssertion C1 a0
 ClassAssertion C2 a0
 DisjointClasses C0 C1
@@ -178,7 +178,7 @@ SubClassOf C2 C0
 
 New general inconsistency:
 General graph number: 83
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C1 . }
 ClassAssertion C4 a0
 DisjointClasses C1 C3
 SubClassOf C0 C1
@@ -188,7 +188,7 @@ SubClassOf C4 C2
 
 New general inconsistency:
 General graph number: 20
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a0
 ClassAssertion C2 a0
 DisjointClasses C4 C2
@@ -198,7 +198,7 @@ SubClassOf C3 C4
 
 New general inconsistency:
 General graph number: 255
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C10 C14
 SubClassOf C0 C11
@@ -218,7 +218,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 170
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C5 a0
 DisjointClasses C2 C11
 SubClassOf C0 C1
@@ -236,7 +236,7 @@ SubClassOf C9 C6
 
 New general inconsistency:
 General graph number: 261
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C11 a0
 ClassAssertion C4 a0
 DisjointClasses C4 C10
@@ -253,7 +253,7 @@ SubClassOf C9 C5
 
 New general inconsistency:
 General graph number: 257
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C9 C10
 SubClassOf C0 C1
@@ -272,7 +272,7 @@ SubClassOf C8 C9
 
 New general inconsistency:
 General graph number: 249
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C10 C0
@@ -290,7 +290,7 @@ SubClassOf C9 C8
 
 New general inconsistency:
 General graph number: 36
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf ?C3 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 SubClassOf C2 C3
@@ -299,7 +299,7 @@ SubClassOf C3 C1
 
 New general inconsistency:
 General graph number: 37
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . }
 ClassAssertion C0 a0
 ClassAssertion C1 a0
 DisjointClasses C2 C0
@@ -308,7 +308,7 @@ SubClassOf C1 C2
 
 New general inconsistency:
 General graph number: 38
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C1 C2
 SubClassOf C0 C1
@@ -320,7 +320,7 @@ SubClassOf C6 C4
 
 New general inconsistency:
 General graph number: 246
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C8 a0
 DisjointClasses C12 C13
 SubClassOf C0 C1
@@ -339,7 +339,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 42
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a0
 ClassAssertion C4 a0
 DisjointClasses C2 C0
@@ -349,7 +349,7 @@ SubClassOf C4 C1
 
 New general inconsistency:
 General graph number: 43
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf ?C0 . ?a0 rdf:type ?C3 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf ?C0 . ?a0 rdf:type ?C3 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 rdfs:subClassOf ?C2 . }
 ClassAssertion C4 a0
 DisjointClasses C3 C1
 EquivalentClasses C5 C1
@@ -361,7 +361,7 @@ SubClassOf C4 C3
 
 New general inconsistency:
 General graph number: 197
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C9 C11
 SubClassOf C0 C1
@@ -380,7 +380,7 @@ SubClassOf C9 C0
 
 New general inconsistency:
 General graph number: 222
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C7 a0
 DisjointClasses C13 C8
 SubClassOf C0 C1
@@ -399,7 +399,7 @@ SubClassOf C9 C6
 
 New general inconsistency:
 General graph number: 137
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C7 a0
 DisjointClasses C2 C3
 SubClassOf C0 C1
@@ -413,7 +413,7 @@ SubClassOf C8 C3
 
 New general inconsistency:
 General graph number: 99
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 rdfs:subClassOf+ ?C3 . ?C1 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 rdfs:subClassOf+ ?C3 . ?C1 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C6 C7
@@ -427,7 +427,7 @@ SubClassOf C8 C4
 
 New general inconsistency:
 General graph number: 53
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C1 a0
 DisjointClasses C0 C1
 SubClassOf C1 C2
@@ -436,7 +436,7 @@ SubClassOf C3 C0
 
 New general inconsistency:
 General graph number: 103
-SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C5 . ?C5 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C5 . ?C5 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C10 C9
@@ -453,7 +453,7 @@ SubClassOf C9 C11
 
 New general inconsistency:
 General graph number: 115
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C9 a0
 DisjointClasses C0 C1
 SubClassOf C2 C3
@@ -468,7 +468,7 @@ SubClassOf C9 C2
 
 New general inconsistency:
 General graph number: 62
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 rdfs:subClassOf+ ?C1 . ?a0 rdf:type ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 rdfs:subClassOf+ ?C1 . ?a0 rdf:type ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C0 C1
 SubClassOf C0 C2
@@ -479,7 +479,7 @@ SubClassOf C5 C4
 
 New general inconsistency:
 General graph number: 245
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C8 a0
 DisjointClasses C13 C14
 SubClassOf C0 C1
@@ -499,7 +499,7 @@ SubClassOf C9 C4
 
 New general inconsistency:
 General graph number: 139
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf ?C1 . }
 ClassAssertion C7 a0
 DisjointClasses C10 C9
 SubClassOf C0 C1
@@ -515,7 +515,7 @@ SubClassOf C8 C10
 
 New general inconsistency:
 General graph number: 228
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf ?C1 . }
 ClassAssertion C12 a0
 DisjointClasses C7 C10
 SubClassOf C0 C1
@@ -542,7 +542,7 @@ SubClassOf C3 C4
 p0 a0 a1
 New general inconsistency:
 General graph number: 250
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 SubClassOf C2 C3
@@ -552,7 +552,7 @@ SubClassOf C4 C0
 
 New general inconsistency:
 General graph number: 72
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C6 C8
 EquivalentClasses C7 C8
@@ -567,7 +567,7 @@ SubClassOf C6 C2
 
 New general inconsistency:
 General graph number: 217
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C3 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C5 a0
 DisjointClasses C4 C10
 SubClassOf C0 C1
@@ -584,7 +584,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 221
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf ?C0 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C7 a0
 DisjointClasses C13 C8
 SubClassOf C0 C1
@@ -603,7 +603,7 @@ SubClassOf C9 C6
 
 New general inconsistency:
 General graph number: 86
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C1 . }
 ClassAssertion C6 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -616,7 +616,7 @@ SubClassOf C6 C2
 
 New general inconsistency:
 General graph number: 91
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C0 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a0
 ClassAssertion C3 a0
 DisjointClasses C2 C0
@@ -629,7 +629,7 @@ SubClassOf C7 C5
 
 New general inconsistency:
 General graph number: 135
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C4 C11
 EquivalentClasses C10 C11
@@ -646,7 +646,7 @@ SubClassOf C9 C5
 
 New general inconsistency:
 General graph number: 161
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 rdfs:subClassOf+ ?C3 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C3 . ?a0 rdf:type ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 rdfs:subClassOf+ ?C3 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C3 . ?a0 rdf:type ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C8
 EquivalentClasses C7 C8
@@ -662,7 +662,7 @@ SubClassOf C6 C4
 
 New general inconsistency:
 General graph number: 105
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C4 . ?C1 owl:equivalentClass ?C3 . ?C1 rdfs:subClassOf ?C0 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C4 . ?C1 owl:equivalentClass ?C3 . ?C1 rdfs:subClassOf ?C0 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C3 a0
 DisjointClasses C3 C1
 EquivalentClasses C4 C1
@@ -673,7 +673,7 @@ SubClassOf C3 C2
 
 New general inconsistency:
 General graph number: 116
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C1 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C4 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C1 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C4 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C6 C7
@@ -687,7 +687,7 @@ SubClassOf C5 C2
 
 New general inconsistency:
 General graph number: 119
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C1 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?C3 rdfs:subClassOf+ ?C0 . ?a0 rdf:type ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C1 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?C3 rdfs:subClassOf+ ?C0 . ?a0 rdf:type ?C3 . }
 ClassAssertion C6 a0
 DisjointClasses C1 C5
 EquivalentClasses C4 C5
@@ -701,7 +701,7 @@ SubClassOf C6 C0
 
 New general inconsistency:
 General graph number: 120
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C2 . }
 ClassAssertion C10 a0
 DisjointClasses C3 C7
 EquivalentClasses C6 C7
@@ -717,7 +717,7 @@ SubClassOf C5 C2
 
 New general inconsistency:
 General graph number: 237
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C0 a0
 DisjointClasses C6 C2
 SubClassOf C0 C7
@@ -732,7 +732,7 @@ SubClassOf C9 C3
 
 New general inconsistency:
 General graph number: 128
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf ?C3 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 SubClassOf C2 C3
@@ -745,7 +745,7 @@ SubClassOf C7 C6
 
 New general inconsistency:
 General graph number: 129
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C1 . }
 ClassAssertion C8 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -759,7 +759,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 130
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C5 . ?C2 rdfs:subClassOf+ ?C3 . ?a0 rdf:type ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C5 . ?C2 rdfs:subClassOf+ ?C3 . ?a0 rdf:type ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C2 . }
 ClassAssertion C8 a0
 DisjointClasses C4 C3
 EquivalentClasses C2 C3
@@ -773,7 +773,7 @@ SubClassOf C8 C5
 
 New general inconsistency:
 General graph number: 132
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C0 . ?C4 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C0 . ?C4 rdfs:subClassOf ?C1 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 EquivalentClasses C3 C1
@@ -785,7 +785,7 @@ SubClassOf C6 C1
 
 New general inconsistency:
 General graph number: 134
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C5 a0
 DisjointClasses C3 C10
 EquivalentClasses C9 C10
@@ -801,7 +801,7 @@ SubClassOf C8 C4
 
 New general inconsistency:
 General graph number: 136
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C8 . ?C4 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf ?C4 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C8 . ?C4 rdfs:subClassOf+ ?C2 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf ?C4 . }
 ClassAssertion C6 a0
 DisjointClasses C7 C5
 EquivalentClasses C10 C1
@@ -817,7 +817,7 @@ SubClassOf C7 C2
 
 New general inconsistency:
 General graph number: 141
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C1 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C1 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . }
 ClassAssertion C2 a0
 DisjointClasses C5 C7
 EquivalentClasses C10 C0
@@ -833,7 +833,7 @@ SubClassOf C5 C3
 
 New general inconsistency:
 General graph number: 230
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C10 C8
 SubClassOf C0 C1
@@ -851,7 +851,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 274
-SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C1 . ?p0 rdfs:range ?C2 . ?C1 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C1 . ?p0 rdfs:range ?C2 . ?C1 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a1
 DisjointClasses C2 C1
 Range C1 p0
@@ -860,7 +860,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 243
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf+ ?C1 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf+ ?C1 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . }
 ClassAssertion C5 a0
 DisjointClasses C4 C8
 EquivalentClasses C10 C1
@@ -875,10 +875,10 @@ SubClassOf C4 C2
 SubClassOf C5 C6
 SubClassOf C6 C0
 
-SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
 New general inconsistency:
 General graph number: 152
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C3 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C4 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C3 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C2 a0
 DisjointClasses C7 C4
 EquivalentClasses C3 C4
@@ -892,7 +892,7 @@ SubClassOf C7 C0
 
 New general inconsistency:
 General graph number: 202
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C0 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C0 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C11 C10
@@ -910,7 +910,7 @@ SubClassOf C5 C2
 
 New general inconsistency:
 General graph number: 157
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C4 . ?C3 owl:equivalentClass ?C0 . ?a0 rdf:type ?C5 . ?C4 rdfs:subClassOf+ ?C0 . ?C5 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf ?C4 . ?C3 owl:equivalentClass ?C0 . ?a0 rdf:type ?C5 . ?C4 rdfs:subClassOf+ ?C0 . ?C5 rdfs:subClassOf ?C1 . }
 ClassAssertion C7 a0
 DisjointClasses C6 C5
 EquivalentClasses C4 C5
@@ -925,7 +925,7 @@ SubClassOf C7 C2
 
 New general inconsistency:
 General graph number: 158
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C6 a0
 DisjointClasses C4 C3
 EquivalentClasses C2 C3
@@ -938,7 +938,7 @@ SubClassOf C7 C4
 
 New general inconsistency:
 General graph number: 159
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf ?C6 . ?C2 owl:equivalentClass ?C9 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf ?C1 . ?C6 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf ?C6 . ?C2 owl:equivalentClass ?C9 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf ?C1 . ?C6 rdfs:subClassOf ?C2 . }
 ClassAssertion C11 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -955,7 +955,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 160
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C6 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C6 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C2 . }
 ClassAssertion C2 a0
 DisjointClasses C1 C6
 EquivalentClasses C4 C5
@@ -969,7 +969,7 @@ SubClassOf C5 C6
 
 New general inconsistency:
 General graph number: 163
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 owl:equivalentClass ?C6 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 owl:equivalentClass ?C6 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C6 C7
@@ -986,7 +986,7 @@ SubClassOf C5 C2
 
 New general inconsistency:
 General graph number: 175
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C1 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C5 . ?C5 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C7 a0
 DisjointClasses C7 C5
 EquivalentClasses C4 C5
@@ -1001,7 +1001,7 @@ SubClassOf C7 C2
 
 New general inconsistency:
 General graph number: 247
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C4 . ?C4 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C4 . ?C4 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C12 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -1019,7 +1019,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 177
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf ?C2 . ?C2 rdfs:subClassOf ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C10 a0
 DisjointClasses C12 C7
 SubClassOf C0 C1
@@ -1037,7 +1037,7 @@ SubClassOf C9 C8
 
 New general inconsistency:
 General graph number: 180
-SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C7 . ?C3 rdfs:subClassOf+ ?C0 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C7 . ?C3 rdfs:subClassOf+ ?C0 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C3 . }
 ClassAssertion C10 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -1053,7 +1053,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 183
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C7 . ?C0 rdfs:subClassOf ?C6 . ?C1 owl:equivalentClass ?C8 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C0 . ?C6 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C7 . ?C0 rdfs:subClassOf ?C6 . ?C1 owl:equivalentClass ?C8 . ?C2 owl:equivalentClass ?C5 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C0 . ?C6 rdfs:subClassOf ?C1 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 EquivalentClasses C3 C1
@@ -1067,7 +1067,7 @@ SubClassOf C8 C1
 
 New general inconsistency:
 General graph number: 187
-SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C1 . ?C0 owl:equivalentClass ?C5 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C6 . ?C2 owl:equivalentClass ?C4 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf ?C1 . }
 ClassAssertion C2 a0
 DisjointClasses C0 C1
 EquivalentClasses C3 C1
@@ -1080,7 +1080,7 @@ SubClassOf C7 C1
 
 New general inconsistency:
 General graph number: 198
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C5 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . ?C5 rdfs:subClassOf+ ?C4 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C5 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . ?C5 rdfs:subClassOf+ ?C4 . }
 ClassAssertion C9 a0
 DisjointClasses C6 C5
 EquivalentClasses C10 C8
@@ -1097,7 +1097,7 @@ SubClassOf C9 C7
 
 New general inconsistency:
 General graph number: 223
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C4 . ?C4 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C4 . ?C2 owl:equivalentClass ?C5 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf+ ?C4 . ?C4 rdfs:subClassOf ?C0 . }
 ClassAssertion C12 a0
 DisjointClasses C7 C9
 EquivalentClasses C10 C6
@@ -1116,7 +1116,7 @@ SubClassOf C7 C0
 
 New general inconsistency:
 General graph number: 203
-SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C5 . ?C5 rdfs:subClassOf ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C5 . ?C5 rdfs:subClassOf ?C1 . }
 ClassAssertion C6 a0
 DisjointClasses C3 C5
 EquivalentClasses C11 C10
@@ -1133,7 +1133,7 @@ SubClassOf C9 C10
 
 New general inconsistency:
 General graph number: 224
-SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C5 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C2 . ?C5 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 rdfs:subClassOf+ ?C6 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C5 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C2 . ?C5 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C7 C9
 EquivalentClasses C10 C6
@@ -1153,7 +1153,7 @@ SubClassOf C7 C2
 
 New general inconsistency:
 General graph number: 209
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C8 . ?C4 rdfs:subClassOf ?C5 . ?C5 owl:equivalentClass ?C9 . ?C5 rdfs:subClassOf+ ?C6 . ?a0 rdf:type ?C4 . ?C6 rdfs:subClassOf+ ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C0 . ?C4 owl:equivalentClass ?C8 . ?C4 rdfs:subClassOf ?C5 . ?C5 owl:equivalentClass ?C9 . ?C5 rdfs:subClassOf+ ?C6 . ?a0 rdf:type ?C4 . ?C6 rdfs:subClassOf+ ?C1 . }
 ClassAssertion C6 a0
 DisjointClasses C7 C5
 EquivalentClasses C10 C3
@@ -1170,7 +1170,7 @@ SubClassOf C7 C2
 
 New general inconsistency:
 General graph number: 210
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?a0 rdf:type ?C2 . ?a0 rdf:type ?C1 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C12 a0
 ClassAssertion C7 a0
 DisjointClasses C12 C10
@@ -1188,7 +1188,7 @@ SubClassOf C9 C11
 
 New general inconsistency:
 General graph number: 215
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C4 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C4 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C4 . ?C3 rdfs:subClassOf+ ?C0 . ?C4 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C2 a0
 DisjointClasses C4 C10
 EquivalentClasses C11 C8
@@ -1206,7 +1206,7 @@ SubClassOf C8 C0
 
 New general inconsistency:
 General graph number: 216
-SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 owl:equivalentClass ?C8 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf ?C6 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?C4 rdfs:subClassOf+ ?C1 . ?C5 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C6 . ?C0 owl:equivalentClass ?C8 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C7 . ?C1 rdfs:subClassOf ?C6 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?C4 rdfs:subClassOf+ ?C1 . ?C5 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C6 a0
 DisjointClasses C5 C8
 EquivalentClasses C10 C3
@@ -1223,7 +1223,7 @@ SubClassOf C6 C4
 
 New general inconsistency:
 General graph number: 227
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C4 C7
 EquivalentClasses C10 C9
@@ -1241,7 +1241,7 @@ SubClassOf C9 C3
 
 New general inconsistency:
 General graph number: 231
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 rdfs:subClassOf ?C4 . ?C4 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 owl:equivalentClass ?C5 . ?C1 owl:equivalentClass ?C3 . ?a0 rdf:type ?C2 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 rdfs:subClassOf ?C4 . ?C4 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C8 C10
 EquivalentClasses C11 C7
@@ -1259,7 +1259,7 @@ SubClassOf C8 C1
 
 New general inconsistency:
 General graph number: 233
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C10 a0
 DisjointClasses C3 C5
 EquivalentClasses C11 C8
@@ -1277,7 +1277,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 234
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C8 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?a0 rdf:type ?C9 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C8 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C7 . ?C4 owl:equivalentClass ?C6 . ?a0 rdf:type ?C5 . ?a0 rdf:type ?C9 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf ?C2 . }
 ClassAssertion C11 a0
 ClassAssertion C9 a0
 DisjointClasses C3 C5
@@ -1294,7 +1294,7 @@ SubClassOf C8 C2
 
 New general inconsistency:
 General graph number: 235
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?C3 rdfs:subClassOf+ ?C1 . ?a0 rdf:type ?C3 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C0 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C6 . ?C3 rdfs:subClassOf+ ?C1 . ?a0 rdf:type ?C3 . }
 ClassAssertion C8 a0
 DisjointClasses C3 C5
 EquivalentClasses C4 C5
@@ -1309,7 +1309,7 @@ SubClassOf C8 C6
 
 New general inconsistency:
 General graph number: 236
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C1 rdfs:subClassOf ?C2 . ?C1 owl:equivalentClass+ ?C3 . ?a0 rdf:type ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C1 rdfs:subClassOf ?C2 . ?C1 owl:equivalentClass+ ?C3 . ?a0 rdf:type ?C3 . ?C2 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C5 a0
 DisjointClasses C3 C1
 EquivalentClasses C4 C2
@@ -1320,7 +1320,7 @@ SubClassOf C3 C0
 
 New general inconsistency:
 General graph number: 242
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C0 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf+ ?C0 . ?C5 rdfs:subClassOf+ ?C4 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C0 . ?C3 owl:equivalentClass ?C5 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf+ ?C0 . ?C5 rdfs:subClassOf+ ?C4 . }
 ClassAssertion C0 a0
 DisjointClasses C7 C5
 EquivalentClasses C10 C0
@@ -1348,7 +1348,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 248
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C6 . ?C2 rdfs:subClassOf+ ?C0 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C0 rdfs:subClassOf+ ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C6 . ?C2 rdfs:subClassOf+ ?C0 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C5 C7
 EquivalentClasses C6 C7
@@ -1363,7 +1363,7 @@ SubClassOf C5 C2
 
 New general inconsistency:
 General graph number: 251
-SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C4 . ?C2 rdfs:subClassOf+ ?C3 . ?a0 rdf:type ?C2 . ?C3 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass ?C0 . ?C2 owl:equivalentClass ?C4 . ?C2 rdfs:subClassOf+ ?C3 . ?a0 rdf:type ?C2 . ?C3 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C7 a0
 DisjointClasses C9 C5
 EquivalentClasses C4 C5
@@ -1380,7 +1380,7 @@ SubClassOf C9 C0
 
 New general inconsistency:
 General graph number: 252
-SELECT * WHERE {?C0 owl:disjointWith ?C10 . ?C0 rdfs:subClassOf+ ?C9 . ?C1 owl:equivalentClass ?C7 . ?C2 owl:equivalentClass ?C0 . ?C3 owl:equivalentClass ?C9 . ?C4 owl:equivalentClass ?C8 . ?C5 owl:equivalentClass ?C10 . ?a0 rdf:type ?C6 . ?C6 rdfs:subClassOf+ ?C7 . ?C7 rdfs:subClassOf ?C0 . ?C8 rdfs:subClassOf ?C10 . ?C9 rdfs:subClassOf+ ?C8 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C10 . ?C0 rdfs:subClassOf+ ?C9 . ?C1 owl:equivalentClass ?C7 . ?C2 owl:equivalentClass ?C0 . ?C3 owl:equivalentClass ?C9 . ?C4 owl:equivalentClass ?C8 . ?C5 owl:equivalentClass ?C10 . ?a0 rdf:type ?C6 . ?C6 rdfs:subClassOf+ ?C7 . ?C7 rdfs:subClassOf ?C0 . ?C8 rdfs:subClassOf ?C10 . ?C9 rdfs:subClassOf+ ?C8 . }
 ClassAssertion C0 a0
 DisjointClasses C3 C9
 EquivalentClasses C10 C2
@@ -1399,7 +1399,7 @@ SubClassOf C7 C4
 
 New general inconsistency:
 General graph number: 253
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C5 . ?C4 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf ?C7 . ?C7 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C5 . ?C4 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf ?C6 . ?C6 rdfs:subClassOf ?C7 . ?C7 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C9 C8
 EquivalentClasses C10 C0
@@ -1417,7 +1417,7 @@ SubClassOf C9 C1
 
 New general inconsistency:
 General graph number: 254
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C0 . ?a0 rdf:type ?C6 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C7 . ?C6 rdfs:subClassOf+ ?C4 . ?C7 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C4 . ?C3 owl:equivalentClass ?C0 . ?a0 rdf:type ?C6 . ?C4 rdfs:subClassOf ?C5 . ?C5 rdfs:subClassOf ?C7 . ?C6 rdfs:subClassOf+ ?C4 . ?C7 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C6 a0
 DisjointClasses C9 C8
 EquivalentClasses C10 C3
@@ -1434,7 +1434,7 @@ SubClassOf C9 C0
 
 New general inconsistency:
 General graph number: 256
-SELECT * WHERE {?C0 owl:disjointWith ?C9 . ?C0 owl:equivalentClass ?C11 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C10 . ?C1 rdfs:subClassOf ?C9 . ?C2 owl:equivalentClass ?C12 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C13 . ?C3 rdfs:subClassOf ?C8 . ?C4 owl:equivalentClass ?C7 . ?C5 owl:equivalentClass ?C9 . ?C6 owl:equivalentClass ?C8 . ?a0 rdf:type ?C3 . ?C7 rdfs:subClassOf+ ?C1 . ?C8 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C9 . ?C0 owl:equivalentClass ?C11 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C10 . ?C1 rdfs:subClassOf ?C9 . ?C2 owl:equivalentClass ?C12 . ?C2 rdfs:subClassOf ?C0 . ?C3 owl:equivalentClass ?C13 . ?C3 rdfs:subClassOf ?C8 . ?C4 owl:equivalentClass ?C7 . ?C5 owl:equivalentClass ?C9 . ?C6 owl:equivalentClass ?C8 . ?a0 rdf:type ?C3 . ?C7 rdfs:subClassOf+ ?C1 . ?C8 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C12 a0
 DisjointClasses C10 C5
 EquivalentClasses C14 C12
@@ -1457,7 +1457,7 @@ SubClassOf C8 C13
 
 New general inconsistency:
 General graph number: 258
-SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C6 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C7 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C2 . ?C0 owl:equivalentClass ?C6 . ?C0 rdfs:subClassOf ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 owl:equivalentClass ?C7 . ?C3 owl:equivalentClass ?C4 . ?a0 rdf:type ?C1 . ?C4 rdfs:subClassOf ?C2 . }
 ClassAssertion C0 a0
 DisjointClasses C2 C3
 EquivalentClasses C4 C3
@@ -1471,7 +1471,7 @@ SubClassOf C8 C3
 
 New general inconsistency:
 General graph number: 259
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 owl:equivalentClass ?C9 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C6 . ?C2 owl:equivalentClass ?C7 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C1 . ?C5 rdfs:subClassOf+ ?C0 . ?C6 rdfs:subClassOf ?C7 . ?C7 rdfs:subClassOf ?C5 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 owl:equivalentClass ?C9 . ?C1 owl:equivalentClass ?C8 . ?C1 rdfs:subClassOf+ ?C6 . ?C2 owl:equivalentClass ?C7 . ?C3 owl:equivalentClass ?C6 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf+ ?C1 . ?C5 rdfs:subClassOf+ ?C0 . ?C6 rdfs:subClassOf ?C7 . ?C7 rdfs:subClassOf ?C5 . }
 ClassAssertion C0 a0
 DisjointClasses C11 C10
 EquivalentClasses C12 C1
@@ -1491,7 +1491,7 @@ SubClassOf C8 C11
 
 New general inconsistency:
 General graph number: 260
-SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C5 . ?C4 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C1 owl:equivalentClass ?C6 . ?C1 rdfs:subClassOf ?C2 . ?C2 owl:equivalentClass ?C7 . ?C2 rdfs:subClassOf+ ?C3 . ?C3 owl:equivalentClass ?C8 . ?C3 rdfs:subClassOf ?C5 . ?C4 owl:equivalentClass ?C0 . ?a0 rdf:type ?C1 . ?C5 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C9 C6
 EquivalentClasses C11 C10
@@ -1508,7 +1508,7 @@ SubClassOf C9 C2
 
 New general inconsistency:
 General graph number: 262
-SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C7 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C6 . ?C5 rdfs:subClassOf ?C0 . ?C6 rdfs:subClassOf+ ?C5 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C7 . ?C0 rdfs:subClassOf+ ?C7 . ?C1 owl:equivalentClass ?C5 . ?C2 owl:equivalentClass ?C6 . ?C3 owl:equivalentClass ?C7 . ?a0 rdf:type ?C4 . ?C4 rdfs:subClassOf ?C6 . ?C5 rdfs:subClassOf ?C0 . ?C6 rdfs:subClassOf+ ?C5 . }
 ClassAssertion C0 a0
 DisjointClasses C4 C8
 EquivalentClasses C10 C3
@@ -1526,7 +1526,7 @@ SubClassOf C9 C12
 
 New general inconsistency:
 General graph number: 263
-SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C1 . ?C4 rdfs:subClassOf+ ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C4 . ?C1 owl:equivalentClass ?C5 . ?C1 rdfs:subClassOf+ ?C4 . ?C2 owl:equivalentClass ?C0 . ?a0 rdf:type ?C3 . ?C3 rdfs:subClassOf ?C1 . ?C4 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C11 a0
 DisjointClasses C8 C7
 EquivalentClasses C6 C7
@@ -1543,7 +1543,7 @@ SubClassOf C8 C0
 
 New general inconsistency:
 General graph number: 267
-SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a0
 SubClassOf C1 C2
 SubClassOf C2 C3
@@ -1553,7 +1553,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 268
-SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . ?C1 rdfs:subClassOf+ ?C2 . }
 ClassAssertion C0 a1
 SubClassOf C1 C2
 SubClassOf C2 C3
@@ -1563,7 +1563,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 269
-SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C1 . ?C1 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C1 . ?C1 rdfs:subClassOf ?C2 . }
 ClassAssertion C0 a0
 SubClassOf C1 C2
 DisjointClasses C0 C2
@@ -1572,7 +1572,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 270
-SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . ?C1 rdfs:subClassOf ?C2 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C2 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . ?C1 rdfs:subClassOf ?C2 . }
 ClassAssertion C0 a1
 SubClassOf C1 C2
 DisjointClasses C0 C2
@@ -1581,7 +1581,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 271
-SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C1 . ?p0 rdfs:domain ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C0 . ?C0 owl:disjointWith ?C1 . ?p0 rdfs:domain ?C1 . }
 ClassAssertion C0 a0
 DisjointClasses C0 C1
 Domain C1 p0
@@ -1589,7 +1589,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 272
-SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C1 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?C0 owl:disjointWith ?C1 . ?a1 rdf:type ?C0 . ?p0 rdfs:range ?C1 . }
 ClassAssertion C0 a1
 DisjointClasses C0 C1
 Range C1 p0
@@ -1597,7 +1597,7 @@ p0 a0 a1
 
 New general inconsistency:
 General graph number: 273
-SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf ?C0 . }
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a0
 DisjointClasses C2 C1
 Domain C1 p0

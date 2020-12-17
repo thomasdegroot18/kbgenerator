@@ -12,7 +12,7 @@ import com.thesis.kbStatistics.Statistics;
 public class LODalot {
 
     public static void main(String[] args) throws Exception{
-        String AbsoluteName = "/home/thomas/thesis/kbgenerator/code/resources/";
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/code/resources/";
         AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
         AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
 
