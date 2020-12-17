@@ -16,13 +16,13 @@ Testsuite holds a simple implementation of the functionality of the knowledge ba
 public class CleanTests {
 
     public static void main(String[] args) throws Exception{
-        String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
+        //String AbsoluteName = "D:/Users/Thomas/Documents/thesis/kbgenerator/code/resources/";
         //String AbsoluteName = "/home/thomasdegroot/local/kbgenerator/code/resources/";
-
+        String AbsoluteName = "/home/thomasdegroot/Documents/kbgenerator/code/resources/";
         String hdt;
         String hdtName;
         String args3 = "0";
-        boolean CheckingInconsistency = true;
+        boolean CheckingInconsistency = false;
         // Setting Locations
         switch (args[0]){
             case "0":
@@ -30,11 +30,17 @@ public class CleanTests {
                 hdt = "/home/wbeek/data/LOD-a-lot/lod-a-lot.hdt";
                 hdtName = "lod-a-lot.hdt";
                 break;
-            case "3":
+            case "1":
                 //Setting Yago2s here:
                 hdt = AbsoluteName+"HDTs/yago2s.hdt";
                 hdtName = "yago2s.hdt";
-                args3 = "1";
+                args3 = "0";
+                break;
+            case "3":
+                //Setting Yago2s here:
+                hdt = AbsoluteName+"HDTs/dbpedia2016-04en.hdt";
+                hdtName = "dbpedia2016-04en.hdt";
+                args3 = "0";
                 break;
             default:
                 // Default here:
@@ -75,7 +81,7 @@ public class CleanTests {
         Statistics.main(argsStatistics);
         System.out.println("------------------------------------------------------------------------------------------");
 //        System.out.println("Making inconsistency.json");
-        String FileInput = rdf+"INCONSISTENCIES-LOD-a-lotUSED.ttl";
+        String FileInput = rdf+"INCONSISTENCIES-LOD-a-lotUSEDGrouped.ttl";
         String[] argsInconsistencyCreator = {inconsistencyJSON+"inconsistencies.json", FileInput, inconsistencyJSON+"InconsistencyStatistics.json"};
         InconsistencyCreator.main(argsInconsistencyCreator);
         promptEnterKey();
