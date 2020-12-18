@@ -25,7 +25,7 @@ public class Statistics {
 
 
     @SuppressWarnings("UnusedReturnValue")
-    private static HashMap<String, String> GraphsLoader (String fileLocation, HashMap<String, String> StoredGraph) {
+    private static HashMap<String, String> GraphsLoader (String fileLocation, HashMap<String, String> StoredGraph, HashMap<String, Integer> ids) {
         //Load the SPARQL Query Location
 
         File file = new File(fileLocation);
@@ -33,7 +33,7 @@ public class Statistics {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
-
+            Integer id = 0;
             String key = null;
             StringBuilder value = new StringBuilder();
 
@@ -42,15 +42,20 @@ public class Statistics {
                 if (line.startsWith("prefix")){
                     key = line;
                 }
+                else if (line.startsWith("General graph number: ")){
+                    id = Integer.parseInt(line.replace("General graph number: ",""));
+                }
                 else if (line.startsWith("New general inconsistency:")){
                     if (!(key == null )){
                         StoredGraph.put(key, value.toString());
+                        ids.put(key, id);
                         value = new StringBuilder();
                     }
                 }
                 else if (line.equals("Stopped")){
                     if (!(key == null )){
                         StoredGraph.put(key, value.toString());
+                        ids.put(key, id);
                         value = new StringBuilder();
                     }
                     ConstantLoopBoolean = false;
@@ -193,21 +198,23 @@ public class Statistics {
 
         // Create HashMap for StoredGraphs
         HashMap<String, String> StoredGraphs = new HashMap<>();
+        HashMap<String, Integer> ids = new HashMap<>();
         boolean firstLoop = true;
         int cons =0;
         while(firstLoop ||ConstantLoopBoolean){
             firstLoop = false;
             // Load all Inconsistency graphs.
-            GraphsLoader(fileLocation, StoredGraphs);
+            GraphsLoader(fileLocation, StoredGraphs, ids);
             // RunAll Inconsistency Statistics:
-
+            File Folder = new File(OutputLocation+"incons");
+            Folder.mkdirs();
             System.out.println("Running Inconsistency Statistics");
             for (String Key : StoredGraphs.keySet()){
                 if (Datasets.length > 1){
                     System.out.println("datasets Check");
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets);
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key), Datasets,ids.get(Key),OutputLocation+"incons");
                 } else{
-                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key));
+                    InconsistencyStats.RunAll(Key, StoredGraphs.get(Key),ids.get(Key),OutputLocation+"incons");
                 }
 
             }

@@ -98,12 +98,12 @@ public class CleanTests {
 //        String[] argsGenerator = {hdt, samples, inconsistencyJSON+"inconsistencies.json", temp, "N-TRIPLES", "0.2"};
 //        Generator.main(argsGenerator);
 
-        System.out.println("------------------------------------------------------------------------------------------");
-        // Statistics Sampled
-        System.out.println("Starting Statistics");
-        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
-        Statistics.main(argsStatisticsSampled);
-        System.out.println("------------------------------------------------------------------------------------------");
+//        System.out.println("------------------------------------------------------------------------------------------");
+//        // Statistics Sampled
+//        System.out.println("Starting Statistics");
+//        String[] argsStatisticsSampled = {samples+"Sample-"+hdtName, rdf, SampledLocationStats};
+//        Statistics.main(argsStatisticsSampled);
+//        System.out.println("------------------------------------------------------------------------------------------");
 
 
 

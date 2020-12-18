@@ -32,26 +32,30 @@ class InconsistencyStatistics {
 
     @SuppressWarnings("unused")
     private static String InconsistencyType(String SPARQLString, GeneralisedSubGraph Subgraph){
-        int SizeBefore = Subgraph.GetVertices().size();
-        Subgraph.SinglesRemoval();
-        int SizeAfter = Subgraph.GetVertices().size();
-        boolean Equivalence = Subgraph.getEquivalenceType();
-        if(SizeBefore == SizeAfter && !Equivalence){
-            return "LoopWithoutEquivalence";
-        }
+        try {
+            int SizeBefore = Subgraph.GetVertices().size();
+            Subgraph.SinglesRemoval();
+            int SizeAfter = Subgraph.GetVertices().size();
+            boolean Equivalence = Subgraph.getEquivalenceType();
+            if (SizeBefore == SizeAfter && !Equivalence) {
+                return "LoopWithoutEquivalence";
+            }
 
-        if(SizeBefore > SizeAfter && !Equivalence){
-            return "KiteWithoutEquivalence";
-        }
+            if (SizeBefore > SizeAfter && !Equivalence) {
+                return "KiteWithoutEquivalence";
+            }
 
-        if(SizeBefore == SizeAfter){
-            return "LoopWithEquivalence";
-        }
+            if (SizeBefore == SizeAfter) {
+                return "LoopWithEquivalence";
+            }
 
-        if(SizeBefore > SizeAfter){
-            return "KiteWithEquivalence";
+            if (SizeBefore > SizeAfter) {
+                return "KiteWithEquivalence";
+            }
+            return "NoClassFound";
+        } catch (Exception e){
+            return "domainRange";
         }
-        return "NoClassFound";
     }
 
     @SuppressWarnings("unused")
@@ -60,12 +64,12 @@ class InconsistencyStatistics {
         return "Test";
     }
 
-    private double TailEffect(GeneralisedSubGraph Subgraph){
+    private double TailEffect(GeneralisedSubGraph Subgraph, Integer number, String outputLocation){
         try{
             Subgraph.SinglesRemoval();
             Subgraph.RebuildSPARQL();
             String NewSPARQLQuery = Subgraph.convertSPARQL();
-            int CountTail = InconsistencyCount(NewSPARQLQuery);
+            int CountTail = InconsistencyCount(NewSPARQLQuery, number, outputLocation);
 
             return (double)CountTail;
         } catch (Exception e){
@@ -76,22 +80,22 @@ class InconsistencyStatistics {
 
 
 
-    private int InconsistencyCount(String SPARQLString){
-        return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
+    private int InconsistencyCount(String SPARQLString, Integer number, String outputLocation){
+        return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString, number, outputLocation);
     }
 
-    private int InconsistencyCountperDataset(String SPARQLString, String DataSet){
+    private int InconsistencyCountperDataset(String SPARQLString, String DataSet, Integer number, String outputLocation){
         SPARQLString = SPARQLString.replace("SELECT * WHERE", "SELECT * FROM <"+DataSet+"> WHERE");
         System.out.println(SPARQLString);
 
-        return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString);
+        return SPARQLExecutioner.CounterResultPrinter(this.model, SPARQLString, number, outputLocation);
     }
 
     private int InconsistencyExistsChecker(String SPARQLString){
         return SPARQLExecutioner.ExistsPrinter(this.model, SPARQLString);
     }
 
-    void RunAll(String SPARQLQuery, String StringOfInconsistency){
+    void RunAll(String SPARQLQuery, String StringOfInconsistency, Integer number, String outputLocation){
         if(CollectedStatistics.containsKey(SPARQLQuery)){
             return;
         }
@@ -106,12 +110,12 @@ class InconsistencyStatistics {
 
         GeneralisedSubGraph GeneralGraph = new GeneralisedSubGraph(Subgraph);
         // Run tests for single inconsistency
-        int Count = InconsistencyCount(SPARQLQuery);
+        int Count = InconsistencyCount(SPARQLQuery, number, outputLocation);
         int Size = InconsistencySize(GeneralGraph);
         int[] CountArray = new int[1];
         String Type = InconsistencyType(SPARQLQuery, GeneralGraph);
         String ClassType = InconsistencyClassType(SPARQLQuery);
-        double TailEffect = TailEffect(GeneralGraph);
+        double TailEffect = 0;
         System.out.println(Type);
 
         // Store results in array for this query with a array.
@@ -120,7 +124,7 @@ class InconsistencyStatistics {
         CollectedStatistics.put(SPARQLQuery, InconsistencyStats);
     }
 
-    void RunAll(String SPARQLQuery, String StringOfInconsistency, String[] Datasets){
+    void RunAll(String SPARQLQuery, String StringOfInconsistency, String[] Datasets, Integer number, String outputLocation){
         if(CollectedStatistics.containsKey(SPARQLQuery)){
             return;
         }
@@ -138,11 +142,11 @@ class InconsistencyStatistics {
         int[] CountArray = new int[Datasets.length];
         int i = 0;
         for (String DataSet : Datasets){
-            CountArray[i] = InconsistencyCountperDataset(SPARQLQuery,DataSet);
+            CountArray[i] = InconsistencyCountperDataset(SPARQLQuery,DataSet, number, outputLocation);
             System.out.println(DataSet+ " : "+ CountArray[i]);
             i ++;
         }
-        int Count = InconsistencyCount(SPARQLQuery);
+        int Count = InconsistencyCount(SPARQLQuery, number, outputLocation);
         int Size = InconsistencySize(GeneralGraph);
 
         String Type = InconsistencyType(SPARQLQuery, GeneralGraph);

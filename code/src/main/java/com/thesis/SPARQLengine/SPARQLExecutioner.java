@@ -3,6 +3,11 @@ package com.thesis.SPARQLengine;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class SPARQLExecutioner {
 
     public static ResultSet SPARQLQuery(Model model, String SPARQLQuery) {
@@ -52,18 +57,21 @@ public class SPARQLExecutioner {
         return results;
     }
 
-    public static int CounterResultPrinter(Model model, String query){
+    public static int CounterResultPrinter(Model model, String query, Integer number, String outputLocation){
         //  Run query  and retrieve the results as ResultSet.
         ResultSet results = SPARQLQuery(model, query);
         // Print for every result the result line.
         int counter = 0;
         // This way the query will break after a 60 second execution time.
         try {
+            FileOutputStream fileWriter = new FileOutputStream(new File(outputLocation +"/"+ number.toString()));
             while (results.hasNext()) {
+                // Check if output dir exists
                 counter++;
-                results.next();
+                fileWriter.write((results.next().toString()).getBytes());
             }
         } catch (Exception e){
+            System.out.println(e);
             System.out.println("Time out Exception");
         }
 

@@ -232,6 +232,7 @@ public class GeneralisedSubGraph {
                                 disjoints ++;
                                 break;
                             }
+                            case "Domain":
                             case "DataPropertyDomain": {
                                 // Build Subclass Axiom
                                 OWLDataPropertyDomainAxiom Assertion = dataFactory.getOWLDataPropertyDomainAxiom(propertyD, classC2);
@@ -244,6 +245,7 @@ public class GeneralisedSubGraph {
                                 disjoints ++;
                                 break;
                             }
+                            case "Range":
                             case "DataPropertyRange": {
                                 // Build Subclass Axiom
                                 OWLDataPropertyRangeAxiom Assertion = dataFactory.getOWLDataPropertyRangeAxiom(propertyD, dataType);
@@ -268,7 +270,7 @@ public class GeneralisedSubGraph {
                                 break;
                             }
                             default:
-                                throw new ClassCastException(OWLAXIOMString[0]);
+//                                throw new ClassCastException(OWLAXIOMString[0]);
                         }
                     }
                 }
