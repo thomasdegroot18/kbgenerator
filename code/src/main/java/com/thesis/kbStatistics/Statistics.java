@@ -39,7 +39,7 @@ public class Statistics {
 
 
             while((line = br.readLine()) != null){
-                if (line.startsWith("SELECT")){
+                if (line.startsWith("prefix")){
                     key = line;
                 }
                 else if (line.startsWith("New general inconsistency:")){
@@ -194,6 +194,7 @@ public class Statistics {
         // Create HashMap for StoredGraphs
         HashMap<String, String> StoredGraphs = new HashMap<>();
         boolean firstLoop = true;
+        int cons =0;
         while(firstLoop ||ConstantLoopBoolean){
             firstLoop = false;
             // Load all Inconsistency graphs.
@@ -220,6 +221,12 @@ public class Statistics {
                     System.out.println("Waiting 60 seconds");
                     Thread.sleep(60000);
                     System.out.println("Resending Requests");
+                }
+                if (ConstantLoopBoolean){
+                    cons += 1;
+                }
+                if (cons == 3){
+                    ConstantLoopBoolean = false;
                 }
 
             } catch (Exception e){
