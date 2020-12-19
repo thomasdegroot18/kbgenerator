@@ -32,7 +32,7 @@
               for (elemSample in sample){
                 var inconsistencyInfo = graphNumberItems[elemSample]
 
-                if ((sample[elemSample].Graph.indexOf("Range") > -1 || sample[elemSample].Graph.indexOf("Domain") > -1)){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
+                if (inconsistencyInfo && (sample[elemSample].Graph.indexOf("Range") > -1 || sample[elemSample].Graph.indexOf("Domain") > -1)){  // KiteWithoutEquivalence, LoopWithoutEquivalence, KiteWithEquivalence
                   var graph = sample[elemSample].Graph
                   var nodeLinks = graph.split(", ");
                   var nodesEdges = RetrieveNodes(nodeLinks)
@@ -40,14 +40,29 @@
                   links = nodesEdges[1]
                   var sparqlRequest = ("prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>@@@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> @@@ prefix owl: <http://www.w3.org/2002/07/owl#> @@@"+sample[elemSample].SparqlRequest).replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("@@@","</br>").replaceAll(".?",". ?").replaceAll(". ", ". </br>").replace("WHERE {", "WHERE { </br>")
                   var bodySection = d3.select("body").append("div");
-                  bodySection.append("p").attr("width", "600px").html(sparqlRequest);
+                  bodySection.append("p").attr("height", "300px").attr("width", "600px").html(sparqlRequest);
                   build(nodes, links, bodySection)
 
+                  inconsistencyInfo.LODaLot = lOD[elemSample].Count ? lOD[elemSample].Count : 1
+                  if(yago2s[elemSample] == undefined){
+                    inconsistencyInfo.YAGO = 0;
+                  } else{
+                    inconsistencyInfo.YAGO = yago2s[elemSample].Count > 1000 ? Math.ceil(yago2s[elemSample].Count/20) : yago2s[elemSample].Count
+                  }
+                  if(dbpedia[elemSample] == undefined){
+                    inconsistencyInfo.dbpedia = 0;
+                  } else{
+                    inconsistencyInfo.dbpedia = dbpedia[elemSample].Count
+                  }
 
-
+                  delete inconsistencyInfo.PerDatasetCount
+                  delete inconsistencyInfo.ClassType
+                  delete inconsistencyInfo.TailEffect
+                  delete inconsistencyInfo.Count
+                  inconsistencyInfo.Type = "DomainRange"
                   values = []
                   values.push(inconsistencyInfo);
-                  // tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
+                  tablebuild(Object.keys(inconsistencyInfo), values, bodySection)
 
                 }
               }

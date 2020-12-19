@@ -514,28 +514,35 @@ SubClassOf C7 C2
 New general inconsistency:
 General graph number: 35
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C5 . ?C0 rdfs:subClassOf+ ?C5 . ?C1 owl:equivalentClass+ ?C6 . ?C1 rdfs:subClassOf+ ?C2 . ?C2 owl:equivalentClass+ ?C7 . ?C2 rdfs:subClassOf+ ?C0 . ?C3 owl:equivalentClass+ ?C8 . ?C3 rdfs:subClassOf+ ?C1 . ?C4 owl:equivalentClass+ ?C5 . ?a0 rdf:type ?C3 . }
-ClassAssertion C2 a0
-DisjointClasses C5 C7
-EquivalentClasses C10 C0
-EquivalentClasses C6 C7
-EquivalentClasses C8 C2
-EquivalentClasses C9 C1
+ClassAssertion C5 a0
+DisjointClasses C4 C8
+EquivalentClasses C10 C1
+EquivalentClasses C11 C0
+EquivalentClasses C7 C8
+EquivalentClasses C9 C5
 SubClassOf C0 C1
-SubClassOf C1 C5
-SubClassOf C2 C0
-SubClassOf C3 C4
-SubClassOf C4 C7
-SubClassOf C5 C3
+SubClassOf C1 C4
+SubClassOf C2 C3
+SubClassOf C3 C8
+SubClassOf C4 C2
+SubClassOf C5 C6
+SubClassOf C6 C0
 
 New general inconsistency:
 General graph number: 36
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf+ ?C0 . }
 ClassAssertion C0 a0
-DisjointClasses C2 C1
+DisjointClasses C3 C1
 Domain C1 p0
 SubClassOf C0 C2
+SubClassOf C2 C3
 p0 a0 a1
 
+
+
+
+
+Stopped
 New general inconsistency:
 General graph number: 37
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?C0 owl:disjointWith ?C3 . ?C1 owl:equivalentClass+ ?C4 . ?C1 rdfs:subClassOf+ ?C3 . ?C2 owl:equivalentClass+ ?C0 . ?a0 rdf:type ?C1 . ?C3 rdfs:subClassOf+ ?C0 . }
@@ -928,6 +935,7 @@ SubClassOf C9 C6
 
 New general inconsistency:
 General graph number: 61
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C3 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf+ ?C0 . ?C2 rdfs:subClassOf+ ?C3 . }
 ClassAssertion C0 a1
 DisjointClasses C4 C5
 Range C1 p0

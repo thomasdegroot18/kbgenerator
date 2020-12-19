@@ -266,7 +266,7 @@ function RetrieveNodes(nodeLinks) {
 
 
 function build(nodes, links, divSection) {
-  const svg = divSection.append('svg').attr("width", "600px").attr("height", "300px");
+  const svg = divSection.append('svg').attr("width", "600px").attr("height", "450px");
   var width = 200,
     height = 200;
 
