@@ -1596,6 +1596,12 @@ Range C1 p0
 p0 a0 a1
 
 New general inconsistency:
+General graph number: 274
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . }
+p0 a0 a1
+
+
+New general inconsistency:
 General graph number: 273
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> prefix owl: <http://www.w3.org/2002/07/owl#> SELECT * WHERE {?a0 ?p0 ?a1 . ?a0 rdf:type ?C1 . ?C0 owl:disjointWith ?C2 . ?p0 rdfs:domain ?C2 . ?C1 rdfs:subClassOf ?C0 . }
 ClassAssertion C0 a0
@@ -1604,3 +1610,5 @@ Domain C1 p0
 SubClassOf C0 C2
 p0 a0 a1
 
+
+Stopped
