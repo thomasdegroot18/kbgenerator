@@ -82,7 +82,7 @@ So we have the knowledge graphs
 
         <section>
           <section>
-            <h2>Problems with large inconsistent knowledge graphs</h3>
+            <h2 style="position:relative; left: 50%; transform: translateX(-50%); width: max-content; max-width: 1200px">Problems with large inconsistent knowledge graphs</h2>
             <ul>
               <li>Inconsistent knowledge graphs block reasoning</li>
               <li>Justifications can occur frequently</li>
@@ -95,6 +95,9 @@ So we have the knowledge graphs
           </section>
           <section>
             <h2>Motivation for this paper</h3>
+            <p>
+              We want to develop tooling that can:
+            </p>
             <ul>
               <li>Allows us to find mistakes in knowledge graphs</li>
               <li>Allows us to fix the mistakes in knowledge graphs</li>
@@ -106,8 +109,8 @@ So we have the knowledge graphs
             <h2>What is the use anti-patterns?</h3>
             <ul>
               <li>Scalability issues with justifications </li>
+              <li>Frequencies of justifications</li>
               <li>Anti-patterns are domain independent</li>
-              <li>Frequencies of the justification</li>
             </ul>
           </section>
           <section>
@@ -228,10 +231,10 @@ So we have the knowledge graphs
           </section>
           <section>
             <h2>Finding anti-patterns in a KG:</h2>
-            <ol>
+            <ul>
               <li>Retrieving justifications of contradictions</li>
               <li>Generalising these detected justifications into anti-patterns</li>
-            </ol>
+            </ul>
           </section>
           <section>
             <h2>Dimensions of complexity</h2>
@@ -246,7 +249,7 @@ So we have the knowledge graphs
             <figure>
               <img src="imgs/SubgraphRetrieval.png" style="max-height: 420px !important"/>
             </figure>
-            <p>Retrieval of subgraphs from the knowledge graph with a max limit of $G_{max}$</p>
+            <p>Retrieval of subgraphs from the knowledge graph with a max limit of $G_{max}$ triples</p>
           </section>
           <section>
             <h2>Justification retrieval</h2>
@@ -283,92 +286,92 @@ So we have the knowledge graphs
                 <tr>
                   <th>$G_{max}$</th>
                   <th>Anti-patterns</th>
-                  <th>Total Runtime</th>
+                  <th>Subgraphs</th>
+                  <th>Total Runtime(s)</th>
                   <!-- <th>Step 1 Runtime</th>
                   <th>Step 2 Runtime</th>
                   <th>Step 3 Runtime</th> -->
-                  <th>Subgraphs</th>
                 </tr>
                 <tr>
                   <td><i>500</i></td>
                   <td>0</td>
+                  <td>101,673</td>
                   <td>1,783</td>
                   <!-- <td>216</td>
                   <td>1,566</td>
                   <td>2</td> -->
-                  <td>101,673</td>
                 </tr>
                 <tr>
-                  <td><i>1K</i></td>
+                  <td><i>1,000</i></td>
                   <td>2</td>
+                  <td>50,960</td>
                   <td>3,505</td>
                   <!-- <td>429</td>
                   <td>3,073</td>
                   <td>3</td> -->
-                  <td>50,960</td>
                 </tr>
                 <tr>
                   <td><i>2,500</i></td>
                   <td>31</td>
-                  <td>4,328.82</td>
+                  <td>20,436</td>
+                  <td>4,329</td>
                   <!-- <td>570.52</td>
                   <td>3,749.1</td>
                   <td>9.2</td> -->
-                  <td>20,436</td>
                 </tr>
-                <tr>
-                  <td><i>5K</i></td>
+                <tr style="background-color: #ffffc4;">
+                  <td><i>5,000</i></td>
                   <td>39</td>
+                  <td>10,218</td>
                   <td>4,525</td>
                   <!-- <td>668</td>
                   <td>3,829</td>
                   <td>28</td> -->
-                  <td>10,218</td>
                 </tr>
                 <tr>
                   <td><i>7,500</i></td>
                   <td>39</td>
-                  <td>4,976.92</td>
+                  <td>6,812</td>
+                  <td>4,977</td>
                   <!-- <td>694.02</td>
                   <td>4,271.8</td>
                   <td>11.1</td> -->
-                  <td>6,812</td>
                 </tr>
                 <tr>
-                  <td><i>10K</i></td>
+                  <td><i>10,000</i></td>
                   <td>39</td>
+                  <td>5,109</td>
                   <td>5,106</td>
                   <!-- <td>739</td>
                   <td>4,349</td>
                   <td>18</td> -->
-                  <td>5,109</td>
                 </tr>
                 <tr>
-                  <td><i>25K</i></td>
+                  <td><i>25,000</i></td>
                   <td>39</td>
+                  <td>2,041</td>
                   <td>5,347</td>
                   <!-- <td>835</td>
                   <td>4,493</td>
                   <td>18</td> -->
-                  <td>2,041</td>
                 </tr>
                 <tr>
-                  <td><i>50K</i></td>
+                  <td><i>50,000</i></td>
                   <td>39</td>
+                  <td>1,014</td>
                   <td>5,497</td>
                   <!-- <td>858</td>
                   <td>4,615</td>
                   <td>24</td> -->
-                  <td>1,014</td>
                 </tr>
                 <tr>
-                  <td><i>100K</i></td>
+                  <td><i>100,000</i></td>
                   <td>39</td>
+                  <td>507</td>
                   <td>5,758</td>
                   <!-- <td>946</td>
                   <td>4,792</td>
                   <td>20</td> -->
-                  <td>507</td>
                 </tr>
               </table>
 
@@ -382,77 +385,77 @@ So we have the knowledge graphs
             <h3>Completeness Evaluation (YAGO)</h3>
             <figure>
               <table style="position:relative; left: 50%; transform: translateX(-50%); width: auto; font-size: 28px;">
-                <tr>
+                <tr style="">
                   <th>$G_{max}$</th>
                   <th>Anti-patterns</th>
-                  <th>Total Runtime</th>
-                  <th>Step 1 Runtime</th>
-                  <th>Step 2 Runtime</th>
-                  <th>Step 3 Runtime</th>
                   <th>Subgraphs</th>
+                  <th>Total Runtime(s)</th>
+                  <th style="opacity: 0.5">Step 1 Runtime</th>
+                  <th style="opacity: 0.5">Step 2 Runtime</th>
+                  <th style="opacity: 0.5">Step 3 Runtime</th>
                 </tr>
                 <tr>
                   <td><i>500</i></td>
                   <td>0</td>
-                  <td>3,403</td>
-                  <td>649</td>
-                  <td>2,753</td>
-                  <td>1</td>
                   <td>18,203,648</td>
+                  <td>3,403</td>
+                  <td style="opacity: 0.5">649</td>
+                  <td style="opacity: 0.5">2,753</td>
+                  <td style="opacity: 0.5">1</td>
                 </tr>
                 <tr>
-                  <td><i>1K</i></td>
+                  <td><i>1,000</i></td>
                   <td>0</td>
-                  <td>39,41</td>
-                  <td>1,223</td>
-                  <td>2,717</td>
-                  <td>1</td>
                   <td>9,123,936</td>
+                  <td>3,941</td>
+                  <td style="opacity: 0.5">1,223</td>
+                  <td style="opacity: 0.5">2,717</td>
+                  <td style="opacity: 0.5">1</td>
                 </tr>
-                <tr>
-                  <td><i>5K</i></td>
+                <tr style="background-color: #ffffc4;">
+                  <td><i>5,000</i></td>
                   <td>135</td>
-                  <td>14,342</td>
-                  <td>2,125</td>
-                  <td>12,004</td>
-                  <td>214</td>
                   <td>1,829,442</td>
+                  <td>14,342</td>
+                  <td style="opacity: 0.5">2,125</td>
+                  <td style="opacity: 0.5">12,004</td>
+                  <td style="opacity: 0.5">214</td>
                 </tr>
                 <tr>
-                  <td><i>10K</i></td>
+                  <td><i>10,000</i></td>
                   <td>135</td>
-                  <td>18,283</td>
-                  <td>2,265</td>
-                  <td>15,739</td>
-                  <td>279</td>
                   <td>914,721</td>
+                  <td>18,283</td>
+                  <td style="opacity: 0.5">2,265</td>
+                  <td style="opacity: 0.5">15,739</td>
+                  <td style="opacity: 0.5">279</td>
                 </tr>
                 <tr>
-                  <td><i>25K</i></td>
+                  <td><i>25,000</i></td>
                   <td>135</td>
-                  <td>19,174</td>
-                  <td>2,938</td>
-                  <td>16,013</td>
-                  <td>223</td>
                   <td>365,422</td>
+                  <td>19,174</td>
+                  <td style="opacity: 0.5">2,938</td>
+                  <td style="opacity: 0.5">16,013</td>
+                  <td style="opacity: 0.5">223</td>
                 </tr>
                 <tr>
-                  <td><i>50K</i></td>
+                  <td><i>50,000</i></td>
                   <td>135</td>
-                  <td>34,177</td>
-                  <td>3,289</td>
-                  <td>30,684</td>
-                  <td>204</td>
                   <td>181,547</td>
+                  <td>34,177</td>
+                  <td style="opacity: 0.5">3,289</td>
+                  <td style="opacity: 0.5">30,684</td>
+                  <td style="opacity: 0.5">204</td>
                 </tr>
                 <tr>
-                  <td><i>100K</i></td>
+                  <td><i>100,000</i></td>
                   <td>135</td>
-                  <td>68,264</td>
-                  <td>3,976</td>
-                  <td>64,081</td>
-                  <td>206</td>
                   <td>90,773</td>
+                  <td>68,264</td>
+                  <td style="opacity: 0.5">3,976</td>
+                  <td style="opacity: 0.5">64,081</td>
+                  <td style="opacity: 0.5">206</td>
                 </tr>
               </table>
               <figcaption>
@@ -460,7 +463,7 @@ So we have the knowledge graphs
                 the approach (in seconds) for YAGO
               </figcaption>
             </figure>
-              <p>The Goldilock zone($G_{max}$) in our experiments is 5k</p>
+              <p>The Goldilock zone($G_{max}$) in our experiments is 5,000</p>
           </section>
           <section>
             <h3>Scalability Evaluation</h3>
