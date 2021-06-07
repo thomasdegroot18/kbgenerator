@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/shared/imgs/logo/triply-favicon.png" />
+    <link rel="stylesheet" href="/shared/css/presentation.css" />
+    <link rel="stylesheet" href="/shared/css/prism.css" />
+    <link rel="stylesheet" href="/shared/css/reveal/reset.css" />
+    <link rel="stylesheet" href="/shared/css/reveal/reveal.css" />
+    <link rel="stylesheet" href="/shared/css/reveal/simple.css" id="theme" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="author" content="Thomas de Groot" />
+    <meta name="description" content="Analysing Large Inconsistent Knowledge Graphs using Anti-Patterns" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysing Large
+Inconsistent Knowledge Graphs using Anti-Patterns</title>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Analysing large inconsistent Knowledge Graphs using anti-patterns</h2>
+          <hr />
+          <p class="size-80">
+            Thomas de Groot (<a href="mailto:thomas.de.groot@triply.cc">thomas.de.groot@triply.cc</a>)<br /> Joe Raad (<a
+              href="mailto:j.raad@vu.nl"
+              >j.raad@vu.nl</a
+            >)<br /> Stefan Schlobach (<a href="mailto:k.s.schlobach@vu.nl ">k.s.schlobach@vu.nl</a>)<br />
+          </p>
+          <div class="left">
+            <a href="https://krr.cs.vu.nl" target="_blank">
+              <figure>
+                <img src="/shared/imgs/logo/vu.svg" height="130" />
+                <figcaption>VU University Amsterdam</figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="right">
+            <a href="https://triply.cc" target="_blank">
+              <figure>
+                <img src="/shared/imgs/logo/triply.svg" height="130" />
+                <figcaption>Triply B.V.</figcaption>
+              </figure>
+            </a>
+          </div>
+        </section>
+
+<!-- Better motivation
+
+The fact that something is inconsistent easy
+
+To help find inconsistencies.
+
+Tackling these problems with anti-patterns
+1. Frequencies of the justification.
+2. Scalability
+3. Domain dependent.
+
+a little bit more technical presentation.
+
+Improve the scripting of the story.
+ -> Main point of the slide
+    -> More points on the script
+
+Add research questions as Sub headers to presentation slides
+
+Be consistent in terminology -> use same terms.
+
+Observations:
+ -> the inconsistencies that we found are and are things we -->
+
+        <section>
+          <section>
+            <h3>Motivation</h3>
+            <ul>
+              <li>Allows us to compare</li>
+              <li>Allows us to find mistakes</li>
+              <li>Allows us to fix the mistakes</li>
+              <li>Benchmarking systems</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Example 1</h3>
+            <div class="left">
+              <figure>
+                <img src="imgs/justification1.png" />
+                <figcaption>Explanation of contradiction</figcaption>
+              </figure>
+            </div>
+            <div class="right">
+              <figure>
+                <img src="imgs/anti-pattern1.png" />
+                <figcaption>respective anti-pattern</figcaption>
+              </figure>
+            </div>
+            <div style="clear:both; padding-top: 20px">
+            <p>Contradicting statements demonstrating the unsatisfiable class CheesyVegetableTopping</p>
+            </div>
+          </section>
+          <section>
+            <h3>Example 2</h3>
+            <div class="left">
+              <figure>
+                <img src="imgs/justification2.png" />
+                <figcaption>Explanation of contradiction</figcaption>
+              </figure>
+            </div>
+            <div class="right">
+              <figure>
+                <img src="imgs/anti-pattern2.png" />
+                <figcaption>respective anti-pattern</figcaption>
+              </figure>
+            </div>
+            <div style="clear:both; padding-top: 20px">
+              <p>Contradicting statements with setting a property’s domain</p>
+            </div>
+          </section>
+        </section>
+
+
+
+
+        <section>
+          <section>
+            <h2>Part I: Research Questions</h2>
+          </section>
+          <section>
+            <h2>Research Question 1</h2>
+            <p>
+              Can we define a more general explanation for contradictions, that categorises the most common mistakes
+              in a KG, independently from its domain?
+            </p>
+          </section>
+          <section>
+            <h2>Research Question 2</h2>
+            <p>Can we retrieve these generalised explanations from any KG, independently from its size?</p>
+          </section>
+          <section>
+            <h2>Research Question 3</h2>
+            <p>
+              How can these generalised explanations help analysing and comparing certain characteristics between the
+              most commonly used KGs in the Web?
+            </p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Part II: Formalization</h2>
+            <h3>Research Question 1</h3>
+          </section>
+          <section>
+            <p>
+              Definition 1 (Anti-Pattern) <br/>
+              <pre><code>
+              (P) is an anti-pattern of a Knowledge Graph(G)
+
+              if there is a substitution μ(P) s.t. μ(P)⊆G,
+              and μ(P) is minimally inconsistent w.r.t some entailment relation (E),
+
+              i.e. @P′ s.t. P′⊂P and μ(P′) is inconsistent.
+            </code></pre>
+            </p>
+          </section>
+          <section>
+            <h3>Example 1</h3>
+            <div class="left">
+              <figure>
+                <img src="imgs/justification1.png" />
+                <figcaption>Explanation of contradiction</figcaption>
+              </figure>
+            </div>
+            <div class="right">
+              <figure>
+                <img src="imgs/anti-pattern1.png" />
+                <figcaption>respective anti-pattern</figcaption>
+              </figure>
+            </div>
+            <div style="clear:both; padding-top: 20px">
+            <p>Retrieval of the anti-pattern from an explanation</p>
+          </div>
+          </section>
+
+          <section>
+            <h3>Example 2</h3>
+            <div class="left">
+              <figure>
+                <img src="imgs/justification2.png" />
+                <figcaption>Explanation of contradiction</figcaption>
+              </figure>
+            </div>
+            <div class="right">
+              <figure>
+                <img src="imgs/anti-pattern2.png" />
+                <figcaption>respective anti-pattern</figcaption>
+              </figure>
+            </div>
+            <div style="clear:both; padding-top: 20px">
+            <p>Retrieval of the anti-pattern from an explanation</p>
+          </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Part III: Approach</h2>
+            <h3>Research Question 2</h3>
+          </section>
+          <section>
+            <h2>Finding anti-patterns in a KG:</h2>
+            <ol>
+              <li>Retrieving justifications of contradictions</li>
+              <li>Generalising these detected justifications into anti-patterns</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Dimensions of complexity</h2>
+            <ul>
+              <li>Knowledge Graphs can be too large to query</li>
+              <li>Justification retrieval algorithms do not scale</li>
+              <li>Guaranteeing the retrieval of all anti-patterns</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Subgraph retrieval</h2>
+            <figure>
+              <img src="imgs/SubgraphRetrieval.png" style="max-height: 420px !important"/>
+            </figure>
+            <p>Retrieval of subgraphs from the knowledge graph with a max limit of $G_{max}$</p>
+          </section>
+          <section>
+            <h2>Justification retrieval</h2>
+            <figure>
+              <img src="imgs/JustificationRetrieval.png" style="max-height: 420px !important" />
+            </figure>
+            <p>Retrieval of the detected inconsistencies with their justifications</p>
+          </section>
+          <section>
+            <h2>Anti-pattern generalization</h2>
+            <figure>
+              <img src="imgs/PatternGeneralizing.png" style="max-height: 420px !important"/>
+            </figure>
+            <p>Generalization of each justification to a distinct anti-pattern</p>
+          </section>
+          <section>
+            <h2>Complete pipeline</h2>
+            <figure>
+              <img src="imgs/SimplifiedPipelineMissingPart.png" style="max-height: 420px !important"/>
+            </figure>
+            <p>From knowledge graph to a list of anti-patterns via the retrieval and generalization procedure</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Part IV: Algorithm evaluation</h2>
+            <h3>Research Question 2</h3>
+          </section>
+
+          <section>
+            <h3>Completeness Evaluation (LOV)</h3>
+            <figure>
+              <table style="position:relative;  width: auto; font-size: 28px;">  <!--left: 50%; transform: translateX(-50%); -->
+                <tr>
+                  <th>$G_{max}$</th>
+                  <th>Anti-patterns</th>
+                  <th>Total Runtime</th>
+                  <!-- <th>Step 1 Runtime</th>
+                  <th>Step 2 Runtime</th>
+                  <th>Step 3 Runtime</th> -->
+                  <th>Subgraphs</th>
+                </tr>
+                <tr>
+                  <td><i>500</i></td>
+                  <td>0</td>
+                  <td>1,783</td>
+                  <!-- <td>216</td>
+                  <td>1,566</td>
+                  <td>2</td> -->
+                  <td>101,673</td>
+                </tr>
+                <tr>
+                  <td><i>1K</i></td>
+                  <td>2</td>
+                  <td>3,505</td>
+                  <!-- <td>429</td>
+                  <td>3,073</td>
+                  <td>3</td> -->
+                  <td>50,960</td>
+                </tr>
+                <tr>
+                  <td><i>2,500</i></td>
+                  <td>31</td>
+                  <td>4,328.82</td>
+                  <!-- <td>570.52</td>
+                  <td>3,749.1</td>
+                  <td>9.2</td> -->
+                  <td>20,436</td>
+                </tr>
+                <tr>
+                  <td><i>5K</i></td>
+                  <td>39</td>
+                  <td>4,525</td>
+                  <!-- <td>668</td>
+                  <td>3,829</td>
+                  <td>28</td> -->
+                  <td>10,218</td>
+                </tr>
+                <tr>
+                  <td><i>7,500</i></td>
+                  <td>39</td>
+                  <td>4,976.92</td>
+                  <!-- <td>694.02</td>
+                  <td>4,271.8</td>
+                  <td>11.1</td> -->
+                  <td>6,812</td>
+                </tr>
+                <tr>
+                  <td><i>10K</i></td>
+                  <td>39</td>
+                  <td>5,106</td>
+                  <!-- <td>739</td>
+                  <td>4,349</td>
+                  <td>18</td> -->
+                  <td>5,109</td>
+                </tr>
+                <tr>
+                  <td><i>25K</i></td>
+                  <td>39</td>
+                  <td>5,347</td>
+                  <!-- <td>835</td>
+                  <td>4,493</td>
+                  <td>18</td> -->
+                  <td>2,041</td>
+                </tr>
+                <tr>
+                  <td><i>50K</i></td>
+                  <td>39</td>
+                  <td>5,497</td>
+                  <!-- <td>858</td>
+                  <td>4,615</td>
+                  <td>24</td> -->
+                  <td>1,014</td>
+                </tr>
+                <tr>
+                  <td><i>100K</i></td>
+                  <td>39</td>
+                  <td>5,758</td>
+                  <!-- <td>946</td>
+                  <td>4,792</td>
+                  <td>20</td> -->
+                  <td>507</td>
+                </tr>
+              </table>
+
+              <figcaption>
+                Impact of the subgraph size limit $G_{max}$ on the number of detected anti-patterns and the runtime of
+                the approach (in seconds) for LOV
+              </figcaption>
+            </figure>
+          </section>
+          <section>
+            <h3>Completeness Evaluation (YAGO)</h3>
+            <figure>
+              <table style="position:relative; left: 50%; transform: translateX(-50%); width: auto; font-size: 28px;">
+                <tr>
+                  <th>$G_{max}$</th>
+                  <th>Anti-patterns</th>
+                  <th>Total Runtime</th>
+                  <th>Step 1 Runtime</th>
+                  <th>Step 2 Runtime</th>
+                  <th>Step 3 Runtime</th>
+                  <th>Subgraphs</th>
+                </tr>
+                <tr>
+                  <td><i>500</i></td>
+                  <td>0</td>
+                  <td>3,403</td>
+                  <td>649</td>
+                  <td>2,753</td>
+                  <td>1</td>
+                  <td>18,203,648</td>
+                </tr>
+                <tr>
+                  <td><i>1K</i></td>
+                  <td>0</td>
+                  <td>39,41</td>
+                  <td>1,223</td>
+                  <td>2,717</td>
+                  <td>1</td>
+                  <td>9,123,936</td>
+                </tr>
+                <tr>
+                  <td><i>5K</i></td>
+                  <td>135</td>
+                  <td>14,342</td>
+                  <td>2,125</td>
+                  <td>12,004</td>
+                  <td>214</td>
+                  <td>1,829,442</td>
+                </tr>
+                <tr>
+                  <td><i>10K</i></td>
+                  <td>135</td>
+                  <td>18,283</td>
+                  <td>2,265</td>
+                  <td>15,739</td>
+                  <td>279</td>
+                  <td>914,721</td>
+                </tr>
+                <tr>
+                  <td><i>25K</i></td>
+                  <td>135</td>
+                  <td>19,174</td>
+                  <td>2,938</td>
+                  <td>16,013</td>
+                  <td>223</td>
+                  <td>365,422</td>
+                </tr>
+                <tr>
+                  <td><i>50K</i></td>
+                  <td>135</td>
+                  <td>34,177</td>
+                  <td>3,289</td>
+                  <td>30,684</td>
+                  <td>204</td>
+                  <td>181,547</td>
+                </tr>
+                <tr>
+                  <td><i>100K</i></td>
+                  <td>135</td>
+                  <td>68,264</td>
+                  <td>3,976</td>
+                  <td>64,081</td>
+                  <td>206</td>
+                  <td>90,773</td>
+                </tr>
+              </table>
+              <figcaption>
+                Impact of the subgraph size limit $G_{max}$ on the number of detected anti-patterns and the runtime of
+                the approach (in seconds) for YAGO
+              </figcaption>
+            </figure>
+              <p>The Goldilock zone($G_{max}$) in our experiments is 5k</p>
+          </section>
+          <section>
+            <h3>Scalability Evaluation</h3>
+            <figure>
+              <table style="position:relative; left: 50%; transform: translateX(-50%); width: auto; font-size: 28px;">
+                <tr>
+                  <th style="min-width: 390px"></th>
+                  <th>LOD-a-lot</th>
+                  <th>DBpedia</th>
+                  <th>YAGO</th>
+                </tr>
+                <tr>
+                  <td>number of triples</td>
+                  <td>28,362,198,927</td>
+                  <td>1,040,358,853</td>
+                  <td>158,991,568</td>
+                </tr>
+                <tr>
+                  <td>number of distinct namespaces</td>
+                  <td>9,619</td>
+                  <td>20</td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <td>number of distinct anti-patterns</td>
+                  <td>222</td>
+                  <td>13</td>
+                  <td>135</td>
+                </tr>
+                <tr>
+                  <td>largest anti-pattern size</td>
+                  <td>19</td>
+                  <td>12</td>
+                  <td>16</td>
+                </tr>
+                <tr>
+                  <td><i>runtime (in hours)</i></td>
+                  <td><i> 157.56</i></td>
+                  <td><i>13.01 </i></td>
+                  <td><i>3.98</i></td>
+                </tr>
+              </table>
+              <figcaption>
+                Results of detecting anti-patterns from three of the largest KGs in the Web: LOD-a-lot, DBpedia and
+                YAGO
+              </figcaption>
+            </figure>
+          </section>
+          </section>
+          <section>
+          <section>
+            <h2>Part V: Experiments and analysis</h2>
+            <h3>Research Question 3</h3>
+          </section>
+          <section>
+            <h2>Size of the anti-patterns</h2>
+            <figure>
+              <img src="imgs/figure1.svg" />
+            </figure>
+            <p>Size distribution for all three knowledge graphs of the anti-pattern support</p>
+          </section>
+          <section>
+            <h2>common anti-pattern types</h2>
+            <figure>
+              <a href="https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html" target="_blank">
+              <img src="imgs/queries.png" />
+            </a>
+            </figure>
+            <p>Sample of three anti-pattern types, with SPARQL queries to locate them</p>
+          </section>
+          <section>
+            <h2>Anti-pattern support</h2>
+            <figure>
+              <img src="imgs/figure3.svg" />
+            </figure>
+            <p>Distribution of the anti-pattern support. <br />Where we show the amount of distinct justifications per anti-pattern</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Part VI: Conclusions</h2>
+          </section>
+          <section>
+            <h2>Contributions</h2>
+            <ul>
+              <li>(Q1) We introduced anti-patterns that match inconsistent subgraphs in a KG</li>
+              <li>(Q2) A tool that extracts a large number of anti-patterns from any KG</li>
+              <li>(Q3) A <a href="https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html" target="_blank">Catalog</a>  of anti-patterns that can help locate these contradictions in other KGs, via SPARQL</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Future work</h2>
+            <ul>
+              <li>Applying this tool to also include additional datasets</li>
+              <li>exploiting the computed transitive closure in the LOD-a-lot, detecting additional anti-patterns</li>
+              <li>Analysing the origins of anti-patterns, analysing the detected justifications</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h2>Analysing Large Inconsistent Knowledge Graphs using Anti-Patterns</h2>
+          <hr />
+          <p class="size-80">
+            Thomas de Groot (<a href="thomas.de.groot@triply.cc">thomas.de.groot@triply.cc</a>)<br />
+            Joe Raad (<a href="mailto:j.raad@vu.nl ">j.raad@vu.nl</a>)<br /> Stefan Schlobach (<a
+              href="mailto:k.s.schlobach@vu.nl "
+              >k.s.schlobach@vu.nl</a
+            >)
+          </p>
+          <div class="left">
+            <a href="https://krr.cs.vu.nl" target="_blank">
+              <figure>
+                <img src="/shared/imgs/logo/vu.svg" height="130" />
+                <figcaption>VU University Amsterdam</figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="right">
+            <a href="https://triply.cc" target="_blank">
+              <figure>
+                <img src="/shared/imgs/logo/triply.svg" height="130" />
+                <figcaption>Triply B.V.</figcaption>
+              </figure>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="/shared/js/reveal/highlight.js"></script>
+    <script src="/shared/js/reveal/math.js"></script>
+    <script src="/shared/js/reveal/reveal.js"></script>
+    <script src="/shared/js/prism.min.js"></script>
+    <script>
+      Reveal.initialize({
+        center: true,
+        controls: true,
+        hash: true,
+        plugins: [RevealHighlight, RevealMath],
+        progress: true
+      });
+    </script>
+  </body>
+</html>

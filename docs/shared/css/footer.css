@@ -1,0 +1,72 @@
+footer {
+  background: #eee;
+}
+/* Footer class contains  */
+.footer {
+  color: #b3b3b3;
+  flex-direction: column;
+  padding: 2rem 1rem 0;
+}
+.footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+}
+.footer a:hover {
+  color: #666;
+  cursor: pointer;
+}
+.footer a:hover svg {
+  transform: scale(1.1);
+}
+.upper-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+.footer-element {
+  list-style: none;
+  padding-left: 3rem;
+}
+.footer-element ul {
+  padding-left: 0;
+  list-style: none;
+}
+.footer-element:first-child {
+  padding-left: 0;
+}
+.footer-element > :first-child {
+  font-weight: bold;
+  color: #333;
+}
+.lower-footer ul {
+  justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+}
+.lower-footer li {
+  list-style: none;
+  padding-right: 1.5rem;
+  margin-right: 1.5rem;
+  align-self: center;
+}
+.footer .triply-logo {
+  height: 3rem;
+  justify-self: flex-start;
+}
+.lower-footer li:last-child {
+  padding-right: 0;
+  margin-right: 0;
+}
+.lower-footer li:first-child {
+  flex-grow: 1;
+}
+.footer .brand-logo svg {
+  width: 2rem;
+  height: 2rem;
+}
+.footer .brand-logo:hover svg {
+  color: #666;
+  cursor: pointer;
+}
