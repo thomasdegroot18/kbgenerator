@@ -87,7 +87,7 @@ So we have the knowledge graphs
               <li>Inconsistent knowledge graphs block reasoning</li>
               <li>Justifications can occur frequently</li>
               <li>Justifications are domain dependent</li>
-              <li>Scalability issues with justifications</li>
+              <li>Justifications retrieval algorithms do not scale to billions of triples</li>
             </ul>
             <p>
               It is simple to find an inconsistent knowledge graph, but not simple to find all justifications
@@ -96,13 +96,13 @@ So we have the knowledge graphs
           <section>
             <h2>Motivation for this paper</h2>
             <p>
-              We want to develop tooling that can:
+              We want to develop an approach that allows us to:
             </p>
             <ul>
-              <li>Allows us to find mistakes in knowledge graphs</li>
-              <li>Allows us to help fix the mistakes in knowledge graphs</li>
-              <li>Allows us to compare knowledge graphs</li>
-              <li>Allows us to build benchmarking systems</li>
+              <li>Find mistakes in knowledge graphs</li>
+              <li>Help fix the mistakes in knowledge graphs</li>
+              <li>Compare knowledge graphs</li>
+              <li>Build benchmarking systems</li>
             </ul>
           </section>
           <section>
@@ -110,11 +110,11 @@ So we have the knowledge graphs
             <div class="center">
               <figure>
                 <img src="imgs/justification1.png" />
-                <figcaption>Explanation of contradiction</figcaption>
+                <figcaption>Contradicting statements demonstrating the unsatisfiable class CheesyVegetableTopping</figcaption>
               </figure>
             </div>
+            <p>minimal subset of the KG that is sufficient for the contradiction to hold</p>
             <div style="clear:both; padding-top: 20px">
-            <p>Contradicting statements demonstrating the unsatisfiable class CheesyVegetableTopping</p>
             </div>
           </section>
           <section>
@@ -138,7 +138,6 @@ So we have the knowledge graphs
           <section>
             <h2>What is the use of anti-patterns?</h2>
             <ul>
-              <li>Solves scalability issues with justifications </li>
               <li>Frequencies of justifications</li>
               <li>Anti-patterns are domain independent</li>
             </ul>
@@ -170,12 +169,12 @@ So we have the knowledge graphs
         </section>
         <section>
           <section>
-            <h2>Part II: Formalization</h2>
+            <h2>Part II: Anti-patterns</h2>
             <h3>Research Question 1</h3>
           </section>
           <section>
             <p>
-              Definition 1 (Anti-Pattern) <br/>
+              Definition 1 (Anti-Pattern)<br/>
               <pre><code>
               (P) is an anti-pattern of a Knowledge Graph(G)
 
@@ -549,7 +548,7 @@ So we have the knowledge graphs
           <section>
             <h2>Contributions</h2>
             <ul>
-              <li>(Q1) We introduced anti-patterns that match inconsistent subgraphs in a KG</li>
+              <li>(Q1) We introduced anti-patterns that generalizes inconsistencies in a KG</li>
               <li>(Q2) A tool that extracts a large number of anti-patterns from any KG</li>
               <li>(Q3) A <a href="https://thomasdegroot18.github.io/kbgenerator/Webpages/statisticsOverview.html" target="_blank">Catalog</a>  of anti-patterns that can help locate these contradictions in other KGs, via SPARQL</li>
             </ul>
